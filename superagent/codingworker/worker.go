@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path"
 	"path/filepath"
 	"strings"
 	"time"
@@ -145,30 +146,58 @@ func (r *Runner) test(ctx context.Context, root string) (env.Result, error) {
 	defer cancel()
 	return r.executor(root).Run(ctx, env.Command{Argv: []string{"go", "test", "-count=1", "./..."}})
 }
+func rootDirectory(raw any) bool {
+	p, ok := raw.(string)
+	return raw == nil || (ok && (p == "" || path.Clean(p) == "."))
+}
+func relativeFile(raw any) string {
+	p, ok := raw.(string)
+	if !ok || p == "" || path.IsAbs(p) || strings.Contains(p, "\\") {
+		return ""
+	}
+	return path.Clean(p)
+}
 func authorize(_ context.Context, name string, in *interfaces.ToolInput) error {
-	denied := errors.New("CSV fixture policy: only reading fixture files, editing export.go and the exact test command are allowed")
+	denied := errors.New("CSV fixture policy: only fixture reads, export.go edits, root glob and the fixed test command are allowed")
 	if in == nil {
 		return denied
 	}
 	switch name {
 	case "read_file":
-		p, _ := in.Args["path"].(string)
 		for _, name := range files {
-			if p == name {
+			if relativeFile(in.Args["path"]) == name {
 				return nil
 			}
 		}
 	case "edit_file":
-		if in.Args["path"] == "export.go" {
+		if relativeFile(in.Args["path"]) == "export.go" {
 			return nil
 		}
+	case "glob":
+		pattern, _ := in.Args["pattern"].(string)
+		if rootDirectory(in.Args["path"]) && pattern != "" && !path.IsAbs(pattern) && !strings.Contains(pattern, "\\") {
+			outside := false
+			for _, segment := range strings.Split(pattern, "/") {
+				outside = outside || segment == ".."
+			}
+			if !outside {
+				return nil
+			}
+		}
 	case "run_command":
-		dir, _ := in.Args["work_dir"].(string)
-		if in.Args["command"] == TestCommand && (dir == "" || dir == ".") {
+		// Command permission is an Ask in the trusted preset. Approval below rejects
+		// non-whitelisted commands as model-visible feedback, never executing them.
+		if rootDirectory(in.Args["work_dir"]) {
 			return nil
 		}
 	}
 	return denied
+}
+func commandApproval(req tools.ApprovalRequest) tools.ApprovalResult {
+	if req.Call.Tool == "run_command" && req.Call.Args["command"] == TestCommand && rootDirectory(req.Call.Args["work_dir"]) {
+		return tools.ApprovalResult{Outcome: tools.ApprovalAllowedOnce}
+	}
+	return tools.ApprovalResult{Outcome: tools.ApprovalRejected, Feedback: "outside fixed CSV task: only go test -count=1 ./... is permitted; use glob/read_file to discover and inspect files, not shell commands"}
 }
 func (r *Runner) assembly(ctx context.Context, root string, onResult func(context.Context, tools.DispatchResult) error) (*preset.Assembly, error) {
 	workspace := map[string]any{"sandbox": "workspace-write", "executor": "docker", "image": r.cfg.Image, "network": false, "commandTimeout": "90s"}
@@ -176,16 +205,16 @@ func (r *Runner) assembly(ctx context.Context, root string, onResult func(contex
 		workspace = map[string]any{"sandbox": "danger-full-access", "executor": "local", "network": true, "commandTimeout": "90s"}
 	}
 	doc := map[string]any{"presets": []any{map[string]any{"id": "csv-worker", "components": []any{
-		map[string]any{"id": "persona", "use": "persona", "config": map[string]any{"prompt": "你是 CSV 修复 Worker。先运行 go test -count=1 ./... 复现失败，再读取 export.go 和测试，修复 CSV 空输出。只允许编辑 export.go；不能修改或删除测试，不能提交或推送。修改后重跑固定测试命令，再汇报真实结果。不要声称已人工验收。"}},
+		map[string]any{"id": "persona", "use": "persona", "config": map[string]any{"prompt": "你是 CSV 修复 Worker。先运行 go test -count=1 ./... 复现失败，再读取 export.go 和 export_test.go，修复 CSV 空输出。工作区只有 go.mod、export.go、export_test.go；如需发现文件使用 glob，不能用 ls/find/cat 等 Shell 命令。只允许编辑 export.go；不能修改或删除测试，不能提交或推送。修改后重跑固定测试命令，再汇报真实结果。不要声称已人工验收。"}},
 		map[string]any{"id": "workspace", "use": "workspace", "config": workspace},
-		map[string]any{"id": "coding", "use": "coding-tools", "config": map[string]any{"tools": []string{"read_file", "edit_file", "run_command"}}},
+		map[string]any{"id": "coding", "use": "coding-tools", "config": map[string]any{"tools": []string{"read_file", "edit_file", "glob", "run_command"}}},
 		map[string]any{"id": "permissions", "use": "permissions", "config": map[string]any{"base": "coding"}},
 	}}}}
 	data, err := yaml.Marshal(doc)
 	if err != nil {
 		return nil, err
 	}
-	set, err := preset.Load(preset.Source{Layer: preset.LayerHost, Path: "superagent/csv-worker-v1", Trusted: true, Data: data})
+	set, err := preset.Load(preset.Source{Layer: preset.LayerHost, Path: "superagent/csv-worker-v2", Trusted: true, Data: data})
 	if err != nil {
 		return nil, err
 	}
@@ -196,10 +225,7 @@ func (r *Runner) assembly(ctx context.Context, root string, onResult func(contex
 	return preset.Build(ctx, p, preset.Host{Root: root, ArtifactDir: filepath.Join(r.cfg.Root, "artifacts"), Dispatch: tools.DispatchConfig{Authorize: authorize, OnResult: onResult, MaxConcurrency: 1},
 		// The task host preauthorizes exactly this fixture test, never arbitrary commands.
 		Approver: tools.ApproverFunc(func(_ context.Context, req tools.ApprovalRequest) (tools.ApprovalResult, error) {
-			if req.Call.Tool == "run_command" && req.Call.Args["command"] == TestCommand {
-				return tools.ApprovalResult{Outcome: tools.ApprovalAllowedOnce}, nil
-			}
-			return tools.ApprovalResult{Outcome: tools.ApprovalRejected, Feedback: "outside fixed CSV task"}, nil
+			return commandApproval(req), nil
 		}),
 	})
 }
@@ -312,7 +338,7 @@ func (r *Runner) Run(ctx context.Context, id, prompt string) (out example.Eviden
 	if err = graph.AddEdge("code", workflow.END); err != nil {
 		return out, err
 	}
-	version := "csv-worker-v1/" + r.cfg.ModelID + "/" + asm.Manifest.Digest()
+	version := "csv-worker-v2/" + r.cfg.ModelID + "/" + asm.Manifest.Digest()
 	compiled, err := graph.CompileDurable(ctx, workflow.DurableConfig{Store: r.cfg.Store, Version: version})
 	if err != nil {
 		return out, err

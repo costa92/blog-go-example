@@ -12,6 +12,7 @@ import (
 	"github.com/kart-io/goagent/core/durable"
 	"github.com/kart-io/goagent/interfaces"
 	"github.com/kart-io/goagent/llm"
+	"github.com/kart-io/goagent/tools"
 )
 
 const request = `{"Mandate":"csv-export","Inputs":[{"text":"修复 CSV 空输出，保留测试并验证"}]}`
@@ -87,8 +88,17 @@ func TestPolicyRejectsScopeAndCommands(t *testing.T) {
 		{"run_command", map[string]any{"command": TestCommand + "; echo injected"}},
 		{"run_command", map[string]any{"command": TestCommand, "work_dir": ".."}},
 		{"write_file", map[string]any{"path": "export.go"}},
+		{"glob", map[string]any{"pattern": "*", "path": ".."}},
+		{"glob", map[string]any{"pattern": "../*"}},
 	} {
-		if err := authorize(context.Background(), tc.name, &interfaces.ToolInput{Args: tc.args}); err == nil {
+		err := authorize(context.Background(), tc.name, &interfaces.ToolInput{Args: tc.args})
+		if err == nil && tc.name == "run_command" {
+			decision := commandApproval(tools.ApprovalRequest{Call: &tools.Call{Tool: tc.name, Args: tc.args}})
+			if decision.Outcome == tools.ApprovalRejected {
+				continue
+			}
+		}
+		if err == nil {
 			t.Fatalf("allowed %s: %v", tc.name, tc.args)
 		}
 	}
@@ -167,4 +177,57 @@ func (m *noRepairModel) CompleteToolsStream(context.Context, *llm.CompletionRequ
 	ch <- &llm.StreamChunk{Content: "已经修好", Delta: "已经修好", Done: true, FinishReason: "stop"}
 	close(ch)
 	return ch, nil
+}
+
+// A denied discovery command must reach the model as feedback without executing
+// it or aborting the entire task. The next turns use the permitted file tools.
+func TestDeniedCommandCanBeCorrectedWithoutExecutingIt(t *testing.T) {
+	model := &discoveryModel{ScriptModel: NewScriptModel()}
+	factory := func(_, _ string) (llm.Client, error) { return model, nil }
+	r := makeRunner(t, t.TempDir(), factory, "local", "")
+	out, err := r.Run(context.Background(), "worker/discovery/1", request)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !model.sawDenial {
+		t.Fatal("model did not receive policy feedback")
+	}
+	if _, err = os.Stat(filepath.Join(out.Workspace, "forbidden.txt")); !os.IsNotExist(err) {
+		t.Fatal("disallowed command actually executed")
+	}
+}
+
+type discoveryModel struct {
+	*ScriptModel
+	sawDenial bool
+}
+
+func (m *discoveryModel) CompleteToolsStream(ctx context.Context, req *llm.CompletionRequest, ts []interfaces.Tool) (<-chan *llm.StreamChunk, error) {
+	toolCount := 0
+	for _, msg := range req.Messages {
+		if msg.Role == "tool" {
+			toolCount++
+		}
+	}
+	if toolCount == 0 {
+		call := llm.ToolCall{ID: "denied-discovery", Type: "function"}
+		call.Function.Name = "run_command"
+		call.Function.Arguments = `{"command":"touch forbidden.txt"}`
+		ch := make(chan *llm.StreamChunk, 1)
+		ch <- &llm.StreamChunk{ToolCalls: []llm.ToolCall{call}, Done: true, FinishReason: "tool_calls"}
+		close(ch)
+		return ch, nil
+	}
+	copyReq := *req
+	copyReq.Messages = nil
+	skipped := false
+	for _, msg := range req.Messages {
+		if msg.Role == "tool" && !skipped {
+			m.sawDenial = strings.Contains(msg.Content, "outside fixed CSV task")
+			skipped = true
+			continue
+		}
+		copyReq.Messages = append(copyReq.Messages, msg)
+	}
+	return m.ScriptModel.CompleteToolsStream(ctx, &copyReq, ts)
 }

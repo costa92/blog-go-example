@@ -57,15 +57,24 @@ Docker 必须能够访问宿主的工作区目录。Docker Desktop／Colima 通�
 5. 模型结束后，宿主检查受保护文件、独立运行测试、生成 diff 与源码哈希。验证失败不进入 ready。
 6. 人工评审后，`accept` 再核对证据并执行测试；状态或源码变化会拒绝旧结果。
 
-工具只开放 `read_file`、`edit_file`、`run_command`。可信宿主的 Authorize 钩子进一步限制：只读三个模板文件，只能编辑 `export.go`，命令必须完整等于 `go test -count=1 ./...`，工作目录只能是根目录。测试文件和 go.mod 必须与嵌入模板一致；增加、删除或替换文件也会被验证拒绝。
+工具只开放 `read_file`、`edit_file`、只读 `glob` 和 `run_command`。可信宿主的 Authorize 钩子限制文件与目录范围：只读三个模板文件、在根目录内查找文件、只编辑 `export.go`。命令进入 Harness 审批管线后，只有完整等于 `go test -count=1 ./...` 且在根目录执行时才获准。测试文件和 go.mod 必须与嵌入模板一致；增加、删除或替换文件也会被验证拒绝。
 
-固定测试命令由任务宿主预先授权，Harness Approver 每次只允许该命令，不是交互式人工命令审批。最终代码验收始终由独立的 `accept` 操作完成。运行真实模型时，CLI 仅允许 Docker 执行器；默认容器断网，不注入模型 API Key。`-coding-executor local` 仅供离线固定脚本练习，不提供命令隔离。
+固定测试命令由任务宿主预先授权，Harness Approver 每次只允许该命令，不是交互式人工命令审批。`ls/find` 等命令不会执行，其拒绝原因作为工具反馈交回模型，使其可以改用 `glob/read_file`；越界文件操作仍会终止运行。最终代码验收始终由独立的 `accept` 操作完成。运行真实模型时，CLI 仅允许 Docker 执行器；默认容器断网，不注入模型 API Key。`-coding-executor local` 仅供离线固定脚本练习，不提供命令隔离。
 
 编码 Worker 最多 12 次模型请求、10 轮执行，每次测试最多 90 秒，Agent 最多 3 分钟，整个编码命令最多 10 分钟。请求次数是执行预算，不是固定金额保证。
 
 ## 真实模型
 
 沿用主案例的 `GOAGENT_API_KEY`、`GOAGENT_BASE_URL` 和 `GOAGENT_MODEL`，配置支持原生工具调用的 OpenAI-compatible 模型，然后选择新的共享状态目录：
+
+如果已有 `DEEPSEEK_API_KEY`（例如配置在 `~/.zshrc`），可只在当前终端映射，不改配置文件：
+
+```bash
+source ~/.zshrc
+export GOAGENT_API_KEY="$DEEPSEEK_API_KEY"
+export GOAGENT_BASE_URL="https://api.deepseek.com"
+export GOAGENT_MODEL="deepseek-flash"
+```
 
 ```bash
 live_state="$(mktemp -d "$PWD/.superagent/csv-live.XXXXXX")"
@@ -74,7 +83,7 @@ go run ./superagent/cmd/superagent -mode coding-demo -live -state-dir "$live_sta
 
 后续 `event`／`work` 需同时使用 `-coding -live`；`review`、`status` 和通知投递不调用模型。`accept` 使用 `-coding` 进行宿主验证，不需要模型密钥。若使用非默认 Docker 镜像，验收也要传入相同的 `-coding-image`。
 
-图版本绑定模型配置标识、装配摘要和适配器版本，恢复时不应改变模型或工具配置。模型密钥不进入该标识。现有 coding Ticket 不能不带 `-coding` 就退回只生成方案；已有 plan Ticket 也不会悄悄升级为可修改代码的任务。
+图版本绑定模型配置标识、装配摘要和适配器版本，恢复时不应改变模型或工具配置。加入只读文件发现与可纠正的命令拒绝反馈后，适配器版本为 v2，先前 v1 检查点不能直接用于新版本运行。模型密钥不进入该标识。现有 coding Ticket 不能不带 `-coding` 就退回只生成方案；已有 plan Ticket 也不会悄悄升级为可修改代码的任务。
 
 ## 验证与恢复边界
 
@@ -87,6 +96,6 @@ SUPERAGENT_TEST_DOCKER_IMAGE=golang:1.26.6-alpine go test -run '^TestDockerCodin
 
 Docker 测试使用用户目录下独立临时目录，结束后清理，避免 Colima 未共享系统临时目录的问题。普通单元测试使用明确的本地执行器和已知脚本，不接外部模型。
 
-已验证：真实模板编辑与测试、完成图重放不重复请求模型、模型虚报成功被宿主拒绝、测试文件与命令限制、过期证据拒绝、coding 任务不得降级为计划，以及断网容器内的修复流程。
+已验证：真实模板编辑与测试、完成图重放不重复请求模型、模型虚报成功被宿主拒绝、测试文件与命令限制、被拒绝命令不执行且可由模型纠正、过期证据拒绝、coding 任务不得降级为计划，以及断网容器内的修复流程。
 
-这里只验证完成图的恢复，不承诺任意工具执行中断后都能自动接续。外部副作用仍受 GoAgent 的持久调用与不确定结果契约约束。测试通过也不是任意代码安全或语义正确的证明，仍需人工检查 diff。未实测外部模型自主修复，未接入 GitHub、PR 或真实通知平台。
+这里只验证完成图的恢复，不承诺任意工具执行中断后都能自动接续。外部副作用仍受 GoAgent 的持久调用与不确定结果契约约束。测试通过也不是任意代码安全或语义正确的证明，仍需人工检查 diff。2026-11-01 使用真实 DeepSeek `deepseek-flash` 调用通过一次 CSV 修复：模型读取代码与测试、补上 `Flush()` 并检查刷新错误，原有三项测试及宿主独立容器验证通过，Ticket 保持 ready 待人工评审。模型带 `2>&1` 的非白名单命令被拒绝后，改用允许的精确命令，未执行被拒绝的命令。该结果仅覆盖固定教学模板，不代表任意仓库修复能力或生产可靠性；未接入 GitHub、PR 或真实通知平台。
