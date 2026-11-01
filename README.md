@@ -8,3 +8,7 @@
 - `costa92/blog-go-example`：文章中的可运行 Go 案例及其测试、使用说明。
 
 按文章主题组织示例；示例说明应链接对应文章，并写明运行方法与演示边界。本仓库不承载 Hexo 博客源码，也不发布博客网站。
+
+## 案例
+
+- [Super-agent 协调层](superagent/README.md)：基于 `kart-io/goagent v0.33.0`，包含任务分工、消息路由、可恢复 Worker 和 Outbox 通知重试。
