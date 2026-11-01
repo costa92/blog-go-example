@@ -32,6 +32,20 @@ go run ./superagent/cmd/superagent -mode status -state-dir "$demo_state"
 
 参见 [CSV 编码 Worker](codingworker/README.md)：使用 `-mode coding-demo`，默认在断网 Docker 容器中执行固定测试。支持 `review` 查看证据、`accept -coding` 独立验证后验收；不要用旧 plan 状态目录直接切换执行模式。
 
+## 案例架构与流程
+
+两图对应本仓库的 CSV 教学案例。文件工具在宿主受限访问工作区，只有命令测试在断网 Docker 中执行；FileStore 保存运行记录，通知由独立投递命令处理。
+
+### 案例架构
+
+[![GoAgent 与 Harness 案例架构：Engine、协调 Agent、编码 Worker、宿主文件工具、Docker、FileStore 与模拟通知接收端](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-architecture-v1.svg)](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-architecture-v1.svg)
+
+### 从请求到验收
+
+命令不符合规则时拒绝执行并反馈模型，文件越界时中止本轮；宿主验证通过后才进入 ready，显式验收还会重新校验。通知重试不重新运行修复。
+
+[![CSV 案例流程：接单、编码工具循环、独立验证、ready、显式验收与独立通知支路](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-flow-v1.svg)](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-flow-v1.svg)
+
 ## 对照代码理解职责
 
 | 部分 | 实现 | 负责什么 |

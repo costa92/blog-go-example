@@ -4,6 +4,8 @@
 
 依赖固定为 GoAgent `v0.33.0` 与 GoAgent Harness `v0.0.0-20261030153904-11520f497ae3`（提交 `11520f4`）。Harness 尚无版本标签，本项目没有使用浮动分支或本地 replace。
 
+架构与处理路径见[案例架构与流程](../README.md#案例架构与流程)。
+
 ## 运行一次完整案例
 
 需要 Go 1.25+、Git 和 Docker。默认镜像是 `golang:1.26.6-alpine`，可先用 `docker pull golang:1.26.6-alpine` 准备；也可用 `-coding-image` 选择已安装且包含 Go 1.25+ 的镜像。
