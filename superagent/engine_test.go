@@ -173,6 +173,7 @@ func TestNotificationRecoveryDoesNotRepeatWork(t *testing.T) {
 }
 func TestWorkerConcurrencyAndIndependentInputs(t *testing.T) {
 	var active, peak, calls atomic.Int32
+	paired := make(chan struct{})
 	factory := func(role, id string) (llm.Client, error) {
 		m, _ := OfflineFactory(role, id)
 		if role == "worker" {
@@ -181,11 +182,13 @@ func TestWorkerConcurrencyAndIndependentInputs(t *testing.T) {
 				defer active.Add(-1)
 				for old := peak.Load(); n > old && !peak.CompareAndSwap(old, n); old = peak.Load() {
 				}
-				calls.Add(1)
+				if calls.Add(1) == 2 {
+					close(paired)
+				}
 				select {
 				case <-ctx.Done():
 					return "", ctx.Err()
-				case <-time.After(25 * time.Millisecond):
+				case <-paired:
 				}
 				return id, nil
 			}
@@ -196,7 +199,9 @@ func TestWorkerConcurrencyAndIndependentInputs(t *testing.T) {
 	for _, id := range []string{"a", "b", "c", "d"} {
 		submit(t, e, event(id, id))
 	}
-	if err := e.RunPending(context.Background()); err != nil {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := e.RunPending(ctx); err != nil {
 		t.Fatal(err)
 	}
 	if calls.Load() != 4 || peak.Load() > 2 || peak.Load() < 2 {

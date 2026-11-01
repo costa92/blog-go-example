@@ -11,4 +11,4 @@
 
 ## 案例
 
-- [Super-agent 协调层](superagent/README.md)：基于 `kart-io/goagent v0.33.0`，包含任务分工、消息路由、可恢复 Worker 和 Outbox 通知重试。
+- [Super-agent 协调层](superagent/README.md)：基于 `kart-io/goagent v0.33.0`，包含任务分工、消息路由、可恢复 Worker 和 Outbox 通知重试；另提供 [GoAgent Harness CSV 编码执行案例](superagent/codingworker/README.md)。

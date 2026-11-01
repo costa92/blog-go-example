@@ -4,7 +4,7 @@
 
 这是一个可运行的教学案例，用 [kart-io/goagent v0.33.0](https://github.com/kart-io/goagent/tree/v0.33.0) 实现协调 Agent、独立 Worker、任务记录和通知恢复。该版本对应提交 `da848ae4f5e23460761c95d407483b9e9f2d7ec1`，依赖写入 `go.mod`、`go.sum`，没有本地 `replace`。
 
-案例解释文章中的协调机制，不是 DeepSeek 官方原型的移植。Worker 目前生成修复方案与测试检查清单，没有仓库读写、Shell、GitHub 或飞书工具，不会实际修 Bug、运行目标仓库测试或创建 PR。`ready` 表示教学方案可评审，人工确认后才变为 `accepted`。
+案例解释文章中的协调机制，不是 DeepSeek 官方原型的移植。默认 Worker 生成方案；新增的 [Harness 编码 Worker](codingworker/README.md) 可在独立 CSV 教学工作区真实读写代码、执行测试并交付 diff。它不接 GitHub 或飞书，不创建 PR。`ready` 表示方案或代码改动可评审，人工确认后才变为 `accepted`。
 
 ## 快速运行
 
@@ -27,6 +27,10 @@ go run ./superagent/cmd/superagent -mode status -state-dir "$demo_state"
 `demo` 要求空状态目录，防止覆盖已有演示。它创建两个独立任务，投递一条评审意见、一条机器人消息和一条范围外要求，再并行运行 Worker。输出包含路由结果、Ticket、Outbox 和模拟接收端回执。第二次进程只重试到期的待发通知；已发送项保持不变。接收端按稳定消息 ID 去重，所以模拟回执不会随重试增加。
 
 `-mode work` 可以在独立进程处理尚未完成的 Worker；重新读取已保存的工作流结果不会重复调用模型。若运行期间有新的人工后续消息，旧版本结果不能覆盖新输入，下一次 `work` 处理新版本。
+
+## 运行可修改代码的版本
+
+参见 [CSV 编码 Worker](codingworker/README.md)：使用 `-mode coding-demo`，默认在断网 Docker 容器中执行固定测试。支持 `review` 查看证据、`accept -coding` 独立验证后验收；不要用旧 plan 状态目录直接切换执行模式。
 
 ## 对照代码理解职责
 
@@ -94,9 +98,9 @@ live_state="$(mktemp -d)"
 go run ./superagent/cmd/superagent -mode demo -live -state-dir "$live_state"
 ```
 
-`event` 和 `work` 阶段均需带 `-live`；`deliver` 与 `status` 不调用模型。缺少配置直接报错，不自动降级成离线响应。协调器响应须为带布尔 `accept` 的 JSON，格式错误会停止接单。每次 Agent 调用限制 45 秒，命令限制 3 分钟，并发上限默认 2。超时会消耗已发起的模型请求，不能据此保证固定金额预算。
+`event` 和 `work` 阶段均需带 `-live`；`deliver` 与 `status` 不调用模型。缺少配置直接报错，不自动降级成离线响应。协调器响应须为带布尔 `accept` 的 JSON，格式错误会停止接单。默认方案模式每次 Agent 调用限制 45 秒、命令限制 3 分钟，并发上限默认 2；编码模式的时限见对应说明。超时会消耗已发起的模型请求，不能据此保证固定金额预算。
 
-真实模型模式仍只生成方案，通知仍使用本地模拟接收端。本次验证覆盖离线执行和本地 HTTP 流式接口契约，没有实测外部模型服务，也没有验证真实模型的判断质量。
+默认真实模型模式仍只生成方案；编码模式按单独说明开启 Harness 工具。通知仍使用本地模拟接收端。本次验证覆盖离线执行和本地 HTTP 流式接口契约，没有实测外部模型服务，也没有验证真实模型的判断质量。
 
 ## 恢复与边界
 

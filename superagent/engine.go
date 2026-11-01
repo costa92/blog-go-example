@@ -73,14 +73,35 @@ type Input struct {
 	Event   Event `json:"event"`
 	InScope bool  `json:"in_scope"`
 }
+type Evidence struct {
+	Image        string   `json:"image,omitempty"`
+	RunID        string   `json:"run_id"`
+	Summary      string   `json:"summary"`
+	Workspace    string   `json:"workspace"`
+	BeforeTests  string   `json:"before_tests"`
+	TestOutput   string   `json:"test_output"`
+	Diff         string   `json:"diff"`
+	SourceSHA256 string   `json:"source_sha256"`
+	Executor     string   `json:"executor"`
+	Tools        []string `json:"tools"`
+}
+
+// CodeWorker is implemented by the optional Harness execution adapter.
+type CodeWorker interface {
+	Run(context.Context, string, string) (Evidence, error)
+	Verify(context.Context, Evidence) error
+}
+
 type Ticket struct {
-	ID       string  `json:"id"`
-	Thread   string  `json:"thread"`
-	Mandate  string  `json:"mandate"`
-	Inputs   []Input `json:"inputs"`
-	Revision int     `json:"revision"`
-	Status   Status  `json:"status"`
-	Result   string  `json:"result,omitempty"`
+	Execution string    `json:"execution,omitempty"`
+	Evidence  *Evidence `json:"evidence,omitempty"`
+	ID        string    `json:"id"`
+	Thread    string    `json:"thread"`
+	Mandate   string    `json:"mandate"`
+	Inputs    []Input   `json:"inputs"`
+	Revision  int       `json:"revision"`
+	Status    Status    `json:"status"`
+	Result    string    `json:"result,omitempty"`
 }
 type Message struct {
 	ID          string    `json:"id"`
@@ -102,6 +123,7 @@ type State struct {
 }
 type ModelFactory func(role, session string) (llm.Client, error)
 type Config struct {
+	Worker     CodeWorker
 	Store      durable.Store
 	Models     ModelFactory
 	MaxWorkers int
@@ -231,6 +253,7 @@ func (e *Engine) Handle(ctx context.Context, ev Event) (Route, error) {
 				t.Revision++
 				t.Status = Pending
 				t.Result = ""
+				t.Evidence = nil
 			}
 			s.Tickets[owner] = t
 		} else {
@@ -243,7 +266,11 @@ func (e *Engine) Handle(ctx context.Context, ev Event) (Route, error) {
 			out.Observed = accept && !allowed
 			if accept && allowed {
 				id := "ticket-" + digest(ev.ID)[:16]
-				s.Tickets[id] = Ticket{ID: id, Thread: ev.Thread, Mandate: ev.Scope, Inputs: []Input{{Event: ev, InScope: true}}, Revision: 1, Status: Pending}
+				execution := "plan"
+				if e.cfg.Worker != nil {
+					execution = "coding"
+				}
+				s.Tickets[id] = Ticket{Execution: execution, ID: id, Thread: ev.Thread, Mandate: ev.Scope, Inputs: []Input{{Event: ev, InScope: true}}, Revision: 1, Status: Pending}
 				s.Subscriptions[ev.Thread] = id
 				out.Created = id
 			}
@@ -377,9 +404,26 @@ func (e *Engine) runTicket(ctx context.Context, id string) error {
 	}{t.Mandate, inputs})
 	runID := fmt.Sprintf("worker/%s/%d", id, t.Revision)
 	// ModelFactory receives the stable ticket ID as session name via this run ID.
-	result, err := e.agent(ctx, "worker", runID, string(b))
-	if err != nil {
-		return err
+	var result string
+	var evidence *Evidence
+	if t.Execution == "coding" {
+		if e.cfg.Worker == nil {
+			return errors.New("coding task requires its Harness worker; refusing to downgrade to a plan")
+		}
+		proof, runErr := e.cfg.Worker.Run(ctx, runID, string(b))
+		if runErr != nil {
+			return runErr
+		}
+		evidence = &proof
+		result = proof.Summary
+	} else {
+		if e.cfg.Worker != nil {
+			return errors.New("plan task cannot silently become a coding task; use a new coding request")
+		}
+		result, err = e.agent(ctx, "worker", runID, string(b))
+		if err != nil {
+			return err
+		}
 	}
 	return e.state(ctx, true, func(s *State) error {
 		latest := s.Tickets[id]
@@ -387,6 +431,7 @@ func (e *Engine) runTicket(ctx context.Context, id string) error {
 			return nil
 		} // New input remains pending; never overwrite it.
 		latest.Result = result
+		latest.Evidence = evidence
 		latest.Status = Ready
 		s.Tickets[id] = latest
 		key := fmt.Sprintf("result/%s/%d", id, t.Revision)
@@ -402,16 +447,29 @@ func (e *Engine) Accept(ctx context.Context, id string, authorizedHuman bool) er
 	if !authorizedHuman {
 		return ErrUnauthorized
 	}
+	current, err := e.Snapshot(ctx)
+	if err != nil {
+		return err
+	}
+	ticket, ok := current.Tickets[id]
+	if !ok || ticket.Status != Ready {
+		return errors.New("ticket is not ready for review")
+	}
+	if ticket.Evidence != nil {
+		if e.cfg.Worker == nil {
+			return errors.New("Harness verifier is required to accept a coding task")
+		}
+		if err = e.cfg.Worker.Verify(ctx, *ticket.Evidence); err != nil {
+			return err
+		}
+	}
 	return e.state(ctx, true, func(s *State) error {
-		t, ok := s.Tickets[id]
-		if !ok {
-			return errors.New("missing ticket")
+		latest := s.Tickets[id]
+		if latest.Status != Ready || latest.Revision != ticket.Revision || digest(latest.Evidence) != digest(ticket.Evidence) {
+			return errors.New("ticket changed during review")
 		}
-		if t.Status != Ready {
-			return errors.New("ticket is not ready for review")
-		}
-		t.Status = Accepted
-		s.Tickets[id] = t
+		latest.Status = Accepted
+		s.Tickets[id] = latest
 		return nil
 	})
 }
