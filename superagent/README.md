@@ -34,17 +34,29 @@ go run ./superagent/cmd/superagent -mode status -state-dir "$demo_state"
 
 ## 案例架构与流程
 
-两图对应本仓库的 CSV 教学案例。文件工具在宿主受限访问工作区，只有命令测试在断网 Docker 中执行；FileStore 保存运行记录，通知由独立投递命令处理。
+两图展示 CSV 教学案例在默认 Docker 编码模式下的逻辑关系，源码基线为 `811698b`。文件工具在宿主受限访问工作区，命令测试在断网容器中执行；应用快照与框架检查点分别保存。通知只在 `Deliver` 被调用时处理到期项，没有内置后台重试循环。
 
 ### 案例架构
 
-[![GoAgent 与 Harness 案例架构：Engine、协调 Agent、编码 Worker、宿主文件工具、Docker、FileStore 与模拟通知接收端](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-architecture-v1.svg)](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-architecture-v1.svg)
+[![GoAgent 与 Harness 案例架构：Engine、协调 Agent、编码 Worker、宿主文件工具、Docker、FileStore 与模拟通知接收端](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-architecture-v2.svg)](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-architecture-v2.svg)
 
 ### 从请求到验收
 
-命令不符合规则时拒绝执行并反馈模型，文件越界时中止本轮；宿主验证通过后才进入 ready，显式验收还会重新校验。通知重试不重新运行修复。
+本图展开新建任务的主路径，省略已有订阅与中断恢复。新任务获准后，`event` 只记录 pending；`work` 调用 `RunPending` 执行，demo 连续调用接单和执行。通过宿主范围校验后，非白名单命令拒绝并反馈模型；文件或工作目录越界直接中止本轮。宿主验证后还须核对任务版本，才发布 ready 与待发通知；已有新版本则不写旧结果，等待后续显式执行。`review` 是可选的只读阅读命令，代码不强制它先于 `accept`；后者重新校验文件、测试和任务版本后才写 accepted。
 
-[![CSV 案例流程：接单、编码工具循环、独立验证、ready、显式验收与独立通知支路](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-flow-v1.svg)](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-flow-v1.svg)
+[![CSV 案例流程：接单、编码工具循环、独立验证、ready、显式验收与独立通知支路](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-flow-v2.svg)](https://cdn.jsdelivr.net/gh/costa92/article-images/images/deepseek-superagent-goagent-harness-flow-v2.svg)
+
+### 图与代码的对应
+
+| 图中环节 | 代码入口 | 关键条件 |
+| --- | --- | --- |
+| 新任务接单 | [Engine.Handle](engine.go#L196) | 宿主授权、模型评估和显式请求／auto 范围规则共同决定 |
+| 编码循环与工具 | [Runner.Run](codingworker/worker.go#L240)、[assembly](codingworker/worker.go#L202) | GoAgent 执行循环，Harness 提供工具和策略 |
+| 调度执行 | [Engine.RunPending](engine.go#L336) | event 不自动执行；work 或 demo 显式调用，单 Engine 限制并发 |
+| 发布结果 | [Engine.runTicket](engine.go#L375) | 核对 Revision 后，将 ready、Evidence、Outbox 写入同一应用快照 |
+| 阅读与验收 | [CLI review](cmd/superagent/main.go#L177)、[Engine.Accept](engine.go#L446) | review 只读；accept 复验并再次检查版本、状态与证据 |
+| 通知 | [Engine.Deliver](outbox.go#L22) | 仅调用时处理到期项，失败记退避，下一次调用才可重试 |
+| 存储 | [Engine.state](engine.go#L158) 与 GoAgent durable Store | 应用与框架分记录保存，不是跨全部记录的一次事务 |
 
 ## 对照代码理解职责
 

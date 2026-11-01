@@ -57,7 +57,8 @@ Docker 必须能够访问宿主的工作区目录。Docker Desktop／Colima 通�
 3. `preset.Build` 装配 Harness 的 workspace、coding-tools 和 permissions。
 4. `preset.Configure` 将装配结果接入 GoAgent Builder；`Assembly.PinManifest` 固定装配清单，外层持久图记录模型与工具执行。
 5. 模型结束后，宿主检查受保护文件、独立运行测试、生成 diff 与源码哈希。验证失败不进入 ready。
-6. 人工评审后，`accept` 再核对证据并执行测试；状态或源码变化会拒绝旧结果。
+6. Engine 再检查任务 Revision；已有新版本时不发布旧结果，否则原子保存 ready、Evidence 与 Outbox。
+7. 建议先用 `review` 阅读证据；它只读且不是代码强制的前置条件。`accept` 复验文件与测试，再核对任务版本和 ready 状态后写入 accepted。
 
 工具只开放 `read_file`、`edit_file`、只读 `glob` 和 `run_command`。可信宿主的 Authorize 钩子限制文件与目录范围：只读三个模板文件、在根目录内查找文件、只编辑 `export.go`。命令进入 Harness 审批管线后，只有完整等于 `go test -count=1 ./...` 且在根目录执行时才获准。测试文件和 go.mod 必须与嵌入模板一致；增加、删除或替换文件也会被验证拒绝。
 
