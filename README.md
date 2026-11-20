@@ -13,3 +13,4 @@
 
 - [Super-agent 协调层](superagent/README.md)：基于 `kart-io/goagent v0.33.0`，包含任务分工、消息路由、可恢复 Worker 和 Outbox 通知重试；另提供 [GoAgent Harness CSV 编码执行案例](superagent/codingworker/README.md)。
 - [encoding/json v1 与 v2 对比](jsonv2/README.md)：用测试断言两个版本的默认行为差异、迁移选项和基准，需要 Go 1.27。
+- [Go 内存上限在 Kubernetes 里的表现](gomemlimit/README.md)：文章 GOMEMLIMIT / GOMAXPROCS 实验用的负载程序和 kind 脚本，独立 go.mod，用 Docker 构建。
