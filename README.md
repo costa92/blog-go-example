@@ -29,6 +29,7 @@
 - [本地嵌入模型的中文检索](local-embedding-chinese-retrieval/README.md)：48 段中英文语料、40 条问题，测 recall、词表覆盖和长文档截断。
 - [大模型结构化 JSON 输出](llm-json-output/README.md)：36 条客服消息抽字段，对比提示词、`format: json` 和 JSON Schema，附 MiniMax 对照。
 - [本地模型多步工具调用](local-model-tool-calling/README.md)：假工单系统加最小工具循环，按第一处出错的地方给每次运行打标签。
+- [同一个小模型的量化版本对比](local-model-quantization/README.md)：qwen2.5:3b 六个量化版本和 imatrix 重新量化的题库、判分、KL 散度和速度显存脚本，附原始结果。
 - [本地模型当裁判的偏差](local-llm-judge-bias/README.md)：32 道一对一判题，测位置、长度、格式偏差和几种补救办法。
 - [Ollama 在 Kubernetes 里的冷启动和资源限制](ollama-on-kubernetes/README.md)：kind 集群里的冷启动、`keep_alive`、CPU / 内存 limit 和滚动重启实验脚本。
 - [Claude Code 无头调用的 token 账](claude-code-token-budget/README.md)：逐块测内置工具、MCP、CLAUDE.md、技能和缓存的上下文开销，含一个无依赖的 MCP 服务器。

@@ -1,0 +1,18 @@
+qwen2.5:3b-instruct-imat-q4_K_M done
+qwen2.5:3b-instruct-imat-q3_K_M done
+qwen2.5:3b-instruct-imat-q2_K done
+fp16    总 153/165  fact 43/45  arith 52/60  json 38/40  code 20/20  | 失败 {'wrong_number': 8, 'field': 2} 字段 {'total': 2}
+q4_K_M  总 154/165  fact 43/45  arith 51/60  json 40/40  code 20/20  | 失败 {'wrong_number': 9} 字段 {}
+imat-q4_K_M 总 149/165  fact 41/45  arith 52/60  json 37/40  code 19/20  | 失败 {'wrong_number': 8, 'field': 3, 'test_fail': 1} 字段 {'total': 3}
+q3_K_M  总 49/165  fact 29/45  arith 19/60  json 0/40  code 1/20  | 失败 {'wrong_number': 37, 'no_answer_line': 4, 'bad_json': 40, 'unfenced_fail': 6, 'test_fail': 12, 'timeout': 1} 字段 {}
+imat-q3_K_M 总 128/165  fact 34/45  arith 46/60  json 35/40  code 13/20  | 失败 {'wrong_number': 14, 'field': 5, 'test_fail': 7} 字段 {'total': 5}
+q2_K    总 0/165  fact 0/45  arith 0/60  json 0/40  code 0/20  | 失败 {'no_answer_line': 47, 'server_abort': 28, 'bad_json': 25, 'unfenced_fail': 20} 字段 {}
+imat-q2_K 总 92/165  fact 30/45  arith 27/60  json 22/40  code 13/20  | 失败 {'wrong_number': 33, 'field': 18, 'unfenced_fail': 1, 'test_fail': 6} 字段 {'total': 17, 'order_id': 1}
+
+与 fp16 逐题对比（fp16对本错 / fp16错本对）与输出完全一致的题数：
+q4_K_M  丢 5  得 6  输出一字不差 84/165
+imat-q4_K_M 丢 9  得 5  输出一字不差 86/165
+q3_K_M  丢 109  得 5  输出一字不差 20/165
+imat-q3_K_M 丢 27  得 2  输出一字不差 35/165
+q2_K    丢 153  得 0  输出一字不差 0/165
+imat-q2_K 丢 61  得 0  输出一字不差 25/165
