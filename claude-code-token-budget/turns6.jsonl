@@ -1,0 +1,6 @@
+{"type": "user", "message": {"role": "user", "content": "读一下 src/order.go，用一句话说它做什么。"}}
+{"type": "user", "message": {"role": "user", "content": "再读 src/payment.go，和 order.go 比有什么不同？一句话。"}}
+{"type": "user", "message": {"role": "user", "content": "再读 src/inventory.go，一句话。"}}
+{"type": "user", "message": {"role": "user", "content": "CancelOrder 里的超时是多少？"}}
+{"type": "user", "message": {"role": "user", "content": "validateOrder 检查了什么？"}}
+{"type": "user", "message": {"role": "user", "content": "把前面的结论合成三行清单。"}}

@@ -1,0 +1,46 @@
+---
+name: pg-reviewer
+description: Reviews PostgreSQL migrations for locking, long-running rewrites and missing indexes. Use after editing files under db/migrations.
+tools: Read, Grep
+---
+
+- Rule 1: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 1).
+- Rule 2: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 2).
+- Rule 3: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 3).
+- Rule 4: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 4).
+- Rule 5: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 5).
+- Rule 6: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 6).
+- Rule 7: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 7).
+- Rule 8: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 8).
+- Rule 9: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 9).
+- Rule 10: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 10).
+- Rule 11: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 11).
+- Rule 12: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 12).
+- Rule 13: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 13).
+- Rule 14: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 14).
+- Rule 15: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 15).
+- Rule 16: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 16).
+- Rule 17: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 17).
+- Rule 18: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 18).
+- Rule 19: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 19).
+- Rule 20: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 20).
+- Rule 21: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 21).
+- Rule 22: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 22).
+- Rule 23: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 23).
+- Rule 24: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 24).
+- Rule 25: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 25).
+- Rule 26: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 26).
+- Rule 27: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 27).
+- Rule 28: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 28).
+- Rule 29: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 29).
+- Rule 30: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 30).
+- Rule 31: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 31).
+- Rule 32: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 32).
+- Rule 33: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 33).
+- Rule 34: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 34).
+- Rule 35: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 35).
+- Rule 36: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 36).
+- Rule 37: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 37).
+- Rule 38: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 38).
+- Rule 39: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 39).
+- Rule 40: flag statements that take an ACCESS EXCLUSIVE lock on tables over 1M rows unless wrapped in a batched migration (case 40).

@@ -1,0 +1,165 @@
+{"id": "fact-00", "kind": "fact", "prompt": "澳大利亚的首都是哪个城市？只回答答案，不要解释。", "answers": ["堪培拉"]}
+{"id": "fact-01", "kind": "fact", "prompt": "加拿大的首都是哪个城市？只回答答案，不要解释。", "answers": ["渥太华"]}
+{"id": "fact-02", "kind": "fact", "prompt": "日本的首都是哪个城市？只回答答案，不要解释。", "answers": ["东京"]}
+{"id": "fact-03", "kind": "fact", "prompt": "法国的首都是哪个城市？只回答答案，不要解释。", "answers": ["巴黎"]}
+{"id": "fact-04", "kind": "fact", "prompt": "中国最长的河流是哪条？只回答答案，不要解释。", "answers": ["长江"]}
+{"id": "fact-05", "kind": "fact", "prompt": "地球上面积最大的大洋是哪个？只回答答案，不要解释。", "answers": ["太平洋"]}
+{"id": "fact-06", "kind": "fact", "prompt": "世界上国土面积最大的国家是哪个？只回答答案，不要解释。", "answers": ["俄罗斯"]}
+{"id": "fact-07", "kind": "fact", "prompt": "太阳系中最大的行星是哪颗？只回答答案，不要解释。", "answers": ["木星"]}
+{"id": "fact-08", "kind": "fact", "prompt": "元素周期表中原子序数为 1 的元素是什么？只回答答案，不要解释。", "answers": ["氢"]}
+{"id": "fact-09", "kind": "fact", "prompt": "水的化学式是什么？只回答答案，不要解释。", "answers": ["H2O", "H₂O"]}
+{"id": "fact-10", "kind": "fact", "prompt": "“床前明月光”的下一句是什么？只回答答案，不要解释。", "answers": ["疑是地上霜"]}
+{"id": "fact-11", "kind": "fact", "prompt": "“白日依山尽”的下一句是什么？只回答答案，不要解释。", "answers": ["黄河入海流"]}
+{"id": "fact-12", "kind": "fact", "prompt": "“春眠不觉晓”的下一句是什么？只回答答案，不要解释。", "answers": ["处处闻啼鸟"]}
+{"id": "fact-13", "kind": "fact", "prompt": "“举头望明月”的下一句是什么？只回答答案，不要解释。", "answers": ["低头思故乡"]}
+{"id": "fact-14", "kind": "fact", "prompt": "“锄禾日当午”的下一句是什么？只回答答案，不要解释。", "answers": ["汗滴禾下土"]}
+{"id": "fact-15", "kind": "fact", "prompt": "“海内存知己”的下一句是什么？只回答答案，不要解释。", "answers": ["天涯若比邻"]}
+{"id": "fact-16", "kind": "fact", "prompt": "“谁言寸草心”的下一句是什么？只回答答案，不要解释。", "answers": ["报得三春晖"]}
+{"id": "fact-17", "kind": "fact", "prompt": "“欲穷千里目”的下一句是什么？只回答答案，不要解释。", "answers": ["更上一层楼"]}
+{"id": "fact-18", "kind": "fact", "prompt": "《红楼梦》的作者是谁？只回答答案，不要解释。", "answers": ["曹雪芹"]}
+{"id": "fact-19", "kind": "fact", "prompt": "《西游记》的作者是谁？只回答答案，不要解释。", "answers": ["吴承恩"]}
+{"id": "fact-20", "kind": "fact", "prompt": "《三国演义》的作者是谁？只回答答案，不要解释。", "answers": ["罗贯中"]}
+{"id": "fact-21", "kind": "fact", "prompt": "《史记》的作者是谁？只回答答案，不要解释。", "answers": ["司马迁"]}
+{"id": "fact-22", "kind": "fact", "prompt": "《论语》主要记录了哪位思想家及其弟子的言行？只回答答案，不要解释。", "answers": ["孔子"]}
+{"id": "fact-23", "kind": "fact", "prompt": "《静夜思》的作者是谁？只回答答案，不要解释。", "answers": ["李白"]}
+{"id": "fact-24", "kind": "fact", "prompt": "《春望》“国破山河在”的作者是谁？只回答答案，不要解释。", "answers": ["杜甫"]}
+{"id": "fact-25", "kind": "fact", "prompt": "唐朝的都城是哪里？只回答答案，不要解释。", "answers": ["长安"]}
+{"id": "fact-26", "kind": "fact", "prompt": "第一个统一中国的封建王朝是哪个朝代？只回答答案，不要解释。", "answers": ["秦"]}
+{"id": "fact-27", "kind": "fact", "prompt": "二十四节气中的第一个节气是什么？只回答答案，不要解释。", "answers": ["立春"]}
+{"id": "fact-28", "kind": "fact", "prompt": "中秋节是农历几月几日？只回答答案，不要解释。", "answers": ["八月十五"]}
+{"id": "fact-29", "kind": "fact", "prompt": "端午节是农历几月初几？只回答答案，不要解释。", "answers": ["五月初五"]}
+{"id": "fact-30", "kind": "fact", "prompt": "成语“画蛇添_”空缺的字是什么？只回答答案，不要解释。", "answers": ["足"]}
+{"id": "fact-31", "kind": "fact", "prompt": "成语“守株待_”空缺的字是什么？只回答答案，不要解释。", "answers": ["兔"]}
+{"id": "fact-32", "kind": "fact", "prompt": "成语“亡羊补_”空缺的字是什么？只回答答案，不要解释。", "answers": ["牢"]}
+{"id": "fact-33", "kind": "fact", "prompt": "成语“掩耳盗_”空缺的字是什么？只回答答案，不要解释。", "answers": ["铃"]}
+{"id": "fact-34", "kind": "fact", "prompt": "成语“对牛弹_”空缺的字是什么？只回答答案，不要解释。", "answers": ["琴"]}
+{"id": "fact-35", "kind": "fact", "prompt": "成语“井底之_”空缺的字是什么？只回答答案，不要解释。", "answers": ["蛙"]}
+{"id": "fact-36", "kind": "fact", "prompt": "成语“胸有成_”空缺的字是什么？只回答答案，不要解释。", "answers": ["竹"]}
+{"id": "fact-37", "kind": "fact", "prompt": "成语“破釜沉_”空缺的字是什么？只回答答案，不要解释。", "answers": ["舟"]}
+{"id": "fact-38", "kind": "fact", "prompt": "计算机中 1 个字节等于多少个二进制位？只回答答案，不要解释。", "answers": ["8", "八"]}
+{"id": "fact-39", "kind": "fact", "prompt": "HTTP 状态码 404 表示什么？只回答答案，不要解释。", "answers": ["未找到", "找不到", "Not Found", "not found", "不存在"]}
+{"id": "fact-40", "kind": "fact", "prompt": "一个直角是多少度？只回答答案，不要解释。", "answers": ["90", "九十"]}
+{"id": "fact-41", "kind": "fact", "prompt": "一千克等于多少克？只回答答案，不要解释。", "answers": ["1000", "一千"]}
+{"id": "fact-42", "kind": "fact", "prompt": "珠穆朗玛峰位于中国和哪个国家的边境上？只回答答案，不要解释。", "answers": ["尼泊尔"]}
+{"id": "fact-43", "kind": "fact", "prompt": "光在真空中的速度约为每秒多少万公里？只回答答案，不要解释。", "answers": ["30", "三十"]}
+{"id": "fact-44", "kind": "fact", "prompt": "世界上人口最多的洲是哪个？只回答答案，不要解释。", "answers": ["亚洲"]}
+{"id": "arith-00", "kind": "arith", "prompt": "仓库原有 790 箱货，运来 8 车，每车 23 箱，又运走 27 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 947}
+{"id": "arith-01", "kind": "arith", "prompt": "一本书 89 元，一支笔 27 元。买 5 本书和 7 支笔，付了 800 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 166}
+{"id": "arith-02", "kind": "arith", "prompt": "一个长方形长 12 米，宽 16 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 56}
+{"id": "arith-03", "kind": "arith", "prompt": "小王每天读 16 页书，读了 8 天后还剩 43 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 171}
+{"id": "arith-04", "kind": "arith", "prompt": "甲班有 58 人，乙班比甲班多 15 人，丙班人数是乙班的 2 倍少 7 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 270}
+{"id": "arith-05", "kind": "arith", "prompt": "一辆车每小时行驶 61 千米，先行驶了 6 小时，又以每小时 41 千米行驶了 7 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 653}
+{"id": "arith-06", "kind": "arith", "prompt": "仓库原有 210 箱货，运来 18 车，每车 11 箱，又运走 25 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 383}
+{"id": "arith-07", "kind": "arith", "prompt": "一本书 31 元，一支笔 20 元。买 5 本书和 7 支笔，付了 400 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 105}
+{"id": "arith-08", "kind": "arith", "prompt": "一个长方形长 38 米，宽 6 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 88}
+{"id": "arith-09", "kind": "arith", "prompt": "小王每天读 7 页书，读了 16 天后还剩 18 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 130}
+{"id": "arith-10", "kind": "arith", "prompt": "甲班有 37 人，乙班比甲班多 8 人，丙班人数是乙班的 2 倍少 1 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 171}
+{"id": "arith-11", "kind": "arith", "prompt": "一辆车每小时行驶 69 千米，先行驶了 14 小时，又以每小时 49 千米行驶了 15 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1701}
+{"id": "arith-12", "kind": "arith", "prompt": "仓库原有 670 箱货，运来 17 车，每车 33 箱，又运走 21 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1210}
+{"id": "arith-13", "kind": "arith", "prompt": "一本书 78 元，一支笔 20 元。买 3 本书和 5 支笔，付了 500 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 166}
+{"id": "arith-14", "kind": "arith", "prompt": "一个长方形长 43 米，宽 39 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 164}
+{"id": "arith-15", "kind": "arith", "prompt": "小王每天读 35 页书，读了 18 天后还剩 12 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 642}
+{"id": "arith-16", "kind": "arith", "prompt": "甲班有 96 人，乙班比甲班多 18 人，丙班人数是乙班的 2 倍少 12 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 426}
+{"id": "arith-17", "kind": "arith", "prompt": "一辆车每小时行驶 71 千米，先行驶了 5 小时，又以每小时 51 千米行驶了 6 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 661}
+{"id": "arith-18", "kind": "arith", "prompt": "仓库原有 710 箱货，运来 13 车，每车 25 箱，又运走 59 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 976}
+{"id": "arith-19", "kind": "arith", "prompt": "一本书 24 元，一支笔 25 元。买 8 本书和 10 支笔，付了 600 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 158}
+{"id": "arith-20", "kind": "arith", "prompt": "一个长方形长 45 米，宽 42 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 174}
+{"id": "arith-21", "kind": "arith", "prompt": "小王每天读 25 页书，读了 18 天后还剩 25 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 475}
+{"id": "arith-22", "kind": "arith", "prompt": "甲班有 15 人，乙班比甲班多 18 人，丙班人数是乙班的 2 倍少 13 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 101}
+{"id": "arith-23", "kind": "arith", "prompt": "一辆车每小时行驶 79 千米，先行驶了 7 小时，又以每小时 59 千米行驶了 8 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1025}
+{"id": "arith-24", "kind": "arith", "prompt": "仓库原有 990 箱货，运来 19 车，每车 36 箱，又运走 19 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1655}
+{"id": "arith-25", "kind": "arith", "prompt": "一本书 74 元，一支笔 28 元。买 6 本书和 8 支笔，付了 800 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 132}
+{"id": "arith-26", "kind": "arith", "prompt": "一个长方形长 60 米，宽 21 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 162}
+{"id": "arith-27", "kind": "arith", "prompt": "小王每天读 47 页书，读了 11 天后还剩 6 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 523}
+{"id": "arith-28", "kind": "arith", "prompt": "甲班有 17 人，乙班比甲班多 10 人，丙班人数是乙班的 2 倍少 5 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 93}
+{"id": "arith-29", "kind": "arith", "prompt": "一辆车每小时行驶 84 千米，先行驶了 17 小时，又以每小时 64 千米行驶了 18 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 2580}
+{"id": "arith-30", "kind": "arith", "prompt": "仓库原有 260 箱货，运来 18 车，每车 37 箱，又运走 43 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 883}
+{"id": "arith-31", "kind": "arith", "prompt": "一本书 98 元，一支笔 25 元。买 12 本书和 14 支笔，付了 1700 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 174}
+{"id": "arith-32", "kind": "arith", "prompt": "一个长方形长 95 米，宽 37 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 264}
+{"id": "arith-33", "kind": "arith", "prompt": "小王每天读 40 页书，读了 12 天后还剩 45 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 525}
+{"id": "arith-34", "kind": "arith", "prompt": "甲班有 19 人，乙班比甲班多 9 人，丙班人数是乙班的 2 倍少 4 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 99}
+{"id": "arith-35", "kind": "arith", "prompt": "一辆车每小时行驶 48 千米，先行驶了 9 小时，又以每小时 28 千米行驶了 10 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 712}
+{"id": "arith-36", "kind": "arith", "prompt": "仓库原有 370 箱货，运来 15 车，每车 20 箱，又运走 18 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 652}
+{"id": "arith-37", "kind": "arith", "prompt": "一本书 33 元，一支笔 40 元。买 19 本书和 21 支笔，付了 1600 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 133}
+{"id": "arith-38", "kind": "arith", "prompt": "一个长方形长 33 米，宽 24 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 114}
+{"id": "arith-39", "kind": "arith", "prompt": "小王每天读 11 页书，读了 19 天后还剩 53 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 262}
+{"id": "arith-40", "kind": "arith", "prompt": "甲班有 77 人，乙班比甲班多 6 人，丙班人数是乙班的 2 倍少 1 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 325}
+{"id": "arith-41", "kind": "arith", "prompt": "一辆车每小时行驶 63 千米，先行驶了 18 小时，又以每小时 43 千米行驶了 19 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1951}
+{"id": "arith-42", "kind": "arith", "prompt": "仓库原有 380 箱货，运来 17 车，每车 39 箱，又运走 19 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1024}
+{"id": "arith-43", "kind": "arith", "prompt": "一本书 36 元，一支笔 33 元。买 11 本书和 13 支笔，付了 1000 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 175}
+{"id": "arith-44", "kind": "arith", "prompt": "一个长方形长 25 米，宽 6 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 62}
+{"id": "arith-45", "kind": "arith", "prompt": "小王每天读 24 页书，读了 10 天后还剩 19 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 259}
+{"id": "arith-46", "kind": "arith", "prompt": "甲班有 53 人，乙班比甲班多 11 人，丙班人数是乙班的 2 倍少 3 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 242}
+{"id": "arith-47", "kind": "arith", "prompt": "一辆车每小时行驶 49 千米，先行驶了 14 小时，又以每小时 29 千米行驶了 15 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1121}
+{"id": "arith-48", "kind": "arith", "prompt": "仓库原有 150 箱货，运来 7 车，每车 38 箱，又运走 20 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 396}
+{"id": "arith-49", "kind": "arith", "prompt": "一本书 67 元，一支笔 29 元。买 19 本书和 21 支笔，付了 2000 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 118}
+{"id": "arith-50", "kind": "arith", "prompt": "一个长方形长 87 米，宽 30 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 234}
+{"id": "arith-51", "kind": "arith", "prompt": "小王每天读 20 页书，读了 14 天后还剩 48 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 328}
+{"id": "arith-52", "kind": "arith", "prompt": "甲班有 82 人，乙班比甲班多 13 人，丙班人数是乙班的 2 倍少 3 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 364}
+{"id": "arith-53", "kind": "arith", "prompt": "一辆车每小时行驶 80 千米，先行驶了 5 小时，又以每小时 60 千米行驶了 6 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 760}
+{"id": "arith-54", "kind": "arith", "prompt": "仓库原有 990 箱货，运来 17 车，每车 8 箱，又运走 22 箱。现在仓库有多少箱？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1104}
+{"id": "arith-55", "kind": "arith", "prompt": "一本书 71 元，一支笔 33 元。买 13 本书和 15 支笔，付了 1600 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。", "answer": 182}
+{"id": "arith-56", "kind": "arith", "prompt": "一个长方形长 27 米，宽 29 米。沿着它的四周每隔 1 米种一棵树，四个角都种，一共种多少棵？请一步步计算，最后单独一行写“答案：数字”。", "answer": 112}
+{"id": "arith-57", "kind": "arith", "prompt": "小王每天读 45 页书，读了 19 天后还剩 46 页没读。这本书一共多少页？请一步步计算，最后单独一行写“答案：数字”。", "answer": 901}
+{"id": "arith-58", "kind": "arith", "prompt": "甲班有 70 人，乙班比甲班多 7 人，丙班人数是乙班的 2 倍少 16 人。三个班一共多少人？请一步步计算，最后单独一行写“答案：数字”。", "answer": 285}
+{"id": "arith-59", "kind": "arith", "prompt": "一辆车每小时行驶 86 千米，先行驶了 10 小时，又以每小时 66 千米行驶了 11 小时。一共行驶多少千米？请一步步计算，最后单独一行写“答案：数字”。", "answer": 1586}
+{"id": "json-00", "kind": "json", "expected": {"name": "周婷", "city": "杭州", "order_id": "SO940372", "qty": 6, "total": 246}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n周婷在6月4日从杭州下了一单，订单号 SO940372，买了6个水壶，每个 41 元。"}
+{"id": "json-01", "kind": "json", "expected": {"name": "赵敏", "city": "南京", "order_id": "SO949127", "qty": 7, "total": 1078}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO949127：收货城市南京，保温杯7件，单价154元，下单人赵敏，日期1月9日。"}
+{"id": "json-02", "kind": "json", "expected": {"name": "陈静", "city": "厦门", "order_id": "SO469810", "qty": 10, "total": 1370}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n4月20日，订单号为 SO469810 的客户陈静购买了键盘，单价 137 元，数量 10，寄往厦门。"}
+{"id": "json-03", "kind": "json", "expected": {"name": "赵敏", "city": "南京", "order_id": "SO560434", "qty": 11, "total": 2640}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往南京的包裹里是11个笔记本（240 元一个），对应订单 SO560434，是赵敏8月12日下的单。"}
+{"id": "json-04", "kind": "json", "expected": {"name": "李娜", "city": "武汉", "order_id": "SO317900", "qty": 12, "total": 1128}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n李娜在5月26日从武汉下了一单，订单号 SO317900，买了12个耳机，每个 94 元。"}
+{"id": "json-05", "kind": "json", "expected": {"name": "刘洋", "city": "南京", "order_id": "SO338408", "qty": 10, "total": 1000}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO338408：收货城市南京，笔记本10件，单价100元，下单人刘洋，日期1月24日。"}
+{"id": "json-06", "kind": "json", "expected": {"name": "李娜", "city": "杭州", "order_id": "SO460251", "qty": 12, "total": 1812}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n8月26日，订单号为 SO460251 的客户李娜购买了保温杯，单价 151 元，数量 12，寄往杭州。"}
+{"id": "json-07", "kind": "json", "expected": {"name": "周婷", "city": "武汉", "order_id": "SO934001", "qty": 12, "total": 2484}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往武汉的包裹里是12个雨伞（207 元一个），对应订单 SO934001，是周婷9月10日下的单。"}
+{"id": "json-08", "kind": "json", "expected": {"name": "赵敏", "city": "杭州", "order_id": "SO581165", "qty": 5, "total": 260}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n赵敏在12月1日从杭州下了一单，订单号 SO581165，买了5个笔记本，每个 52 元。"}
+{"id": "json-09", "kind": "json", "expected": {"name": "李娜", "city": "杭州", "order_id": "SO996009", "qty": 2, "total": 414}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO996009：收货城市杭州，水壶2件，单价207元，下单人李娜，日期6月28日。"}
+{"id": "json-10", "kind": "json", "expected": {"name": "李娜", "city": "厦门", "order_id": "SO168159", "qty": 7, "total": 532}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n4月27日，订单号为 SO168159 的客户李娜购买了耳机，单价 76 元，数量 7，寄往厦门。"}
+{"id": "json-11", "kind": "json", "expected": {"name": "赵敏", "city": "南京", "order_id": "SO108063", "qty": 6, "total": 1560}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往南京的包裹里是6个雨伞（260 元一个），对应订单 SO108063，是赵敏4月13日下的单。"}
+{"id": "json-12", "kind": "json", "expected": {"name": "赵敏", "city": "西安", "order_id": "SO295685", "qty": 9, "total": 1080}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n赵敏在9月19日从西安下了一单，订单号 SO295685，买了9个耳机，每个 120 元。"}
+{"id": "json-13", "kind": "json", "expected": {"name": "黄强", "city": "成都", "order_id": "SO768844", "qty": 12, "total": 2964}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO768844：收货城市成都，保温杯12件，单价247元，下单人黄强，日期10月1日。"}
+{"id": "json-14", "kind": "json", "expected": {"name": "周婷", "city": "青岛", "order_id": "SO523406", "qty": 4, "total": 980}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n6月2日，订单号为 SO523406 的客户周婷购买了雨伞，单价 245 元，数量 4，寄往青岛。"}
+{"id": "json-15", "kind": "json", "expected": {"name": "周婷", "city": "杭州", "order_id": "SO666379", "qty": 2, "total": 258}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往杭州的包裹里是2个雨伞（129 元一个），对应订单 SO666379，是周婷12月6日下的单。"}
+{"id": "json-16", "kind": "json", "expected": {"name": "吴昊", "city": "杭州", "order_id": "SO530293", "qty": 7, "total": 1330}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n吴昊在10月15日从杭州下了一单，订单号 SO530293，买了7个台灯，每个 190 元。"}
+{"id": "json-17", "kind": "json", "expected": {"name": "陈静", "city": "沈阳", "order_id": "SO438556", "qty": 4, "total": 68}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO438556：收货城市沈阳，背包4件，单价17元，下单人陈静，日期9月2日。"}
+{"id": "json-18", "kind": "json", "expected": {"name": "陈静", "city": "厦门", "order_id": "SO768561", "qty": 9, "total": 882}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n3月14日，订单号为 SO768561 的客户陈静购买了键盘，单价 98 元，数量 9，寄往厦门。"}
+{"id": "json-19", "kind": "json", "expected": {"name": "黄强", "city": "成都", "order_id": "SO508981", "qty": 4, "total": 96}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往成都的包裹里是4个保温杯（24 元一个），对应订单 SO508981，是黄强6月11日下的单。"}
+{"id": "json-20", "kind": "json", "expected": {"name": "赵敏", "city": "武汉", "order_id": "SO630654", "qty": 2, "total": 410}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n赵敏在3月12日从武汉下了一单，订单号 SO630654，买了2个键盘，每个 205 元。"}
+{"id": "json-21", "kind": "json", "expected": {"name": "赵敏", "city": "成都", "order_id": "SO686822", "qty": 2, "total": 512}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO686822：收货城市成都，键盘2件，单价256元，下单人赵敏，日期8月8日。"}
+{"id": "json-22", "kind": "json", "expected": {"name": "张伟", "city": "杭州", "order_id": "SO418938", "qty": 6, "total": 1488}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n8月21日，订单号为 SO418938 的客户张伟购买了台灯，单价 248 元，数量 6，寄往杭州。"}
+{"id": "json-23", "kind": "json", "expected": {"name": "刘洋", "city": "昆明", "order_id": "SO257173", "qty": 11, "total": 2486}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往昆明的包裹里是11个台灯（226 元一个），对应订单 SO257173，是刘洋8月20日下的单。"}
+{"id": "json-24", "kind": "json", "expected": {"name": "吴昊", "city": "厦门", "order_id": "SO838919", "qty": 3, "total": 174}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n吴昊在5月16日从厦门下了一单，订单号 SO838919，买了3个台灯，每个 58 元。"}
+{"id": "json-25", "kind": "json", "expected": {"name": "周婷", "city": "厦门", "order_id": "SO590530", "qty": 12, "total": 852}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO590530：收货城市厦门，耳机12件，单价71元，下单人周婷，日期11月5日。"}
+{"id": "json-26", "kind": "json", "expected": {"name": "陈静", "city": "青岛", "order_id": "SO120322", "qty": 6, "total": 780}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n9月22日，订单号为 SO120322 的客户陈静购买了雨伞，单价 130 元，数量 6，寄往青岛。"}
+{"id": "json-27", "kind": "json", "expected": {"name": "黄强", "city": "南京", "order_id": "SO836001", "qty": 5, "total": 960}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往南京的包裹里是5个台灯（192 元一个），对应订单 SO836001，是黄强10月16日下的单。"}
+{"id": "json-28", "kind": "json", "expected": {"name": "刘洋", "city": "昆明", "order_id": "SO417244", "qty": 9, "total": 1332}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n刘洋在1月7日从昆明下了一单，订单号 SO417244，买了9个笔记本，每个 148 元。"}
+{"id": "json-29", "kind": "json", "expected": {"name": "张伟", "city": "南京", "order_id": "SO353910", "qty": 11, "total": 1452}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO353910：收货城市南京，水壶11件，单价132元，下单人张伟，日期12月11日。"}
+{"id": "json-30", "kind": "json", "expected": {"name": "刘洋", "city": "成都", "order_id": "SO187295", "qty": 4, "total": 728}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n11月5日，订单号为 SO187295 的客户刘洋购买了耳机，单价 182 元，数量 4，寄往成都。"}
+{"id": "json-31", "kind": "json", "expected": {"name": "王芳", "city": "成都", "order_id": "SO997521", "qty": 12, "total": 828}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往成都的包裹里是12个雨伞（69 元一个），对应订单 SO997521，是王芳1月13日下的单。"}
+{"id": "json-32", "kind": "json", "expected": {"name": "吴昊", "city": "西安", "order_id": "SO953169", "qty": 5, "total": 1040}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n吴昊在10月14日从西安下了一单，订单号 SO953169，买了5个保温杯，每个 208 元。"}
+{"id": "json-33", "kind": "json", "expected": {"name": "陈静", "city": "沈阳", "order_id": "SO936143", "qty": 8, "total": 1456}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO936143：收货城市沈阳，雨伞8件，单价182元，下单人陈静，日期7月22日。"}
+{"id": "json-34", "kind": "json", "expected": {"name": "赵敏", "city": "西安", "order_id": "SO684775", "qty": 6, "total": 270}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n1月7日，订单号为 SO684775 的客户赵敏购买了保温杯，单价 45 元，数量 6，寄往西安。"}
+{"id": "json-35", "kind": "json", "expected": {"name": "黄强", "city": "长沙", "order_id": "SO422211", "qty": 4, "total": 76}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往长沙的包裹里是4个台灯（19 元一个），对应订单 SO422211，是黄强2月8日下的单。"}
+{"id": "json-36", "kind": "json", "expected": {"name": "刘洋", "city": "沈阳", "order_id": "SO919907", "qty": 4, "total": 700}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n刘洋在4月19日从沈阳下了一单，订单号 SO919907，买了4个水壶，每个 175 元。"}
+{"id": "json-37", "kind": "json", "expected": {"name": "周婷", "city": "成都", "order_id": "SO157042", "qty": 7, "total": 1477}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n订单 SO157042：收货城市成都，笔记本7件，单价211元，下单人周婷，日期11月27日。"}
+{"id": "json-38", "kind": "json", "expected": {"name": "赵敏", "city": "南京", "order_id": "SO709575", "qty": 2, "total": 266}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n6月10日，订单号为 SO709575 的客户赵敏购买了台灯，单价 133 元，数量 2，寄往南京。"}
+{"id": "json-39", "kind": "json", "expected": {"name": "杨磊", "city": "昆明", "order_id": "SO513528", "qty": 6, "total": 102}, "prompt": "从下面这句话中抽取信息，只输出一个 JSON 对象，不要其他文字。字段：name（下单人）、city（城市）、order_id（订单号）、qty（数量，整数）、total（总金额=数量×单价，整数）。\n\n寄往昆明的包裹里是6个键盘（17 元一个），对应订单 SO513528，是杨磊11月19日下的单。"}
+{"id": "code-00", "kind": "code", "test": "assert is_pal('A man, a plan, a canal: Panama'); assert not is_pal('race a car'); assert is_pal('')", "prompt": "用 Python 写一个函数 is_pal(s)：判断字符串是否为回文，忽略大小写和非字母数字字符。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-01", "kind": "code", "test": "assert rev_words('  the sky  is blue ')=='blue is sky the'; assert rev_words('a')=='a'", "prompt": "用 Python 写一个函数 rev_words(s)：把句子中的单词顺序反转，单词之间用一个空格分隔，去掉首尾和多余空格。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-02", "kind": "code", "test": "assert merge([1,3,5],[2,4,6,8])==[1,2,3,4,5,6,8]; assert merge([],[1])==[1]", "prompt": "用 Python 写一个函数 merge(a, b)：合并两个升序整数列表，返回一个新的升序列表。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-03", "kind": "code", "test": "assert fib(0)==0; assert fib(10)==55; assert fib(90)==2880067194370816120", "prompt": "用 Python 写一个函数 fib(n)：返回斐波那契数列第 n 项，fib(0)=0，fib(1)=1，要求 n=90 时也能很快算出。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-04", "kind": "code", "test": "assert roman('MCMXCIV')==1994; assert roman('LVIII')==58; assert roman('IV')==4", "prompt": "用 Python 写一个函数 roman(s)：把罗马数字字符串转成整数。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-05", "kind": "code", "test": "assert not is_prime(1); assert is_prime(2); assert is_prime(97); assert not is_prime(91)", "prompt": "用 Python 写一个函数 is_prime(n)：判断整数 n 是否为质数，n 小于 2 返回 False。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-06", "kind": "code", "test": "assert dedup([3,1,3,2,1])==[3,1,2]; assert dedup([])==[]", "prompt": "用 Python 写一个函数 dedup(xs)：列表去重，保留每个元素第一次出现的顺序。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-07", "kind": "code", "test": "assert snake('parseHTTPRequest')=='parse_http_request'; assert snake('userId')=='user_id'; assert snake('simple')=='simple'", "prompt": "用 Python 写一个函数 snake(s)：把驼峰命名转成小写下划线命名，例如 parseHTTPRequest 转成 parse_http_request。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-08", "kind": "code", "test": "assert bsearch([1,3,5,7,9],7)==3; assert bsearch([1,3,5],4)==-1; assert bsearch([],1)==-1", "prompt": "用 Python 写一个函数 bsearch(xs, x)：在升序列表中二分查找 x，找到返回下标，找不到返回 -1。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-09", "kind": "code", "test": "assert balanced('([]{})'); assert not balanced('(]'); assert not balanced('(('); assert balanced('')", "prompt": "用 Python 写一个函数 balanced(s)：判断只含 ()[]{} 的字符串括号是否匹配。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-10", "kind": "code", "test": "assert rle('aaabcc')=='a3b1c2'; assert rle('')==''; assert rle('z')=='z1'", "prompt": "用 Python 写一个函数 rle(s)：游程压缩：'aaabcc' 转成 'a3b1c2'，空串返回空串。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-11", "kind": "code", "test": "assert max_sub([-2,1,-3,4,-1,2,1,-5,4])==6; assert max_sub([-3,-1,-2])==-1", "prompt": "用 Python 写一个函数 max_sub(xs)：返回非空整数列表的最大连续子数组和。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-12", "kind": "code", "test": "assert transpose([[1,2,3],[4,5,6]])==[[1,4],[2,5],[3,6]]; assert transpose([[1]])==[[1]]", "prompt": "用 Python 写一个函数 transpose(m)：转置一个由列表组成的矩阵（每行长度相同）。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-13", "kind": "code", "test": "assert hms(0)=='00:00:00'; assert hms(3661)=='01:01:01'; assert hms(360000)=='100:00:00'", "prompt": "用 Python 写一个函数 hms(sec)：把秒数转成 'HH:MM:SS' 字符串，小时至少两位。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-14", "kind": "code", "test": "assert count_chars('abca')=={'a':2,'b':1,'c':1}; assert count_chars('')=={}", "prompt": "用 Python 写一个函数 count_chars(s)：返回字典，统计字符串中每个字符出现的次数。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-15", "kind": "code", "test": "assert second_max([3,1,3,2])==2; assert second_max([5,5])is None; assert second_max([])is None", "prompt": "用 Python 写一个函数 second_max(xs)：返回列表中第二大的不同数值，不存在时返回 None。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-16", "kind": "code", "test": "assert flatten([1,[2,[3,[4]]],5])==[1,2,3,4,5]; assert flatten([])==[]", "prompt": "用 Python 写一个函数 flatten(xs)：把任意层嵌套的列表展平成一维列表。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-17", "kind": "code", "test": "assert leap(2000); assert not leap(1900); assert leap(2024); assert not leap(2023)", "prompt": "用 Python 写一个函数 leap(y)：判断公历年份是否为闰年。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-18", "kind": "code", "test": "assert digit_sum(0)==0; assert digit_sum(98765)==35", "prompt": "用 Python 写一个函数 digit_sum(n)：返回非负整数 n 各位数字之和。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-19", "kind": "code", "test": "assert chunks([1,2,3,4,5],2)==[[1,2],[3,4],[5]]; assert chunks([],3)==[]", "prompt": "用 Python 写一个函数 chunks(xs, k)：把列表按每 k 个一组切分，最后一组可以不足 k 个。只输出一个 ```python 代码块，不要解释，不要写测试。"}

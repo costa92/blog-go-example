@@ -1,0 +1,955 @@
+Go 语言的并发模型是其核心竞争力之一。通过 goroutine，开发者可以轻松创建数以万计的并发任务，而无需担心传统线程模型的高昂开销。本文将深入剖析 Go 协程的实现原理，从 GMP 调度模型到运行时调度器，再到动态栈管理机制，帮助理解 Go 并发的底层设计权衡。
+
+## 一、Goroutine 的本质：用户态轻量级线程
+
+### 1.1 为什么需要 Goroutine
+
+传统操作系统线程存在以下问题：
+
+- **创建成本高**：每个 OS 线程有固定大小的栈（Linux 上默认通常为 8MB 虚拟地址空间，实际按需提交）
+- **上下文切换开销大**：涉及内核态切换，需要保存/恢复寄存器、刷新 TLB
+- **调度粒度粗**：OS 调度器无法感知应用层的语义
+
+Go 在用户态实现调度器，goroutine 的创建和切换都不必进入内核：
+
+**关键设计：**
+- Goroutine 初始栈大小为 **2KB**（自 Go 1.4 起；Go 1.19 起 runtime 会按历史平均栈用量调整新 goroutine 的初始栈）
+- 动态栈增长：按需扩展，默认上限 1GB（64 位系统，可用 `debug.SetMaxStack` 调整）
+- 用户态调度：Go runtime 完全掌控调度逻辑
+
+### 1.2 Goroutine 与 OS 线程的差异
+
+具体耗时与硬件、内核版本强相关，需要量化时建议在自己的机器上用 `go test -bench` 实测。
+
+> **提示**
+> Go 1.3 把分段栈换成了连续栈（contiguous stack），Go 1.4 在此基础上把 goroutine 初始栈从 8KB 降到 2KB。
+
+## 二、GMP 调度模型：M:N 调度的精髓
+
+### 2.1 核心组件
+
+Go 调度器基于 **GMP 模型**，由三个核心实体组成：
+
+#### G (Goroutine)
+- 代表一个用户级任务
+- 包含栈指针、程序计数器、等待状态等元数据
+- 完成后 G 对象会被回收到池中复用
+
+**关键数据结构（简化）：**
+
+#### M (Machine)
+- 代表一个操作系统线程
+- 执行 Go 代码时必须持有一个 P
+- 数量可动态调整，默认上限 10000（`debug.SetMaxThreads`）
+
+**关键特性：**
+- 每个 M 维护一个特殊的 **g0** goroutine，用于执行调度器代码
+- 系统调用阻塞时，M 会与 P 解绑，允许其他 M 接管
+
+#### P (Processor)
+- 代表执行 Go 代码所需的逻辑处理器资源
+- 持有本地运行队列（Local Run Queue, LRQ）
+- 数量由 `GOMAXPROCS` 控制，默认等于 CPU 核心数
+
+**本地队列大小：**
+- LRQ 容量为 **256 个** goroutine
+- 本地队列满时，会把其中一半连同新 G 一起移到全局队列
+
+### 2.2 调度流程
+
+**调度决策点：**
+1. **主动让出**：调用 `runtime.Gosched()`
+2. **阻塞操作**：channel 操作、网络 I/O、锁等待
+3. **系统调用**：长时间阻塞的 syscall 会让 P 被转交给其他 M
+4. **被抢占**：运行超过约 10ms 的 goroutine 会被 sysmon 标记抢占；函数序言的栈检查是协作式抢占点，Go 1.14 起还可以通过信号异步抢占
+
+> **注意**
+> Go 1.14 之前的调度器是协作式的，长时间运行的计算密集型 goroutine 可能导致其他 goroutine 饥饿。Go 1.14 引入了基于信号的抢占，解决了这个问题。
+
+## 三、调度器实现细节
+
+### 3.1 Work-Stealing 算法
+
+当 P 的本地队列为空时，调度器会执行以下操作：
+
+1. **检查全局队列**：从全局运行队列中获取 goroutine
+2. **检查网络轮询器**：非阻塞地取出网络 I/O 已就绪的 goroutine
+3. **窃取其他 P 的任务**：以随机顺序遍历其他 P，窃取其本地队列的一半任务
+
+**Work-Stealing 核心逻辑（按 runtime/proc.go 改写的伪代码，函数名和细节随版本变化，并非原样源码）：**
+
+**关键参数：**
+- **全局队列检查频率**：每 61 次调度检查一次（素数选择，避免共振）
+- **窃取比例**：窃取目标 P 本地队列的 **50%** 任务
+- **遍历轮数**：`stealTries = 4`，每轮按随机顺序把所有 P 过一遍
+
+### 3.2 系统调用处理
+
+当 goroutine 执行阻塞的系统调用时，为避免整个 P 被占住，调度器会执行 **handoff** 操作：
+
+**Handoff 流程：**
+1. Goroutine 进入系统调用前调用 `runtime.entersyscall()`，P 被标记为 `_Psyscall`，M 暂时仍挂着它
+2. 如果 syscall 很快返回，M 直接拿回原来的 P 继续执行，没有额外开销
+3. 如果 syscall 迟迟不返回，sysmon 在下一次检查时（至少 20μs 之后，且有其他工作要做）把 P 夺走，交给空闲的或新建的 M（`handoffp`）；已知会长时间阻塞的调用走 `entersyscallblock`，直接交出 P
+4. 系统调用返回后（`exitsyscall`），原 M 先尝试拿回原 P，再尝试空闲 P；都拿不到就把 G 放进全局队列，M 自己休眠
+
+> **说明**
+> Go 的网络库（`net` 包）使用非阻塞 I/O + 网络轮询器（netpoller），网络读写不会占住线程。普通文件 I/O、cgo 调用等才会真正阻塞 M。
+
+### 3.3 抢占式调度
+
+Go 1.14 引入基于信号的抢占式调度，解决了协作式调度的死循环问题：
+
+**抢占机制：**
+- **sysmon 线程**：不绑定 P 的独立监控线程，空闲时轮询间隔从 20μs 逐步拉长到 10ms
+- **抢占触发条件**：同一个 goroutine 连续运行超过 **10ms**（`forcePreemptNS`）
+- **实现方式**：先设置抢占标志（协作式，在函数序言的栈检查处生效）；Go 1.14 起再向目标线程发送 `SIGURG` 信号，信号处理函数在异步安全点把 goroutine 切出去
+
+## 四、动态栈管理
+
+### 4.1 栈增长机制
+
+Go 使用 **连续栈（Contiguous Stack）** 策略（Go 1.3+），替代了早期的分段栈（Segmented Stack）。
+
+**栈增长流程：**
+1. **检测**：每次函数调用时检查 `stackguard0`
+2. **分配新栈**：当前栈不足时，分配 **2 倍大小** 的新栈（不够就继续翻倍）
+3. **拷贝数据**：将旧栈数据复制到新栈
+4. **更新指针**：调整栈上所有指针的引用
+5. **释放旧栈**：旧栈归还到栈缓存/堆
+
+### 4.2 栈收缩
+
+为避免内存浪费，Go 会在垃圾回收期间收缩过大的栈：
+
+**收缩条件：**
+- 栈使用率  **提示**
+> 连续栈相比分段栈的优势：
+> - 消除了"热分裂"（hot split）问题：在分段边界附近反复调用/返回时反复分配释放栈段
+> - 栈内存连续，CPU 缓存局部性更好
+>
+> 代价是扩容时要拷贝整个栈并调整栈上的指针。
+
+## 五、实践要点
+
+### 5.1 避免 Goroutine 泄漏
+
+注意 `case val, ok := <-ch` 里的 `ok` 检查：从已关闭的 channel 接收会立即返回零值，如果只写 `val := <-ch`，`close(ch)` 之后这个 select 会变成打印 0 的空转循环。
+
+**检测工具：**
+
+测试里可以用 go.uber.org/goleak 在用例结束时断言没有遗留 goroutine。
+
+### 5.2 控制并发度
+
+### 5.3 CPU 密集型 vs I/O 密集型调优
+
+**调优建议：**
+- **CPU 密集型**：同时在跑的 goroutine 数和 GOMAXPROCS 相当即可，再多只会增加切换
+- **I/O 密集型**：goroutine 数量可以远超核心数，瓶颈通常在下游（连接池、限流）
+- **混合场景**：用 worker pool 或信号量限制并发度
+- **容器环境**：Go 1.25 起默认 GOMAXPROCS 会参考 cgroup 的 CPU 限额；更老的版本需要 `go.uber.org/automaxprocs`
+
+## 六、优缺点分析
+
+### 6.1 优势
+
+1. **极低的创建开销**
+   - 2KB 初始栈，远小于 OS 线程的固定栈
+   - 创建不需要系统调用
+
+2. **高效的调度**
+   - 用户态调度，无内核态切换
+   - Work-stealing 算法实现负载均衡
+   - 基于信号的异步抢占（Go 1.14+）
+
+3. **动态栈管理**
+   - 自动增长/收缩
+   - 不必像线程那样预估栈大小
+
+4. **与语言特性深度集成**
+   - Channel 原生支持
+   - 网络轮询器（netpoller）非阻塞 I/O
+   - defer/panic/recover 机制
+
+### 6.2 劣势
+
+1. **单个 goroutine 不会自动并行**
+   
+
+2. **调度器黑盒**
+   - 无法精确控制 goroutine 在哪个核心执行
+   - 调试困难（相比传统线程 ID）
+
+3. **栈拷贝开销**
+   - 频繁栈增长会导致性能抖动
+   - 深度递归场景不如固定栈
+
+4. **内存模型复杂**
+   
+
+### 6.3 使用场景建议
+
+## 七、生产环境监控
+
+### 7.1 关键指标
+
+### 7.2 常见问题诊断
+
+**问题 1：Goroutine 数量持续增长**
+
+**问题 2：调度器延迟过高**
+
+## 八、总结
+
+Go 的 goroutine 实现是 M:N 调度模型的经典实践：
+
+1. **GMP 模型** 通过三层抽象（G/M/P）解耦了用户任务、OS 线程和逻辑处理器
+2. **Work-stealing 算法** 实现了高效的负载均衡
+3. **动态栈管理** 在内存效率和性能之间取得平衡
+4. **抢占式调度** 解决了协作式调度的公平性问题
+
+理解这些机制，排查问题时会更有方向：goroutine 数量暴涨先查泄漏，CPU 跑不满先看 GOMAXPROCS 和阻塞 syscall，尾延迟抖动再去 trace 里看调度和 GC。
+
+## 参考链接
+
+- Dmitry Vyukov, Scalable Go Scheduler Design Doc（引入 P 的设计文档）: https://golang.org/s/go11sched
+- Proposal: Non-cooperative goroutine preemption: https://github.com/golang/proposal/blob/master/design/24543-non-cooperative-preemption.md
+- Go 1.4 Release Notes（初始栈降到 2KB）: https://go.dev/doc/go1.4
+- Go 1.14 Release Notes（异步抢占）: https://go.dev/doc/go1.14
+- Effective Go - Concurrency: https://go.dev/doc/effective_go#concurrency
+- Ardan Labs, Scheduling In Go: https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html
+- 调度器源码: https://github.com/golang/go/blob/master/src/runtime/proc.go
+- 栈管理源码: https://github.com/golang/go/blob/master/src/runtime/stack.go
+
+`encoding/json` 是 Go 里用得最多的标准库之一，它有不少早年定下、因为兼容性又无法修改的默认行为：字段名大小写不敏感、nil 切片编码成 `null`、默认转义 HTML 字符、非法 UTF-8 被替换成 `U+FFFD` 而不报错。
+
+`encoding/json/v2` 就是为了解决这些问题而来的。它在 Go 1.25 以实验特性（`GOEXPERIMENT=jsonv2`）的形式进入标准库，到 Go 1.27 默认开启。本文所有输出都来自 **Go 1.27.3 / linux amd64** 上的实际运行结果。每一项差异都写成了测试，放在 blog-go-example/jsonv2，执行 `go test -v ./jsonv2/` 即可在你自己的 Go 版本上复核。
+
+## 版本时间线与包结构
+
+先看清楚各版本的状态，我对本机装的几个版本逐一查了 `src/internal/buildcfg/exp.go` 里 `JSONv2` 的默认值：
+
+v2 由三个包组成：
+
+- **`encoding/json/jsontext`**：纯语法层，负责 JSON 的词法和格式，提供 `Encoder` / `Decoder` / `Token` / `Value`，完全不涉及 Go 类型反射。
+- **`encoding/json/v2`**：语义层，负责 Go 值和 JSON 之间的转换（`Marshal` / `Unmarshal` / `MarshalWrite` / `UnmarshalRead` 等），建立在 `jsontext` 之上。
+- **`encoding/json`（v1）**：API 不变。启用 jsonv2 后，v1 的内部实现改为“v2 + 一组兼容选项”，对外行为保持 v1 语义。
+
+因此，**升级到 Go 1.27 后，不改代码的 v1 调用也会由 v2 实现执行**。我用同一段 v1 代码在默认和 `GOEXPERIMENT=nojsonv2` 下各跑一次，输出完全一致：
+
+所以升级本身不会改变 v1 的语义；真正的行为变化只发生在你显式 `import "encoding/json/v2"` 的地方。
+
+## 默认行为差异逐项实测
+
+下面的示例用别名同时导入两个版本：
+
+### 2.1 nil 切片和 nil map
+
+v1 把 Go 的 nil 语义泄漏到了 JSON 里：同样是“没有元素”，nil 切片是 `null`，空切片是 `[]`，前端经常因此多写一层判空。v2 统一编码成 `[]` / `{}`。如果下游确实依赖 `null`，可以用选项恢复：
+
+### 2.2 字段名匹配：大小写敏感
+
+v1 解码时对字段名做大小写不敏感匹配，`USER_NAME`、`Age` 都能对上。这个默认值既让人意外，也有性能代价：遇到未知字段时要额外做一次折叠比较。v2 改为**精确匹配**，对不上的键当成未知字段直接忽略，不报错。迁移后如果请求方用的字段名大小写和 tag 不一致，这些字段会变成零值，也不会有任何错误提示。
+
+需要宽松匹配时有两种方式，一个是全局选项，一个是字段级 tag：
+
+注意 v2 的“不敏感”比 v1 更宽：它同时忽略 `-` 和 `_`，所以 `userName`、`user_name`、`USER-NAME` 都能匹配到 `user_name`。实测 `{"userName":"bob"}` 在开启选项后能正确填进 `user_name` 字段。
+
+### 2.3 重复键
+
+v1 取最后一个值且不报错。RFC 8259 并没有规定重复键的语义，不同解析器有的取第一个、有的取最后一个，这种分歧曾经被用来绕过安全校验（网关看到的是 A，后端拿到的是 B）。v2 直接拒绝。确实需要兼容时用 `jsontext.AllowDuplicateNames(true)`。
+
+### 2.4 非法 UTF-8
+
+v1 会把非法字节替换成 `U+FFFD`，数据就这样悄悄被改了；v2 报错，并告诉你出错位置的 JSON Pointer 和字节偏移。兼容选项是 `jsontext.AllowInvalidUTF8(true)`。
+
+### 2.5 HTML 字符转义
+
+v1 默认把 ``、`&` 转义成 `\u00XX`，防的是 JSON 被直接塞进 HTML 时的注入。Go 团队认为这是“层次错误”：JSON 库不该假设输出一定嵌进 HTML。v2 默认不转义，输出更短也更好读。如果你的 JSON 确实会内联进 ``，显式打开 `jsontext.EscapeForHTML(true)` 和 `jsontext.EscapeForJS(true)`。
+
+### 2.6 omitempty 的语义变了，新增 omitzero
+
+两个版本对 `omitempty` 的判断依据不同：
+
+- **v1 的 omitempty 按 Go 类型判断**：`false`、`0`、nil 指针、nil 接口、长度为 0 的数组/切片/map/字符串会被省略。所以 `count:0` 被省略，而空结构体 `obj:{}` 不会，`time.Time` 零值也不会。
+- **v2 的 omitempty 按 JSON 结果判断**：编码结果是 `null`、`""`、`{}`、`[]` 才省略。所以 `count:0` **保留**（`0` 不是空 JSON 值），`obj:{}` 被省略。
+- **omitzero 按 Go 零值判断**，有 `IsZero() bool` 方法时调用它。`time.Time` 零值靠它才能省掉。`omitzero` 在 Go 1.24 已经加入 v1，两个版本都能用。
+
+迁移建议：原来 v1 里 `int`、`bool` 字段上的 `omitempty`，到 v2 改成 `omitzero` 才是原来的意思；`time.Time`、`netip.Addr` 这类有明确零值的类型也用 `omitzero`。
+
+### 2.7 time.Duration 没有默认表示
+
+v1 把 `Duration` 当成普通 `int64` 输出纳秒数，对端很难看出单位。v2 在 1.27 里干脆不给默认值，直接报错，逼你做出选择。目前有两条路：
+
+> **版本差异提醒**
+> Go 1.25/1.26 的实验版 v2 支持 `json:"d,format:units"` 这样的 `format` tag。到了 1.27，它已经从文档中移除，同样的写法会报 ``has unsupported `format` tag option``。网上不少 v2 教程基于早期版本，照抄前请先确认自己的 Go 版本。
+
+### 2.8 [N]byte 与数组长度
+
+v1 里 `[]byte` 编码成 base64 字符串，`[N]byte` 却是数字数组，两者不一致。v2 统一为 base64（兼容选项 `jsonv1.FormatByteArrayAsArray`）。
+
+数组长度也变严格了：
+
+v1 静默丢掉多余元素，v2 要求长度严格相等。
+
+### 2.9 map 键的顺序
+
+v1 总是按键排序，v2 为了流式编码和性能不排序。依赖输出稳定性的场景（签名、缓存键、golden 测试）要加 `jsonv2.Deterministic(true)`，或者对已有 JSON 调用 `jsontext.Value.Canonicalize()`。
+
+### 2.10 指针接收者的 MarshalJSON
+
+这是 v1 的一个老坑：值不可寻址时（这里是按值传入的结构体），v1 不会调用定义在指针接收者上的 `MarshalJSON`，退化成反射编码；`ID` 没有导出字段，于是输出了 `{}`。v2 会在需要时取地址，统一调用方法。
+
+### 2.11 string 选项
+
+两者都要求带 `,string` 的字段在 JSON 里是带引号的数字 `"123"`。区别在于 v2 把它限定为只能用于数字类型，用在其他类型上直接报错；v1 则静默忽略。
+
+## 错误信息：带 JSON Pointer 的 SemanticError
+
+同一个类型错误，看看两边的报错：
+
+v2 的路径是标准 JSON Pointer（RFC 6901），可以直接拿去定位。而且错误是结构化的：
+
+写 API 网关或配置校验时，可以把 `JSONPointer` 直接返回给调用方，不用再从字符串里解析字段路径。
+
+## v2 的新能力
+
+### 4.1 embed：内联结构体与“兜底”字段
+
+v1 只能通过 Go 匿名嵌入来“摊平”字段，也没有办法保留未知字段。v2 用一个 `embed` 选项同时解决这两件事（1.25/1.26 里分别叫 `inline` 和 `unknown`，1.27 合并成了 `embed`）：
+
+当 embed 字段的类型是 `jsontext.Value` 或 `map[string]T` 时，它就成了“兜底字段”，所有没被其他字段认领的键都收进来，编码时再原样写回：
+
+这对“只改其中几个字段、其余原样透传”的场景很有用，比如代理修改配置、中间件补字段。反过来，如果想严格拒绝未知字段：
+
+v1 对应的是 `Decoder.DisallowUnknownFields()`，只能在 `Decoder` 上用，`json.Unmarshal` 没有这个选项。
+
+### 4.2 流式接口：MarshalJSONTo / UnmarshalJSONFrom
+
+v1 的 `MarshalJSON() ([]byte, error)` 必须先生成一段完整的 `[]byte`，库再校验一遍、拷贝进输出，嵌套层数一多就有大量重复分配。v2 新增了直接操作编码器的接口：
+
+对应的解码接口是 `UnmarshalJSONFrom(*jsontext.Decoder) error`。原有的 `MarshalJSON` / `UnmarshalJSON` 在 v2 中仍然被识别，不需要为迁移重写。
+
+### 4.3 调用方指定的编解码函数
+
+除了在类型上定义方法，v2 还能在调用时为某个类型临时指定编解码逻辑，这在 v1 里做不到。前面的 `Duration` 例子用的就是这个：`MarshalToFunc` / `UnmarshalFromFunc` 生成 `Marshalers`，再通过 `WithMarshalers` 传进去。适合以下场景：
+
+- 第三方类型，你没法给它加方法；
+- 同一个类型在不同接口里需要不同表示（例如对外接口输出 `"1.5s"`、内部存储输出纳秒）。
+
+### 4.4 jsontext：按 token 流式处理
+
+`jsontext.Decoder` 可以逐个读 token，不需要把整个文档反序列化成 Go 值。下面统计日志里 `lvl` 为 `error` 的条目数：
+
+v1 也有 `Decoder.Token()`，但每个 token 都装箱成 `interface{}`，分配多、速度慢。`jsontext.Token` 是值类型，配合 `ReadValue` / `SkipValue` 可以跳过不关心的子树。
+
+`jsontext.Value` 还自带格式化工具：
+
+## 迁移策略
+
+### 5.1 不迁移也能吃到一部分红利
+
+如前所述，Go 1.27 下 v1 已经跑在 v2 引擎上，语义不变、解码更快（见下文「性能实测」）。对大多数项目来说，**升级 Go 版本本身就是第一步**。如果升级后发现兼容问题，可以先用 `GOEXPERIMENT=nojsonv2` 回退到旧实现，同时向上游报告问题。
+
+### 5.2 用 DefaultOptionsV1 渐进切换
+
+v1 包里导出了 `DefaultOptionsV1()`，把它传给 v2 的函数，就能得到 v1 语义：
+
+选项可以叠加，后面的覆盖前面的。于是可以先整体套上 v1 语义，再逐条关掉不想要的旧行为：
+
+v1 包里还有一组更细的开关（`MatchCaseSensitiveDelimiter`、`OmitEmptyWithLegacySemantics`、`CallMethodsWithLegacySemantics`、`UnmarshalArrayFromAnyLength` 等），每个对应一项历史行为，便于逐项排查。
+
+### 5.3 迁移检查清单
+
+把 `import "encoding/json"` 换成 v2 之前，逐项确认：
+
+前两项最危险，因为它们**不报错**，只是结果不同。迁移时最好准备一组真实请求样本，分别用 v1 和 v2 解码，再逐个比较结果。
+
+## 性能实测
+
+测试数据：1000 个对象组成的数组（约 98KB），每个对象含 `int64`、`string`、`float64`、`[]string` 和 `map[string]string` 字段。环境为 Intel i7-14700KF、Go 1.27.3，`-count 3` 取中位数。“经典 v1”使用 `GOEXPERIMENT=nojsonv2`。
+
+基准代码如下（`bench_test.go`）。解码和编码各一组，v1 与 v2 用同一份数据：
+
+`b.Loop()` 是 Go 1.24 新增的基准循环写法，会自动排除循环外的准备代码。运行方式：
+
+“经典 v1”那一行需要 `GOEXPERIMENT=nojsonv2`。但关掉实验后，本目录会因为构建约束被整个跳过（见「用测试复核这些差异」一节），所以要把两个 `BenchmarkV1*` 复制到一个不引用 v2、也不带该约束的文件里单独运行。结果汇总：
+
+从这组数据可以看出：
+
+- **解码提升明显**：v2 比经典 v1 快约 37%，分配次数少三分之一。即使继续用 v1 API，也有约 30% 的提升。
+- **编码在这个负载下反而更慢**：v2 比经典 v1 慢约 37%，v1 跑在 v2 引擎上慢约 55%，虽然分配次数更少。性能差异和数据形状关系很大（这里每个对象都带一个小 map 和一个字符串切片），不要把官方或别人的数字直接套到自己的服务上。
+
+如果服务以编码为主（比如大量序列化响应体），升级到 1.27 后建议用自己的真实数据跑一遍基准；编码确实成为瓶颈时，可以先用 `GOEXPERIMENT=nojsonv2` 回退，再观察后续版本的优化。
+
+## 用测试复核这些差异
+
+前面每一项输出都写成了断言，放在 blog-go-example/jsonv2 的 `diff_test.go` 里。在自己的 Go 版本上运行一条命令就能复核文中结论；Go 升级后如果 v2 的行为有变化，对应的测试会失败。迁移业务代码时，也可以照这个思路，把关心的样本固定成测试。
+
+### 7.1 构建约束
+
+两个条件缺一不可：`goexperiment.jsonv2` 保证 v2 包存在；`go1.27` 把 1.25/1.26 排除在外，因为那两个版本的实验版用的是 `inline`、`unknown`、`format` 这些旧 tag，本案例的断言在那里不成立。满足不了条件时，整个目录会被跳过，不影响仓库里的其他案例。
+
+### 7.2 辅助函数
+
+`t.Helper()` 让失败信息指向调用处的行号，而不是辅助函数内部。
+
+### 7.3 编码差异：nil 切片与 omitempty
+
+### 7.4 解码差异：大小写与重复键
+
+v2 的大小写差异不报错，只表现为字段没被填上，所以这里比较的是解码后的结构体，而不是错误：
+
+### 7.5 time.Duration：把版本变化也固定下来
+
+最后一段断言检查 `format` tag 在 1.27 中已不受支持。Go 1.25/1.26 的教程大多用这个写法，如果后续版本恢复了它，这条断言会失败。
+
+### 7.6 embed 与结构化错误
+
+其余测试（非法 UTF-8、HTML 转义、`[N]byte`、map 顺序、指针接收者、`MarshalJSONTo`、`jsontext` 流式读取、`DefaultOptionsV1`）写法相同，完整代码见仓库。
+
+### 7.7 运行结果
+
+在 Go 1.27.3 上 15 个测试全部通过：
+
+如果在更新的 Go 版本上有测试失败，说明 v2 的行为又变了，失败信息里的 `got` / `want` 就是新旧差异。
+
+## 小结
+
+v2 的默认行为更严格，也更贴近 JSON 本身的语义，宽松行为需要通过选项显式打开。重复键、非法 UTF-8、数组元素过多、`Duration` 没有指定格式，这些情况 v1 不报错，v2 都会报错。
+
+实际落地可以分三步：
+
+1. 升级到 Go 1.27，v1 代码不改，先拿到解码性能提升，同时验证编码路径没有变慢；
+2. 新代码直接用 v2，按「迁移策略」一节的清单设置 tag 和选项；
+3. 老代码用 `DefaultOptionsV1()` 平移到 v2，再逐项去掉兼容选项，每去一项都用真实样本做对比测试。
+
+另外要注意，v2 的细节仍在变化：从 1.26 到 1.27，`inline`/`unknown` 合并成了 `embed`，`format` tag 被移除，`Duration` 也没有了默认表示。写代码和查资料时，都以你所用 Go 版本自带的 `go doc encoding/json/v2` 为准。
+
+让模型返回程序能直接用的 JSON，常见的做法有三种：只在提示词里要求、给 Ollama 传 `format: "json"`、传一份 JSON Schema 做结构化输出。一般认为第三种最稳，约束了就不会错。这次在自己的 RTX 3060 上，用 36 条手写的客服消息、四个本地模型和 MiniMax 的托管接口跑了 2200 多次抽取，结果有几处和这个说法对不上：
+
+- schema 约束保证的是「能解析、结构对」，不是「内容对」。提示词里已经写清字段时，温度 0 下 `format: "json"` 和 `format: ` 的输出在四个本地模型上 36 条全部逐字相同，字段准确率 95.8% 到 97.7%，一个点都没变。只靠提示词的那组，解析失败全是因为模型套了一层 json python
+SCHEMA = {
+    "type": "object",
+    "properties": {
+        "order_id": {"type": ["string", "null"]},
+        "customer": {"type": ["string", "null"]},
+        "intent": {"type": "string", "enum": ["refund", "exchange", "cancel", "shipping", "other"]},
+        "items": {"type": "array", "items": {
+            "type": "object",
+            "properties": {"sku": {"type": "string"}, "qty": {"type": "integer"}},
+            "required": ["sku", "qty"], "additionalProperties": False}},
+        "urgent": {"type": "boolean"},
+        "days_waiting": {"type": ["integer", "null"]},
+        "summary": {"type": "string"},
+    },
+    "required": ["order_id", "customer", "intent", "items", "urgent", "days_waiting", "summary"],
+    "additionalProperties": False,
+}
+` ` 代码块，再取第一个 `{` 到最后一个 `}` |
+
+比对规则很宽松：订单号去掉 `#`，名字不分大小写，SKU 转大写。两条有歧义的样本我标了多个可接受答案，比如 `Dr. Helen Ward` 和 `Helen Ward` 都算对。
+
+请求 Ollama 时只改 `format`，其余参数相同，温度 0，`num_predict` 512：
+
+每个模型依次加载，跑完卸载，GPU 上同一时间只有一个模型。
+
+## 温度 0：三种方式答得一样，差别只在外壳
+
+每格 36 个样本。`score.py` 的原始输出是这样的（只删了无关的行）：
+
+只靠提示词时，qwen2.5-coder:7b 和 gemma4 每一次都把 JSON 包在 json ` `，后面的上下文跟着变了。
+
+剩下的错误全是内容错误，换哪种 format 都一样：
+
+- `Please don't cancel my order 40500`：四个本地模型在不思考的情况下都判成 cancel。
+- `Cancel!!! Wrong address on 55120`：两个 qwen 模型把订单号填成 null，大概是没认出光秃秃的 `55120` 是订单号。
+- `Do you ship to Iceland?` 和 `你们周末发货吗？`：所有模型（包括 MiniMax-M3）都判成 shipping，我标的是 other。我给 shipping 的定义是「delivery status or shipping changes」，这两句确实可以算进去，算标注和提示词的歧义，不算模型错。每个模型的 intent 错误里都有这两条。
+
+gemma4 的输出 token 少了三成，原因很直接。只靠提示词时它按多行缩进格式写，加了 `format` 后变成单行紧凑 JSON：
+
+所以对 gemma4 来说，加约束反而让中位耗时从 2.25 s 降到 1.12 s。其余三个模型输出几乎一样，生成速度差别在 3% 以内（3b 约 120 到 123 tok/s，7b 约 64 tok/s，llama3.1:8b 约 62 tok/s）。在这个规模的 schema 上，约束本身没有可见的开销。
+
+## 温度 0.8：约 4% 的结构错误被 schema 全部挡住，准确率没变
+
+温度 0 下约束看不出作用，我又在 0.8 下把「只靠提示词」和「format: schema」两组各跑 3 遍（每格 108 个样本）：
+
+只靠提示词时，3b 有 4 次结构不合规：一次把 intent 写成枚举之外的 `delivery`，三次 intent 直接是 null；llama3.1:8b 有 5 次，主要是 `summary` 写成了 null。schema 把这 9 次都挡住了。可准确率没跟着涨，3b 加约束后全对率反而低了 5.6 个百分点。每格 108 个样本，这个差距在噪声范围内，我不把它解读成「约束让 3b 变差」，能确定的只是「约束没让它变好」。
+
+## 不在提示词里描述字段：结构全对，内容大半是错的
+
+Ollama 文档里写着「It is ideal to also pass the JSON schema as a string in the prompt to ground the model's response」。我想知道不这么做会怎样，就把提示词换成一句话「Extract the order information from this customer message as JSON.」，分别配 `format: "json"` 和 `format: `：
+
+`format: "json"` 只保证是合法 JSON，键名由模型自己取。同一条消息，7b 给出的是 `order_number`、`product`、`customer_name`、`request`，程序一个字段都读不到。
+
+加上 schema 后，键名和类型都对了，内容却错得很多。schema 只告诉模型「`days_waiting` 是整数或 null」，没说什么时候该填 null，没提等待天数的 25 条消息里，7b 有 19 条填成 `0`、只有 5 条填了 null；`urgent` 没有定义，它把 36 条里的 24 条判成 true（标注里只有 7 条是）；`customer` 填了 `"unknown"`、`"未提供"`、`"Refund me"`、`"I"`。同一条台灯消息，提示词描述了字段时 7b 填的是 `"days_waiting": null`，只靠 schema 时变成 `"days_waiting": 0`。
+
+字段名本身就是一种提示，它能让模型写出 `order_id` 而不是 `order_number`；字段的语义（什么时候为空、什么算紧急、两周等于几天）只能靠提示词说清楚。
+
+## 去掉 null 之后，模型开始编
+
+这组是我最想验证的。很多人写 schema 时习惯把字段都设成必填、单一类型，比如 `days_waiting: {"type": "integer"}`。我把 `order_id`、`customer`、`days_waiting` 三个字段的 null 去掉，提示词保持不变，里面仍然写着「没有就填 null」：
+
+36 条消息里，标注为 null 的位置一共 44 个（days_waiting 25 个、customer 14 个、order_id 5 个）。模型在这些位置填了什么：
+
+7b 和 gemma4 的做法算是有迹可循：数字填 0 或 -1，字符串填 `"null"`。3b 更糟，把整句消息当成顾客名，还有 `"Customer Name"`、`"收件人"`、`"Hi"`。最直观的是那条只有一句夸奖的消息：
+
+这些输出全部通过 schema 校验。程序拿到 `"customer": "null"` 至少还能做个字符串判断，`"days_waiting": 0` 就分不清是「当天」还是「没提」。约束把模型想写的 `null` 屏蔽掉之后，它只能挑一个合法的值，代价是错误从「解析失败」这种显眼的形式，变成了「看起来正常的错值」。
+
+## 让模型先写理由：多花近一半 token，没换来准确率
+
+还有一种流行做法：在 schema 第一个位置放一个 `reasoning` 字段，让模型先写几句分析再填答案。Ollama 的约束会按 properties 的顺序生成，我对比了 `reasoning` 放最前和放最后：
+
+表里是全对率。差距最多两条样本，在 36 个样本上说明不了什么。理由的内容也多是在复述题目，7b 对第一条写的是「The message contains an order number, customer name, intent for a refund, and a product code. No urgency or waiting time is mentioned.」，这些信息模型不写出来也知道。真正有效的是把「思考」交给模型自己的思考模式，见下一节 gemma4 的结果。
+
+## 截断：约束救不了写到一半的 JSON
+
+`num_predict` 设成 40 个 token（正常输出 70 到 90 个），三种方式、三个模型（gemma4 没跑这组）的可解析率都是 0：
+
+json\n{\n  \"order_id\": \"45510\",\n  \"customer\": \"Mike O'Neil\",\n  \"intent\": \"refund\",\n  \"items\": \n    {\n"
+model=qwen2.5-coder:7b arm=schema tag=trunc case=7 temp=0.0 rep=0 done_reason=length eval_count=40
+content="{\n  \"order_id\": \"45510\",\n  \"customer\": \"Mike O'Neil\",\n  \"intent\": \"refund\",\n  \"items\": [\n    {\n      \"sku"
+```
+
+约束决定的是「下一个 token 可以是什么」，不管还剩多少 token 预算，到了上限就直接停。gemma4 在这一点上更容易出事：它默认开启思考，思考内容也计入 `num_predict`。我在 8 条消息上用 `format: ` 加默认思考、`num_predict` 512 跑了一遍，6 条的 `content` 是空字符串，2 条是写到一半的 JSON，`done_reason` 全是 `length`。HTTP 返回 200，没有任何报错。
+
+把 `num_predict` 提到 4096 后，8 条全部正常结束，平均输出 685 个 token（思考加答案），8 条 6 个字段全对，包括关闭思考时判错的 `Please don't cancel` 那条。代价是中位耗时从 1.1 s 涨到约 10 s。8 个样本太少，我只能说思考修好了这一条，不能说它在全部 36 条上都更准。
+
+程序里要检查 `done_reason`（OpenAI 兼容接口是 `finish_reason`），等于 `length` 时，不管有没有约束，输出都不可信。
+
+## MiniMax-M3：参数照收，约束不执行
+
+MiniMax 的 [OpenAI 兼容接口文档 参数表里没有 `response_format`，也没有把它列进「不生效」的参数。它的原生文本接口文档 写着 `response_format`「当前仅 `MiniMax-Text-01` 支持此参数」，而同一页的模型枚举里只有 MiniMax-M3.1-Flash 和 MiniMax-M3。文档说不清楚，我就直接测。
+
+第一个请求就碰了壁：同一份 SCHEMA 原样传过去，返回 400：
+
+它不接受 `"type": ["integer", "null"]` 这种 JSON Schema 标准写法。我写了个函数把类型数组改成 `anyOf`，之后请求都能返回 200。为了判断它到底有没有按 schema 约束输出，我用了和本地模型一样的方法：提示词里不写字段，只靠 schema。36 次回答里没有一次符合 schema，键名五花八门（`order_number`、`customer_name`、`requested_action`……），同一条消息还会出现嵌套的 `item` 和 `issue` 对象。在 Ollama 上，同样的写法 schema 合规率是 100%。
+
+提示词写清字段时，MiniMax-M3 的内容准确率是这次最高的：
+
+两个现象：
+
+- 直接解析几乎全失败，原因是 `content` 开头是一段 `…`。文档里有个 `reasoning_split` 参数，设为 true 后思考内容挪到 `reasoning_content` 字段，`content` 只剩 JSON，36 次直接解析全部成功。
+- `json_object` 模式下有一次键名写坏了：`"days-ings":14`。它的思考里写着「days-ings spelling key requested」，模型自己把字段名看错了。
+
+MiniMax 这部分一共调用了 186 次。
+
+## 这组数据的边界
+
+样本量不大，主实验每格 36 条，温度 0.8 每格 108 条。相差一两条样本（3 到 6 个百分点）的差别我都没当成结论，比如 reasoning 字段的影响、温度 0.8 下 3b 加约束后全对率略降。站得住的结论是几处差距很大、而且在四个模型上方向一致的地方：去掉 null 后全对率掉 56～64 个百分点、不描述字段时全对率只剩 2.8%～22.2%、温度 0 下约束不改变任何输出。
+
+schema 很小，7 个字段，嵌套只有一层。更复杂的 schema（几十个字段、深层嵌套、递归）下约束的速度开销和对模型的干扰可能完全不同，这次没测。生成速度上我看到的唯一差异是「不描述字段 + schema」那组每秒 token 数低了 10% 到 20%（7b 从 66.6 降到 57.7），推测是模型想写的 token 频繁被约束拒绝，采样器要多做几轮筛选，但两组的输出内容也不同，我没法把这两个因素分开。
+
+标注是我一个人做的，`shipping` 和 `other` 的边界前面已经说过有歧义。MiniMax 的结论只针对 MiniMax-M3 这一个模型、2026 年 11 月 20 日的接口行为。
+
+## 接进程序时的几条做法
+
+- 提示词里把每个字段的含义写清楚，尤其是「什么时候为空」。这是准确率的主要来源，约束替代不了它。
+- 用 Ollama 时加 `format: `。温度 0 下它不改内容，代价几乎为零，但能挡住升温后 4% 左右的结构错误，也省掉剥代码块的代码。
+- 允许为空的字段在 schema 里显式写成可为 null。不确定的字段宁可可空，必填加单一类型等于逼模型编一个值。
+- 拿到结果先看 `done_reason` / `finish_reason`，是 `length` 就当失败处理。思考模型要么关掉思考，要么给足输出上限：这次 gemma4 开着思考时单条最多用了 803 个 token，我设的上限是 4096。
+- 解析之后再用 jsonschema 或 Pydantic 校验一遍。托管接口上 `response_format` 收下了不代表生效，MiniMax-M3 就是例子；它的思考段要用 `reasoning_split` 分出去。
+- 结构对了不等于内容对。准确率要靠带标注的样本去测，schema 校验通过率不能当准确率用。
+
+## 参考
+
+- Ollama Structured Outputs 文档
+- Ollama 博客：Structured outputs
+- MiniMax OpenAI SDK 兼容接口文档
+- MiniMax 文本合成接口文档（response_format 说明）
+
+## 环境
+
+起因不是磁盘告警，而是一个装不上的 npm 包。
+
+## 起因：codex 装不上，顺手发现磁盘要满
+
+第一次报错发生在运行时：
+
+optional dependency 缺失，通常意味着安装阶段就没装上。重装时才看到真正的错误：
+
+npm 更新一个包时的做法是：先把旧目录 rename 成 `.-` 作为临时备份，装好新的再删备份。上一次安装被中断，备份目录 `.codex-m3xzPeyC` 留在了那里，此后每一次安装的 rename 都会撞上这个非空目录而失败。于是那个 323MB 的平台二进制包永远装不上，而外层的 `@openai/codex` 看起来"装好了"，只是跑起来才报缺依赖。
+
+修复很直接：`rm -rf` 掉残留目录后重装，13 分钟（下载 323MB），`codex --version` 输出 `codex-cli 0.149.0`。
+
+这个小插曲本身不重要，重要的是下载 323MB 的过程让我顺手看了一眼 `df`：根分区只剩 11G。
+
+## `du` 的子项加不起来：输出被命令重写层过滤了
+
+开始做容量分析，第一条命令是常规的：
+
+输出看起来很正常，只是加不起来。`/home` 顶层统计是 242G，而列出来的子目录加总只有约 57G。差了 185G。
+
+看到这个信号就该停下来。一个目录的总量和它子项之和对不上，只有几种可能：
+
+1. 有子目录因权限读不到（会有 stderr 报错，且通常伴随 `Permission denied`）
+2. 硬链接被去重（`du` 默认行为，但一般不会造成如此巨大的偏差）
+3. 挂载点跨越（已经用 `-x` 排除）
+4. 你看到的不是 `du` 的真实输出
+
+答案是第 4 种。这台机器上装了一个叫 rtk 的 CLI 代理，通过 Claude Code 的 hook 自动重写命令以节省 token，它会对输出做过滤和压缩。结果是 `~/code`(50G)、`~/.config`(42G)、`~/.local`(32G)、`~/.nvm`、`~/onedrive`(10G) 这些几十 G 的行全部被吃掉了，只留下零碎小目录。
+
+如果没注意到加总对不上，接下来的每一个判断都会建立在一份被删了大半的数据上。
+
+绕过方式是让命令不经过重写层：
+
+做容量分析时，任何会改写命令的中间层（别名、包装脚本、shell hook、AI 工具链）都可能让你看到失真的数据。校验方法是免费的：总量必须等于子项之和。
+
+## 第一大头是 51GB 的 BuildKit 构建缓存
+
+拿到真实数据后，自顶向下。
+
+> 说明：本文的终端图均据当次排查的真实输出重新渲染，并非原始截图。清理动作已经执行完毕，98%、51.49GB 这些状态无法再复现。图中所有数字、路径、报错文本均取自当时的实际记录，未做修改。
+
+根分区顶层：
+
+`~/.cache` 共 37G，细分：
+
+`/var` 细分：
+
+`docker system df`：
+
+到这里第一名已经很清楚：BuildKit 构建缓存 51.49GB，可回收 47GB。这是典型的"没人管的增长项"，每次 `docker build` 都往里加。Docker 内置的 builder 默认开着 GC，但文档里 `defaultKeepStorage: 20GB` 是 Docker Desktop 的默认值，文档没写 Linux 上 Docker Engine 的默认上限。我没去核实这台机器上 GC 实际生效的阈值，能确定的只是：这台 Linux 机器上 GC 没把缓存控住，涨到了 51GB。要让它自己管住，得在 `daemon.json` 的 `builder.gc` 里显式配置上限；否则就得靠人定期 prune。
+
+清理执行：
+
+下面的 prune 会删除当前 daemon/builder 认为“不再使用”的资源；`-a` 会扩大删除范围，执行前先用 `docker system df -v` 和 `docker volume ls -qf dangling=true` 逐项确认。缓存和无引用镜像删除后通常无法恢复，只在确认不需要它们时执行。
+
+刻意保留的东西：两个具名卷 `docker_app_data` 和 `docker_app_outbox`。它们当时处于 dangling 状态（没有容器引用）。Docker 23.0 起 `docker volume prune` 默认只删匿名卷，加 `-a`/`--all` 才会连具名卷一起删；但旧版本的 Docker 和顺手加上的 `-a` 都会把它们带走。具名卷之所以被人为命名，通常就是因为它承载真实业务数据；匿名卷是运行时副产品，具名卷不是。dangling 只说明此刻没容器挂着它，不说明数据没用。
+
+批量清理时我的做法是：匿名卷按规则删，具名卷逐个确认后再动。
+
+结果：11G → 84G 可用，98% → 82%。
+
+## data-root 只管 dockerd，构建缓存在 containerd 那一层
+
+清理完毕，但真正让我在意的是 `/var/lib/containerd` 那 60G。因为这台机器早就把 Docker 数据盘搬走了：
+
+而且配置确实生效，`docker info` 显示 `Docker Root Dir: /mnt/data/docker-data`，实测该目录 35G。既然搬走了，为什么根分区还被吃掉 60G？
+
+答案在于这台机器上的 dockerd / containerd / BuildKit 可以看成三层，而 `data-root` 只覆盖其中一层。镜像和构建缓存落在哪一层，取决于 Docker 是否启用了 containerd image store（containerd snapshotter）。
+
+关键点：dockerd 自己不管理底层运行时。现代 Docker 安装把容器生命周期委托给一个独立的 systemd 服务 containerd，两者通过 socket 通信：
+
+这个 containerd 是独立进程、独立配置、独立数据目录。它的 root 由 `/etc/containerd/config.toml` 决定，跟 `daemon.json` 里的 `data-root` 毫无关系。你把 dockerd 的家搬到数据盘，containerd 依然待在 `/var/lib/containerd`。
+
+在本次环境中，清理后 containerd 存储层的占用是：
+
+（以上为清理之后的数据。）
+
+需要说明的是，"47G 构建缓存躺在 containerd 这一层"是推断出来的：我当时没有保存 `docker info` 的 DriverStatus 输出，依据是后文那笔账，`/var/lib/containerd` 清理前 60G、`docker builder prune` 报告释放 49.81G、清理后实测 9.6G，60 − 49.81 ≈ 10，与实测基本吻合。如果这个推断成立，这部分缓存从头到尾就躺在根分区上，`data-root` 搬不走它。
+
+这与 containerd image store 的行为一致。Docker 官方文档写明，启用它之后镜像内容和快照由 containerd 存在自己的数据目录里，`data-root` 不会作用到这部分，需要单独配置 containerd 的目录；而 Docker Engine 29.0 起，新安装默认就启用 containerd image store。确认方法：
+
+如果用的是传统的 overlay2 存储驱动，镜像和构建缓存仍在 `data-root` 下，本文的结论不适用。排查时以 `docker info`、builder 配置和实际目录占用为准。
+
+## 只改一行 root，把 containerd 迁到数据盘
+
+清理只是把水位降下来，构建缓存会重新长回去。要根治，得把 containerd 的 root 也挪到数据盘。
+
+### 先读配置，不要先动手
+
+第一步是看 `/etc/containerd/config.toml` 现状。我用 grep 找 `root` / `snapshotter` 关键字，没有匹配，于是一度认为"这台机器没有 containerd 配置文件"。
+
+这是错的。文件存在，886 字节，是 Docker 官方包附带的。grep 没命中只是因为相关行被注释了，而我的模式没考虑前导 `#`。
+
+判断文件在不在应该用 `ls` 或 `test -f`，不能拿 grep 有没有命中去反推。
+
+实际内容的关键部分：
+
+即：root 被注释掉，走编译内置的默认值 `/var/lib/containerd`。
+
+### 关键决策：不要用 `containerd config default`
+
+网上常见做法是 `containerd config default > /etc/containerd/config.toml` 然后改 root。这里不能这么做。
+
+那条命令会生成一份 296 行的完整配置，其中包含当前明确被 `disabled_plugins = ["cri"]` 关掉的 CRI 插件及一大堆默认参数。用它覆盖现有的 886 字节配置，等于凭空引入几百行你没审过的配置项，把一次单参数变更变成一次全量配置替换。风险面无谓地扩大了。
+
+最小改动只需一行：
+
+`state = /run/containerd` 保持不动：那是 tmpfs，重启即空，不占磁盘，没有迁移的必要。
+
+### 执行步骤
+
+先确认目标盘已经挂载、空间足够，并确认当前 containerd 服务确实使用这份配置；如果目标文件系统不支持 ACL 或 xattr，需要相应调整 `rsync` 参数。
+
+几个实测细节：
+
+- 停 docker 耗时较长，因为要优雅关闭 10 个容器，其中含 3 个 kind 节点。
+- rsync 9.6G 约 2 分钟。
+- `rsync` 的 `-aHAX` 中 `-H` 尤其重要：containerd 的 content store 里存在大量硬链接，丢掉硬链接会让占用凭空膨胀。
+
+旧目录先不删，是这里最重要的一条纪律。迁移完成后 `/var/lib/containerd` 仍然原样存在，一旦新目录有问题，可执行下面的回滚步骤：停止 Docker/containerd，把 `root` 改回 `/var/lib/containerd`，再启动 containerd 和 Docker。确认新目录运行稳定、进程不再打开旧目录后，再执行 `sudo rm -rf /var/lib/containerd` 释放那 9.6G。多占一段时间磁盘，换来随时可用的回滚路径。
+
+回滚示例（把配置中的 `root` 改回旧路径后执行）：
+
+## 这次排查里我犯的三个错误
+
+### 错误一：把 `/var/lib/containerd` 判定为 k3s 的镜像层
+
+最初看到 60G，我的第一反应是"这是 k3s 的镜像层"。这个判断有两处错误。
+
+第一处是归属错了。这台机器上确实跑着 k8s 相关的东西，所以"containerd = k8s 的运行时"这个联想很自然，但它只是联想，不是证据。查证只用了两步：
+
+dockerd 显式指向了系统的 `/run/containerd/containerd.sock`，说明 `/usr/bin/containerd` 服务的是 Docker。
+
+containerd 用 namespace 隔离不同调用方：Docker 用 `moby`，Kubernetes 用 `k8s.io`。这里只有 moby 和 moby_history，没有 k8s.io。结论很明确：这份数据属于 Docker，跟 k8s 无关。
+
+补充事实：这台机器上确实存在第二个 containerd 二进制 `/usr/local/bin/containerd`，服务于 kubelet 的 `k8s.io` namespace，与前者互不影响。而我猜测的 k3s 数据目录 `/var/lib/rancher` 实际只有 4K。
+
+第二处是数字过时了。60G 是清理之前的数字，我却拿它去做清理之后的决策。重新测量：`/var/lib/containerd` 只剩 9.6G。
+
+而这个数字反过来成了最好的交叉验证：
+
+两者基本吻合，说明那 60G 的绝大部分就是 BuildKit 构建缓存。
+
+### 错误二：认定 `restart=on-failure` 的容器不会自动拉起
+
+迁移前我记录了所有容器的重启策略，并判断：`restart=on-failure` 的容器在 daemon 重启后不会自动启动，需要手动 `docker start`。
+
+实测证明这是错的。docker 恢复后，10 个容器全部自动恢复，包括那 4 个 `on-failure` 的。
+
+这类"我记得规则是这样"的判断成本极低、验证成本也极低，却经常不验证就写进计划。这次的代价只是多准备了一份没用上的手动启动清单，但同类错误在反方向上（以为会自动起、结果没起）就是一次静默的服务中断。
+
+### 错误三：grep 没命中就断定文件不存在
+
+已在迁移一节说明。这三个错误的共同点：都是用间接信号去推断事实，没有直接观测。
+
+## 重启暴露了 migration 版本漂移
+
+迁移完成后开始验证，出现两件事。
+
+### 一件是虚惊
+
+kind 集群的 `kubectl get nodes` 报错：
+
+看起来很吓人，但这只是 apiserver 还没起来。稍等片刻，3 个节点全部 Ready。
+
+这里差点误判：重启后应该先等 apiserver 和节点就绪，再看报错。
+
+### 一件是真问题
+
+容器 `app-1` 陷入重启循环。日志里有两个阶段，必须分开看：
+
+阶段一（噪音）：
+
+这是应用比 postgres 先起来的启动竞态，postgres 就绪后会自愈，不是根因。
+
+阶段二（根因，在日志最后）：
+
+查证两边的状态：
+
+结论清楚了：数据库已经被某个更新版本的应用升级到了 193，而当前镜像只带到 192。
+
+golang-migrate 并不会自动回滚。它用 `schema_migrations` 表记录当前版本和 `dirty` 标志，执行 `up` 之前先检查"数据库当前版本"对应的迁移文件在本地是否存在：先找 `000193_*.up.sql`，再找 `000193_*.down.sql`，两个都没有就直接报 `no migration found for version 193`，报错里的 `read down for version 193` 只是它最后一次查找的那个文件。镜像里缺的是整个 193 版本，不是某个 down 文件。
+
+我事后在本机用 `migrate/migrate:v4.18.3` 镜像加一个 postgres:16-alpine 容器复现了一遍（2026-10-30，Ubuntu 26.04 + Docker）：先用带 191–193 的目录 `up` 到 193，再换成只带 191–192 的目录：
+
+报错和线上一字不差，`up` 和 `down 1` 都在同一处失败，数据库版本保持 193、`dirty` 仍为 `f`，没有任何回滚动作。
+
+### 它和磁盘迁移无关
+
+问题本身先前就存在，只是那个容器已经连续运行了 4 个小时没重启，被"进程还活着"的假象掩盖着。停 Docker 才把它暴露出来。
+
+运行中的进程只能说明它上次启动时没问题。镜像回滚、迁移文件缺失、配置被改坏、依赖的 secret 过期，都要等下一次启动才会暴露。
+
+一次计划内的重启，往往是发现这类定时炸弹的唯一机会。而如果等到机器宕机、被迫重启时才发现，你要在故障压力下同时处理宕机和一堆起不来的服务，代价完全不是一个量级。
+
+顺带一个建议：如果你的服务栈里有那种"跑了几个月没重启"的容器，主动挑一个低峰期把它重启一遍，就当是演练。
+
+### 处置：不擅自决定
+
+问题定位清楚了，但我没有动数据库。可选方案有两条：
+
+1. 补回 `000193_*` 迁移文件，重建镜像；
+2. 确认 193 这次变更应当废弃，手工回退 schema 到 192。
+
+选哪条取决于 193 那次变更的业务含义，而这不是执行磁盘清理的人能判断的。所以把两个选项和证据交给业务负责人。
+
+这和前面保留具名卷是同一个考虑：清理只动能重新生成的数据。
+
+## 结果：可用空间从 11G 回到 93G
+
+最终：根分区可用空间从 11G（98%）变为 93G（80%），累计释放 82G。
+
+旧目录 `/var/lib/containerd` 是最后删的。在删之前，用四项证据确认了 containerd 已完全切换到新目录：
+
+其中 `lsof` 那条是最硬的证据：配置写了什么是意图，进程实际打开了什么才是事实。
+
+删除前还做了两项防呆确认：`readlink -f` 确保新目录不是指回旧目录的符号链接，`stat -c %d` 对比设备号（`2048` vs `66307`）确认两者在不同文件系统上、是真实独立副本。否则一条 `rm -rf` 会把刚迁移好的数据一起带走。
+
+最后总结一下这次弄清的结构：`daemon.json` 里的 `data-root` 只搬走 dockerd 自己那一层。启用 containerd image store 时，底层 containerd 是独立服务、独立配置、独立数据目录，镜像和 BuildKit 构建缓存都落在 containerd 的 snapshotter 和 content store 里。要把本机 Docker 相关数据彻底挪出根分区，需要同时核对并迁移两处；用 overlay2 存储驱动的环境不适用这条结论。
+
+---
+
+## 附：可复用速查表
+
+### 容量定位
+
+校验：顶层数字必须约等于子项之和，对不上就是数据有问题。
+
+### Docker / containerd 归属确认
+
+### 清理
+
+### containerd 迁移
+
+### 容器起不来时的排查顺序
+
+读日志时区分两类信息：连接被拒、"system is starting up" 这类是启动竞态噪音；`Error:` / `FATAL` 且不再重试的那条才是根因。
+
+新买一台 Ubuntu 云主机，我要做的事情几乎每次都一样：装 Docker、配 swap、开 UFW、加固 SSH、起一个网关，再按需加 Redis、Postgres、VictoriaMetrics 这些组件。手敲两三次之后，我把它写成了 hostkit：一个纯 shell 的初始化工具，每个步骤一个文件，都提供 install / uninstall / purge 三种动作，用 `make swap`、`make uninstall-ssh` 这样的命令驱动。
+
+从建仓到提交 af94e70 一共 40 个提交（含 GitHub 自动生成的初始提交和 1 个 merge），其中 12 个的标题带 fix 或"修复"。这篇不复述 README，只讲写这种脚本必须回答的几个问题，以及这个项目实际撞上的 bug。所有安装和卸载我都放在一次性的 systemd 容器里跑，没有碰宿主机。几个结论先放前面：
+
+## 测试环境和测试结果
+
+- 宿主：Ubuntu，Docker 29.9.2，ShellCheck 0.11.0
+- 被测代码：kart-io/hostkit，文中的提交哈希都可以在仓库里用 `git show ` 查看。安装、重跑、卸载的演示跑在提交 a3723ba 上；写完初稿后项目又进来 4 个提交（到 af94e70），改的是网关、测试和文档，swap、docker、dockerconf、ufw、ssh 这几个步骤和 Makefile 都没动，下文的演示结论不受影响。`make test` 在 a3723ba 和 af94e70 上各跑了一遍。文中引用的源码行号都以 a3723ba 为准
+- 安装演示：基于 `ubuntu:24.04` 自建的 systemd 镜像（装了 systemd、openssh-server、ufw），`--privileged` 运行，仓库只读挂载进去，跑完连同镜像一起删掉
+
+项目自带 `make test`，也就是 `tests/run.sh`：先对所有脚本跑 shellcheck，再在 ubuntu:22.04 / 24.04 / 26.04 三个容器里跑纯函数单测，最后校验网关、OTel、告警的配置。第一次跑是在 a3723ba 上：
+
+shellcheck 零告警，三个 Ubuntu 版本的单测全部通过，但整体失败，卡在 nginx 模板校验。原因我顺手查了：把切换网关前后的两个提交分别导出，用 `TEST_IMAGES=" "` 跳过容器单测只跑后半段，b5bce87 通过，f0bdafc 开始失败：
+
+f0bdafc 把网关从 nginx 换成 Traefik，重写了 `lib/status.sh` 里的 `status_sites`，但 `tests/run.sh` 还停在更早的 6feeaf2，断言的是 nginx 时代的输出格式。网关已经从安装步骤表里拿掉，测试还在测它。
+
+之后的 5407096 把测试一起重写了：删掉 nginx 校验，改成真实启动一个只开文件 provider 的 Traefik，用请求验证路由。在 af94e70 上重跑：
+
+整体通过，共 142 个 ok，其中容器单测 120 个。5407096 的提交说明里还提到，旧测试把 `steps/*.sh` 全部 source 进来，掩盖了生产环境里某个步骤已经不加载的事实，这一点放到后面网关那一节细说。
+
+## 重跑不重启：写文件前先比较
+
+初始化脚本最常见的用法不是跑一次，而是改一行配置再跑一次。如果每次都无条件覆盖文件、重启服务，第二次运行就会把正在跑的容器全部打断。
+
+hostkit 所有写配置的地方都走同一个函数，`lib/common.sh:104-113`：
+
+关键在返回值：有变化返回 0，没变化返回 1，调用方用 `if write_if_changed ...; then systemctl restart ...` 决定要不要重载。容器组件也一样，`lib/components.sh:62-66` 里 compose 文件、`.env`、渲染出的配置任意一个变了才加 `--force-recreate`，否则 `docker compose up -d` 什么也不做。
+
+我在容器里连跑两次 dockerconf。第一次 daemon.json 从安装前的 `{"debug": true}` 改成合并后的内容，第二次什么都不改：
+
+PID 和启动时间都没变，文件的修改时间还停在第一次写入的 05:52:16。更早还有一轮 docker 和 dockerconf 两步一起重跑，`time` 记下的是 1.154 秒，Docker 的启动时间前后都是 05:47:51；第一次装 Docker 是 3 分 54 秒。SSH 步骤同理，第二次运行输出 `SSH 配置无变化`，没有重启 ssh.socket。
+
+也有不完全幂等的地方。UFW 步骤每次都会重新执行 `ufw allow` 和 `ufw --force enable`，第二次运行这一步花了 4 秒。ufw 遇到已存在的规则会跳过，结果应当一致（这次没有用 `ufw status numbered` 逐条核对），只是它没有做"先比较再动手"。写自己的脚本时，我的建议是把"结果一致"和"什么都不碰"分开对待：前者是底线，后者对会重启服务的步骤才是必须的。
+
+还有一个细节值得抄：判断包是否已装，`lib/common.sh:115-116` 特意不用 `dpkg -s`：
+
+我在 ubuntu:24.04 容器里装上 ufw 再 `apt remove`，验证了这条注释：
+
+包已经卸了，`dpkg -s` 仍然返回 0。用它判断"已安装就跳过"，被卸载过一次的主机就再也装不回来。
+
+## 卸载只撤销自己做过的事
+
+卸载比安装难。新主机上可能已经有云厂商建好的 swap、用户自己写的 daemon.json、早就启用的 UFW。卸载如果把这些一起删了，比不提供卸载更糟。
+
+hostkit 的办法是在 `/var/lib/hostkit` 记账，`lib/common.sh:40-67`：
+
+`backup_once` 的"once"很重要：只在第一次修改前备份，之后重跑不会把自己改过的版本当成"原始文件"覆盖掉备份。原文件不存在也要记下来（`absent`），否则卸载时不知道该删还是该留。
+
+各步骤按同一个思路记账：swap 步骤只有自己创建了 `/swapfile` 才写 `swapfile-created`，卸载时没有这个标记就输出 `swap 不是本脚本创建的，保留`；docker 步骤没有 `docker-installed` 标记时拒绝卸载 Docker；UFW 记下安装前是否已启用。
+
+容器里的实测。先放一个已有的 daemon.json，装 docker + dockerconf：
+
+用户原有的 `"debug": true` 被保留（`merge_json` 是合并而不是覆盖）。然后卸载：
+
+最后剩下的 `docker-data-root` 是留给 purge 用的：uninstall 只卸包、保留数据，并记下数据目录在哪（daemon.json 可能改过 data-root），purge 时才按这个记录删。UFW 也一样，安装前是 inactive，卸载后：
+
+如果安装前 UFW 就是开着的，卸载只删自己加的规则，并且会跳过当前 SSH 端口的规则（`steps/ufw.sh:24-25`），因为 UFW 还要继续开着，删掉 SSH 规则等于把自己关在外面。
+
+## 改 SSH 时不把自己锁在外面
+
+远程主机上改 SSH 是整个脚本风险最高的一步。hostkit 叠了四层保护。
+
+第一层是顺序。`install.sh:16` 的注释写着"ufw 必须在 ssh 前：改端口时先放行新端口"，而 UFW 放行的端口来自配置的端口加上 sshd 当前实际在听的端口（`steps/ufw.sh:7`），所以即使 sshd 原本跑在非 22 端口，开防火墙时也不会漏掉。改端口时默认新旧端口同时监听：
+
+第二层是写完先校验，失败就撤销，`steps/ssh.sh:45-48`：
+
+我故意把端口写成 70000：
+
+配置被删掉，ssh.socket 没有被重启，22 端口的 IPv4、IPv6 两个监听都还在。最后那行 `步骤 [ssh] 失败` 来自 `install.sh` 里的 EXIT trap，`set -e` 退出时默认什么都不说，这个 trap 补上了失败的步骤名。
+
+第三层是 Ubuntu 22.10 之后的 socket 激活。新版本里监听 22 端口的是 systemd 的 `ssh.socket`，sshd 要等第一个连接进来才启动，`/run/sshd` 这个目录也是那时才创建。在刚开机、还没人连过的机器上直接跑 `sshd -t`，结果是这样的：
+
+配置本身没问题，校验却失败。如果脚本照搬"校验失败就回滚"，在这种机器上永远改不了 SSH。hostkit 的处理是在调用前把目录建好，`lib/common.sh:186-188`：
+
+生效方式也不同：socket 激活时端口由 systemd generator 从 sshd_config 生成，要 `daemon-reload` 再重启 `ssh.socket`，`systemctl reload ssh` 不会让新端口生效（`steps/ssh.sh:5-12`）。改端口后看监听进程，22 和 2222 都是 `systemd,pid=1`，说明新端口确实是 socket 在听：
+
+第四层是密码登录。只有 root 或 `SUDO_USER` 的 `authorized_keys` 里有可用公钥，才关闭 `PasswordAuthentication`。我的测试容器里没放公钥，所以输出是 `保留密码登录`。顺带一个小瑕疵：以 root 直接运行时 `SUDO_USER` 为空，这条警告显示成 `root  没有可用的 authorized_keys`，中间多了一个空格，不影响逻辑。配置文件名用 `00-` 前缀，是因为 sshd 对同一选项取第一次出现的值，要排在云镜像自带的 `50-cloud-init.conf` 前面；写完后脚本还会用 `sshd -T` 读实际生效值，被别的文件覆盖时给出警告。
+
+## Docker 地址池要避开宿主机的路由
+
+Docker 默认从 172.17.0.0/16 起分配网段。云主机的 VPC 如果恰好在 172.16.0.0/12 里，或者机器要通过专线访问 10.x 的内网，新建的 compose 网络就可能和真实路由重叠，表现是容器里访问某些内网地址不通，很难第一时间想到是网段冲突。
+
+hostkit 的做法是先收集宿主机已用的网段，排除 Docker 自己的接口，`lib/common.sh:178-184`：
+
+再在三个候选（`172.17.0.0/16 10.200.0.0/16 192.168.128.0/18`）里用 Python 的 `ipaddress.overlaps` 挑第一个不冲突的，用户还可以用 `AVOID_CIDRS` 补充路由表里看不到的网段（比如对端 VPN 的网段）。
+
+测试容器正好提供了一个真实场景：它跑在宿主机默认 bridge 上，eth0 是 172.17.0.3/16，也就是第一个候选已经被占：
+
+脚本跳过了 172.17.0.0/16，docker0 和新网络都落在 10.200.0.0/16 里。另一个值得注意的选择在 `steps/dockerconf.sh:65-66`：daemon.json 里已经有 `default-address-pools` 就不再改。已有的网络不会因为地址池变了而迁移，重跑时换池只会造成新旧网络不一致。重跑 dockerconf 时输出里没有"Docker 地址池"这一行，就是走了这个分支。
+
+## make uninstall swap 实际会做什么
+
+这个坑和 shell 无关，是 make 的语义。用户很自然地会敲 `make uninstall swap`，意思是"卸载 swap"。但对 make 来说这是两个目标：`uninstall`（STEPS 默认是 all）和 `swap`（安装 swap）。我把 Makefile 拷出来，删掉保护块，用 `make -n` 只打印不执行：
+
+先卸载全部组件，再装一遍 swap。如果加了 `CONFIRM=yes`，这一下就把整台机器的 Docker 和组件都卸掉了。hostkit 在 `Makefile:9-14` 里直接拒绝这种组合：
+
+当前版本的实际效果：
+
+用 make 包装破坏性命令时，`MAKECMDGOALS` 检查值得每个项目都加上。
+
+## 自定义 404 的三个坑：状态码、自动路由、优先级
+
+网关这一层在 git 历史里改得最密：先在 nginx 上给未匹配的路由返回自定义 404，再整体换成 Traefik，404 页面也换了好几种实现。其中三个问题值得单独拿出来，前两个我做了复现，写网关配置时很容易再踩一遍。
+
+第一个是状态码。f0bdafc 里 error-pages 的配置是：
+
+我用同一个 nginx:1.30.7-alpine 镜像分别加载这一版和 e07ffc3 修复后的版本：
+
+页面内容一样，状态码差别很大。`try_files` 回落到一个存在的 URI 时，是一次内部跳转去正常服务那个文件，状态码就是 200；只有最后一个参数写成 `=404` 才会返回 404。浏览器里看不出区别，搜索引擎和监控会把所有不存在的路径当成正常页面。修复版改成 `return 404` 加 `error_page 404 /404.html`，并把 `/404.html` 标成 `internal`。
+
+第二个是 Traefik 的 Docker provider。f0bdafc 给 error-pages 容器加了 `traefik.enable=true` 和服务端口 label，本意只是让 Traefik 知道这个服务。我起了一个 Traefik 3.7.19（用 constraints 只让它看到实验容器），给一个容器加同样的两个 label，查 API：
+
+Traefik 按默认规则 `Host(容器名)` 给它自动建了一条路由，带 `Host: hk-ep` 请求就能直接访问到这个容器。53cc3fd 的修复是去掉 label，在 file provider 里声明一个静态服务 `http://error-pages:80`，这样它只作为中间件的后端存在，不会自己长出路由。Traefik 文档里对这个行为的描述是 `defaultRule`，只要容器被 enable 又没有显式写 router，就会套用它。
+
+再往后我干脆把辅助容器删了，改成 Traefik 本地插件直接写 404：一个 `PathPrefix(`/`)`、优先级 1 的兜底路由，挂上插件中间件，后端只是一个指向 `http://127.0.0.1:9` 的占位服务 `dummy-404`，请求在中间件这一层就被写回 404。
+
+第三个问题出在优先级上。demo 测试页的路由也是 `PathPrefix(`/`)`，没有限定 Host，优先级又比兜底路由高，结果所有没匹配上的路径都被 demo 接走，自定义 404 根本轮不到。5407096 的做法是把优先级写成表：兜底 404 是 1，SITES 的 main 站点 2，demo 3，内置服务站点 4，容器名:端口站点和根路径跳转 1000，组件路径路由用 Traefik 默认的规则长度。Traefik 默认按规则字符串长度排优先级，`PathPrefix(`/`)` 这种短规则之间谁先谁后不直观，显式写数字比靠长度推算可靠。
+
+同一个提交还暴露了另一件事：切到 Traefik 后，nginx 和 tls 步骤已经不在步骤表里，但 otel、alert 两个步骤还在调用 `tls_on`，证书监控就这样静默失效了。测试脚本当时把 `steps/*.sh` 全部 source 进来，函数都在，所以没报错。改完后测试只加载步骤表里的步骤，和 `install.sh` 一致。回头看，网关这一层换方案的成本远高于 swap、SSH 这些步骤：它同时牵动配置渲染、状态输出、监控和测试。
+
+## 被删掉的 bind mount 目录
+
+最后一个坑出现在 nginx 时代的证书清除逻辑里（这部分代码已随 nginx 在 5407096 删除，但坑对任何挂载证书目录的容器都成立），提交 d2a5b31 的说明写得很清楚：certbot 的证书目录是运行中 nginx 容器的 bind mount，`purge-tls` 用 `rm -rf` 删掉目录、重签时再建一个同名目录，容器里看不到新证书，`nginx -t` 报找不到证书。
+
+我用一个临时目录复现：
+
+bind mount 绑定的是挂载那一刻的目录 inode，不是路径。目录被删后容器手里拿着的是一个已删除的空目录，宿主机上同名的新目录与它无关。
+
+修复分两步：d2a5b31 把删除改成 `find "$d" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +`，只清空内容；07171ae 再加一个自愈检查，签发后在容器里 `test -s` 证书文件，看不到就 `--force-recreate` 重建容器，这样已经被旧版本弄坏的主机 `git pull` 后重跑一次 `make tls` 就能恢复。`lib/common.sh` 里的 `safe_rm_dir` 对挂载点也做了同样处理：`mountpoint -q` 为真时只清空内容。
+
+## 写自己的初始化脚本时可以照抄的清单
+
+按这次实测的结果整理：
+
+1. 所有配置写入都经过一个"比较后再写"的函数，用返回值决定是否重载服务；重跑一次，确认服务 PID 不变。
+2. 判断包是否已安装用 `dpkg-query -W -f='${db:Status-Status}'`，等于 `installed` 才算，不要用 `dpkg -s`。
+3. 首次修改前备份原文件，原本不存在也要记录；状态放在固定目录，卸载只按记录撤销。卸载后用 `cmp` 验证。
+4. 先放行防火墙端口再改 SSH，新旧端口并行一段时间；写完 `sshd -t`，失败就删掉自己的配置。
+5. 兼容 socket 激活：调用 `sshd -t/-T` 前 `install -d /run/sshd`，生效用 `daemon-reload` + 重启 `ssh.socket`。
+6. Docker 地址池按 `ip route show table all` 挑不冲突的网段，已配置过就别改。
+7. make 包装的卸载命令检查 `MAKECMDGOALS`，拒绝 `make uninstall ` 这种会被拆成两个目标的写法。
+8. 自定义错误页先用 curl 看状态码；Traefik 里只做后端的容器不要 enable，放到 file provider 的静态服务里。
+9. 运行中容器的 bind mount 目录只清空内容，不要删掉重建。
+10. 换掉大组件时，测试要和生产按同一张步骤表加载，不然删掉的组件还会在测试里"活着"，掩盖真实调用关系。
+
+## 参考
+
+- hostkit 仓库：
+- nginx `try_files`：
+- Ubuntu 22.10 起 sshd 改为 socket 激活：
+- Docker daemon 配置文件与 `default-address-pools`：
+- Docker 与 UFW / iptables：
+- Traefik Docker provider 的 `defaultRule`：
+- GNU make 目标与 `MAKECMDGOALS`：

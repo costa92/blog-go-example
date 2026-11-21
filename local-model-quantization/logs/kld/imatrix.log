@@ -1,0 +1,15 @@
+0.00.236.572 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.00.436.492 I cmn          init: llama threadpool init, n_threads = 16
+0.00.436.513 I 
+0.00.436.556 I system_info: n_threads = 16 (n_threads_batch = 16) / 28 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.00.436.559 I compute_imatrix: tokenizing the input ..
+0.00.457.139 I compute_imatrix: tokenization took 20.577 ms
+0.00.457.162 I compute_imatrix: computing over 38 chunks, n_ctx=512, batch_size=2048, n_seq=4
+0.23.112.084 I compute_imatrix: 22.65 seconds per pass - ETA 3.58 minutes
+[1]7.8011,[2]7.5773,[3]8.4429,[4]9.2345,[5]8.5113,[6]8.0734,[7]8.8943,[8]9.1994,
+[9]9.7791,[10]10.2553,[11]10.4830,[12]10.9178,[13]11.1778,[14]11.9088,[15]12.6609,[16]12.7778,
+[17]12.8017,[18]13.4204,[19]13.9191,[20]14.4247,[21]15.0292,[22]15.1351,[23]15.2351,[24]15.2432,[25]15.3314,[26]15.3061,[27]15.7132,[28]16.0902,
+[29]16.5092,[30]16.4825,[31]16.6766,[32]16.9267,[33]16.8137,[34]16.8039,[35]17.1281,[36]17.2347,[37]17.4867,[38]17.6711,
+Final estimate: PPL = 17.6711 +/- 0.52281
+
+

@@ -1,0 +1,10 @@
+{"kind": "baseline_vram_mib", "value": 4133, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267613.5232477}
+{"kind": "cold", "rep": 0, "wall": 41.04046269500395, "load_s": 40.993495888, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267656.5646863}
+{"kind": "cold", "rep": 1, "wall": 1.5206864480278455, "load_s": 1.482305513, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267660.5573943}
+{"kind": "cold", "rep": 2, "wall": 1.5662292269989848, "load_s": 1.526314901, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267664.1865678}
+{"kind": "vram", "nvidia_mib": 3452, "size": 3514952580, "size_vram": 3514952580, "ctx": 4096, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267665.205311}
+{"kind": "long", "rep": 0, "ttft": 0.45389928901568055, "wall": 1.7314880730118603, "prompt_n": 2019, "prompt_tps": 4538.730953740463, "gen_n": 109, "gen_tps": 85.58242372564631, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267666.9368563}
+{"kind": "long", "rep": 1, "ttft": 0.4824698659940623, "wall": 1.8321249159635045, "prompt_n": 2028, "prompt_tps": 4579.614842649131, "gen_n": 116, "gen_tps": 86.14147102898957, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267668.7690403}
+{"kind": "long", "rep": 2, "ttft": 0.4898304350208491, "wall": 1.9573376190382987, "prompt_n": 2024, "prompt_tps": 4506.279625337581, "gen_n": 126, "gen_tps": 86.01128795760054, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267670.7264276}
+{"kind": "long", "rep": 3, "ttft": 0.4831775760394521, "wall": 1.8656537480419502, "prompt_n": 2028, "prompt_tps": 4570.501335316588, "gen_n": 118, "gen_tps": 85.60687292602842, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267672.5921264}
+{"kind": "long", "rep": 4, "ttft": 0.5002961939899251, "wall": 1.9972911879885942, "prompt_n": 2028, "prompt_tps": 4521.08390088393, "gen_n": 128, "gen_tps": 85.72756583274284, "model": "qwen2.5:3b-instruct-q8_0", "ts": 1795267674.5894756}
