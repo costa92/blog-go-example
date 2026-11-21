@@ -1,0 +1,826 @@
+{
+  "environment": {
+    "arch": "arm64",
+    "background_limit_ms": 1000,
+    "go": "go1.27.2",
+    "grpc_go": "v1.76.0",
+    "os": "darwin",
+    "step_ms": 10,
+    "steps": 20,
+    "timeout_ms": 50
+  },
+  "cases": [
+    {
+      "protocol": "http1",
+      "trigger": "deadline",
+      "mode": "ignore",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.906,
+      "task_done_at_client_return": false,
+      "task_end_ms": 215.505,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "deadline",
+      "mode": "cooperate",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.929,
+      "task_done_at_client_return": false,
+      "task_end_ms": 50.966,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 4,
+        "completed": false
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "deadline",
+      "mode": "detached",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.546,
+      "task_done_at_client_return": false,
+      "task_end_ms": 212.3,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "client-timeout",
+      "mode": "ignore",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.451,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.31,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "client-timeout",
+      "mode": "cooperate",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.722,
+      "task_done_at_client_return": false,
+      "task_end_ms": 50.759,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 4,
+        "completed": false
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "client-timeout",
+      "mode": "detached",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.32,
+      "task_done_at_client_return": false,
+      "task_end_ms": 214.738,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "cancel",
+      "mode": "ignore",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 51.07,
+      "task_done_at_client_return": false,
+      "task_end_ms": 212.83,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "cancel",
+      "mode": "cooperate",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 51.052,
+      "task_done_at_client_return": false,
+      "task_end_ms": 51.094,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 4,
+        "completed": false
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "cancel",
+      "mode": "detached",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 50.73,
+      "task_done_at_client_return": false,
+      "task_end_ms": 212.4,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "wait-only",
+      "mode": "ignore",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.928,
+      "task_done_at_client_return": false,
+      "task_end_ms": 215.55,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "wait-only",
+      "mode": "cooperate",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.437,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.323,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http1",
+      "trigger": "wait-only",
+      "mode": "detached",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.223,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.128,
+      "task": {
+        "observed_protocol": "HTTP/1.1",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "deadline",
+      "mode": "ignore",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.083,
+      "task_done_at_client_return": false,
+      "task_end_ms": 214.744,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "deadline",
+      "mode": "cooperate",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.464,
+      "task_done_at_client_return": false,
+      "task_end_ms": 50.604,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 4,
+        "completed": false
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "deadline",
+      "mode": "detached",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.992,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.289,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "client-timeout",
+      "mode": "ignore",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.789,
+      "task_done_at_client_return": false,
+      "task_end_ms": 212.912,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "client-timeout",
+      "mode": "cooperate",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.984,
+      "task_done_at_client_return": false,
+      "task_end_ms": 51.156,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 4,
+        "completed": false
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "client-timeout",
+      "mode": "detached",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 51.094,
+      "task_done_at_client_return": false,
+      "task_end_ms": 214.354,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "cancel",
+      "mode": "ignore",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 50.867,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.281,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "cancel",
+      "mode": "cooperate",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 51.011,
+      "task_done_at_client_return": false,
+      "task_end_ms": 51.158,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 4,
+        "completed": false
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "cancel",
+      "mode": "detached",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 51.056,
+      "task_done_at_client_return": false,
+      "task_end_ms": 212.55,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "wait-only",
+      "mode": "ignore",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.993,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.365,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "wait-only",
+      "mode": "cooperate",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.18,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.883,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "http2",
+      "trigger": "wait-only",
+      "mode": "detached",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.781,
+      "task_done_at_client_return": false,
+      "task_end_ms": 215.185,
+      "task": {
+        "observed_protocol": "HTTP/2.0",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "deadline",
+      "mode": "ignore",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.585,
+      "task_done_at_client_return": false,
+      "task_end_ms": 211.513,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": true,
+        "request_budget_ms": 49.971,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "deadline",
+      "mode": "cooperate",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 50.068,
+      "task_done_at_client_return": false,
+      "task_end_ms": 50.076,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": true,
+        "request_budget_ms": 49.964,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 4,
+        "completed": false
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "deadline",
+      "mode": "detached",
+      "client_wait_result": "DeadlineExceeded",
+      "actual_call_result": "DeadlineExceeded",
+      "client_wait_ms": 51.03,
+      "task_done_at_client_return": false,
+      "task_end_ms": 212.928,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": true,
+        "request_budget_ms": 49.966,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "cancel",
+      "mode": "ignore",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 50.202,
+      "task_done_at_client_return": false,
+      "task_end_ms": 215.621,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "cancel",
+      "mode": "cooperate",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 50.135,
+      "task_done_at_client_return": false,
+      "task_end_ms": 50.226,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 4,
+        "completed": false
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "cancel",
+      "mode": "detached",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 50.849,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.537,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "wait-only",
+      "mode": "ignore",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.476,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.104,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "wait-only",
+      "mode": "cooperate",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.185,
+      "task_done_at_client_return": false,
+      "task_end_ms": 213.515,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "protocol": "grpc",
+      "trigger": "wait-only",
+      "mode": "detached",
+      "client_wait_result": "LocalWaitTimeout",
+      "actual_call_result": "OK",
+      "client_wait_ms": 50.337,
+      "task_done_at_client_return": false,
+      "task_end_ms": 214.597,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    }
+  ],
+  "chains": [
+    {
+      "frontend_protocol": "http1",
+      "passed_request_context": true,
+      "frontend_has_deadline": false,
+      "client_result": "DeadlineExceeded",
+      "client_wait_ms": 51.031,
+      "backend_end_ms": 51.144,
+      "forward_delay_ms": 20,
+      "backend": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 2,
+        "completed": false
+      }
+    },
+    {
+      "frontend_protocol": "http1",
+      "passed_request_context": false,
+      "frontend_has_deadline": false,
+      "client_result": "DeadlineExceeded",
+      "client_wait_ms": 51.061,
+      "backend_end_ms": 234.22,
+      "forward_delay_ms": 20,
+      "backend": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "frontend_protocol": "http2",
+      "passed_request_context": true,
+      "frontend_has_deadline": false,
+      "client_result": "DeadlineExceeded",
+      "client_wait_ms": 50.318,
+      "backend_end_ms": 50.542,
+      "forward_delay_ms": 20,
+      "backend": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "Canceled",
+        "work_context_error_at_task_end": "Canceled",
+        "steps_completed": 2,
+        "completed": false
+      }
+    },
+    {
+      "frontend_protocol": "http2",
+      "passed_request_context": false,
+      "frontend_has_deadline": false,
+      "client_result": "DeadlineExceeded",
+      "client_wait_ms": 50.549,
+      "backend_end_ms": 234.962,
+      "forward_delay_ms": 20,
+      "backend": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    },
+    {
+      "frontend_protocol": "grpc",
+      "passed_request_context": true,
+      "frontend_has_deadline": true,
+      "client_result": "DeadlineExceeded",
+      "client_wait_ms": 50.231,
+      "backend_end_ms": 50.233,
+      "forward_delay_ms": 20,
+      "backend": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": true,
+        "request_budget_ms": 29.821,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "DeadlineExceeded",
+        "work_error": "DeadlineExceeded",
+        "work_context_error_at_task_end": "DeadlineExceeded",
+        "steps_completed": 2,
+        "completed": false
+      }
+    },
+    {
+      "frontend_protocol": "grpc",
+      "passed_request_context": false,
+      "frontend_has_deadline": true,
+      "client_result": "DeadlineExceeded",
+      "client_wait_ms": 50.844,
+      "backend_end_ms": 234.711,
+      "forward_delay_ms": 20,
+      "backend": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": false,
+        "parent_error_at_task_end": "",
+        "work_error": "",
+        "work_context_error_at_task_end": "",
+        "steps_completed": 20,
+        "completed": true
+      }
+    }
+  ],
+  "bounded_detached": {
+    "environment": {
+      "arch": "arm64",
+      "background_limit_ms": 80,
+      "go": "go1.27.2",
+      "grpc_go": "v1.76.0",
+      "os": "darwin",
+      "step_ms": 10,
+      "steps": 20,
+      "timeout_ms": 50
+    },
+    "case": {
+      "protocol": "grpc",
+      "trigger": "cancel",
+      "mode": "detached",
+      "client_wait_result": "Canceled",
+      "actual_call_result": "Canceled",
+      "client_wait_ms": 51.142,
+      "task_done_at_client_return": false,
+      "task_end_ms": 80.828,
+      "task": {
+        "observed_protocol": "gRPC/HTTP2",
+        "has_request_deadline": false,
+        "has_work_deadline": true,
+        "parent_error_at_task_end": "Canceled",
+        "work_error": "DeadlineExceeded",
+        "work_context_error_at_task_end": "DeadlineExceeded",
+        "steps_completed": 7,
+        "completed": false
+      }
+    }
+  }
+}

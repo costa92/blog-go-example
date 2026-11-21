@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package cancellation.v1;
+
+option go_package = "github.com/costa92/blog-go-example/http-timeout-cancellation/api;api";
+
+service Worker {
+  rpc Run(WorkRequest) returns (WorkReply);
+}
+
+message WorkRequest {
+  string mode = 1;
+}
+
+message WorkReply {
+  string outcome = 1;
+}
