@@ -1,0 +1,5 @@
+__pycache__/
+runs/
+claudemd_*.md
+ledger.tsv
+*.orig

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# kubectl against the scratch kind cluster only
+D="$(cd "$(dirname "$0")/.." && pwd)"
+exec "${KUBECTL:-kubectl}" --kubeconfig "${KUBECONFIG_FILE:-$D/kubeconfig}" "$@"

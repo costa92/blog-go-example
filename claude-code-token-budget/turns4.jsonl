@@ -1,0 +1,4 @@
+{"type": "user", "message": {"role": "user", "content": "用一句话说明 Go 里 context.WithTimeout 的作用。"}}
+{"type": "user", "message": {"role": "user", "content": "再用一句话说明为什么要 defer cancel()。"}}
+{"type": "user", "message": {"role": "user", "content": "金额为什么建议用 int64 分而不是 float64？一句话。"}}
+{"type": "user", "message": {"role": "user", "content": "把前面三个回答合成一个三行的清单。"}}

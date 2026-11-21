@@ -1,11 +1,11 @@
 # blog-go-example
 
-[翼舞成梦博客](https://github.com/costa92/hexo_blog)的文章配套 Go 案例代码。
+[翼舞成梦博客](https://github.com/costa92/hexo_blog)的文章配套代码：Go 案例，以及文章实验用的 Python 和 shell 脚本。
 
 ## 仓库分工
 
 - `costa92/hexo_blog`：博客正文、Hexo 主题、发布流程和写作 skill。
-- `costa92/blog-go-example`：文章中的可运行 Go 案例及其测试、使用说明。
+- `costa92/blog-go-example`：文章中的可运行 Go 案例、实验脚本，及其测试、使用说明。
 
 按文章主题组织示例；示例说明应链接对应文章，并写明运行方法与演示边界。本仓库不承载 Hexo 博客源码，也不发布博客网站。
 
@@ -16,3 +16,19 @@
 - [Go 内存上限在 Kubernetes 里的表现](gomemlimit/README.md)：文章 GOMEMLIMIT / GOMAXPROCS 实验用的负载程序和 kind 脚本，独立 go.mod，用 Docker 构建。
 - [Go 长连接与 Kubernetes 扩容后的流量不均](keepalive/README.md)：文章 keep-alive 实验用的回显服务、压测客户端和 kind 脚本，独立 go.mod，用 Docker 构建。
 - [Go 服务在 CPU limit 下的尾延迟](cpulimit/README.md)：文章 CPU limit 实验用的服务端、开环压测器和 kind 脚本，独立 go.mod，用 Docker 构建。
+- [tz-verify：构建期校验镜像时区别名](tzverify/README.md)：文章 tzdata-legacy 排查里的构建期校验程序，两段式 Dockerfile，镜像缺旧时区名时让构建失败。
+
+## 实验脚本
+
+下面这些目录是文章实验的 Python / shell 脚本，只保留代码和小输入，不含原始日志。
+
+- [Ollama /v1 兼容接口的静默差异](ollama-openai-compat/README.md)：同一请求分别发给 `/v1` 和原生接口，对照温度、上下文、`response_format`、工具调用和错误处理。
+- [Ollama 长提示词静默截断](ollama-context-truncation/README.md)：截断规则、任务说明写在哪里、`num_ctx` 的来源和显存代价。
+- [Ollama 提示词前缀缓存](ollama-prefix-cache/README.md)：时间戳位置、工具顺序、多轮对话和接口混用对缓存命中和首字延迟的影响。
+- [本地代码模型的采样温度](local-model-temperature/README.md)：10 道带隐藏测试的 Python 题，5 档温度下的通过率、多样性和可复现性，附 MiniMax 对照。
+- [本地嵌入模型的中文检索](local-embedding-chinese-retrieval/README.md)：48 段中英文语料、40 条问题，测 recall、词表覆盖和长文档截断。
+- [大模型结构化 JSON 输出](llm-json-output/README.md)：36 条客服消息抽字段，对比提示词、`format: json` 和 JSON Schema，附 MiniMax 对照。
+- [本地模型多步工具调用](local-model-tool-calling/README.md)：假工单系统加最小工具循环，按第一处出错的地方给每次运行打标签。
+- [本地模型当裁判的偏差](local-llm-judge-bias/README.md)：32 道一对一判题，测位置、长度、格式偏差和几种补救办法。
+- [Ollama 在 Kubernetes 里的冷启动和资源限制](ollama-on-kubernetes/README.md)：kind 集群里的冷启动、`keep_alive`、CPU / 内存 limit 和滚动重启实验脚本。
+- [Claude Code 无头调用的 token 账](claude-code-token-budget/README.md)：逐块测内置工具、MCP、CLAUDE.md、技能和缓存的上下文开销，含一个无依赖的 MCP 服务器。
