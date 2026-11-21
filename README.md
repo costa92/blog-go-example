@@ -15,3 +15,4 @@
 - [encoding/json v1 与 v2 对比](jsonv2/README.md)：用测试断言两个版本的默认行为差异、迁移选项和基准，需要 Go 1.27。
 - [Go 内存上限在 Kubernetes 里的表现](gomemlimit/README.md)：文章 GOMEMLIMIT / GOMAXPROCS 实验用的负载程序和 kind 脚本，独立 go.mod，用 Docker 构建。
 - [Go 长连接与 Kubernetes 扩容后的流量不均](keepalive/README.md)：文章 keep-alive 实验用的回显服务、压测客户端和 kind 脚本，独立 go.mod，用 Docker 构建。
+- [Go 服务在 CPU limit 下的尾延迟](cpulimit/README.md)：文章 CPU limit 实验用的服务端、开环压测器和 kind 脚本，独立 go.mod，用 Docker 构建。
