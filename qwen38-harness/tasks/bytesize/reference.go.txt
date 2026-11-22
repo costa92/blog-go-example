@@ -1,0 +1,21 @@
+package exercise
+
+import (
+	"fmt"
+	"math"
+	"regexp"
+	"strconv"
+	"strings"
+)
+
+var bytePattern = regexp.MustCompile(`^([0-9]+)[ \t]*(B|KiB|MiB|GiB)?$`)
+
+func ParseBytes(s string) (uint64, error) {
+	m := bytePattern.FindStringSubmatch(strings.TrimSpace(s))
+	if m == nil { return 0, fmt.Errorf("invalid byte size") }
+	n, err := strconv.ParseUint(m[1], 10, 64)
+	if err != nil { return 0, err }
+	factor := map[string]uint64{"":1, "B":1, "KiB":1<<10, "MiB":1<<20, "GiB":1<<30}[m[2]]
+	if n > math.MaxUint64/factor { return 0, fmt.Errorf("overflow") }
+	return n*factor, nil
+}

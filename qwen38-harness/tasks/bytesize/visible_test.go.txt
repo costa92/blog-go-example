@@ -1,0 +1,8 @@
+package exercise
+
+import "testing"
+
+func TestVisible(t *testing.T) {
+	n, err := ParseBytes("12")
+	if err != nil || n != 12 { t.Fatalf("got %d, %v", n, err) }
+}

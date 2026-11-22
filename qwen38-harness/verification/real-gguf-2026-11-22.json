@@ -1,0 +1,408 @@
+{
+  "date": "2026-11-22",
+  "kind": "real_local_model_inference",
+  "scope": "3 public teaching tasks, one scored attempt per condition; GGUF Q4_K_M plus official F16 Pi LoRA. No RL training or official benchmark reproduction.",
+  "environment": {
+    "state": "completed",
+    "hardware": {
+      "chip": "Apple M4 Pro",
+      "unified_memory_bytes": 51539607552
+    },
+    "backend": {
+      "name": "llama.cpp",
+      "version": "0.6.0",
+      "build": 11429,
+      "commit": "d81235049",
+      "context_window": 16384,
+      "parallel_slots": 1,
+      "gpu_layers": 99
+    },
+    "base": {
+      "repo": "ggml-org/Qwen3.8-27B-GGUF",
+      "hf_revision": "c1869413dece09109e55b7dcc2c77ef382b0d0bd",
+      "file": "Qwen3.8-27B-Q4_K_M.gguf",
+      "size": 19403684480,
+      "sha256": "d15d4b6de55f662ac40e867702d31afe738d032fa06b829b2b1a21a49d4a48ee",
+      "verified": true,
+      "gguf_metadata": {
+        "version": 3,
+        "tensors": 851,
+        "metadata": {
+          "general.architecture": "qwen35",
+          "general.type": "model",
+          "general.sampling.top_k": 20,
+          "general.sampling.top_p": 0.949999988079071,
+          "general.sampling.temp": 1.0,
+          "general.name": "Qwen3.8-27B",
+          "general.size_label": "27B",
+          "general.license": "apache-2.0",
+          "general.tags": "array length 1",
+          "general.quantization_version": 2,
+          "general.file_type": 15
+        }
+      }
+    },
+    "adapter": {
+      "repo": "harness-hub/Qwen3.8-27B-pi-adapted-GGUF",
+      "hf_revision": "19980ce556b41c7b73818083c9adf4b3fa0c72e5",
+      "file": "Qwen3.8-27B-pi-lora-F16.gguf",
+      "size": 318802304,
+      "sha256": "a64f91844f19e67da500d8628bdf9383aa334e61b7ab687805802e7d272d7b67",
+      "verified": true,
+      "gguf_metadata": {
+        "version": 3,
+        "tensors": 512,
+        "metadata": {
+          "general.architecture": "qwen35",
+          "general.type": "adapter",
+          "adapter.type": "lora",
+          "general.name": "Cbb199Ec5C3642697D998A0Ad8E31730229473C7",
+          "adapter.lora.alpha": 64.0,
+          "general.quantization_version": 2
+        }
+      }
+    },
+    "conditions": {
+      "base": {
+        "lora_id": 0,
+        "scale": 0
+      },
+      "adapter": {
+        "lora_id": 0,
+        "scale": 1
+      }
+    },
+    "separation": "Pi and Go grader in an unprivileged read-only Docker container; Metal inference on macOS host. No host source tree mounted.",
+    "download_verification": {
+      "Qwen3.8-27B-Q4_K_M.gguf": {
+        "downloaded": 19403684480,
+        "total": 19403684480,
+        "state": "verified",
+        "sha256": "d15d4b6de55f662ac40e867702d31afe738d032fa06b829b2b1a21a49d4a48ee",
+        "source": "https://modelscope.cn/models/ggml-org/Qwen3.8-27B-GGUF/resolve/e4542bd48de5bc4689d960280348e3f2219ede6d/Qwen3.8-27B-Q4_K_M.gguf",
+        "hf_same_sha256": true
+      },
+      "Qwen3.8-27B-pi-lora-F16.gguf": {
+        "downloaded": 318802304,
+        "total": 318802304,
+        "state": "verified",
+        "sha256": "a64f91844f19e67da500d8628bdf9383aa334e61b7ab687805802e7d272d7b67",
+        "source": "https://modelscope.cn/models/harness-hub/Qwen3.8-27B-pi-adapted-GGUF/resolve/cea9fb3f998876be9a0ec40a7e3a2fda81b9133a/Qwen3.8-27B-pi-lora-F16.gguf",
+        "hf_same_sha256": true
+      }
+    },
+    "image_id": "sha256:20399a76302fd6ecefa6d31fcba98da231ef279f1dd44688ee2e6dc59ca4b4ea",
+    "native_control": [
+      {
+        "scale": 0,
+        "tokens_predicted": 16,
+        "reported_lora": [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ]
+      },
+      {
+        "scale": 1,
+        "tokens_predicted": 16,
+        "reported_lora": [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ]
+      }
+    ],
+    "native_control_logits_changed": true,
+    "model_server_stopped": true,
+    "segment_images": [
+      {
+        "segment": "first four completed trials",
+        "image_id": "sha256:20399a76302fd6ecefa6d31fcba98da231ef279f1dd44688ee2e6dc59ca4b4ea"
+      },
+      {
+        "segment": "remaining CSV pair",
+        "image_id": "sha256:ad41c662c8c02fbe51937cc46bc65be9e598c0dd4e0b9e706d9a04c3582ee855"
+      }
+    ]
+  },
+  "trials": [
+    {
+      "task": "bytesize",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "timeout",
+      "scorable": true,
+      "passed": false,
+      "agent_wall_ms": 300038,
+      "grade_wall_ms": 77,
+      "grade": {
+        "passed": false,
+        "status": "failed"
+      },
+      "metrics": {
+        "assistant_messages": 15,
+        "tool_calls": 17,
+        "tool_errors": 0,
+        "generated_tokens": null,
+        "input_tokens": null,
+        "cache_read_tokens": null,
+        "cache_write_tokens": null
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "5fe3b871d468183b2af77d9b2cfb4596d020a14ccc17dcb6823bba458d53bdba",
+      "artifact_sha256": {
+        "events.jsonl": "1c6fe6e86a534cf0dd097d383e0e2cbfc9c068c0f87b2b107d87300c409b14a0",
+        "grade.jsonl": "06b31fa4c71decc0eba6168e75b79ca5f02933865777bf5c364da3a1068130f9",
+        "result.json": "fc7ab39490c6c030f1f7bb037ec48fe1f04bda48d43e4e0775142e628e55675e",
+        "solution.go.txt": "5fe3b871d468183b2af77d9b2cfb4596d020a14ccc17dcb6823bba458d53bdba"
+      }
+    },
+    {
+      "task": "bytesize",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 168857,
+      "grade_wall_ms": 250,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 7,
+        "tool_calls": 9,
+        "tool_errors": 0,
+        "generated_tokens": 1247,
+        "input_tokens": 2658,
+        "cache_read_tokens": 16209,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "b2bb7c96ed8c051be6a5aac0ad726bad8d062ef4c735af025e4f1774902cdd4b",
+      "artifact_sha256": {
+        "events.jsonl": "d2afa9be27899b0dece3825b946e5aed2b6a53e5b3237b1f93ea7a82f6529a3f",
+        "grade.jsonl": "b3ee4f2c195a0479ae896024040ddb5298dda80d044dad55e9347c8e23636e42",
+        "result.json": "ac7ee7ad5b23d8c1370670aaa802198ec9825162bda164ace434d1bc2dfadcf8",
+        "solution.go.txt": "b2bb7c96ed8c051be6a5aac0ad726bad8d062ef4c735af025e4f1774902cdd4b"
+      }
+    },
+    {
+      "task": "retry-delay",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 83361,
+      "grade_wall_ms": 146,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 6,
+        "tool_errors": 0,
+        "generated_tokens": 707,
+        "input_tokens": 494,
+        "cache_read_tokens": 9336,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "d3a480618c8697feab7d34ca68b7d6427caa081050357f60bcd3b2532398c34f",
+      "artifact_sha256": {
+        "events.jsonl": "20ef8e82efa04ab886ee2384d532973870487c39d0b92acc8934eaa44aabfc63",
+        "grade.jsonl": "8e240d7c6b1d94e10755f4436662f5fae4475f3301a4801024d626f40232ea3e",
+        "result.json": "d033b53d593e9886d1a3fd340e0978fe45bbced11206829382358e70deac3b35",
+        "solution.go.txt": "d3a480618c8697feab7d34ca68b7d6427caa081050357f60bcd3b2532398c34f"
+      }
+    },
+    {
+      "task": "retry-delay",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": false,
+      "agent_wall_ms": 113171,
+      "grade_wall_ms": 218,
+      "grade": {
+        "passed": false,
+        "status": "failed"
+      },
+      "metrics": {
+        "assistant_messages": 7,
+        "tool_calls": 7,
+        "tool_errors": 0,
+        "generated_tokens": 987,
+        "input_tokens": 1896,
+        "cache_read_tokens": 13029,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "951c62b6cb5afaff77dc208b1e9d7dd9908902d556da7a998204349dc0a6316e",
+      "artifact_sha256": {
+        "events.jsonl": "4cf261c396459f4b50954eb2a9da6d58f31872290eb22e19c8066e48e969a005",
+        "grade.jsonl": "1ef6a93fbb2e088c435fce9ef719455ed665db9767620143cdd96fb99e649de8",
+        "result.json": "9279459ba5da99dbcd53d652f14276d788cd7b689278c7a999f1d68751f34827",
+        "solution.go.txt": "951c62b6cb5afaff77dc208b1e9d7dd9908902d556da7a998204349dc0a6316e"
+      }
+    },
+    {
+      "task": "csv-record",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 81267,
+      "grade_wall_ms": 189,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 7,
+        "tool_calls": 7,
+        "tool_errors": 1,
+        "generated_tokens": 778,
+        "input_tokens": 689,
+        "cache_read_tokens": 13912,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7",
+      "artifact_sha256": {
+        "events.jsonl": "d71fce0ea65f1a9124869845012facaebb096140918fcfb50c8e4cd4dbb86156",
+        "grade.jsonl": "964cb02fc280fd234a95b4a51abb58a795f402e81380c00594bbba8142681531",
+        "result.json": "a3426745f27282d4fe6e62a96e19c8405164feed38a221c2a5ab7379de439bef",
+        "solution.go.txt": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      }
+    },
+    {
+      "task": "csv-record",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 69941,
+      "grade_wall_ms": 144,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 5,
+        "tool_errors": 0,
+        "generated_tokens": 430,
+        "input_tokens": 1838,
+        "cache_read_tokens": 7526,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7",
+      "artifact_sha256": {
+        "events.jsonl": "c5552de5381a4f4a46fe50b3a22ab0ba8d1ee0c2227fdd6bacb8551626240320",
+        "grade.jsonl": "b4ef11dd07234218da52978158f36223ad657c253e63cc663d448df181072d5b",
+        "result.json": "bf0a66f50e4f5cb4c355dd6798f376a1dc3af74c016d1dc638e23bd995aca4f9",
+        "solution.go.txt": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      }
+    }
+  ],
+  "interruption": {
+    "reason": "Initial output was on tmpfs, which docker cp could not export. Four completed trials were archived with their original source hashes. A CSV-base trial was actively cancelled and excluded; remaining CSV pair ran with persistent output storage.",
+    "completed_trials_never_rerun": true,
+    "additional_cancelled_unscorable_attempts": 1,
+    "resume_only_pairs": [
+      "csv-record:base",
+      "csv-record:adapter"
+    ]
+  },
+  "limitations": [
+    "Tiny public task set; only one scored sample per condition.",
+    "Temperature 0.8; sampling seed not controlled.",
+    "Pi runtime context includes temporary directory paths.",
+    "Server GPU, host caches and compilation caches were not reset between trials.",
+    "Only CSV was both successful and complete, so paired efficiency has n=1.",
+    "Full raw trajectories remain in ignored results directories; this file is curated measurements and artifact hashes."
+  ],
+  "summary": {
+    "conditions": {
+      "adapter": {
+        "attempts": 3,
+        "scorable": 3,
+        "passed": 3,
+        "unscorable": 0
+      },
+      "base": {
+        "attempts": 3,
+        "scorable": 3,
+        "passed": 1,
+        "unscorable": 0
+      }
+    },
+    "both_passed_pairs": 1,
+    "both_passed_and_completed_pairs": 1,
+    "pairs_with_complete_usage": 1,
+    "median_tool_calls_on_complete_pairs": {
+      "adapter": 5,
+      "base": 7
+    },
+    "median_agent_ms_on_complete_pairs": {
+      "adapter": 69941,
+      "base": 81267
+    },
+    "median_generated_tokens_on_usage_pairs": {
+      "adapter": 430,
+      "base": 778
+    }
+  },
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 1,
+    "thinking": false,
+    "max_output_tokens_per_call": 4096,
+    "context_window": 16384,
+    "wall_limit_seconds_per_attempt": 300,
+    "pi_version": "1.5.2",
+    "node_version": "22.19.0",
+    "go_version": "1.27.2",
+    "agent_and_grader_os": "linux/arm64",
+    "container_cpus": 2,
+    "container_memory_bytes": 2147483648,
+    "tools": [
+      "read",
+      "bash",
+      "edit",
+      "write"
+    ],
+    "automatic_retry": false,
+    "automatic_compaction": false,
+    "sampling_seed_controlled": false
+  },
+  "backend_default_sampling": {
+    "top_k": 20,
+    "min_p": 0.05000000074505806,
+    "repeat_penalty": 1.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0
+  }
+}

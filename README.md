@@ -20,7 +20,9 @@
 
 ## 实验脚本
 
-下面这些目录是文章实验的 Python / shell 脚本，只保留代码和小输入，不含原始日志。
+下面这些目录是文章实验的 Go 程序及 Python / shell 脚本，只保留代码和小输入，不含原始日志。
+
+- [Qwen3.8-27B Harness 适配器对照](qwen38-harness/README.md)：Go 驱动真实的 Pi 1.5.2 与 DeepSeek Harness 0.2.2-rc.1，对照基座与 Pi LoRA 的三道修复题；包含 V1/V2 外部验收、工具/token/耗时统计，以及不调用真实模型的自检和接口集成测试。
 
 - [Ollama /v1 兼容接口的静默差异](ollama-openai-compat/README.md)：同一请求分别发给 `/v1` 和原生接口，对照温度、上下文、`response_format`、工具调用和错误处理。
 - [Ollama 长提示词静默截断](ollama-context-truncation/README.md)：截断规则、任务说明写在哪里、`num_ctx` 的来源和显存代价。

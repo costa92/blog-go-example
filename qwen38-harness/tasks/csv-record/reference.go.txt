@@ -1,0 +1,15 @@
+package exercise
+
+import (
+	"bytes"
+	"encoding/csv"
+)
+
+func EncodeRecord(fields []string) (string,error) {
+	var b bytes.Buffer
+	w:=csv.NewWriter(&b)
+	if err:=w.Write(fields);err!=nil { return "",err }
+	w.Flush()
+	if err:=w.Error();err!=nil { return "",err }
+	return b.String(),nil
+}

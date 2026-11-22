@@ -1,0 +1,10 @@
+package exercise
+
+import (
+	"testing"
+	"time"
+)
+
+func TestVisible(t *testing.T) {
+	if got:=Delay(1,time.Second,10*time.Second); got!=time.Second { t.Fatalf("got %v",got) }
+}

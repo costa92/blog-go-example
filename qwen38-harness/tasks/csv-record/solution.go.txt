@@ -1,0 +1,7 @@
+package exercise
+
+import "strings"
+
+func EncodeRecord(fields []string) (string, error) {
+	return strings.Join(fields,",")+"\n",nil
+}

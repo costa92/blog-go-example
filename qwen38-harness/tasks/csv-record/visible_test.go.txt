@@ -1,0 +1,8 @@
+package exercise
+
+import "testing"
+
+func TestVisible(t *testing.T) {
+	s,err:=EncodeRecord([]string{"a","b"})
+	if err!=nil || s!="a,b\n" { t.Fatalf("got %q, %v",s,err) }
+}

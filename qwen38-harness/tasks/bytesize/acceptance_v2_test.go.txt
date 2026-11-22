@@ -1,0 +1,355 @@
+package exercise
+
+import "testing"
+
+// V2: fixed post-hoc coverage suite. V1 and visible tests remain unchanged.
+func TestAcceptanceV2(t *testing.T) {
+	t.Run("zero", func(t *testing.T) {
+		n, err := ParseBytes("0")
+		if err != nil || n != 0 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(0))
+		}
+	})
+	t.Run("plain", func(t *testing.T) {
+		n, err := ParseBytes("12")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("bytes_attached", func(t *testing.T) {
+		n, err := ParseBytes("12B")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("kib_spaces", func(t *testing.T) {
+		n, err := ParseBytes(" 2 KiB ")
+		if err != nil || n != 2048 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(2048))
+		}
+	})
+	t.Run("mib_attached", func(t *testing.T) {
+		n, err := ParseBytes("3MiB")
+		if err != nil || n != 3145728 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(3145728))
+		}
+	})
+	t.Run("gib_tab", func(t *testing.T) {
+		n, err := ParseBytes("1\tGiB")
+		if err != nil || n != 1073741824 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(1073741824))
+		}
+	})
+	t.Run("leading_zeroes", func(t *testing.T) {
+		n, err := ParseBytes("0007")
+		if err != nil || n != 7 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(7))
+		}
+	})
+	t.Run("uint64_max", func(t *testing.T) {
+		n, err := ParseBytes("18446744073709551615")
+		if err != nil || n != 18446744073709551615 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(18446744073709551615))
+		}
+	})
+	t.Run("bytes_spaced", func(t *testing.T) {
+		n, err := ParseBytes("12 B")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("bytes_tab", func(t *testing.T) {
+		n, err := ParseBytes("12\tB")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("mixed_separator", func(t *testing.T) {
+		n, err := ParseBytes("12 \t B")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("outer_crlf", func(t *testing.T) {
+		n, err := ParseBytes("\r\n12B\r\n")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("outer_vertical_tab", func(t *testing.T) {
+		n, err := ParseBytes("\u000b12B\u000b")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("outer_form_feed", func(t *testing.T) {
+		n, err := ParseBytes("\f12B\f")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("outer_nbsp", func(t *testing.T) {
+		n, err := ParseBytes(" 12B ")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("outer_em_space", func(t *testing.T) {
+		n, err := ParseBytes(" 12B ")
+		if err != nil || n != 12 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(12))
+		}
+	})
+	t.Run("zero_kib", func(t *testing.T) {
+		n, err := ParseBytes("0KiB")
+		if err != nil || n != 0 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(0))
+		}
+	})
+	t.Run("one_mib", func(t *testing.T) {
+		n, err := ParseBytes("1MiB")
+		if err != nil || n != 1048576 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(1048576))
+		}
+	})
+	t.Run("one_gib", func(t *testing.T) {
+		n, err := ParseBytes("1GiB")
+		if err != nil || n != 1073741824 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(1073741824))
+		}
+	})
+	t.Run("max_bytes_unit", func(t *testing.T) {
+		n, err := ParseBytes("18446744073709551615B")
+		if err != nil || n != 18446744073709551615 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(18446744073709551615))
+		}
+	})
+	t.Run("kib_max_product", func(t *testing.T) {
+		n, err := ParseBytes("18014398509481983KiB")
+		if err != nil || n != 18446744073709550592 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(18446744073709550592))
+		}
+	})
+	t.Run("mib_max_product", func(t *testing.T) {
+		n, err := ParseBytes("17592186044415MiB")
+		if err != nil || n != 18446744073708503040 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(18446744073708503040))
+		}
+	})
+	t.Run("gib_max_product", func(t *testing.T) {
+		n, err := ParseBytes("17179869183GiB")
+		if err != nil || n != 18446744072635809792 {
+			t.Fatalf("got %d, %v; want %d", n, err, uint64(18446744072635809792))
+		}
+	})
+	t.Run("empty", func(t *testing.T) {
+		n, err := ParseBytes("")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("spaces", func(t *testing.T) {
+		n, err := ParseBytes(" ")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("minus", func(t *testing.T) {
+		n, err := ParseBytes("-1")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("plus", func(t *testing.T) {
+		n, err := ParseBytes("+1")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("fraction", func(t *testing.T) {
+		n, err := ParseBytes("1.5KiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("decimal_unit", func(t *testing.T) {
+		n, err := ParseBytes("1 KB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("lowercase", func(t *testing.T) {
+		n, err := ParseBytes("1 kib")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("unit_only", func(t *testing.T) {
+		n, err := ParseBytes("KiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("internal_lf", func(t *testing.T) {
+		n, err := ParseBytes("1\nKiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("uint64_overflow", func(t *testing.T) {
+		n, err := ParseBytes("18446744073709551616")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("kib_overflow", func(t *testing.T) {
+		n, err := ParseBytes("18014398509481984KiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("mib_overflow", func(t *testing.T) {
+		n, err := ParseBytes("17592186044416MiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("gib_overflow", func(t *testing.T) {
+		n, err := ParseBytes("17179869184GiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("prefix_letters", func(t *testing.T) {
+		n, err := ParseBytes("abc12")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("prefix_punctuation", func(t *testing.T) {
+		n, err := ParseBytes("!12B")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("prefix_unit", func(t *testing.T) {
+		n, err := ParseBytes("B12")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("negative_unit", func(t *testing.T) {
+		n, err := ParseBytes("-1B")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("plus_unit", func(t *testing.T) {
+		n, err := ParseBytes("+1KiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("hex", func(t *testing.T) {
+		n, err := ParseBytes("0x10")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("exponent", func(t *testing.T) {
+		n, err := ParseBytes("1e3")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("underscore", func(t *testing.T) {
+		n, err := ParseBytes("1_000")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("arabic_digits", func(t *testing.T) {
+		n, err := ParseBytes("١٢B")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("fullwidth_digits", func(t *testing.T) {
+		n, err := ParseBytes("１２B")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("double_unit", func(t *testing.T) {
+		n, err := ParseBytes("1KiBB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("wrong_case", func(t *testing.T) {
+		n, err := ParseBytes("1KIB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("internal_cr", func(t *testing.T) {
+		n, err := ParseBytes("1\rKiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("internal_vertical_tab", func(t *testing.T) {
+		n, err := ParseBytes("1\u000bKiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("internal_form_feed", func(t *testing.T) {
+		n, err := ParseBytes("1\fKiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("internal_nbsp", func(t *testing.T) {
+		n, err := ParseBytes("1 KiB")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("split_digits", func(t *testing.T) {
+		n, err := ParseBytes("1 2B")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("split_unit", func(t *testing.T) {
+		n, err := ParseBytes("1 Ki B")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("trailing_junk", func(t *testing.T) {
+		n, err := ParseBytes("1Bz")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("missing_digits", func(t *testing.T) {
+		n, err := ParseBytes(" B")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("fraction_no_unit", func(t *testing.T) {
+		n, err := ParseBytes("1.0")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+	t.Run("newline_inside_digits", func(t *testing.T) {
+		n, err := ParseBytes("1\n2")
+		if err == nil {
+			t.Fatalf("accepted invalid input: result=%d", n)
+		}
+	})
+}

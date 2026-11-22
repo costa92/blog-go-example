@@ -1,0 +1,485 @@
+{
+  "date": "2026-11-22",
+  "kind": "real_local_model_deepseek_harness_pilot",
+  "scope": "Three public tasks, one scored attempt per condition under official DSH; Pi-trained LoRA transfer probe, not a DSH-trained adapter or an equal-N harness ranking.",
+  "harness": {
+    "name": "DeepSeek Harness",
+    "version": "0.2.2-rc.1",
+    "npm_package": "@deepseek-ai/dsh",
+    "npm_integrity": "sha512-ijR9UEVYkG15Q/Q79JzvzLBzQOQfc63VLr9n6flpwHPhr5IKn2UxthnSoto/P9l7qGd7pPvI1Ra6TW7LH3oKpg==",
+    "documentation_revision": "fcc0ad462172522aaf5c93a7b2e01f6b9f0b0159",
+    "runtime": {
+      "node": "v24.9.0",
+      "dsh": "0.2.2-rc.1",
+      "go": "go version go1.27.2 linux/arm64",
+      "npm_lock_sha256": "584fb838ea3d9b06b61232b7e9a38ba2a2bb482d9daf65b3ab2795a77789567e"
+    }
+  },
+  "environment": {
+    "hardware": {
+      "chip": "Apple M4 Pro",
+      "unified_memory_bytes": 51539607552
+    },
+    "backend": {
+      "name": "llama.cpp",
+      "version": "0.6.0",
+      "build": 11429,
+      "commit": "d81235049",
+      "context_window": 16384,
+      "parallel_slots": 1,
+      "gpu_layers": 99
+    },
+    "base": {
+      "repo": "ggml-org/Qwen3.8-27B-GGUF",
+      "hf_revision": "c1869413dece09109e55b7dcc2c77ef382b0d0bd",
+      "file": "Qwen3.8-27B-Q4_K_M.gguf",
+      "size": 19403684480,
+      "sha256": "d15d4b6de55f662ac40e867702d31afe738d032fa06b829b2b1a21a49d4a48ee",
+      "verified": true,
+      "gguf_metadata": {
+        "version": 3,
+        "tensors": 851,
+        "metadata": {
+          "general.architecture": "qwen35",
+          "general.type": "model",
+          "general.sampling.top_k": 20,
+          "general.sampling.top_p": 0.949999988079071,
+          "general.sampling.temp": 1.0,
+          "general.name": "Qwen3.8-27B",
+          "general.size_label": "27B",
+          "general.license": "apache-2.0",
+          "general.tags": "array length 1",
+          "general.quantization_version": 2,
+          "general.file_type": 15
+        }
+      }
+    },
+    "adapter": {
+      "repo": "harness-hub/Qwen3.8-27B-pi-adapted-GGUF",
+      "hf_revision": "19980ce556b41c7b73818083c9adf4b3fa0c72e5",
+      "file": "Qwen3.8-27B-pi-lora-F16.gguf",
+      "size": 318802304,
+      "sha256": "a64f91844f19e67da500d8628bdf9383aa334e61b7ab687805802e7d272d7b67",
+      "verified": true,
+      "gguf_metadata": {
+        "version": 3,
+        "tensors": 512,
+        "metadata": {
+          "general.architecture": "qwen35",
+          "general.type": "adapter",
+          "adapter.type": "lora",
+          "general.name": "Cbb199Ec5C3642697D998A0Ad8E31730229473C7",
+          "adapter.lora.alpha": 64.0,
+          "general.quantization_version": 2
+        }
+      }
+    },
+    "weight_checks": {
+      "Qwen3.8-27B-Q4_K_M.gguf": {
+        "sha256": "d15d4b6de55f662ac40e867702d31afe738d032fa06b829b2b1a21a49d4a48ee",
+        "verified": true
+      },
+      "Qwen3.8-27B-pi-lora-F16.gguf": {
+        "sha256": "a64f91844f19e67da500d8628bdf9383aa334e61b7ab687805802e7d272d7b67",
+        "verified": true
+      }
+    },
+    "same_backend_defaults_as_pi": true,
+    "server_restarted_for_dsh_batch": true,
+    "image_id": "sha256:384b41df5428b7a338b82f249237da5a5c01bce38a9790bea662778dd4f3f9ec",
+    "unprivileged_uid": 10001,
+    "read_only_root": true,
+    "cpus": 2,
+    "memory_bytes": 2147483648,
+    "host_source_mounts": false,
+    "model_server_stopped": true,
+    "trial_container_removed_after_verified_export": true
+  },
+  "sampling_plan": {
+    "planned_at": "2026-11-22T08:22:41.644852+00:00",
+    "harness": "DeepSeek Harness",
+    "version": "0.2.2-rc.1",
+    "new_model_trials": 6,
+    "runs_per_task_condition": 1,
+    "tasks": [
+      "bytesize",
+      "retry-delay",
+      "csv-record"
+    ],
+    "conditions": [
+      "base",
+      "adapter"
+    ],
+    "adapter_training_harness": "Pi; testing transfer into DSH, not a DSH-trained LoRA",
+    "grader": "acceptance-v2-post-hoc, same frozen suite as the Pi regrade",
+    "wall_limit_seconds": 300,
+    "temperature": 0.8,
+    "top_p": 1,
+    "context_window": 16384,
+    "thinking": false,
+    "max_output_tokens_per_call": 4096,
+    "lora_scale": {
+      "base": 0,
+      "adapter": 1
+    },
+    "all_outcomes_retained": true,
+    "seed_controlled": false,
+    "native_dsh_tools": [
+      "read",
+      "write",
+      "edit",
+      "bash"
+    ],
+    "pi_comparison_has_more_repetitions": true,
+    "interpretation": "DSH integration pilot; not an equal-N harness ranking",
+    "v2_test_sha256": {
+      "bytesize": "7d24dc2c3a49c3e0e2595fb9b00b64b046a72a9583d592106265bae5f2dafb12",
+      "retry-delay": "57ce6c25bb8eb5f81d3fac4fa0effe81293b349aaeacf9ae59dd91b710ae072a",
+      "csv-record": "1224b215b6455c46c8913c898bc7f53d6dbc8cf5a058698346d1db5eeceea89b"
+    }
+  },
+  "metadata": {
+    "arch": "arm64",
+    "config": {
+      "harness": "deepseek-harness",
+      "base_url": "http://host.docker.internal:8091/v1",
+      "base_model": "qwen-base",
+      "adapter_model": "qwen-pi",
+      "runs_per_task_per_model": 1,
+      "run_offset": 0,
+      "timeout_ns": 300000000000,
+      "context_window": 16384,
+      "llama_per_request_lora": true
+    },
+    "go_version": "go version go1.27.2 linux/arm64",
+    "harness_version": "0.2.2-rc.1",
+    "kind": "real_deepseek_harness_external_endpoint",
+    "node_minimum_version": "24.9.0",
+    "os": "linux",
+    "policy_gateway": "Only normalizes request sampling and LoRA; agent loop, prompt and native tools are DSH. Full outgoing bodies saved per trial.",
+    "request_policy": {
+      "adapter": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "lora": [
+          {
+            "id": 0,
+            "scale": 1
+          }
+        ],
+        "max_tokens": 4096,
+        "temperature": 0.8,
+        "top_p": 1
+      },
+      "base": {
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        },
+        "lora": [
+          {
+            "id": 0,
+            "scale": 0
+          }
+        ],
+        "max_tokens": 4096,
+        "temperature": 0.8,
+        "top_p": 1
+      }
+    },
+    "schema": 1,
+    "seed_controlled": false,
+    "started_at": "2026-11-22T08:25:48Z",
+    "tool_names": [
+      "read",
+      "write",
+      "edit",
+      "bash"
+    ],
+    "weight_identity": "model IDs are routing names, verify server weights and revisions separately"
+  },
+  "metadata_sha256": "477f88f080807584cd1cc241aea4731b108bf2db49f5700064d0919539bb4881",
+  "initial_grader": "acceptance-v1, retained only as historical pipeline output; use separate V2 regrade for corrected acceptance",
+  "summary_v1": {
+    "conditions": {
+      "adapter": {
+        "attempts": 3,
+        "scorable": 3,
+        "passed": 2,
+        "unscorable": 0
+      },
+      "base": {
+        "attempts": 3,
+        "scorable": 3,
+        "passed": 3,
+        "unscorable": 0
+      }
+    },
+    "both_passed_pairs": 2,
+    "both_passed_and_completed_pairs": 0,
+    "pairs_with_complete_usage": 0,
+    "median_tool_calls_on_complete_pairs": {
+      "adapter": null,
+      "base": null
+    },
+    "median_agent_ms_on_complete_pairs": {
+      "adapter": null,
+      "base": null
+    },
+    "median_generated_tokens_on_usage_pairs": {
+      "adapter": null,
+      "base": null
+    }
+  },
+  "trials": [
+    {
+      "harness": "deepseek-harness",
+      "task": "bytesize",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "timeout",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 300118,
+      "grade_wall_ms": 152,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 8,
+        "tool_calls": 11,
+        "tool_errors": 0,
+        "generated_tokens": null,
+        "input_tokens": null,
+        "cache_read_tokens": null,
+        "cache_write_tokens": null
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "a3d131e31800b731d2f7c758162fac8c939628f02ca3eb471513025b1b67922d",
+      "artifact_sha256": {
+        "events.jsonl": "009f41a91d4e883038141c94072d48e9c64712fdf0b5a78edd48a068695105d3",
+        "grade.jsonl": "079ec9ba6131ce61a4402380acb7ff3ff4c6e135b34cf1bd35290a815cdd7fdd",
+        "result.json": "ce4b56dbb6cddcf2cf2ce506ff6165c855739b04e39891c106f1d3b17a51abf0",
+        "solution.go.txt": "a3d131e31800b731d2f7c758162fac8c939628f02ca3eb471513025b1b67922d",
+        "outgoing-requests.jsonl": "6369daddce1fd877886df5d0b3386cfa887aed99a7b84c21eea95bc05989eb9a",
+        "dsh.cordis.patch.yml": "7125e2f5886419371643d9f453fa36ab8b9835a93e68e2aca174f69b459dfdef",
+        "stderr.log": "402d017897df3eff83db86dc28cbe3829d94de6afd766a84d9ee5f48a06d05c6"
+      },
+      "outgoing_request_count": 9,
+      "first_system_prompt_sha256": "09d921bb538fb743efc353d1059c7e6de947def4bf48cd4bf31671198e179d58",
+      "native_system_prompt_contains_model_alias": true
+    },
+    {
+      "harness": "deepseek-harness",
+      "task": "bytesize",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "timeout",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 300083,
+      "grade_wall_ms": 265,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 6,
+        "tool_errors": 0,
+        "generated_tokens": null,
+        "input_tokens": null,
+        "cache_read_tokens": null,
+        "cache_write_tokens": null
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "2cfeb616f12c58e6668b7579de9e10e6f10859158e78e4e85e6adc055ae8117f",
+      "artifact_sha256": {
+        "events.jsonl": "36603763b71064ef5a65076130bcfedf55c803868f5584506988dc8d1e735545",
+        "grade.jsonl": "1ee617b6925b89b348b7f518a6adb720917a2cdf0a9d83ce22ee37d09fd4228e",
+        "result.json": "cb521c9d0f9c8f02b6105da0a8abc405ca34d9b23f3ec34940f952a8ac5cafd5",
+        "solution.go.txt": "2cfeb616f12c58e6668b7579de9e10e6f10859158e78e4e85e6adc055ae8117f",
+        "outgoing-requests.jsonl": "ad73ea9b2843e47ab060b7a2f8b23c79bb30156f56062941fc6774d4e838333d",
+        "dsh.cordis.patch.yml": "af3539dae47c7f188356917e56a0b9e0d1d37b30b9af5a4fd608546f3728defc",
+        "stderr.log": "9c5c859c502e1595e12dc2adc0982485e7db593299ee5c0e9180659357cdd82a"
+      },
+      "outgoing_request_count": 6,
+      "first_system_prompt_sha256": "6b31ff8ec458161ed8ac3452218908203fc743c8fd394b13642072b19071645d",
+      "native_system_prompt_contains_model_alias": true
+    },
+    {
+      "harness": "deepseek-harness",
+      "task": "retry-delay",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 227968,
+      "grade_wall_ms": 257,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 8,
+        "tool_calls": 9,
+        "tool_errors": 0,
+        "generated_tokens": 2104,
+        "input_tokens": 1021,
+        "cache_read_tokens": 21749,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "320aebc81ae3952e3b3f402ec7ad42ed00cc958a43b24a3e7a0e7e3b6dc268a1",
+      "artifact_sha256": {
+        "events.jsonl": "fad37de6540319df6c9e3d4eb61ca90bd692527f5984f24d94c9b465cfd53ff5",
+        "grade.jsonl": "0f5adb22bc013cc46bd49d99a9c12475c5df1326f645977da22a6e0b19385b60",
+        "result.json": "100132ec70bda27afacfd1c75c70de2498973fe22f8fc8aadd54722c727d977c",
+        "solution.go.txt": "320aebc81ae3952e3b3f402ec7ad42ed00cc958a43b24a3e7a0e7e3b6dc268a1",
+        "outgoing-requests.jsonl": "7d3712bbcc09b5cc5e6bd1d82cec4f4706e94712c896777306f5a3750a697e4d",
+        "dsh.cordis.patch.yml": "9a5310cfec8f08ad846b1cc9de846615d1b2b5882ba8522f8540a8f4ade4bd61",
+        "stderr.log": "e1c7896f39d02b3084db9d755c4267cb4c8a7a73ee3cfd31ad25203b77888eb1"
+      },
+      "outgoing_request_count": 8,
+      "first_system_prompt_sha256": "6b31ff8ec458161ed8ac3452218908203fc743c8fd394b13642072b19071645d",
+      "native_system_prompt_contains_model_alias": true
+    },
+    {
+      "harness": "deepseek-harness",
+      "task": "retry-delay",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "timeout",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 300150,
+      "grade_wall_ms": 166,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 10,
+        "tool_calls": 13,
+        "tool_errors": 0,
+        "generated_tokens": null,
+        "input_tokens": null,
+        "cache_read_tokens": null,
+        "cache_write_tokens": null
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "65fae11e42d591e421802dfba21120c856694e232c6e9b4dfb7ce7829635a451",
+      "artifact_sha256": {
+        "events.jsonl": "39ae35d32086a1af341fd2fdbafff304fd6031fd4c9bd04e5873fc0a4f641df3",
+        "grade.jsonl": "e3444bd13ba356e0e67187f12a9abe7ebe1af16b61406408a49815d79b261897",
+        "result.json": "a47275b62e823452466214b996e97a0ef8ebd0d576bacb601609241971475159",
+        "solution.go.txt": "65fae11e42d591e421802dfba21120c856694e232c6e9b4dfb7ce7829635a451",
+        "outgoing-requests.jsonl": "8eb6a6b98be47a0b9a95df29e14828a965c58f042d92d4f9d41d4b45ec4c9165",
+        "dsh.cordis.patch.yml": "eef31a230417382278ff560f86b2495dc643a426bd683f9c350f77ea8439e58d",
+        "stderr.log": "6baebb566cc593ecd2b9d3243db7ef10caac8cc9817166cbd6c8ae1cb8ade5af"
+      },
+      "outgoing_request_count": 11,
+      "first_system_prompt_sha256": "09d921bb538fb743efc353d1059c7e6de947def4bf48cd4bf31671198e179d58",
+      "native_system_prompt_contains_model_alias": true
+    },
+    {
+      "harness": "deepseek-harness",
+      "task": "csv-record",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 73297,
+      "grade_wall_ms": 234,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 7,
+        "tool_errors": 0,
+        "generated_tokens": 641,
+        "input_tokens": 923,
+        "cache_read_tokens": 10586,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7",
+      "artifact_sha256": {
+        "events.jsonl": "c6889868add62c6a17b3af8abc012e46a7fcd79767ba775f55078df83199d569",
+        "grade.jsonl": "320b07e558b738cd3b2db9109794698036c7cfca81d9044369c626a94bed4912",
+        "result.json": "37e29ed08b0f60b49b5ce60d0225a6d5cdeb276519fce71d2e70284d144ddf63",
+        "solution.go.txt": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7",
+        "outgoing-requests.jsonl": "7f725505325b999d502021ccc4169047591774a5b40b6f6bfb16e9d1ec89efa1",
+        "dsh.cordis.patch.yml": "6e37906b23fa21d2b3365a1c64b9ce219b15f7e2240e01c80651521cc63abb67",
+        "stderr.log": "e1c7896f39d02b3084db9d755c4267cb4c8a7a73ee3cfd31ad25203b77888eb1"
+      },
+      "outgoing_request_count": 5,
+      "first_system_prompt_sha256": "09d921bb538fb743efc353d1059c7e6de947def4bf48cd4bf31671198e179d58",
+      "native_system_prompt_contains_model_alias": true
+    },
+    {
+      "harness": "deepseek-harness",
+      "task": "csv-record",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "timeout",
+      "scorable": true,
+      "passed": false,
+      "agent_wall_ms": 300118,
+      "grade_wall_ms": 204,
+      "grade": {
+        "passed": false,
+        "status": "failed"
+      },
+      "metrics": {
+        "assistant_messages": 8,
+        "tool_calls": 11,
+        "tool_errors": 0,
+        "generated_tokens": null,
+        "input_tokens": null,
+        "cache_read_tokens": null,
+        "cache_write_tokens": null
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "028dd56a17bed96f91c7e974aa7ee812b8e072b18a1d7991d812511a65e27a16",
+      "artifact_sha256": {
+        "events.jsonl": "b9259be414212ab275fd8fb2f2f626fb1769bfbcd1368c95a83e7833367dd9ba",
+        "grade.jsonl": "83c92541bb5c004a5134ae690fd4bb08c293275bef4a8e692766224d5d6eaa8f",
+        "result.json": "db2f4a0ac6a2914bced10da17b1acadfbb2bc1ee045f7ec152946e3288b806c6",
+        "solution.go.txt": "028dd56a17bed96f91c7e974aa7ee812b8e072b18a1d7991d812511a65e27a16",
+        "outgoing-requests.jsonl": "b4236cf4004516dbd552ad0f97fd586fb237f79520c0e19506097d95e300156c",
+        "dsh.cordis.patch.yml": "812624f3422f10e870cd842499747557d6a86982aa81dcf015c387fab3e7e7a3",
+        "stderr.log": "7bbbdd7d48dedd4e28108d3def288f06bbb5b0fd162113277cac1c3793222e7d"
+      },
+      "outgoing_request_count": 9,
+      "first_system_prompt_sha256": "6b31ff8ec458161ed8ac3452218908203fc743c8fd394b13642072b19071645d",
+      "native_system_prompt_contains_model_alias": true
+    }
+  ],
+  "limitations": [
+    "One sample per task and condition, versus three in the Pi experiment.",
+    "Pi-trained adapter, not trained or guaranteed for DSH.",
+    "DSH Node 24.9.0 differs from Pi Node 22.19.0; host caches, runtime period, prompts and tool schemas also differ.",
+    "Temperature 0.8, seed uncontrolled, shared backend caches not reset between trials.",
+    "Native DSH system prompts contain the selected model alias and temporary working-directory paths; they are not byte-identical between conditions.",
+    "A timeout can leave a passing answer; timeout token totals remain unknown and those trials are excluded from completed efficiency pairs.",
+    "Raw requests, transcripts and final code remain in ignored results; only measurements and artifact hashes are published."
+  ]
+}

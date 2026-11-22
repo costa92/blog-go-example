@@ -1,0 +1,16 @@
+package exercise
+
+import "testing"
+
+func TestAcceptance(t *testing.T) {
+	for _, c := range []struct{s string; n uint64}{
+		{"0",0}, {"12B",12}, {" 2 KiB ",2048}, {"3MiB",3145728},
+		{"1\tGiB",1073741824}, {"0007",7}, {"18446744073709551615",^uint64(0)},
+	} {
+		got, err := ParseBytes(c.s)
+		if err != nil || got != c.n { t.Fatalf("%q: got %d, %v; want %d",c.s,got,err,c.n) }
+	}
+	for _, s := range []string{"", " ", "-1", "+1", "1.5KiB", "1 KB", "1 kib", "KiB", "1\nKiB", "18446744073709551616", "18014398509481984KiB"} {
+		if _,err := ParseBytes(s); err == nil { t.Fatalf("accepted invalid %q",s) }
+	}
+}

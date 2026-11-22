@@ -1,0 +1,877 @@
+{
+  "date": "2026-11-22",
+  "kind": "real_local_model_inference",
+  "scope": "3 public teaching tasks, three scored attempts per condition (18 trials); GGUF Q4_K_M plus official F16 Pi LoRA. No RL training or official benchmark reproduction.",
+  "environment": {
+    "state": "completed",
+    "hardware": {
+      "chip": "Apple M4 Pro",
+      "unified_memory_bytes": 51539607552
+    },
+    "backend": {
+      "name": "llama.cpp",
+      "version": "0.6.0",
+      "build": 11429,
+      "commit": "d81235049",
+      "context_window": 16384,
+      "parallel_slots": 1,
+      "gpu_layers": 99
+    },
+    "base": {
+      "repo": "ggml-org/Qwen3.8-27B-GGUF",
+      "hf_revision": "c1869413dece09109e55b7dcc2c77ef382b0d0bd",
+      "file": "Qwen3.8-27B-Q4_K_M.gguf",
+      "size": 19403684480,
+      "sha256": "d15d4b6de55f662ac40e867702d31afe738d032fa06b829b2b1a21a49d4a48ee",
+      "verified": true,
+      "gguf_metadata": {
+        "version": 3,
+        "tensors": 851,
+        "metadata": {
+          "general.architecture": "qwen35",
+          "general.type": "model",
+          "general.sampling.top_k": 20,
+          "general.sampling.top_p": 0.949999988079071,
+          "general.sampling.temp": 1.0,
+          "general.name": "Qwen3.8-27B",
+          "general.size_label": "27B",
+          "general.license": "apache-2.0",
+          "general.tags": "array length 1",
+          "general.quantization_version": 2,
+          "general.file_type": 15
+        }
+      }
+    },
+    "adapter": {
+      "repo": "harness-hub/Qwen3.8-27B-pi-adapted-GGUF",
+      "hf_revision": "19980ce556b41c7b73818083c9adf4b3fa0c72e5",
+      "file": "Qwen3.8-27B-pi-lora-F16.gguf",
+      "size": 318802304,
+      "sha256": "a64f91844f19e67da500d8628bdf9383aa334e61b7ab687805802e7d272d7b67",
+      "verified": true,
+      "gguf_metadata": {
+        "version": 3,
+        "tensors": 512,
+        "metadata": {
+          "general.architecture": "qwen35",
+          "general.type": "adapter",
+          "adapter.type": "lora",
+          "general.name": "Cbb199Ec5C3642697D998A0Ad8E31730229473C7",
+          "adapter.lora.alpha": 64.0,
+          "general.quantization_version": 2
+        }
+      }
+    },
+    "conditions": {
+      "base": {
+        "lora_id": 0,
+        "scale": 0
+      },
+      "adapter": {
+        "lora_id": 0,
+        "scale": 1
+      }
+    },
+    "separation": "Pi and Go grader in an unprivileged read-only Docker container; Metal inference on macOS host. No host source tree mounted.",
+    "download_verification": {
+      "Qwen3.8-27B-Q4_K_M.gguf": {
+        "downloaded": 19403684480,
+        "total": 19403684480,
+        "state": "verified",
+        "sha256": "d15d4b6de55f662ac40e867702d31afe738d032fa06b829b2b1a21a49d4a48ee",
+        "source": "https://modelscope.cn/models/ggml-org/Qwen3.8-27B-GGUF/resolve/e4542bd48de5bc4689d960280348e3f2219ede6d/Qwen3.8-27B-Q4_K_M.gguf",
+        "hf_same_sha256": true
+      },
+      "Qwen3.8-27B-pi-lora-F16.gguf": {
+        "downloaded": 318802304,
+        "total": 318802304,
+        "state": "verified",
+        "sha256": "a64f91844f19e67da500d8628bdf9383aa334e61b7ab687805802e7d272d7b67",
+        "source": "https://modelscope.cn/models/harness-hub/Qwen3.8-27B-pi-adapted-GGUF/resolve/cea9fb3f998876be9a0ec40a7e3a2fda81b9133a/Qwen3.8-27B-pi-lora-F16.gguf",
+        "hf_same_sha256": true
+      }
+    },
+    "image_id": "sha256:20399a76302fd6ecefa6d31fcba98da231ef279f1dd44688ee2e6dc59ca4b4ea",
+    "native_control": [
+      {
+        "scale": 0,
+        "tokens_predicted": 16,
+        "reported_lora": [
+          {
+            "id": 0,
+            "scale": 0.0
+          }
+        ]
+      },
+      {
+        "scale": 1,
+        "tokens_predicted": 16,
+        "reported_lora": [
+          {
+            "id": 0,
+            "scale": 1.0
+          }
+        ]
+      }
+    ],
+    "native_control_logits_changed": true,
+    "model_server_stopped": true,
+    "segment_images": [
+      {
+        "segment": "first four completed trials",
+        "image_id": "sha256:20399a76302fd6ecefa6d31fcba98da231ef279f1dd44688ee2e6dc59ca4b4ea"
+      },
+      {
+        "segment": "remaining CSV pair",
+        "image_id": "sha256:ad41c662c8c02fbe51937cc46bc65be9e598c0dd4e0b9e706d9a04c3582ee855"
+      },
+      {
+        "segment": "complete repetitions 2 and 3",
+        "image_id": "sha256:ee706bfc41a58fa6c0186e688f2e408121903f085543d9fac14f493cde3ea6bd"
+      }
+    ]
+  },
+  "trials": [
+    {
+      "task": "bytesize",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "timeout",
+      "scorable": true,
+      "passed": false,
+      "agent_wall_ms": 300038,
+      "grade_wall_ms": 77,
+      "grade": {
+        "passed": false,
+        "status": "failed"
+      },
+      "metrics": {
+        "assistant_messages": 15,
+        "tool_calls": 17,
+        "tool_errors": 0,
+        "generated_tokens": null,
+        "input_tokens": null,
+        "cache_read_tokens": null,
+        "cache_write_tokens": null
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "5fe3b871d468183b2af77d9b2cfb4596d020a14ccc17dcb6823bba458d53bdba",
+      "artifact_sha256": {
+        "events.jsonl": "1c6fe6e86a534cf0dd097d383e0e2cbfc9c068c0f87b2b107d87300c409b14a0",
+        "grade.jsonl": "06b31fa4c71decc0eba6168e75b79ca5f02933865777bf5c364da3a1068130f9",
+        "result.json": "fc7ab39490c6c030f1f7bb037ec48fe1f04bda48d43e4e0775142e628e55675e",
+        "solution.go.txt": "5fe3b871d468183b2af77d9b2cfb4596d020a14ccc17dcb6823bba458d53bdba"
+      },
+      "segment": "real-gguf-01"
+    },
+    {
+      "task": "bytesize",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 168857,
+      "grade_wall_ms": 250,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 7,
+        "tool_calls": 9,
+        "tool_errors": 0,
+        "generated_tokens": 1247,
+        "input_tokens": 2658,
+        "cache_read_tokens": 16209,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "b2bb7c96ed8c051be6a5aac0ad726bad8d062ef4c735af025e4f1774902cdd4b",
+      "artifact_sha256": {
+        "events.jsonl": "d2afa9be27899b0dece3825b946e5aed2b6a53e5b3237b1f93ea7a82f6529a3f",
+        "grade.jsonl": "b3ee4f2c195a0479ae896024040ddb5298dda80d044dad55e9347c8e23636e42",
+        "result.json": "ac7ee7ad5b23d8c1370670aaa802198ec9825162bda164ace434d1bc2dfadcf8",
+        "solution.go.txt": "b2bb7c96ed8c051be6a5aac0ad726bad8d062ef4c735af025e4f1774902cdd4b"
+      },
+      "segment": "real-gguf-01"
+    },
+    {
+      "task": "retry-delay",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 83361,
+      "grade_wall_ms": 146,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 6,
+        "tool_errors": 0,
+        "generated_tokens": 707,
+        "input_tokens": 494,
+        "cache_read_tokens": 9336,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "d3a480618c8697feab7d34ca68b7d6427caa081050357f60bcd3b2532398c34f",
+      "artifact_sha256": {
+        "events.jsonl": "20ef8e82efa04ab886ee2384d532973870487c39d0b92acc8934eaa44aabfc63",
+        "grade.jsonl": "8e240d7c6b1d94e10755f4436662f5fae4475f3301a4801024d626f40232ea3e",
+        "result.json": "d033b53d593e9886d1a3fd340e0978fe45bbced11206829382358e70deac3b35",
+        "solution.go.txt": "d3a480618c8697feab7d34ca68b7d6427caa081050357f60bcd3b2532398c34f"
+      },
+      "segment": "real-gguf-01"
+    },
+    {
+      "task": "retry-delay",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": false,
+      "agent_wall_ms": 113171,
+      "grade_wall_ms": 218,
+      "grade": {
+        "passed": false,
+        "status": "failed"
+      },
+      "metrics": {
+        "assistant_messages": 7,
+        "tool_calls": 7,
+        "tool_errors": 0,
+        "generated_tokens": 987,
+        "input_tokens": 1896,
+        "cache_read_tokens": 13029,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "951c62b6cb5afaff77dc208b1e9d7dd9908902d556da7a998204349dc0a6316e",
+      "artifact_sha256": {
+        "events.jsonl": "4cf261c396459f4b50954eb2a9da6d58f31872290eb22e19c8066e48e969a005",
+        "grade.jsonl": "1ef6a93fbb2e088c435fce9ef719455ed665db9767620143cdd96fb99e649de8",
+        "result.json": "9279459ba5da99dbcd53d652f14276d788cd7b689278c7a999f1d68751f34827",
+        "solution.go.txt": "951c62b6cb5afaff77dc208b1e9d7dd9908902d556da7a998204349dc0a6316e"
+      },
+      "segment": "real-gguf-01"
+    },
+    {
+      "task": "csv-record",
+      "repetition": 1,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 81267,
+      "grade_wall_ms": 189,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 7,
+        "tool_calls": 7,
+        "tool_errors": 1,
+        "generated_tokens": 778,
+        "input_tokens": 689,
+        "cache_read_tokens": 13912,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7",
+      "artifact_sha256": {
+        "events.jsonl": "d71fce0ea65f1a9124869845012facaebb096140918fcfb50c8e4cd4dbb86156",
+        "grade.jsonl": "964cb02fc280fd234a95b4a51abb58a795f402e81380c00594bbba8142681531",
+        "result.json": "a3426745f27282d4fe6e62a96e19c8405164feed38a221c2a5ab7379de439bef",
+        "solution.go.txt": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      },
+      "segment": "real-gguf-02"
+    },
+    {
+      "task": "csv-record",
+      "repetition": 1,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 69941,
+      "grade_wall_ms": 144,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 5,
+        "tool_errors": 0,
+        "generated_tokens": 430,
+        "input_tokens": 1838,
+        "cache_read_tokens": 7526,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7",
+      "artifact_sha256": {
+        "events.jsonl": "c5552de5381a4f4a46fe50b3a22ab0ba8d1ee0c2227fdd6bacb8551626240320",
+        "grade.jsonl": "b4ef11dd07234218da52978158f36223ad657c253e63cc663d448df181072d5b",
+        "result.json": "bf0a66f50e4f5cb4c355dd6798f376a1dc3af74c016d1dc638e23bd995aca4f9",
+        "solution.go.txt": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      },
+      "segment": "real-gguf-02"
+    },
+    {
+      "task": "bytesize",
+      "repetition": 2,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 279447,
+      "grade_wall_ms": 145,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 7,
+        "tool_calls": 8,
+        "tool_errors": 0,
+        "generated_tokens": 2486,
+        "input_tokens": 2065,
+        "cache_read_tokens": 18352,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "90804cf9965b767c5de0b44987cd4bb017f6b81be08b07dac8975076ba3d5e1a",
+      "artifact_sha256": {
+        "events.jsonl": "f42f6314e9a58a1f6dd18d7b49e3455d110f32b813c2bede00dcb2feb8f91f62",
+        "grade.jsonl": "46f4dca3a8787cc776fff1938f76a5408f51a422727e50e512c9c417d94ee112",
+        "result.json": "dde26eaf50edda53aa96608ba7f43f0e07b552528a3e0489773816a3b0b37db3",
+        "solution.go.txt": "90804cf9965b767c5de0b44987cd4bb017f6b81be08b07dac8975076ba3d5e1a"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "bytesize",
+      "repetition": 2,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 244935,
+      "grade_wall_ms": 231,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 11,
+        "tool_calls": 13,
+        "tool_errors": 0,
+        "generated_tokens": 2283,
+        "input_tokens": 2780,
+        "cache_read_tokens": 31534,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "95187569a2ff054befc6c17a00c2f13f8d0e4c4b5431d958a690e5c29dc23219",
+      "artifact_sha256": {
+        "events.jsonl": "24201dad0c56f7db701ac3aac79100ad3ccc14fb4447eb5bbb49d1eecf786e19",
+        "grade.jsonl": "47cee3df5c4ebdbeb28a57a1b51881817751ecda173e3cf0427cd6dd4117a5bd",
+        "result.json": "f2d4953ce288a3901a0e72d3098d82dd89b2eb9016fa1f1141f7ec46ec03b3d4",
+        "solution.go.txt": "95187569a2ff054befc6c17a00c2f13f8d0e4c4b5431d958a690e5c29dc23219"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "retry-delay",
+      "repetition": 2,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": false,
+      "agent_wall_ms": 67506,
+      "grade_wall_ms": 200,
+      "grade": {
+        "passed": false,
+        "status": "failed"
+      },
+      "metrics": {
+        "assistant_messages": 7,
+        "tool_calls": 7,
+        "tool_errors": 1,
+        "generated_tokens": 617,
+        "input_tokens": 589,
+        "cache_read_tokens": 13572,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "01646bf3f184a113cfe6a6b5914f9bff890117ae909d6cce395374b821d1fa1c",
+      "artifact_sha256": {
+        "events.jsonl": "fb5cd63720c3dcc9a074e31d32391bea08f3b87ad3aff6ec19b4ed84b3654b1a",
+        "grade.jsonl": "e3d349d391cde94aa44a6e980ea9d974e3896f05e7a25dd9411391e5cf4894f1",
+        "result.json": "46d9ad0a296bfef41e2e2eca619c2be4f0b5f127aa2425042e917d0efb1db904",
+        "solution.go.txt": "01646bf3f184a113cfe6a6b5914f9bff890117ae909d6cce395374b821d1fa1c"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "retry-delay",
+      "repetition": 2,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 85099,
+      "grade_wall_ms": 135,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 4,
+        "tool_calls": 4,
+        "tool_errors": 0,
+        "generated_tokens": 597,
+        "input_tokens": 1735,
+        "cache_read_tokens": 5872,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "bb4575266752767a61d878823f5681496bbeb5b3a0c7dd3af8e28b6fe2a0306b",
+      "artifact_sha256": {
+        "events.jsonl": "3c7b90a0af3c902a70aff64c2730337262dc6593226e5b6c916989db64ec3d4a",
+        "grade.jsonl": "6eaca11234a6f12e902596d6194da96bbae621a21d500364d3fd47a67a06dcac",
+        "result.json": "fe3d2a7da41106668dcd4fb034e6ff8f5a83176ff80ce0d491f300970de6d3e9",
+        "solution.go.txt": "bb4575266752767a61d878823f5681496bbeb5b3a0c7dd3af8e28b6fe2a0306b"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "csv-record",
+      "repetition": 2,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 62700,
+      "grade_wall_ms": 149,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 4,
+        "tool_calls": 4,
+        "tool_errors": 0,
+        "generated_tokens": 549,
+        "input_tokens": 401,
+        "cache_read_tokens": 7095,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "fa61c44a5145d3f119b89d5e24b110c3e1f0b187b950de662e6693c0f8b84e1f",
+      "artifact_sha256": {
+        "events.jsonl": "c2447a8a6ae2bac994e5ef7de67f7fbea0492d615356d1470369276e09233845",
+        "grade.jsonl": "4471d48e2d3bd497fd4cc9de6bb9e861cf59d8d952295a588a2d44d41e3f5f21",
+        "result.json": "b239c293bef44702d3cf82abd551ae083b4fac4e447a4c8aa52a1cfe951a4795",
+        "solution.go.txt": "fa61c44a5145d3f119b89d5e24b110c3e1f0b187b950de662e6693c0f8b84e1f"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "csv-record",
+      "repetition": 2,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 56444,
+      "grade_wall_ms": 258,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 6,
+        "tool_errors": 0,
+        "generated_tokens": 397,
+        "input_tokens": 1970,
+        "cache_read_tokens": 7855,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7",
+      "artifact_sha256": {
+        "events.jsonl": "44cfe4c9272ef39903177f6580d6cd80da22267cd701c4bd7fca2d21df2d3926",
+        "grade.jsonl": "75f38d5280f1807c6a5cae181782413f4a356a7e591c0939904da4d847fde8f4",
+        "result.json": "0b685abd723c2ea1064ad6ea9108f5fa8af72ff23bc6ab590378c6d04812d58d",
+        "solution.go.txt": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "bytesize",
+      "repetition": 3,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": false,
+      "agent_wall_ms": 106592,
+      "grade_wall_ms": 242,
+      "grade": {
+        "passed": false,
+        "status": "failed"
+      },
+      "metrics": {
+        "assistant_messages": 6,
+        "tool_calls": 8,
+        "tool_errors": 1,
+        "generated_tokens": 1024,
+        "input_tokens": 726,
+        "cache_read_tokens": 13055,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "906ec665b8b024001c888a50a573624ca6fde1eae30874a378198e52517001a3",
+      "artifact_sha256": {
+        "events.jsonl": "7ee36bd34d4a5980c539f2f67831f3b41d02a665807137af36a1f2d55e04ece2",
+        "grade.jsonl": "9d2f6008c37890a50d8d8642fe3f34b449e7c98b2c9d55fd2676c1d2f1ac58f4",
+        "result.json": "6821e0d8ee68887a978e3a5941cfb9b3a5be89f65aa600d05a798633d30a4fc3",
+        "solution.go.txt": "906ec665b8b024001c888a50a573624ca6fde1eae30874a378198e52517001a3"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "bytesize",
+      "repetition": 3,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 113207,
+      "grade_wall_ms": 138,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 5,
+        "tool_errors": 0,
+        "generated_tokens": 830,
+        "input_tokens": 1875,
+        "cache_read_tokens": 8313,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "60b04b86afb5675a828fb0bb05b6a570fdfd4a1727cac36cb3d28b744d814f81",
+      "artifact_sha256": {
+        "events.jsonl": "ea49d3017f311cf89223a5ad6b6504091ff2acc4679fac7708fd9d9781c06cb7",
+        "grade.jsonl": "b769c119a6068eda8cd5f676aad6d95bc5e9c61438f823bccdd2598f0e3befbe",
+        "result.json": "a70dcccd1e1a5b5bd8ede1dd7874c450e35f6ea5a94211c3e4f96211cc9bcb68",
+        "solution.go.txt": "60b04b86afb5675a828fb0bb05b6a570fdfd4a1727cac36cb3d28b744d814f81"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "retry-delay",
+      "repetition": 3,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 54876,
+      "grade_wall_ms": 234,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 6,
+        "tool_errors": 0,
+        "generated_tokens": 430,
+        "input_tokens": 616,
+        "cache_read_tokens": 9324,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "4d82f9d6c0210866fc924b428dc97dd78eb1114a9fc28e2a8f93ab7275f9dfe1",
+      "artifact_sha256": {
+        "events.jsonl": "e70f840862504c987941be5cfb9b5d4dae0cb8208c244c097cbcf8e489e39d65",
+        "grade.jsonl": "4ae2d161cd60164d90f167da5d41f80fb3982f6e107e9fba978db44f29453497",
+        "result.json": "4e5c2f7d5b7e04083d6310e7d5afbc851f5357af5a669945c9e8f3330ba57693",
+        "solution.go.txt": "4d82f9d6c0210866fc924b428dc97dd78eb1114a9fc28e2a8f93ab7275f9dfe1"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "retry-delay",
+      "repetition": 3,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": false,
+      "agent_wall_ms": 299558,
+      "grade_wall_ms": 196,
+      "grade": {
+        "passed": false,
+        "status": "failed"
+      },
+      "metrics": {
+        "assistant_messages": 18,
+        "tool_calls": 20,
+        "tool_errors": 3,
+        "generated_tokens": 2784,
+        "input_tokens": 3174,
+        "cache_read_tokens": 61170,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "5770335a6c050efa6b9aca3fcba76eba3b92cf2c8dd3c42c108686e91819d8e0",
+      "artifact_sha256": {
+        "events.jsonl": "e08560436033c38e4b6b76fa0889aa041630c49a03e260353058011b520fd742",
+        "grade.jsonl": "a564332ebd664b1f65a75429035dab75bcd02807a4d6165ab0a7147e49806f4c",
+        "result.json": "14a964c59024aba9c1250b173807c6d6530b5098b5a8743985539d2edba24832",
+        "solution.go.txt": "5770335a6c050efa6b9aca3fcba76eba3b92cf2c8dd3c42c108686e91819d8e0"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "csv-record",
+      "repetition": 3,
+      "condition": "base",
+      "model": "qwen-base",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 58984,
+      "grade_wall_ms": 126,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 5,
+        "tool_calls": 5,
+        "tool_errors": 0,
+        "generated_tokens": 457,
+        "input_tokens": 501,
+        "cache_read_tokens": 9006,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "b3427b2a9eaa4f6ab1fec0dbc051bbb5e7bd2c3f59158c449d8da7aa9ce1417b",
+      "artifact_sha256": {
+        "events.jsonl": "216d76278cf6cab81c193c5d73578a4fcc4e1015cd4713da71c726a6091f6625",
+        "grade.jsonl": "602389f318b6bbdb1e985f526b2018b38f5ac53acd0c7f600fd3b52f954a97b1",
+        "result.json": "6375ec0a6a0d6fe9cef09661012cadcf9c97e658714ed7e0f2a51e9973d38c2a",
+        "solution.go.txt": "b3427b2a9eaa4f6ab1fec0dbc051bbb5e7bd2c3f59158c449d8da7aa9ce1417b"
+      },
+      "segment": "real-gguf-03"
+    },
+    {
+      "task": "csv-record",
+      "repetition": 3,
+      "condition": "adapter",
+      "model": "qwen-pi",
+      "status": "completed",
+      "scorable": true,
+      "passed": true,
+      "agent_wall_ms": 51238,
+      "grade_wall_ms": 127,
+      "grade": {
+        "passed": true,
+        "status": "passed"
+      },
+      "metrics": {
+        "assistant_messages": 4,
+        "tool_calls": 4,
+        "tool_errors": 0,
+        "generated_tokens": 266,
+        "input_tokens": 1736,
+        "cache_read_tokens": 5342,
+        "cache_write_tokens": 0
+      },
+      "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+      "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+      "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7",
+      "artifact_sha256": {
+        "events.jsonl": "18e60a6e5b8068c74329a39aca18d7dfebe154e874c608331ba394d0b74ba1cb",
+        "grade.jsonl": "448d205c07f3ad6f8f3d5c4d416c8ce5e276129aefb096eb6978f045072931a5",
+        "result.json": "244988a87137619f092aa5a6831de3f7daa12bb23bb24148245319ee44e7ac12",
+        "solution.go.txt": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      },
+      "segment": "real-gguf-03"
+    }
+  ],
+  "interruption": {
+    "reason": "Initial output was on tmpfs, which docker cp could not export. Four completed trials were archived with their original source hashes. A CSV-base trial was actively cancelled and excluded; remaining CSV pair ran with persistent output storage.",
+    "additional_cancelled_unscorable_attempts": 1,
+    "resume_only_pairs": [
+      "csv-record:base",
+      "csv-record:adapter"
+    ],
+    "scope": "Initial repetition storage recovery only; repetitions 2 and 3 are deliberate additional samples.",
+    "original_scored_trials_retained_unchanged": true
+  },
+  "limitations": [
+    "Tiny public task set; three scored samples per task per condition, not nine different tasks.",
+    "Temperature 0.8; sampling seed not controlled.",
+    "Pi runtime context includes temporary directory paths.",
+    "Server GPU, host caches and compilation caches were not reset between trials; model service restarted for the continuation batch.",
+    "Efficiency statistics use only same-task, same-repetition pairs that both passed and completed; see summary pair counts.",
+    "All 18 planned scored outcomes retained; one earlier actively cancelled pre-score attempt remains separately disclosed.",
+    "Full raw trajectories remain in ignored results directories; this file is curated measurements and artifact hashes."
+  ],
+  "summary": {
+    "conditions": {
+      "adapter": {
+        "attempts": 9,
+        "scorable": 9,
+        "passed": 9,
+        "unscorable": 0
+      },
+      "base": {
+        "attempts": 9,
+        "scorable": 9,
+        "passed": 4,
+        "unscorable": 0
+      }
+    },
+    "both_passed_pairs": 4,
+    "both_passed_and_completed_pairs": 4,
+    "pairs_with_complete_usage": 4,
+    "median_tool_calls_on_complete_pairs": {
+      "adapter": 4.5,
+      "base": 6.5
+    },
+    "median_agent_ms_on_complete_pairs": {
+      "adapter": 66320.5,
+      "base": 70125.5
+    },
+    "median_generated_tokens_on_usage_pairs": {
+      "adapter": 489.5,
+      "base": 617.5
+    }
+  },
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 1,
+    "thinking": false,
+    "max_output_tokens_per_call": 4096,
+    "context_window": 16384,
+    "wall_limit_seconds_per_attempt": 300,
+    "pi_version": "1.5.2",
+    "node_version": "22.19.0",
+    "go_version": "1.27.2",
+    "agent_and_grader_os": "linux/arm64",
+    "container_cpus": 2,
+    "container_memory_bytes": 2147483648,
+    "tools": [
+      "read",
+      "bash",
+      "edit",
+      "write"
+    ],
+    "automatic_retry": false,
+    "automatic_compaction": false,
+    "sampling_seed_controlled": false
+  },
+  "backend_default_sampling": {
+    "top_k": 20,
+    "min_p": 0.05000000074505806,
+    "repeat_penalty": 1.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0
+  },
+  "continuation": {
+    "plan": {
+      "planned_at": "2026-11-22T07:30:51.338376+00:00",
+      "purpose": "Append two complete repetitions without replacing previous scored trials",
+      "previous_repetitions": [
+        1
+      ],
+      "new_repetitions": [
+        2,
+        3
+      ],
+      "new_scored_trials": 12,
+      "total_planned_scored_trials": 18,
+      "selection": "all three tasks, both conditions, all outcomes retained",
+      "same_task_prompt_sampling_and_budget": true,
+      "random_seed_controlled": false,
+      "timeout_seconds": 300,
+      "server_restarted": true,
+      "weight_checks": "continued-weight-checks.json",
+      "output_directory": "real-gguf-03"
+    },
+    "previous_evidence_sha256": "cab1e1664293e798ce848f63b7b4b3e0d8998b2a7e49c99719e94faf69052e81",
+    "previous_scored_trials_unchanged": true,
+    "new_trials": 12,
+    "total_trials": 18,
+    "new_image_id": "sha256:ee706bfc41a58fa6c0186e688f2e408121903f085543d9fac14f493cde3ea6bd",
+    "server_restarted_between_repetitions_1_and_2": true,
+    "same_pi_models_config": true,
+    "same_task_and_prompt_hashes_checked_by_summarizer": true,
+    "old_and_new_backend_defaults_match": true,
+    "sampling_complete_at": "2026-11-22T07:56:13.854196+00:00",
+    "weight_checks": {
+      "Qwen3.8-27B-Q4_K_M.gguf": {
+        "sha256": "d15d4b6de55f662ac40e867702d31afe738d032fa06b829b2b1a21a49d4a48ee",
+        "verified": true
+      },
+      "Qwen3.8-27B-pi-lora-F16.gguf": {
+        "sha256": "a64f91844f19e67da500d8628bdf9383aa334e61b7ab687805802e7d272d7b67",
+        "verified": true
+      }
+    },
+    "metadata_sha256": {
+      "real-gguf-01": "6b5d3c0cf6a4b45c360e209cd1c151be4540382edcf2228aac3150e897281f3f",
+      "real-gguf-02": "2c12f7cdd3a795f0f8cfdf54606598c18bfae30fe08bc3c554acdf101caf5556",
+      "real-gguf-03": "39725eb3d1308d959a20204ba5521ec31953fe6f74fc9f330c1ff4e56a923df5"
+    },
+    "trial_container_removed_after_verified_export": true,
+    "persistent_results_volume_retained": true
+  }
+}

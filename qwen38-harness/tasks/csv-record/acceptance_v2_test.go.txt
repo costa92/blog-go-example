@@ -1,0 +1,53 @@
+package exercise
+
+import (
+	"bytes"
+	"encoding/csv"
+	"strings"
+	"testing"
+)
+
+func checkCSVV2(t *testing.T, fields []string) {
+	t.Helper()
+	var buf bytes.Buffer
+	w := csv.NewWriter(&buf)
+	if err := w.Write(fields); err != nil {
+		t.Fatal(err)
+	}
+	w.Flush()
+	if err := w.Error(); err != nil {
+		t.Fatal(err)
+	}
+	got, err := EncodeRecord(fields)
+	if err != nil || got != buf.String() {
+		t.Fatalf("fields=%q: got %q, %v; want %q", fields, got, err, buf.String())
+	}
+}
+func TestAcceptanceV2(t *testing.T) {
+	t.Run("nil", func(t *testing.T) { checkCSVV2(t, nil) })
+	t.Run("empty", func(t *testing.T) { checkCSVV2(t, []string{}) })
+	t.Run("single_empty", func(t *testing.T) { checkCSVV2(t, []string{""}) })
+	t.Run("simple", func(t *testing.T) { checkCSVV2(t, []string{"a", "b"}) })
+	t.Run("comma", func(t *testing.T) { checkCSVV2(t, []string{"a,b", "c"}) })
+	t.Run("quote", func(t *testing.T) { checkCSVV2(t, []string{"a\"b", "c"}) })
+	t.Run("lf", func(t *testing.T) { checkCSVV2(t, []string{"a\nb", "c"}) })
+	t.Run("leading_space", func(t *testing.T) { checkCSVV2(t, []string{" a", ""}) })
+	t.Run("unicode", func(t *testing.T) { checkCSVV2(t, []string{"中文", "x,y"}) })
+	t.Run("cr", func(t *testing.T) { checkCSVV2(t, []string{"a\rb"}) })
+	t.Run("crlf", func(t *testing.T) { checkCSVV2(t, []string{"a\r\nb"}) })
+	t.Run("multiple_empty", func(t *testing.T) { checkCSVV2(t, []string{"", "", ""}) })
+	t.Run("only_comma", func(t *testing.T) { checkCSVV2(t, []string{","}) })
+	t.Run("only_quote", func(t *testing.T) { checkCSVV2(t, []string{"\""}) })
+	t.Run("only_lf", func(t *testing.T) { checkCSVV2(t, []string{"\n"}) })
+	t.Run("only_cr", func(t *testing.T) { checkCSVV2(t, []string{"\r"}) })
+	t.Run("leading_tab", func(t *testing.T) { checkCSVV2(t, []string{"\ta"}) })
+	t.Run("leading_nbsp", func(t *testing.T) { checkCSVV2(t, []string{"\u00a0a"}) })
+	t.Run("trailing_space", func(t *testing.T) { checkCSVV2(t, []string{"a "}) })
+	t.Run("backslash", func(t *testing.T) { checkCSVV2(t, []string{"a\\b"}) })
+	t.Run("bom", func(t *testing.T) { checkCSVV2(t, []string{"\ufeffa"}) })
+	t.Run("nul", func(t *testing.T) { checkCSVV2(t, []string{"a\x00b"}) })
+	t.Run("postgres_end_marker", func(t *testing.T) { checkCSVV2(t, []string{"\\."}) })
+	t.Run("long_field", func(t *testing.T) { checkCSVV2(t, []string{strings.Repeat("a,\"b\n", 2048), "tail"}) })
+	t.Run("many_fields", func(t *testing.T) { checkCSVV2(t, strings.Split(strings.Repeat("x,", 255)+"last", ",")) })
+	t.Run("combined_escaping", func(t *testing.T) { checkCSVV2(t, []string{" \"a,b\n\r", "中文", ""}) })
+}

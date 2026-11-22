@@ -1,0 +1,4121 @@
+{
+  "date": "2026-11-22",
+  "kind": "post_hoc_offline_saved_answer_regrade",
+  "original_evidence": "real-gguf-2026-11-22-repeated.json",
+  "original_evidence_sha256": "4fa02de95923231ee0c1f122a7ad4e35b74ed0fa7bbbf4122cf9bd01d9250f79",
+  "original_results_modified": false,
+  "new_model_calls": 0,
+  "metadata": {
+    "arch": "arm64",
+    "case_denominator": "all predefined cases, including not_run after build failure or interruption; see separate not_run count",
+    "go_version": "go version go1.27.2 linux/arm64",
+    "limitations": "Post-hoc finite coverage audit on three public tasks; not a blinded benchmark. A passed suite is not proof of full correctness.",
+    "new_model_calls": 0,
+    "original_results_modified": false,
+    "os": "linux",
+    "post_hoc": true,
+    "source_artifacts_verified": true,
+    "source_evidence_sha256": "4fa02de95923231ee0c1f122a7ad4e35b74ed0fa7bbbf4122cf9bd01d9250f79",
+    "started_at": "2026-11-22T08:06:03Z",
+    "suites": {
+      "bytesize": {
+        "case_names": [
+          "zero",
+          "plain",
+          "bytes_attached",
+          "kib_spaces",
+          "mib_attached",
+          "gib_tab",
+          "leading_zeroes",
+          "uint64_max",
+          "bytes_spaced",
+          "bytes_tab",
+          "mixed_separator",
+          "outer_crlf",
+          "outer_vertical_tab",
+          "outer_form_feed",
+          "outer_nbsp",
+          "outer_em_space",
+          "zero_kib",
+          "one_mib",
+          "one_gib",
+          "max_bytes_unit",
+          "kib_max_product",
+          "mib_max_product",
+          "gib_max_product",
+          "empty",
+          "spaces",
+          "minus",
+          "plus",
+          "fraction",
+          "decimal_unit",
+          "lowercase",
+          "unit_only",
+          "internal_lf",
+          "uint64_overflow",
+          "kib_overflow",
+          "mib_overflow",
+          "gib_overflow",
+          "prefix_letters",
+          "prefix_punctuation",
+          "prefix_unit",
+          "negative_unit",
+          "plus_unit",
+          "hex",
+          "exponent",
+          "underscore",
+          "arabic_digits",
+          "fullwidth_digits",
+          "double_unit",
+          "wrong_case",
+          "internal_cr",
+          "internal_vertical_tab",
+          "internal_form_feed",
+          "internal_nbsp",
+          "split_digits",
+          "split_unit",
+          "trailing_junk",
+          "missing_digits",
+          "fraction_no_unit",
+          "newline_inside_digits"
+        ],
+        "expected_cases": 58,
+        "task_prompt_sha256": "d2e45cd3680560da40fdc33b11d50c130ec7ed0822a2499deea089595581c726",
+        "test_sha256": "7d24dc2c3a49c3e0e2595fb9b00b64b046a72a9583d592106265bae5f2dafb12"
+      },
+      "csv-record": {
+        "case_names": [
+          "nil",
+          "empty",
+          "single_empty",
+          "simple",
+          "comma",
+          "quote",
+          "lf",
+          "leading_space",
+          "unicode",
+          "cr",
+          "crlf",
+          "multiple_empty",
+          "only_comma",
+          "only_quote",
+          "only_lf",
+          "only_cr",
+          "leading_tab",
+          "leading_nbsp",
+          "trailing_space",
+          "backslash",
+          "bom",
+          "nul",
+          "postgres_end_marker",
+          "long_field",
+          "many_fields",
+          "combined_escaping"
+        ],
+        "expected_cases": 26,
+        "task_prompt_sha256": "f79c2f8a0b7265dd2b3bd4a8d46aec7e19cc8f2aec45f5b61f51bea39b688aab",
+        "test_sha256": "1224b215b6455c46c8913c898bc7f53d6dbc8cf5a058698346d1db5eeceea89b"
+      },
+      "retry-delay": {
+        "case_names": [
+          "first",
+          "second",
+          "cap",
+          "base_exceeds",
+          "zero_attempt",
+          "negative_attempt",
+          "zero_base",
+          "zero_limit",
+          "negative_base",
+          "negative_limit",
+          "signed_overflow",
+          "max_attempt",
+          "exact_cap",
+          "odd_cap_below",
+          "odd_cap_above",
+          "base_equal_cap",
+          "base_above_cap_later",
+          "one_ns_cap",
+          "largest_first",
+          "largest_doubled",
+          "near_signed_threshold_safe",
+          "near_signed_threshold_overflow",
+          "positive_wrap_4",
+          "positive_wrap_8",
+          "positive_wrap_shift3",
+          "positive_wrap_shift4",
+          "positive_wrap_small_cap",
+          "zero_wrap",
+          "last_positive_bit",
+          "first_signed_bit",
+          "shift_64",
+          "shift_128",
+          "large_attempt_small_cap",
+          "odd_base_exact",
+          "odd_base_capped",
+          "duration_min",
+          "negative_limit_min",
+          "attempt_min",
+          "small_base_shift62",
+          "seconds"
+        ],
+        "expected_cases": 40,
+        "task_prompt_sha256": "0ab646b638fcb3dab5661e7044e1dcc0e6c7c66a90d3126639eb7a9436c816eb",
+        "test_sha256": "57ce6c25bb8eb5f81d3fac4fa0effe81293b349aaeacf9ae59dd91b710ae072a"
+      }
+    },
+    "version": "acceptance-v2-post-hoc"
+  },
+  "execution": {
+    "image_id": "sha256:da470610349930376ec691b7bc5bc7ac06ef9eab04e2adeadb9d20047360d0d0",
+    "network": "none",
+    "read_only_root": true,
+    "cpus": 2,
+    "memory_bytes": 2147483648,
+    "unprivileged_uid": 10001,
+    "input_read_only": true,
+    "exit_code": 0
+  },
+  "summary": {
+    "conditions": {
+      "adapter": {
+        "attempts": 9,
+        "v1_passed": 9,
+        "v2_passed": 6,
+        "v2_unscorable": 0,
+        "expected_cases": 372,
+        "passed_cases": 359,
+        "failed_cases": 13,
+        "not_run_cases": 0
+      },
+      "base": {
+        "attempts": 9,
+        "v1_passed": 4,
+        "v2_passed": 3,
+        "v2_unscorable": 0,
+        "expected_cases": 372,
+        "passed_cases": 266,
+        "failed_cases": 48,
+        "not_run_cases": 58
+      }
+    },
+    "by_task": {
+      "bytesize": {
+        "adapter": {
+          "attempts": 3,
+          "v1_passed": 3,
+          "v2_passed": 1,
+          "v2_unscorable": 0,
+          "expected_cases": 174,
+          "passed_cases": 166,
+          "failed_cases": 8,
+          "not_run_cases": 0
+        },
+        "base": {
+          "attempts": 3,
+          "v1_passed": 1,
+          "v2_passed": 0,
+          "v2_unscorable": 0,
+          "expected_cases": 174,
+          "passed_cases": 94,
+          "failed_cases": 22,
+          "not_run_cases": 58
+        }
+      },
+      "csv-record": {
+        "adapter": {
+          "attempts": 3,
+          "v1_passed": 3,
+          "v2_passed": 3,
+          "v2_unscorable": 0,
+          "expected_cases": 78,
+          "passed_cases": 78,
+          "failed_cases": 0,
+          "not_run_cases": 0
+        },
+        "base": {
+          "attempts": 3,
+          "v1_passed": 3,
+          "v2_passed": 3,
+          "v2_unscorable": 0,
+          "expected_cases": 78,
+          "passed_cases": 78,
+          "failed_cases": 0,
+          "not_run_cases": 0
+        }
+      },
+      "retry-delay": {
+        "adapter": {
+          "attempts": 3,
+          "v1_passed": 3,
+          "v2_passed": 2,
+          "v2_unscorable": 0,
+          "expected_cases": 120,
+          "passed_cases": 115,
+          "failed_cases": 5,
+          "not_run_cases": 0
+        },
+        "base": {
+          "attempts": 3,
+          "v1_passed": 0,
+          "v2_passed": 0,
+          "v2_unscorable": 0,
+          "expected_cases": 120,
+          "passed_cases": 94,
+          "failed_cases": 26,
+          "not_run_cases": 0
+        }
+      }
+    },
+    "v2_success_pair_efficiency": {
+      "conditions": {
+        "adapter": {
+          "attempts": 9,
+          "scorable": 9,
+          "passed": 6,
+          "unscorable": 0
+        },
+        "base": {
+          "attempts": 9,
+          "scorable": 9,
+          "passed": 3,
+          "unscorable": 0
+        }
+      },
+      "both_passed_pairs": 3,
+      "both_passed_and_completed_pairs": 3,
+      "pairs_with_complete_usage": 3,
+      "median_tool_calls_on_complete_pairs": {
+        "adapter": 4,
+        "base": 6
+      },
+      "median_agent_ms_on_complete_pairs": {
+        "adapter": 62700,
+        "base": 58984
+      },
+      "median_generated_tokens_on_usage_pairs": {
+        "adapter": 430,
+        "base": 457
+      }
+    }
+  },
+  "trials": [
+    {
+      "original": {
+        "task": "bytesize",
+        "repetition": 1,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "timeout",
+        "scorable": true,
+        "passed": false,
+        "agent_wall_ms": 300038,
+        "grade_wall_ms": 77,
+        "grade": {
+          "passed": false,
+          "status": "failed"
+        },
+        "metrics": {
+          "assistant_messages": 15,
+          "tool_calls": 17,
+          "tool_errors": 0,
+          "generated_tokens": null,
+          "input_tokens": null,
+          "cache_read_tokens": null,
+          "cache_write_tokens": null
+        },
+        "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "5fe3b871d468183b2af77d9b2cfb4596d020a14ccc17dcb6823bba458d53bdba"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "build_failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 58,
+        "passed_cases": 0,
+        "failed_cases": 0,
+        "not_run_cases": 58,
+        "cases": [
+          {
+            "name": "zero",
+            "status": "not_run"
+          },
+          {
+            "name": "plain",
+            "status": "not_run"
+          },
+          {
+            "name": "bytes_attached",
+            "status": "not_run"
+          },
+          {
+            "name": "kib_spaces",
+            "status": "not_run"
+          },
+          {
+            "name": "mib_attached",
+            "status": "not_run"
+          },
+          {
+            "name": "gib_tab",
+            "status": "not_run"
+          },
+          {
+            "name": "leading_zeroes",
+            "status": "not_run"
+          },
+          {
+            "name": "uint64_max",
+            "status": "not_run"
+          },
+          {
+            "name": "bytes_spaced",
+            "status": "not_run"
+          },
+          {
+            "name": "bytes_tab",
+            "status": "not_run"
+          },
+          {
+            "name": "mixed_separator",
+            "status": "not_run"
+          },
+          {
+            "name": "outer_crlf",
+            "status": "not_run"
+          },
+          {
+            "name": "outer_vertical_tab",
+            "status": "not_run"
+          },
+          {
+            "name": "outer_form_feed",
+            "status": "not_run"
+          },
+          {
+            "name": "outer_nbsp",
+            "status": "not_run"
+          },
+          {
+            "name": "outer_em_space",
+            "status": "not_run"
+          },
+          {
+            "name": "zero_kib",
+            "status": "not_run"
+          },
+          {
+            "name": "one_mib",
+            "status": "not_run"
+          },
+          {
+            "name": "one_gib",
+            "status": "not_run"
+          },
+          {
+            "name": "max_bytes_unit",
+            "status": "not_run"
+          },
+          {
+            "name": "kib_max_product",
+            "status": "not_run"
+          },
+          {
+            "name": "mib_max_product",
+            "status": "not_run"
+          },
+          {
+            "name": "gib_max_product",
+            "status": "not_run"
+          },
+          {
+            "name": "empty",
+            "status": "not_run"
+          },
+          {
+            "name": "spaces",
+            "status": "not_run"
+          },
+          {
+            "name": "minus",
+            "status": "not_run"
+          },
+          {
+            "name": "plus",
+            "status": "not_run"
+          },
+          {
+            "name": "fraction",
+            "status": "not_run"
+          },
+          {
+            "name": "decimal_unit",
+            "status": "not_run"
+          },
+          {
+            "name": "lowercase",
+            "status": "not_run"
+          },
+          {
+            "name": "unit_only",
+            "status": "not_run"
+          },
+          {
+            "name": "internal_lf",
+            "status": "not_run"
+          },
+          {
+            "name": "uint64_overflow",
+            "status": "not_run"
+          },
+          {
+            "name": "kib_overflow",
+            "status": "not_run"
+          },
+          {
+            "name": "mib_overflow",
+            "status": "not_run"
+          },
+          {
+            "name": "gib_overflow",
+            "status": "not_run"
+          },
+          {
+            "name": "prefix_letters",
+            "status": "not_run"
+          },
+          {
+            "name": "prefix_punctuation",
+            "status": "not_run"
+          },
+          {
+            "name": "prefix_unit",
+            "status": "not_run"
+          },
+          {
+            "name": "negative_unit",
+            "status": "not_run"
+          },
+          {
+            "name": "plus_unit",
+            "status": "not_run"
+          },
+          {
+            "name": "hex",
+            "status": "not_run"
+          },
+          {
+            "name": "exponent",
+            "status": "not_run"
+          },
+          {
+            "name": "underscore",
+            "status": "not_run"
+          },
+          {
+            "name": "arabic_digits",
+            "status": "not_run"
+          },
+          {
+            "name": "fullwidth_digits",
+            "status": "not_run"
+          },
+          {
+            "name": "double_unit",
+            "status": "not_run"
+          },
+          {
+            "name": "wrong_case",
+            "status": "not_run"
+          },
+          {
+            "name": "internal_cr",
+            "status": "not_run"
+          },
+          {
+            "name": "internal_vertical_tab",
+            "status": "not_run"
+          },
+          {
+            "name": "internal_form_feed",
+            "status": "not_run"
+          },
+          {
+            "name": "internal_nbsp",
+            "status": "not_run"
+          },
+          {
+            "name": "split_digits",
+            "status": "not_run"
+          },
+          {
+            "name": "split_unit",
+            "status": "not_run"
+          },
+          {
+            "name": "trailing_junk",
+            "status": "not_run"
+          },
+          {
+            "name": "missing_digits",
+            "status": "not_run"
+          },
+          {
+            "name": "fraction_no_unit",
+            "status": "not_run"
+          },
+          {
+            "name": "newline_inside_digits",
+            "status": "not_run"
+          }
+        ]
+      },
+      "regrade_wall_ms": 35,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "bce1f94f05e397c4e5c79cde88b76dfed9c90199971d2e83508ccf39750436fc",
+        "result-v2.json": "7a785a64e2ee62c5c26bd6be8caba776d61551abc71d0a10a9f6a0a6a63fc8da"
+      }
+    },
+    {
+      "original": {
+        "task": "bytesize",
+        "repetition": 1,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 168857,
+        "grade_wall_ms": 250,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 7,
+          "tool_calls": 9,
+          "tool_errors": 0,
+          "generated_tokens": 1247,
+          "input_tokens": 2658,
+          "cache_read_tokens": 16209,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "b2bb7c96ed8c051be6a5aac0ad726bad8d062ef4c735af025e4f1774902cdd4b"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 58,
+        "passed_cases": 54,
+        "failed_cases": 4,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "zero",
+            "status": "passed"
+          },
+          {
+            "name": "plain",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_attached",
+            "status": "passed"
+          },
+          {
+            "name": "kib_spaces",
+            "status": "passed"
+          },
+          {
+            "name": "mib_attached",
+            "status": "passed"
+          },
+          {
+            "name": "gib_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_zeroes",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_max",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_spaced",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_tab",
+            "status": "passed"
+          },
+          {
+            "name": "mixed_separator",
+            "status": "passed"
+          },
+          {
+            "name": "outer_crlf",
+            "status": "passed"
+          },
+          {
+            "name": "outer_vertical_tab",
+            "status": "failed"
+          },
+          {
+            "name": "outer_form_feed",
+            "status": "failed"
+          },
+          {
+            "name": "outer_nbsp",
+            "status": "failed"
+          },
+          {
+            "name": "outer_em_space",
+            "status": "failed"
+          },
+          {
+            "name": "zero_kib",
+            "status": "passed"
+          },
+          {
+            "name": "one_mib",
+            "status": "passed"
+          },
+          {
+            "name": "one_gib",
+            "status": "passed"
+          },
+          {
+            "name": "max_bytes_unit",
+            "status": "passed"
+          },
+          {
+            "name": "kib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "mib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "gib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "spaces",
+            "status": "passed"
+          },
+          {
+            "name": "minus",
+            "status": "passed"
+          },
+          {
+            "name": "plus",
+            "status": "passed"
+          },
+          {
+            "name": "fraction",
+            "status": "passed"
+          },
+          {
+            "name": "decimal_unit",
+            "status": "passed"
+          },
+          {
+            "name": "lowercase",
+            "status": "passed"
+          },
+          {
+            "name": "unit_only",
+            "status": "passed"
+          },
+          {
+            "name": "internal_lf",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "kib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "mib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "gib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_letters",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_punctuation",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_unit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_unit",
+            "status": "passed"
+          },
+          {
+            "name": "plus_unit",
+            "status": "passed"
+          },
+          {
+            "name": "hex",
+            "status": "passed"
+          },
+          {
+            "name": "exponent",
+            "status": "passed"
+          },
+          {
+            "name": "underscore",
+            "status": "passed"
+          },
+          {
+            "name": "arabic_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fullwidth_digits",
+            "status": "passed"
+          },
+          {
+            "name": "double_unit",
+            "status": "passed"
+          },
+          {
+            "name": "wrong_case",
+            "status": "passed"
+          },
+          {
+            "name": "internal_cr",
+            "status": "passed"
+          },
+          {
+            "name": "internal_vertical_tab",
+            "status": "passed"
+          },
+          {
+            "name": "internal_form_feed",
+            "status": "passed"
+          },
+          {
+            "name": "internal_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "split_digits",
+            "status": "passed"
+          },
+          {
+            "name": "split_unit",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_junk",
+            "status": "passed"
+          },
+          {
+            "name": "missing_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fraction_no_unit",
+            "status": "passed"
+          },
+          {
+            "name": "newline_inside_digits",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 112,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "947b33145ac0dcd0e976555f01597e2f3847038de62b6646c3496b7546bf91a1",
+        "result-v2.json": "2fa53a215e19eae08b5e65bae14093870722ea3bdd02d755903f3208156d9327"
+      }
+    },
+    {
+      "original": {
+        "task": "retry-delay",
+        "repetition": 1,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 83361,
+        "grade_wall_ms": 146,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 5,
+          "tool_calls": 6,
+          "tool_errors": 0,
+          "generated_tokens": 707,
+          "input_tokens": 494,
+          "cache_read_tokens": 9336,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "d3a480618c8697feab7d34ca68b7d6427caa081050357f60bcd3b2532398c34f"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 40,
+        "passed_cases": 35,
+        "failed_cases": 5,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "first",
+            "status": "passed"
+          },
+          {
+            "name": "second",
+            "status": "passed"
+          },
+          {
+            "name": "cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_exceeds",
+            "status": "passed"
+          },
+          {
+            "name": "zero_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "negative_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "zero_base",
+            "status": "passed"
+          },
+          {
+            "name": "zero_limit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_base",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit",
+            "status": "passed"
+          },
+          {
+            "name": "signed_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "max_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "exact_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_below",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_above",
+            "status": "passed"
+          },
+          {
+            "name": "base_equal_cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_above_cap_later",
+            "status": "passed"
+          },
+          {
+            "name": "one_ns_cap",
+            "status": "passed"
+          },
+          {
+            "name": "largest_first",
+            "status": "passed"
+          },
+          {
+            "name": "largest_doubled",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_safe",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_4",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_8",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_shift3",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_shift4",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_small_cap",
+            "status": "failed"
+          },
+          {
+            "name": "zero_wrap",
+            "status": "passed"
+          },
+          {
+            "name": "last_positive_bit",
+            "status": "passed"
+          },
+          {
+            "name": "first_signed_bit",
+            "status": "passed"
+          },
+          {
+            "name": "shift_64",
+            "status": "passed"
+          },
+          {
+            "name": "shift_128",
+            "status": "passed"
+          },
+          {
+            "name": "large_attempt_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_exact",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_capped",
+            "status": "passed"
+          },
+          {
+            "name": "duration_min",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit_min",
+            "status": "passed"
+          },
+          {
+            "name": "attempt_min",
+            "status": "passed"
+          },
+          {
+            "name": "small_base_shift62",
+            "status": "passed"
+          },
+          {
+            "name": "seconds",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 102,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "18b000568952f633b22a7970bd2bdd06bebf78f7f976bdf2a8aa97882569c92c",
+        "result-v2.json": "91d6e91158c5709cad79ac87aa2de67859aeb174805dcee7262612c4dc1035c6"
+      }
+    },
+    {
+      "original": {
+        "task": "retry-delay",
+        "repetition": 1,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "completed",
+        "scorable": true,
+        "passed": false,
+        "agent_wall_ms": 113171,
+        "grade_wall_ms": 218,
+        "grade": {
+          "passed": false,
+          "status": "failed"
+        },
+        "metrics": {
+          "assistant_messages": 7,
+          "tool_calls": 7,
+          "tool_errors": 0,
+          "generated_tokens": 987,
+          "input_tokens": 1896,
+          "cache_read_tokens": 13029,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "951c62b6cb5afaff77dc208b1e9d7dd9908902d556da7a998204349dc0a6316e"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 40,
+        "passed_cases": 29,
+        "failed_cases": 11,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "first",
+            "status": "passed"
+          },
+          {
+            "name": "second",
+            "status": "failed"
+          },
+          {
+            "name": "cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_exceeds",
+            "status": "passed"
+          },
+          {
+            "name": "zero_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "negative_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "zero_base",
+            "status": "passed"
+          },
+          {
+            "name": "zero_limit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_base",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit",
+            "status": "passed"
+          },
+          {
+            "name": "signed_overflow",
+            "status": "failed"
+          },
+          {
+            "name": "max_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "exact_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_below",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_above",
+            "status": "passed"
+          },
+          {
+            "name": "base_equal_cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_above_cap_later",
+            "status": "passed"
+          },
+          {
+            "name": "one_ns_cap",
+            "status": "passed"
+          },
+          {
+            "name": "largest_first",
+            "status": "passed"
+          },
+          {
+            "name": "largest_doubled",
+            "status": "failed"
+          },
+          {
+            "name": "near_signed_threshold_safe",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_overflow",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_4",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_8",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_shift3",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_shift4",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_small_cap",
+            "status": "failed"
+          },
+          {
+            "name": "zero_wrap",
+            "status": "failed"
+          },
+          {
+            "name": "last_positive_bit",
+            "status": "failed"
+          },
+          {
+            "name": "first_signed_bit",
+            "status": "passed"
+          },
+          {
+            "name": "shift_64",
+            "status": "passed"
+          },
+          {
+            "name": "shift_128",
+            "status": "passed"
+          },
+          {
+            "name": "large_attempt_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_exact",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_capped",
+            "status": "passed"
+          },
+          {
+            "name": "duration_min",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit_min",
+            "status": "passed"
+          },
+          {
+            "name": "attempt_min",
+            "status": "passed"
+          },
+          {
+            "name": "small_base_shift62",
+            "status": "passed"
+          },
+          {
+            "name": "seconds",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 108,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "b113d3980a2bb9d9b418823aaec1827ab05c27570d1c462fd48637ca1e1b9bcc",
+        "result-v2.json": "b9f2461859a009be0188a88a4e7b8b5890a74458d8f461cced934c6d11d7b405"
+      }
+    },
+    {
+      "original": {
+        "task": "csv-record",
+        "repetition": 1,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 81267,
+        "grade_wall_ms": 189,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 7,
+          "tool_calls": 7,
+          "tool_errors": 1,
+          "generated_tokens": 778,
+          "input_tokens": 689,
+          "cache_read_tokens": 13912,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 26,
+        "passed_cases": 26,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "nil",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "single_empty",
+            "status": "passed"
+          },
+          {
+            "name": "simple",
+            "status": "passed"
+          },
+          {
+            "name": "comma",
+            "status": "passed"
+          },
+          {
+            "name": "quote",
+            "status": "passed"
+          },
+          {
+            "name": "lf",
+            "status": "passed"
+          },
+          {
+            "name": "leading_space",
+            "status": "passed"
+          },
+          {
+            "name": "unicode",
+            "status": "passed"
+          },
+          {
+            "name": "cr",
+            "status": "passed"
+          },
+          {
+            "name": "crlf",
+            "status": "passed"
+          },
+          {
+            "name": "multiple_empty",
+            "status": "passed"
+          },
+          {
+            "name": "only_comma",
+            "status": "passed"
+          },
+          {
+            "name": "only_quote",
+            "status": "passed"
+          },
+          {
+            "name": "only_lf",
+            "status": "passed"
+          },
+          {
+            "name": "only_cr",
+            "status": "passed"
+          },
+          {
+            "name": "leading_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_space",
+            "status": "passed"
+          },
+          {
+            "name": "backslash",
+            "status": "passed"
+          },
+          {
+            "name": "bom",
+            "status": "passed"
+          },
+          {
+            "name": "nul",
+            "status": "passed"
+          },
+          {
+            "name": "postgres_end_marker",
+            "status": "passed"
+          },
+          {
+            "name": "long_field",
+            "status": "passed"
+          },
+          {
+            "name": "many_fields",
+            "status": "passed"
+          },
+          {
+            "name": "combined_escaping",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 106,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "cbda45307114fa3b11051d1c1edf12d530994e90b7bc12144f2708f1ccee46a7",
+        "result-v2.json": "cc246017cfa545c67438021d0d720ce96a72258f0bd225af860817f2a66185bf"
+      }
+    },
+    {
+      "original": {
+        "task": "csv-record",
+        "repetition": 1,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 69941,
+        "grade_wall_ms": 144,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 5,
+          "tool_calls": 5,
+          "tool_errors": 0,
+          "generated_tokens": 430,
+          "input_tokens": 1838,
+          "cache_read_tokens": 7526,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 26,
+        "passed_cases": 26,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "nil",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "single_empty",
+            "status": "passed"
+          },
+          {
+            "name": "simple",
+            "status": "passed"
+          },
+          {
+            "name": "comma",
+            "status": "passed"
+          },
+          {
+            "name": "quote",
+            "status": "passed"
+          },
+          {
+            "name": "lf",
+            "status": "passed"
+          },
+          {
+            "name": "leading_space",
+            "status": "passed"
+          },
+          {
+            "name": "unicode",
+            "status": "passed"
+          },
+          {
+            "name": "cr",
+            "status": "passed"
+          },
+          {
+            "name": "crlf",
+            "status": "passed"
+          },
+          {
+            "name": "multiple_empty",
+            "status": "passed"
+          },
+          {
+            "name": "only_comma",
+            "status": "passed"
+          },
+          {
+            "name": "only_quote",
+            "status": "passed"
+          },
+          {
+            "name": "only_lf",
+            "status": "passed"
+          },
+          {
+            "name": "only_cr",
+            "status": "passed"
+          },
+          {
+            "name": "leading_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_space",
+            "status": "passed"
+          },
+          {
+            "name": "backslash",
+            "status": "passed"
+          },
+          {
+            "name": "bom",
+            "status": "passed"
+          },
+          {
+            "name": "nul",
+            "status": "passed"
+          },
+          {
+            "name": "postgres_end_marker",
+            "status": "passed"
+          },
+          {
+            "name": "long_field",
+            "status": "passed"
+          },
+          {
+            "name": "many_fields",
+            "status": "passed"
+          },
+          {
+            "name": "combined_escaping",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 109,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "933392516aaf0a7050675e6211b3e63307cb3dfbf183803590845b2c9443c73f",
+        "result-v2.json": "b5f201d194725c4e89e0fcbee96ed4dbcc95052fe34f2eb4c315dbfab6e7a8ad"
+      }
+    },
+    {
+      "original": {
+        "task": "bytesize",
+        "repetition": 2,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 279447,
+        "grade_wall_ms": 145,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 7,
+          "tool_calls": 8,
+          "tool_errors": 0,
+          "generated_tokens": 2486,
+          "input_tokens": 2065,
+          "cache_read_tokens": 18352,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "90804cf9965b767c5de0b44987cd4bb017f6b81be08b07dac8975076ba3d5e1a"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 58,
+        "passed_cases": 58,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "zero",
+            "status": "passed"
+          },
+          {
+            "name": "plain",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_attached",
+            "status": "passed"
+          },
+          {
+            "name": "kib_spaces",
+            "status": "passed"
+          },
+          {
+            "name": "mib_attached",
+            "status": "passed"
+          },
+          {
+            "name": "gib_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_zeroes",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_max",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_spaced",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_tab",
+            "status": "passed"
+          },
+          {
+            "name": "mixed_separator",
+            "status": "passed"
+          },
+          {
+            "name": "outer_crlf",
+            "status": "passed"
+          },
+          {
+            "name": "outer_vertical_tab",
+            "status": "passed"
+          },
+          {
+            "name": "outer_form_feed",
+            "status": "passed"
+          },
+          {
+            "name": "outer_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "outer_em_space",
+            "status": "passed"
+          },
+          {
+            "name": "zero_kib",
+            "status": "passed"
+          },
+          {
+            "name": "one_mib",
+            "status": "passed"
+          },
+          {
+            "name": "one_gib",
+            "status": "passed"
+          },
+          {
+            "name": "max_bytes_unit",
+            "status": "passed"
+          },
+          {
+            "name": "kib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "mib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "gib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "spaces",
+            "status": "passed"
+          },
+          {
+            "name": "minus",
+            "status": "passed"
+          },
+          {
+            "name": "plus",
+            "status": "passed"
+          },
+          {
+            "name": "fraction",
+            "status": "passed"
+          },
+          {
+            "name": "decimal_unit",
+            "status": "passed"
+          },
+          {
+            "name": "lowercase",
+            "status": "passed"
+          },
+          {
+            "name": "unit_only",
+            "status": "passed"
+          },
+          {
+            "name": "internal_lf",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "kib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "mib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "gib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_letters",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_punctuation",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_unit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_unit",
+            "status": "passed"
+          },
+          {
+            "name": "plus_unit",
+            "status": "passed"
+          },
+          {
+            "name": "hex",
+            "status": "passed"
+          },
+          {
+            "name": "exponent",
+            "status": "passed"
+          },
+          {
+            "name": "underscore",
+            "status": "passed"
+          },
+          {
+            "name": "arabic_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fullwidth_digits",
+            "status": "passed"
+          },
+          {
+            "name": "double_unit",
+            "status": "passed"
+          },
+          {
+            "name": "wrong_case",
+            "status": "passed"
+          },
+          {
+            "name": "internal_cr",
+            "status": "passed"
+          },
+          {
+            "name": "internal_vertical_tab",
+            "status": "passed"
+          },
+          {
+            "name": "internal_form_feed",
+            "status": "passed"
+          },
+          {
+            "name": "internal_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "split_digits",
+            "status": "passed"
+          },
+          {
+            "name": "split_unit",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_junk",
+            "status": "passed"
+          },
+          {
+            "name": "missing_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fraction_no_unit",
+            "status": "passed"
+          },
+          {
+            "name": "newline_inside_digits",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 113,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "9494c209e5621aec1f269a9296a3c4ef1d525fcc98fa6b1ab57d06e3d00dea63",
+        "result-v2.json": "2992ef385f7ca78f03a466cefc84b02814a205f83c8c309faf0d9a064c830ec5"
+      }
+    },
+    {
+      "original": {
+        "task": "bytesize",
+        "repetition": 2,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 244935,
+        "grade_wall_ms": 231,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 11,
+          "tool_calls": 13,
+          "tool_errors": 0,
+          "generated_tokens": 2283,
+          "input_tokens": 2780,
+          "cache_read_tokens": 31534,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "95187569a2ff054befc6c17a00c2f13f8d0e4c4b5431d958a690e5c29dc23219"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 58,
+        "passed_cases": 55,
+        "failed_cases": 3,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "zero",
+            "status": "passed"
+          },
+          {
+            "name": "plain",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_attached",
+            "status": "passed"
+          },
+          {
+            "name": "kib_spaces",
+            "status": "passed"
+          },
+          {
+            "name": "mib_attached",
+            "status": "passed"
+          },
+          {
+            "name": "gib_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_zeroes",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_max",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_spaced",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_tab",
+            "status": "passed"
+          },
+          {
+            "name": "mixed_separator",
+            "status": "passed"
+          },
+          {
+            "name": "outer_crlf",
+            "status": "passed"
+          },
+          {
+            "name": "outer_vertical_tab",
+            "status": "passed"
+          },
+          {
+            "name": "outer_form_feed",
+            "status": "passed"
+          },
+          {
+            "name": "outer_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "outer_em_space",
+            "status": "passed"
+          },
+          {
+            "name": "zero_kib",
+            "status": "passed"
+          },
+          {
+            "name": "one_mib",
+            "status": "passed"
+          },
+          {
+            "name": "one_gib",
+            "status": "passed"
+          },
+          {
+            "name": "max_bytes_unit",
+            "status": "passed"
+          },
+          {
+            "name": "kib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "mib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "gib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "spaces",
+            "status": "passed"
+          },
+          {
+            "name": "minus",
+            "status": "passed"
+          },
+          {
+            "name": "plus",
+            "status": "passed"
+          },
+          {
+            "name": "fraction",
+            "status": "passed"
+          },
+          {
+            "name": "decimal_unit",
+            "status": "passed"
+          },
+          {
+            "name": "lowercase",
+            "status": "passed"
+          },
+          {
+            "name": "unit_only",
+            "status": "passed"
+          },
+          {
+            "name": "internal_lf",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "kib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "mib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "gib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_letters",
+            "status": "failed"
+          },
+          {
+            "name": "prefix_punctuation",
+            "status": "failed"
+          },
+          {
+            "name": "prefix_unit",
+            "status": "failed"
+          },
+          {
+            "name": "negative_unit",
+            "status": "passed"
+          },
+          {
+            "name": "plus_unit",
+            "status": "passed"
+          },
+          {
+            "name": "hex",
+            "status": "passed"
+          },
+          {
+            "name": "exponent",
+            "status": "passed"
+          },
+          {
+            "name": "underscore",
+            "status": "passed"
+          },
+          {
+            "name": "arabic_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fullwidth_digits",
+            "status": "passed"
+          },
+          {
+            "name": "double_unit",
+            "status": "passed"
+          },
+          {
+            "name": "wrong_case",
+            "status": "passed"
+          },
+          {
+            "name": "internal_cr",
+            "status": "passed"
+          },
+          {
+            "name": "internal_vertical_tab",
+            "status": "passed"
+          },
+          {
+            "name": "internal_form_feed",
+            "status": "passed"
+          },
+          {
+            "name": "internal_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "split_digits",
+            "status": "passed"
+          },
+          {
+            "name": "split_unit",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_junk",
+            "status": "passed"
+          },
+          {
+            "name": "missing_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fraction_no_unit",
+            "status": "passed"
+          },
+          {
+            "name": "newline_inside_digits",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 112,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "bde0c3f451b5506bd7671951ec7bdf07ea9ceba8a5998317257ebeac581b1a75",
+        "result-v2.json": "0f1b0c9f33057c4290a761152ab581dabb4117de222b679ddf0a7ec978f37656"
+      }
+    },
+    {
+      "original": {
+        "task": "retry-delay",
+        "repetition": 2,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "completed",
+        "scorable": true,
+        "passed": false,
+        "agent_wall_ms": 67506,
+        "grade_wall_ms": 200,
+        "grade": {
+          "passed": false,
+          "status": "failed"
+        },
+        "metrics": {
+          "assistant_messages": 7,
+          "tool_calls": 7,
+          "tool_errors": 1,
+          "generated_tokens": 617,
+          "input_tokens": 589,
+          "cache_read_tokens": 13572,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "01646bf3f184a113cfe6a6b5914f9bff890117ae909d6cce395374b821d1fa1c"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 40,
+        "passed_cases": 30,
+        "failed_cases": 10,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "first",
+            "status": "passed"
+          },
+          {
+            "name": "second",
+            "status": "passed"
+          },
+          {
+            "name": "cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_exceeds",
+            "status": "passed"
+          },
+          {
+            "name": "zero_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "negative_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "zero_base",
+            "status": "passed"
+          },
+          {
+            "name": "zero_limit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_base",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit",
+            "status": "passed"
+          },
+          {
+            "name": "signed_overflow",
+            "status": "failed"
+          },
+          {
+            "name": "max_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "exact_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_below",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_above",
+            "status": "passed"
+          },
+          {
+            "name": "base_equal_cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_above_cap_later",
+            "status": "passed"
+          },
+          {
+            "name": "one_ns_cap",
+            "status": "passed"
+          },
+          {
+            "name": "largest_first",
+            "status": "passed"
+          },
+          {
+            "name": "largest_doubled",
+            "status": "failed"
+          },
+          {
+            "name": "near_signed_threshold_safe",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_overflow",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_4",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_8",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_shift3",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_shift4",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_small_cap",
+            "status": "failed"
+          },
+          {
+            "name": "zero_wrap",
+            "status": "failed"
+          },
+          {
+            "name": "last_positive_bit",
+            "status": "passed"
+          },
+          {
+            "name": "first_signed_bit",
+            "status": "passed"
+          },
+          {
+            "name": "shift_64",
+            "status": "passed"
+          },
+          {
+            "name": "shift_128",
+            "status": "passed"
+          },
+          {
+            "name": "large_attempt_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_exact",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_capped",
+            "status": "passed"
+          },
+          {
+            "name": "duration_min",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit_min",
+            "status": "passed"
+          },
+          {
+            "name": "attempt_min",
+            "status": "passed"
+          },
+          {
+            "name": "small_base_shift62",
+            "status": "failed"
+          },
+          {
+            "name": "seconds",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 106,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "47d0de3087211b3f5321235b34ce90ce98da657c11c6016d211bc61d12bb7273",
+        "result-v2.json": "08b8f7b7adc98aadfdc4854af3604212deb703911c21f2ba8f71972a2877c2d2"
+      }
+    },
+    {
+      "original": {
+        "task": "retry-delay",
+        "repetition": 2,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 85099,
+        "grade_wall_ms": 135,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 4,
+          "tool_calls": 4,
+          "tool_errors": 0,
+          "generated_tokens": 597,
+          "input_tokens": 1735,
+          "cache_read_tokens": 5872,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "bb4575266752767a61d878823f5681496bbeb5b3a0c7dd3af8e28b6fe2a0306b"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 40,
+        "passed_cases": 40,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "first",
+            "status": "passed"
+          },
+          {
+            "name": "second",
+            "status": "passed"
+          },
+          {
+            "name": "cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_exceeds",
+            "status": "passed"
+          },
+          {
+            "name": "zero_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "negative_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "zero_base",
+            "status": "passed"
+          },
+          {
+            "name": "zero_limit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_base",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit",
+            "status": "passed"
+          },
+          {
+            "name": "signed_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "max_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "exact_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_below",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_above",
+            "status": "passed"
+          },
+          {
+            "name": "base_equal_cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_above_cap_later",
+            "status": "passed"
+          },
+          {
+            "name": "one_ns_cap",
+            "status": "passed"
+          },
+          {
+            "name": "largest_first",
+            "status": "passed"
+          },
+          {
+            "name": "largest_doubled",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_safe",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_4",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_8",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_shift3",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_shift4",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "zero_wrap",
+            "status": "passed"
+          },
+          {
+            "name": "last_positive_bit",
+            "status": "passed"
+          },
+          {
+            "name": "first_signed_bit",
+            "status": "passed"
+          },
+          {
+            "name": "shift_64",
+            "status": "passed"
+          },
+          {
+            "name": "shift_128",
+            "status": "passed"
+          },
+          {
+            "name": "large_attempt_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_exact",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_capped",
+            "status": "passed"
+          },
+          {
+            "name": "duration_min",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit_min",
+            "status": "passed"
+          },
+          {
+            "name": "attempt_min",
+            "status": "passed"
+          },
+          {
+            "name": "small_base_shift62",
+            "status": "passed"
+          },
+          {
+            "name": "seconds",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 107,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "3a7b496b8f635fa8dd013d0ce3e0e328c93d4f42e92301bade7afb8d9b7842f0",
+        "result-v2.json": "aaa346de5e797e2e198e9b2eb310e24cbf8eae779b1d95dcf227b795d46bcbad"
+      }
+    },
+    {
+      "original": {
+        "task": "csv-record",
+        "repetition": 2,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 62700,
+        "grade_wall_ms": 149,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 4,
+          "tool_calls": 4,
+          "tool_errors": 0,
+          "generated_tokens": 549,
+          "input_tokens": 401,
+          "cache_read_tokens": 7095,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "fa61c44a5145d3f119b89d5e24b110c3e1f0b187b950de662e6693c0f8b84e1f"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 26,
+        "passed_cases": 26,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "nil",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "single_empty",
+            "status": "passed"
+          },
+          {
+            "name": "simple",
+            "status": "passed"
+          },
+          {
+            "name": "comma",
+            "status": "passed"
+          },
+          {
+            "name": "quote",
+            "status": "passed"
+          },
+          {
+            "name": "lf",
+            "status": "passed"
+          },
+          {
+            "name": "leading_space",
+            "status": "passed"
+          },
+          {
+            "name": "unicode",
+            "status": "passed"
+          },
+          {
+            "name": "cr",
+            "status": "passed"
+          },
+          {
+            "name": "crlf",
+            "status": "passed"
+          },
+          {
+            "name": "multiple_empty",
+            "status": "passed"
+          },
+          {
+            "name": "only_comma",
+            "status": "passed"
+          },
+          {
+            "name": "only_quote",
+            "status": "passed"
+          },
+          {
+            "name": "only_lf",
+            "status": "passed"
+          },
+          {
+            "name": "only_cr",
+            "status": "passed"
+          },
+          {
+            "name": "leading_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_space",
+            "status": "passed"
+          },
+          {
+            "name": "backslash",
+            "status": "passed"
+          },
+          {
+            "name": "bom",
+            "status": "passed"
+          },
+          {
+            "name": "nul",
+            "status": "passed"
+          },
+          {
+            "name": "postgres_end_marker",
+            "status": "passed"
+          },
+          {
+            "name": "long_field",
+            "status": "passed"
+          },
+          {
+            "name": "many_fields",
+            "status": "passed"
+          },
+          {
+            "name": "combined_escaping",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 107,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "d4c8aea46a7b884f908efc31ea6de58d8168a631c941315fb0333975619a4b9c",
+        "result-v2.json": "c08c9e4e226e0eb727e34716f8e429be8c302c11bc1875217ec827b45649e827"
+      }
+    },
+    {
+      "original": {
+        "task": "csv-record",
+        "repetition": 2,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 56444,
+        "grade_wall_ms": 258,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 5,
+          "tool_calls": 6,
+          "tool_errors": 0,
+          "generated_tokens": 397,
+          "input_tokens": 1970,
+          "cache_read_tokens": 7855,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 26,
+        "passed_cases": 26,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "nil",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "single_empty",
+            "status": "passed"
+          },
+          {
+            "name": "simple",
+            "status": "passed"
+          },
+          {
+            "name": "comma",
+            "status": "passed"
+          },
+          {
+            "name": "quote",
+            "status": "passed"
+          },
+          {
+            "name": "lf",
+            "status": "passed"
+          },
+          {
+            "name": "leading_space",
+            "status": "passed"
+          },
+          {
+            "name": "unicode",
+            "status": "passed"
+          },
+          {
+            "name": "cr",
+            "status": "passed"
+          },
+          {
+            "name": "crlf",
+            "status": "passed"
+          },
+          {
+            "name": "multiple_empty",
+            "status": "passed"
+          },
+          {
+            "name": "only_comma",
+            "status": "passed"
+          },
+          {
+            "name": "only_quote",
+            "status": "passed"
+          },
+          {
+            "name": "only_lf",
+            "status": "passed"
+          },
+          {
+            "name": "only_cr",
+            "status": "passed"
+          },
+          {
+            "name": "leading_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_space",
+            "status": "passed"
+          },
+          {
+            "name": "backslash",
+            "status": "passed"
+          },
+          {
+            "name": "bom",
+            "status": "passed"
+          },
+          {
+            "name": "nul",
+            "status": "passed"
+          },
+          {
+            "name": "postgres_end_marker",
+            "status": "passed"
+          },
+          {
+            "name": "long_field",
+            "status": "passed"
+          },
+          {
+            "name": "many_fields",
+            "status": "passed"
+          },
+          {
+            "name": "combined_escaping",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 112,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "85f4b73c85c49e2ef8640ea2a6525e9c118650ccad5099b271d631c5156fcaf3",
+        "result-v2.json": "c03b91c39d13d18db06dbce5b438580d23e83251b72bb67b9f71816d6ee00b9c"
+      }
+    },
+    {
+      "original": {
+        "task": "bytesize",
+        "repetition": 3,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "completed",
+        "scorable": true,
+        "passed": false,
+        "agent_wall_ms": 106592,
+        "grade_wall_ms": 242,
+        "grade": {
+          "passed": false,
+          "status": "failed"
+        },
+        "metrics": {
+          "assistant_messages": 6,
+          "tool_calls": 8,
+          "tool_errors": 1,
+          "generated_tokens": 1024,
+          "input_tokens": 726,
+          "cache_read_tokens": 13055,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "906ec665b8b024001c888a50a573624ca6fde1eae30874a378198e52517001a3"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 58,
+        "passed_cases": 39,
+        "failed_cases": 19,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "zero",
+            "status": "passed"
+          },
+          {
+            "name": "plain",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_attached",
+            "status": "failed"
+          },
+          {
+            "name": "kib_spaces",
+            "status": "failed"
+          },
+          {
+            "name": "mib_attached",
+            "status": "failed"
+          },
+          {
+            "name": "gib_tab",
+            "status": "failed"
+          },
+          {
+            "name": "leading_zeroes",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_max",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_spaced",
+            "status": "failed"
+          },
+          {
+            "name": "bytes_tab",
+            "status": "failed"
+          },
+          {
+            "name": "mixed_separator",
+            "status": "failed"
+          },
+          {
+            "name": "outer_crlf",
+            "status": "failed"
+          },
+          {
+            "name": "outer_vertical_tab",
+            "status": "failed"
+          },
+          {
+            "name": "outer_form_feed",
+            "status": "failed"
+          },
+          {
+            "name": "outer_nbsp",
+            "status": "failed"
+          },
+          {
+            "name": "outer_em_space",
+            "status": "failed"
+          },
+          {
+            "name": "zero_kib",
+            "status": "failed"
+          },
+          {
+            "name": "one_mib",
+            "status": "failed"
+          },
+          {
+            "name": "one_gib",
+            "status": "failed"
+          },
+          {
+            "name": "max_bytes_unit",
+            "status": "failed"
+          },
+          {
+            "name": "kib_max_product",
+            "status": "failed"
+          },
+          {
+            "name": "mib_max_product",
+            "status": "failed"
+          },
+          {
+            "name": "gib_max_product",
+            "status": "failed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "spaces",
+            "status": "passed"
+          },
+          {
+            "name": "minus",
+            "status": "passed"
+          },
+          {
+            "name": "plus",
+            "status": "passed"
+          },
+          {
+            "name": "fraction",
+            "status": "passed"
+          },
+          {
+            "name": "decimal_unit",
+            "status": "passed"
+          },
+          {
+            "name": "lowercase",
+            "status": "passed"
+          },
+          {
+            "name": "unit_only",
+            "status": "passed"
+          },
+          {
+            "name": "internal_lf",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "kib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "mib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "gib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_letters",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_punctuation",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_unit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_unit",
+            "status": "passed"
+          },
+          {
+            "name": "plus_unit",
+            "status": "passed"
+          },
+          {
+            "name": "hex",
+            "status": "passed"
+          },
+          {
+            "name": "exponent",
+            "status": "passed"
+          },
+          {
+            "name": "underscore",
+            "status": "passed"
+          },
+          {
+            "name": "arabic_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fullwidth_digits",
+            "status": "passed"
+          },
+          {
+            "name": "double_unit",
+            "status": "passed"
+          },
+          {
+            "name": "wrong_case",
+            "status": "passed"
+          },
+          {
+            "name": "internal_cr",
+            "status": "passed"
+          },
+          {
+            "name": "internal_vertical_tab",
+            "status": "passed"
+          },
+          {
+            "name": "internal_form_feed",
+            "status": "passed"
+          },
+          {
+            "name": "internal_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "split_digits",
+            "status": "passed"
+          },
+          {
+            "name": "split_unit",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_junk",
+            "status": "passed"
+          },
+          {
+            "name": "missing_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fraction_no_unit",
+            "status": "passed"
+          },
+          {
+            "name": "newline_inside_digits",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 111,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "cd5bb17a4e1a9b3962a160b4154697815df0f7e15434578ecf890715d8c7f488",
+        "result-v2.json": "b0ccc0e0144fafb1c415d483a682134438cc243324600fb80281d21dec123733"
+      }
+    },
+    {
+      "original": {
+        "task": "bytesize",
+        "repetition": 3,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 113207,
+        "grade_wall_ms": 138,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 5,
+          "tool_calls": 5,
+          "tool_errors": 0,
+          "generated_tokens": 830,
+          "input_tokens": 1875,
+          "cache_read_tokens": 8313,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "a637d46f33daa42c523b98fa2d56d78196dd28bd1907dd4d07ed36623739ba05",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "60b04b86afb5675a828fb0bb05b6a570fdfd4a1727cac36cb3d28b744d814f81"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 58,
+        "passed_cases": 54,
+        "failed_cases": 4,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "zero",
+            "status": "passed"
+          },
+          {
+            "name": "plain",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_attached",
+            "status": "passed"
+          },
+          {
+            "name": "kib_spaces",
+            "status": "passed"
+          },
+          {
+            "name": "mib_attached",
+            "status": "passed"
+          },
+          {
+            "name": "gib_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_zeroes",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_max",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_spaced",
+            "status": "passed"
+          },
+          {
+            "name": "bytes_tab",
+            "status": "passed"
+          },
+          {
+            "name": "mixed_separator",
+            "status": "passed"
+          },
+          {
+            "name": "outer_crlf",
+            "status": "passed"
+          },
+          {
+            "name": "outer_vertical_tab",
+            "status": "failed"
+          },
+          {
+            "name": "outer_form_feed",
+            "status": "failed"
+          },
+          {
+            "name": "outer_nbsp",
+            "status": "failed"
+          },
+          {
+            "name": "outer_em_space",
+            "status": "failed"
+          },
+          {
+            "name": "zero_kib",
+            "status": "passed"
+          },
+          {
+            "name": "one_mib",
+            "status": "passed"
+          },
+          {
+            "name": "one_gib",
+            "status": "passed"
+          },
+          {
+            "name": "max_bytes_unit",
+            "status": "passed"
+          },
+          {
+            "name": "kib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "mib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "gib_max_product",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "spaces",
+            "status": "passed"
+          },
+          {
+            "name": "minus",
+            "status": "passed"
+          },
+          {
+            "name": "plus",
+            "status": "passed"
+          },
+          {
+            "name": "fraction",
+            "status": "passed"
+          },
+          {
+            "name": "decimal_unit",
+            "status": "passed"
+          },
+          {
+            "name": "lowercase",
+            "status": "passed"
+          },
+          {
+            "name": "unit_only",
+            "status": "passed"
+          },
+          {
+            "name": "internal_lf",
+            "status": "passed"
+          },
+          {
+            "name": "uint64_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "kib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "mib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "gib_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_letters",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_punctuation",
+            "status": "passed"
+          },
+          {
+            "name": "prefix_unit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_unit",
+            "status": "passed"
+          },
+          {
+            "name": "plus_unit",
+            "status": "passed"
+          },
+          {
+            "name": "hex",
+            "status": "passed"
+          },
+          {
+            "name": "exponent",
+            "status": "passed"
+          },
+          {
+            "name": "underscore",
+            "status": "passed"
+          },
+          {
+            "name": "arabic_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fullwidth_digits",
+            "status": "passed"
+          },
+          {
+            "name": "double_unit",
+            "status": "passed"
+          },
+          {
+            "name": "wrong_case",
+            "status": "passed"
+          },
+          {
+            "name": "internal_cr",
+            "status": "passed"
+          },
+          {
+            "name": "internal_vertical_tab",
+            "status": "passed"
+          },
+          {
+            "name": "internal_form_feed",
+            "status": "passed"
+          },
+          {
+            "name": "internal_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "split_digits",
+            "status": "passed"
+          },
+          {
+            "name": "split_unit",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_junk",
+            "status": "passed"
+          },
+          {
+            "name": "missing_digits",
+            "status": "passed"
+          },
+          {
+            "name": "fraction_no_unit",
+            "status": "passed"
+          },
+          {
+            "name": "newline_inside_digits",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 115,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "3d8cd028d0d390304923ff8650bfa9d9eddcbbf6da33a8d6b0398c3a9490dd03",
+        "result-v2.json": "71220d238c57c1d0b71e0195e601a540109fe0c99be657fe99e7ed6988ac4de2"
+      }
+    },
+    {
+      "original": {
+        "task": "retry-delay",
+        "repetition": 3,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 54876,
+        "grade_wall_ms": 234,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 5,
+          "tool_calls": 6,
+          "tool_errors": 0,
+          "generated_tokens": 430,
+          "input_tokens": 616,
+          "cache_read_tokens": 9324,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "4d82f9d6c0210866fc924b428dc97dd78eb1114a9fc28e2a8f93ab7275f9dfe1"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 40,
+        "passed_cases": 40,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "first",
+            "status": "passed"
+          },
+          {
+            "name": "second",
+            "status": "passed"
+          },
+          {
+            "name": "cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_exceeds",
+            "status": "passed"
+          },
+          {
+            "name": "zero_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "negative_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "zero_base",
+            "status": "passed"
+          },
+          {
+            "name": "zero_limit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_base",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit",
+            "status": "passed"
+          },
+          {
+            "name": "signed_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "max_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "exact_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_below",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_above",
+            "status": "passed"
+          },
+          {
+            "name": "base_equal_cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_above_cap_later",
+            "status": "passed"
+          },
+          {
+            "name": "one_ns_cap",
+            "status": "passed"
+          },
+          {
+            "name": "largest_first",
+            "status": "passed"
+          },
+          {
+            "name": "largest_doubled",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_safe",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_overflow",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_4",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_8",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_shift3",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_shift4",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "zero_wrap",
+            "status": "passed"
+          },
+          {
+            "name": "last_positive_bit",
+            "status": "passed"
+          },
+          {
+            "name": "first_signed_bit",
+            "status": "passed"
+          },
+          {
+            "name": "shift_64",
+            "status": "passed"
+          },
+          {
+            "name": "shift_128",
+            "status": "passed"
+          },
+          {
+            "name": "large_attempt_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_exact",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_capped",
+            "status": "passed"
+          },
+          {
+            "name": "duration_min",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit_min",
+            "status": "passed"
+          },
+          {
+            "name": "attempt_min",
+            "status": "passed"
+          },
+          {
+            "name": "small_base_shift62",
+            "status": "passed"
+          },
+          {
+            "name": "seconds",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 104,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "f525e3dc19d60d5294d9fa89d1125d83f1bae9fcebf3ac08be7b6aaf2d4c6119",
+        "result-v2.json": "25175d03d3875c89a78364ee3b0daa6086d3204c5ee77ef4f633a10bb78aa056"
+      }
+    },
+    {
+      "original": {
+        "task": "retry-delay",
+        "repetition": 3,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "completed",
+        "scorable": true,
+        "passed": false,
+        "agent_wall_ms": 299558,
+        "grade_wall_ms": 196,
+        "grade": {
+          "passed": false,
+          "status": "failed"
+        },
+        "metrics": {
+          "assistant_messages": 18,
+          "tool_calls": 20,
+          "tool_errors": 3,
+          "generated_tokens": 2784,
+          "input_tokens": 3174,
+          "cache_read_tokens": 61170,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "4f413dc4ae259a24b82dad6fe52b68c0f3035729d086729446c64dc2b3ea6563",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "5770335a6c050efa6b9aca3fcba76eba3b92cf2c8dd3c42c108686e91819d8e0"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "failed",
+        "scorable": true,
+        "passed": false,
+        "expected_cases": 40,
+        "passed_cases": 35,
+        "failed_cases": 5,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "first",
+            "status": "passed"
+          },
+          {
+            "name": "second",
+            "status": "passed"
+          },
+          {
+            "name": "cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_exceeds",
+            "status": "passed"
+          },
+          {
+            "name": "zero_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "negative_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "zero_base",
+            "status": "passed"
+          },
+          {
+            "name": "zero_limit",
+            "status": "passed"
+          },
+          {
+            "name": "negative_base",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit",
+            "status": "passed"
+          },
+          {
+            "name": "signed_overflow",
+            "status": "failed"
+          },
+          {
+            "name": "max_attempt",
+            "status": "passed"
+          },
+          {
+            "name": "exact_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_below",
+            "status": "passed"
+          },
+          {
+            "name": "odd_cap_above",
+            "status": "passed"
+          },
+          {
+            "name": "base_equal_cap",
+            "status": "passed"
+          },
+          {
+            "name": "base_above_cap_later",
+            "status": "passed"
+          },
+          {
+            "name": "one_ns_cap",
+            "status": "passed"
+          },
+          {
+            "name": "largest_first",
+            "status": "passed"
+          },
+          {
+            "name": "largest_doubled",
+            "status": "failed"
+          },
+          {
+            "name": "near_signed_threshold_safe",
+            "status": "passed"
+          },
+          {
+            "name": "near_signed_threshold_overflow",
+            "status": "failed"
+          },
+          {
+            "name": "positive_wrap_4",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_8",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_shift3",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_shift4",
+            "status": "passed"
+          },
+          {
+            "name": "positive_wrap_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "zero_wrap",
+            "status": "passed"
+          },
+          {
+            "name": "last_positive_bit",
+            "status": "passed"
+          },
+          {
+            "name": "first_signed_bit",
+            "status": "failed"
+          },
+          {
+            "name": "shift_64",
+            "status": "passed"
+          },
+          {
+            "name": "shift_128",
+            "status": "passed"
+          },
+          {
+            "name": "large_attempt_small_cap",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_exact",
+            "status": "passed"
+          },
+          {
+            "name": "odd_base_capped",
+            "status": "passed"
+          },
+          {
+            "name": "duration_min",
+            "status": "passed"
+          },
+          {
+            "name": "negative_limit_min",
+            "status": "passed"
+          },
+          {
+            "name": "attempt_min",
+            "status": "passed"
+          },
+          {
+            "name": "small_base_shift62",
+            "status": "failed"
+          },
+          {
+            "name": "seconds",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 102,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "63414e6a7e1e9097df05a833b67ce5e72a7b1b123e9d07bbc1356d6b52132ce4",
+        "result-v2.json": "930af91a96c5f232ae80b1ad429696eaf810605fb297637cbabb606538cd9953"
+      }
+    },
+    {
+      "original": {
+        "task": "csv-record",
+        "repetition": 3,
+        "condition": "base",
+        "model": "qwen-base",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 58984,
+        "grade_wall_ms": 126,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 5,
+          "tool_calls": 5,
+          "tool_errors": 0,
+          "generated_tokens": 457,
+          "input_tokens": 501,
+          "cache_read_tokens": 9006,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "b3427b2a9eaa4f6ab1fec0dbc051bbb5e7bd2c3f59158c449d8da7aa9ce1417b"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 26,
+        "passed_cases": 26,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "nil",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "single_empty",
+            "status": "passed"
+          },
+          {
+            "name": "simple",
+            "status": "passed"
+          },
+          {
+            "name": "comma",
+            "status": "passed"
+          },
+          {
+            "name": "quote",
+            "status": "passed"
+          },
+          {
+            "name": "lf",
+            "status": "passed"
+          },
+          {
+            "name": "leading_space",
+            "status": "passed"
+          },
+          {
+            "name": "unicode",
+            "status": "passed"
+          },
+          {
+            "name": "cr",
+            "status": "passed"
+          },
+          {
+            "name": "crlf",
+            "status": "passed"
+          },
+          {
+            "name": "multiple_empty",
+            "status": "passed"
+          },
+          {
+            "name": "only_comma",
+            "status": "passed"
+          },
+          {
+            "name": "only_quote",
+            "status": "passed"
+          },
+          {
+            "name": "only_lf",
+            "status": "passed"
+          },
+          {
+            "name": "only_cr",
+            "status": "passed"
+          },
+          {
+            "name": "leading_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_space",
+            "status": "passed"
+          },
+          {
+            "name": "backslash",
+            "status": "passed"
+          },
+          {
+            "name": "bom",
+            "status": "passed"
+          },
+          {
+            "name": "nul",
+            "status": "passed"
+          },
+          {
+            "name": "postgres_end_marker",
+            "status": "passed"
+          },
+          {
+            "name": "long_field",
+            "status": "passed"
+          },
+          {
+            "name": "many_fields",
+            "status": "passed"
+          },
+          {
+            "name": "combined_escaping",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 102,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "7935496bbeae14fd7e9ef8fd055e79c00ae85a830f26cb388eb22afd875e508f",
+        "result-v2.json": "4345baf2dc2f4f9561a649da3222eca4f85751e4effea8b36c0df77907fe6412"
+      }
+    },
+    {
+      "original": {
+        "task": "csv-record",
+        "repetition": 3,
+        "condition": "adapter",
+        "model": "qwen-pi",
+        "status": "completed",
+        "scorable": true,
+        "passed": true,
+        "agent_wall_ms": 51238,
+        "grade_wall_ms": 127,
+        "grade": {
+          "passed": true,
+          "status": "passed"
+        },
+        "metrics": {
+          "assistant_messages": 4,
+          "tool_calls": 4,
+          "tool_errors": 0,
+          "generated_tokens": 266,
+          "input_tokens": 1736,
+          "cache_read_tokens": 5342,
+          "cache_write_tokens": 0
+        },
+        "task_sha256": "d79f13fd7e523680bd2fbe22f7d49ca107a65b982d53d0f7aaf3d8614ba64a03",
+        "prompt_sha256": "4a21d581c096e8fd0e4aea8db11b9ff3bfbabd5b0317b9d217c55bd303506e19",
+        "final_source_sha256": "2d73a620e486c977a97698dda47367dbcaa9f21ae85b2cf00ea60e1d40a6aaf7"
+      },
+      "v2": {
+        "version": "acceptance-v2-post-hoc",
+        "status": "passed",
+        "scorable": true,
+        "passed": true,
+        "expected_cases": 26,
+        "passed_cases": 26,
+        "failed_cases": 0,
+        "not_run_cases": 0,
+        "cases": [
+          {
+            "name": "nil",
+            "status": "passed"
+          },
+          {
+            "name": "empty",
+            "status": "passed"
+          },
+          {
+            "name": "single_empty",
+            "status": "passed"
+          },
+          {
+            "name": "simple",
+            "status": "passed"
+          },
+          {
+            "name": "comma",
+            "status": "passed"
+          },
+          {
+            "name": "quote",
+            "status": "passed"
+          },
+          {
+            "name": "lf",
+            "status": "passed"
+          },
+          {
+            "name": "leading_space",
+            "status": "passed"
+          },
+          {
+            "name": "unicode",
+            "status": "passed"
+          },
+          {
+            "name": "cr",
+            "status": "passed"
+          },
+          {
+            "name": "crlf",
+            "status": "passed"
+          },
+          {
+            "name": "multiple_empty",
+            "status": "passed"
+          },
+          {
+            "name": "only_comma",
+            "status": "passed"
+          },
+          {
+            "name": "only_quote",
+            "status": "passed"
+          },
+          {
+            "name": "only_lf",
+            "status": "passed"
+          },
+          {
+            "name": "only_cr",
+            "status": "passed"
+          },
+          {
+            "name": "leading_tab",
+            "status": "passed"
+          },
+          {
+            "name": "leading_nbsp",
+            "status": "passed"
+          },
+          {
+            "name": "trailing_space",
+            "status": "passed"
+          },
+          {
+            "name": "backslash",
+            "status": "passed"
+          },
+          {
+            "name": "bom",
+            "status": "passed"
+          },
+          {
+            "name": "nul",
+            "status": "passed"
+          },
+          {
+            "name": "postgres_end_marker",
+            "status": "passed"
+          },
+          {
+            "name": "long_field",
+            "status": "passed"
+          },
+          {
+            "name": "many_fields",
+            "status": "passed"
+          },
+          {
+            "name": "combined_escaping",
+            "status": "passed"
+          }
+        ]
+      },
+      "regrade_wall_ms": 132,
+      "regrade_artifact_sha256": {
+        "grade-v2.jsonl": "0ad3b1ad0cb990c01c027c92ef2650fb2c056d9206edcc855a69561977a61019",
+        "result-v2.json": "3df78b54144abe98ae8b9049ac7ad459c1000c1011cb62a8fccdee39fa09cfc5"
+      }
+    }
+  ],
+  "raw_artifact_sha256": {
+    "metadata.json": "68f14cf3d6c0db234b1c9c231d207eede7ebd158ed4dfd8ce7d48421cb09cf8c",
+    "results-v2.json": "53188ef47ab05962af21c929462fd59cf29fd9f5ecabd8c8eca9d77b36aeb87f",
+    "summary-v2.json": "66312c871e2bb8ebc9dc17282364f6a6cb26940e83caa7beb8b55afbef4f9989"
+  },
+  "limitations": [
+    "Post-hoc suite built after examining original answers; not a blinded or held-out evaluation.",
+    "All V1 cases retained in V2; outer whitespace follows the original strings.TrimSpace reference contract.",
+    "Case-rate denominator includes unexecuted cases after compilation failure; not_run is separately reported.",
+    "124 fixed cases evaluated on 3 answers per condition; 372 checks are not independent tasks.",
+    "V2 success-pair efficiency reuses original Agent timing and usage, excludes regrade time, and has only the three CSV pairs.",
+    "Finite passing tests do not prove complete correctness."
+  ]
+}

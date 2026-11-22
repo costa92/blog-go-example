@@ -1,0 +1,14 @@
+package exercise
+
+import "time"
+
+func Delay(attempt int, base, limit time.Duration) time.Duration {
+	if attempt<=0 || base<=0 || limit<=0 { return 0 }
+	d:=base
+	if d>=limit { return limit }
+	for i:=1; i<attempt; i++ {
+		if d>=limit-d { return limit }
+		d*=2
+	}
+	return d
+}

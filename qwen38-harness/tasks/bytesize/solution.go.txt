@@ -1,0 +1,7 @@
+package exercise
+
+import "strconv"
+
+func ParseBytes(s string) (uint64, error) {
+	return strconv.ParseUint(s, 10, 64)
+}

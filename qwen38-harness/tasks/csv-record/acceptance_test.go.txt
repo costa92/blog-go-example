@@ -1,0 +1,17 @@
+package exercise
+
+import (
+	"bytes"
+	"encoding/csv"
+	"testing"
+)
+
+func TestAcceptance(t *testing.T) {
+	for _,fields:=range [][]string{nil,{}, {""}, {"a","b"}, {"a,b","c"}, {"a\"b","c"}, {"a\nb","c"}, {" a",""}, {"中文","x,y"}, {"a\rb"}} {
+		var expected bytes.Buffer
+		w:=csv.NewWriter(&expected)
+		if err:=w.Write(fields);err!=nil { t.Fatal(err) };w.Flush()
+		got,err:=EncodeRecord(fields)
+		if err!=nil || got!=expected.String() { t.Fatalf("%q: got %q, %v; want %q",fields,got,err,expected.String()) }
+	}
+}

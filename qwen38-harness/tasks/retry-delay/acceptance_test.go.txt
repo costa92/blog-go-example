@@ -1,0 +1,17 @@
+package exercise
+
+import (
+	"testing"
+	"time"
+)
+
+func TestAcceptance(t *testing.T) {
+	for _, c:=range []struct{attempt int; base,limit,want time.Duration}{
+		{1,1,10,1}, {2,1,10,2}, {5,1,10,10}, {1,20,10,10},
+		{0,1,10,0}, {-1,1,10,0}, {2,0,10,0}, {2,1,0,0},
+		{3,-1,10,0}, {3,1,-10,0}, {3,1<<61,1<<63-1,1<<63-1},
+		{int(^uint(0)>>1),time.Nanosecond,time.Hour,time.Hour},
+	} {
+		if got:=Delay(c.attempt,c.base,c.limit);got!=c.want { t.Fatalf("%+v: got %v",c,got) }
+	}
+}
