@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-11-22T12:49:16.617210+00:00",
+  "scope": "Actual Go commands on macOS arm64; in-memory model. Lost reply is simulated, no network or Kubernetes execution.",
+  "commands": [
+    {
+      "command": [
+        "go",
+        "version"
+      ],
+      "environment_override": "GOROOT unset for this command",
+      "exit_code": 0,
+      "stdout": "go version go1.27.2 darwin/arm64\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./..."
+      ],
+      "environment_override": "GOROOT unset for this command",
+      "exit_code": 0,
+      "stdout": "ok  \tgithub.com/costa92/blog-go-example/ai-native-change-gate\t1.162s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "environment_override": "GOROOT unset for this command",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "go",
+        "run",
+        "."
+      ],
+      "environment_override": "GOROOT unset for this command",
+      "exit_code": 0,
+      "stdout": "stale approval: error=target state changed image=v18 gate_applied=0\nlost reply (simulated): replay=true receipt_version=42 gate_applied=1\nsame ID, changed target: error=operation ID reused with different content\nnew policy: error=policy revision changed gate_applied=0\n32 concurrent calls: applied=1 replayed=31 errors=0 final_version=42 gate_applied=1\n",
+      "stderr": ""
+    }
+  ],
+  "source_sha256": {
+    "README.md": "a10cb75ab2673058fb281322539e8d951d0abf33b517cca85e2c26277acc8fc1",
+    "gate.go": "fc49a24cb30b1d069112d26c71a87fd8525a6501568613d27219f2410ff41a57",
+    "gate_test.go": "176c95cacdedf43650468aaeb2a0356b9cf36fb32b4d061746e0b7ae19477269",
+    "go.mod": "d4a20d52e50708a83dbd5b5dcd69dc18bd549d252f02105a03f2780c7bd6dc42",
+    "main.go": "8a1f99b1a5178065f93d41df22e23109b05a94d971eb62e43c9827fa1d11c35e"
+  }
+}
