@@ -31,6 +31,7 @@
 - [本地模型多步工具调用](local-model-tool-calling/README.md)：假工单系统加最小工具循环，按第一处出错的地方给每次运行打标签。
 - [同一个小模型的量化版本对比](local-model-quantization/README.md)：qwen2.5:3b 六个量化版本和 imatrix 重新量化的题库、判分、KL 散度和速度显存脚本，附原始结果。
 - [本地模型 Agent 的间接提示注入](local-agent-prompt-injection/README.md)：假工具沙箱里的注入用例、六种防护和判分脚本，附原始结果。
+- [工具目录的大小和描述](local-model-tool-catalog/README.md)：100 个虚构工具、24 条单步请求，按目录大小、描述档位和上下文长度测选工具与填参数。
 - [本地模型当裁判的偏差](local-llm-judge-bias/README.md)：32 道一对一判题，测位置、长度、格式偏差和几种补救办法。
 - [Ollama 在 Kubernetes 里的冷启动和资源限制](ollama-on-kubernetes/README.md)：kind 集群里的冷启动、`keep_alive`、CPU / 内存 limit 和滚动重启实验脚本。
 - [Claude Code 无头调用的 token 账](claude-code-token-budget/README.md)：逐块测内置工具、MCP、CLAUDE.md、技能和缓存的上下文开销，含一个无依赖的 MCP 服务器。
