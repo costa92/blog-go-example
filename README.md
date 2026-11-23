@@ -39,3 +39,4 @@
 - [本地模型当裁判的偏差](local-llm-judge-bias/README.md)：32 道一对一判题，测位置、长度、格式偏差和几种补救办法。
 - [Ollama 在 Kubernetes 里的冷启动和资源限制](ollama-on-kubernetes/README.md)：kind 集群里的冷启动、`keep_alive`、CPU / 内存 limit 和滚动重启实验脚本。
 - [Claude Code 无头调用的 token 账](claude-code-token-budget/README.md)：逐块测内置工具、MCP、CLAUDE.md、技能和缓存的上下文开销，含一个无依赖的 MCP 服务器。
+- [小模型先答、大模型兜底的模型路由](agent-model-routing/README.md)：150 道自动判分题上比较 3b 判难度、自报把握、答案 logprob、格式校验和自一致性几种升级规则，附 Ollama 换模型的加载计时和原始结果。

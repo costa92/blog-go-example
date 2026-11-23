@@ -1,0 +1,27 @@
+time=2026-11-23T15:21:20.590+08:00 level=INFO msg="gpu memory" id=0 library=CUDA available="7.2 GiB" free="7.7 GiB" minimum="457.0 MiB" overhead="0 B"
+time=2026-11-23T15:21:38.646+08:00 level=INFO msg="llama-server started in 18.06 seconds"
+time=2026-11-23T15:21:38.646+08:00 level=INFO msg="model ready" model=qwen2.5-coder:3b
+time=2026-11-23T15:21:38.646+08:00 level=INFO msg="loaded runners" count=1
+time=2026-11-23T15:21:38.646+08:00 level=INFO msg="llama-server started in 18.06 seconds"
+time=2026-11-23T15:21:38.862+08:00 level=INFO msg="updated VRAM based on existing loaded models" gpu=0 library=CUDA total="11.6 GiB" available="5.6 GiB"
+time=2026-11-23T15:21:38.966+08:00 level=INFO msg="llama-server model predicted to exceed available memory, evicting" predicted="4.6 GiB" predicted_num_ctx=4096 num_batch=512 available="5.6 GiB" gpu_free="5.6 GiB" system_free="17.0 GiB" system_limited=false
+time=2026-11-23T15:21:40.178+08:00 level=INFO msg="gpu memory" id=0 library=CUDA available="7.2 GiB" free="7.7 GiB" minimum="457.0 MiB" overhead="0 B"
+time=2026-11-23T15:22:45.147+08:00 level=INFO msg="llama-server started in 64.97 seconds"
+time=2026-11-23T15:22:45.147+08:00 level=INFO msg="model ready" model=qwen2.5-coder:7b
+time=2026-11-23T15:22:45.147+08:00 level=INFO msg="loaded runners" count=1
+time=2026-11-23T15:22:45.147+08:00 level=INFO msg="llama-server started in 64.97 seconds"
+time=2026-11-23T15:22:49.406+08:00 level=INFO msg="updated VRAM based on existing loaded models" gpu=0 library=CUDA total="11.6 GiB" available="3.3 GiB"
+time=2026-11-23T15:22:49.532+08:00 level=INFO msg="llama-server model fits alongside existing models" predicted="1.9 GiB" predicted_num_ctx=4096 num_batch=512 available="3.3 GiB" gpu_free="3.3 GiB" system_free="17.1 GiB" system_limited=false
+time=2026-11-23T15:22:49.532+08:00 level=INFO msg="gpu memory" id=0 library=CUDA available="2.8 GiB" free="3.3 GiB" minimum="457.0 MiB" overhead="0 B"
+time=2026-11-23T15:23:21.885+08:00 level=INFO msg="llama-server started in 32.35 seconds"
+time=2026-11-23T15:23:21.885+08:00 level=INFO msg="model ready" model=qwen2.5-coder:3b
+time=2026-11-23T15:23:21.885+08:00 level=INFO msg="loaded runners" count=2
+time=2026-11-23T15:23:21.885+08:00 level=INFO msg="llama-server started in 32.35 seconds"
+time=2026-11-23T15:23:26.806+08:00 level=INFO msg="gpu memory" id=0 library=CUDA available="7.3 GiB" free="7.7 GiB" minimum="457.0 MiB" overhead="0 B"
+time=2026-11-23T15:23:27.559+08:00 level=INFO msg="llama-server started in 0.75 seconds"
+time=2026-11-23T15:23:27.559+08:00 level=INFO msg="model ready" model=qwen2.5-coder:3b
+time=2026-11-23T15:23:27.559+08:00 level=INFO msg="loaded runners" count=1
+time=2026-11-23T15:23:27.559+08:00 level=INFO msg="llama-server started in 0.75 seconds"
+time=2026-11-23T15:23:27.634+08:00 level=INFO msg="updated VRAM based on existing loaded models" gpu=0 library=CUDA total="11.6 GiB" available="5.7 GiB"
+time=2026-11-23T15:23:28.331+08:00 level=INFO msg="llama-server model predicted to exceed available memory, evicting" predicted="4.6 GiB" predicted_num_ctx=4096 num_batch=512 available="5.7 GiB" gpu_free="5.7 GiB" system_free="16.9 GiB" system_limited=false
+time=2026-11-23T15:23:29.503+08:00 level=INFO msg="gpu memory" id=0 library=CUDA available="7.3 GiB" free="7.7 GiB" minimum="457.0 MiB" overhead="0 B"
