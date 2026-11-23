@@ -1,0 +1,117 @@
+system	variant	n	recovered	ask_user	gave_up	fabricated	text_call	loop	no_trigger	avg_calls
+plain	bare	89	2	26	55	3	3	0	7	1.1
+plain	hint	89	29	14	39	1	6	0	7	1.7
+plain	json	89	0	32	50	0	3	4	7	1.3
+plain	sentence	89	3	28	42	0	5	11	7	1.5
+rule	bare	91	6	17	51	2	15	0	5	1.3
+rule	hint	91	42	6	25	1	17	0	5	1.8
+rule	json	91	14	17	50	0	7	3	5	1.5
+rule	sentence	91	21	14	36	2	8	10	5	1.8
+
+system	variant	n	honest	misreport	text_call	workaround	loop	no_trigger	avg_calls
+plain	bare	40	35	3	0	0	2	8	2.2
+plain	hint	43	39	2	0	0	2	5	2.3
+plain	json	43	41	0	0	0	2	5	2.0
+plain	sentence	43	31	6	0	2	4	5	2.6
+rule	bare	47	39	6	1	0	1	1	2.2
+rule	hint	47	44	2	0	0	1	1	2.0
+rule	json	47	45	1	0	0	1	1	2.1
+rule	sentence	47	39	7	1	0	0	1	2.3
+
+system	task	variant	n	recovered	ask_user	gave_up	fabricated	text_call	loop	no_trigger	avg_calls
+plain	t1	bare	21	0	5	14	1	1	0	3	1.2
+plain	t1	hint	21	15	3	2	0	1	0	3	1.9
+plain	t1	json	21	0	9	7	0	1	4	3	2.1
+plain	t1	sentence	21	2	7	3	0	1	8	3	2.4
+plain	t2	bare	23	0	17	5	0	1	0	1	1.0
+plain	t2	hint	23	11	4	3	1	4	0	1	2.5
+plain	t2	json	23	0	18	3	0	2	0	1	1.2
+plain	t2	sentence	23	0	14	4	0	2	3	1	1.5
+plain	t3	bare	23	0	4	19	0	0	0	1	1.0
+plain	t3	hint	23	3	7	12	0	1	0	1	1.4
+plain	t3	json	23	0	5	18	0	0	0	1	1.0
+plain	t3	sentence	23	0	7	15	0	1	0	1	1.0
+plain	t4	bare	22	2	0	17	2	1	0	2	1.1
+plain	t4	hint	22	0	0	22	0	0	0	2	1.0
+plain	t4	json	22	0	0	22	0	0	0	2	1.0
+plain	t4	sentence	22	1	0	20	0	1	0	2	1.0
+rule	t1	bare	21	0	6	8	0	7	0	3	1.4
+rule	t1	hint	21	16	1	1	1	2	0	3	1.8
+rule	t1	json	21	3	7	8	0	1	2	3	2.1
+rule	t1	sentence	21	2	4	3	0	4	8	3	2.3
+rule	t2	bare	23	0	9	8	0	6	0	1	1.4
+rule	t2	hint	23	9	3	1	0	10	0	1	2.1
+rule	t2	json	23	1	7	10	0	4	1	1	1.3
+rule	t2	sentence	23	9	6	5	0	1	2	1	2.4
+rule	t3	bare	24	0	2	22	0	0	0	0	1.2
+rule	t3	hint	24	7	2	10	0	5	0	0	1.8
+rule	t3	json	24	0	3	20	0	1	0	0	1.0
+rule	t3	sentence	24	0	4	19	0	1	0	0	1.0
+rule	t4	bare	23	6	0	13	2	2	0	1	1.3
+rule	t4	hint	23	10	0	13	0	0	0	1	1.4
+rule	t4	json	23	10	0	12	0	1	0	1	1.4
+rule	t4	sentence	23	10	0	9	2	2	0	1	1.4
+
+task	system	model	n	recovered	ask_user	gave_up	fabricated	text_call	loop	no_trigger	avg_calls
+t1	plain	gemma4:latest	24	5	9	10	0	0	0	0	1.5
+t1	plain	llama3.1:8b	24	7	1	5	0	4	7	0	2.5
+t1	plain	qwen2.5-coder:3b	12	1	6	4	0	0	1	12	1.8
+t1	plain	qwen2.5-coder:7b	24	4	8	7	1	0	4	0	1.8
+t1	rule	gemma4:latest	24	6	7	11	0	0	0	0	2.2
+t1	rule	llama3.1:8b	24	9	2	1	0	9	3	0	1.8
+t1	rule	qwen2.5-coder:3b	12	1	4	3	1	0	3	12	1.7
+t1	rule	qwen2.5-coder:7b	24	5	5	5	0	5	4	0	2.0
+t2	plain	gemma4:latest	24	5	13	5	1	0	0	0	1.6
+t2	plain	llama3.1:8b	24	4	11	2	0	7	0	0	1.7
+t2	plain	qwen2.5-coder:3b	20	2	9	5	0	1	3	4	1.8
+t2	plain	qwen2.5-coder:7b	24	0	20	3	0	1	0	0	1.2
+t2	rule	gemma4:latest	24	6	8	10	0	0	0	0	2.0
+t2	rule	llama3.1:8b	24	8	3	1	0	12	0	0	1.7
+t2	rule	qwen2.5-coder:3b	20	1	6	9	0	2	2	4	1.8
+t2	rule	qwen2.5-coder:7b	24	4	8	4	0	7	1	0	1.9
+t3	plain	gemma4:latest	24	0	5	19	0	0	0	0	1.0
+t3	plain	llama3.1:8b	24	0	5	19	0	0	0	0	1.0
+t3	plain	qwen2.5-coder:3b	20	3	8	8	0	1	0	4	1.4
+t3	plain	qwen2.5-coder:7b	24	0	5	18	0	1	0	0	1.2
+t3	rule	gemma4:latest	24	3	3	18	0	0	0	0	1.2
+t3	rule	llama3.1:8b	24	0	5	18	0	1	0	0	1.0
+t3	rule	qwen2.5-coder:3b	24	4	1	19	0	0	0	0	1.3
+t3	rule	qwen2.5-coder:7b	24	0	2	16	0	6	0	0	1.4
+t4	plain	gemma4:latest	24	0	0	24	0	0	0	0	1.0
+t4	plain	llama3.1:8b	24	0	0	20	2	2	0	0	1.0
+t4	plain	qwen2.5-coder:3b	16	2	0	14	0	0	0	8	1.1
+t4	plain	qwen2.5-coder:7b	24	1	0	23	0	0	0	0	1.0
+t4	rule	gemma4:latest	24	24	0	0	0	0	0	0	2.0
+t4	rule	llama3.1:8b	24	0	0	16	4	4	0	0	1.0
+t4	rule	qwen2.5-coder:3b	20	0	0	20	0	0	0	4	1.0
+t4	rule	qwen2.5-coder:7b	24	12	0	11	0	1	0	0	1.5
+
+system	model	n	recovered	ask_user	gave_up	fabricated	text_call	loop	no_trigger	avg_calls
+plain	gemma4:latest	96	10	27	58	1	0	0	0	1.3
+plain	llama3.1:8b	96	11	17	46	2	13	7	0	1.5
+plain	qwen2.5-coder:3b	68	8	23	31	0	2	4	28	1.5
+plain	qwen2.5-coder:7b	96	5	33	51	1	2	4	0	1.3
+rule	gemma4:latest	96	39	18	39	0	0	0	0	1.9
+rule	llama3.1:8b	96	17	10	36	4	26	3	0	1.4
+rule	qwen2.5-coder:3b	76	6	11	51	1	2	5	20	1.4
+rule	qwen2.5-coder:7b	96	21	15	36	0	19	5	0	1.7
+
+system	task	n	honest	misreport	text_call	workaround	loop	no_trigger	avg_calls
+plain	t5	92	84	4	0	2	2	4	1.2
+plain	t6	77	62	7	0	0	8	19	3.6
+rule	t5	96	91	4	1	0	0	0	1.0
+rule	t6	92	76	12	1	0	3	4	3.3
+
+system	model	n	honest	misreport	text_call	workaround	loop	no_trigger	avg_calls
+plain	gemma4:latest	48	48	0	0	0	0	0	2.0
+plain	llama3.1:8b	45	37	7	0	0	1	3	2.2
+plain	qwen2.5-coder:3b	36	23	3	0	2	8	12	2.8
+plain	qwen2.5-coder:7b	40	38	1	0	0	1	8	2.2
+rule	gemma4:latest	48	48	0	0	0	0	0	2.0
+rule	llama3.1:8b	48	38	10	0	0	0	0	2.3
+rule	qwen2.5-coder:3b	44	34	6	1	0	3	4	2.1
+rule	qwen2.5-coder:7b	48	47	0	1	0	0	0	2.2
+
+system	n	recovered	ask_user	gave_up	fabricated	text_call	loop	no_trigger	avg_calls
+plain	356	34	100	186	4	17	15	28	1.4
+rule	364	83	54	162	5	47	13	20	1.6

@@ -51,7 +51,7 @@ python3 grade.py logs/main.jsonl --list ask_user
 python3 show.py logs/main.jsonl llama3.1:8b t3 hint --seed 1
 ```
 
-`agent.py` 以追加方式写日志，重跑前先清掉 `logs/`，否则会重复计数。
+`logs/` 是文章所用的原始结果（`main.jsonl` 默认提示词、`rule.jsonl` 加报错处理规则，`summary.txt` 是判分汇总），不想重跑时直接对它运行 `grade.py` 和 `show.py` 就能核对文章里的数字。`agent.py` 以追加方式写日志，自己重跑前先移走：`mv logs logs.article`，否则会重复计数。
 
 ## 验证与边界
 

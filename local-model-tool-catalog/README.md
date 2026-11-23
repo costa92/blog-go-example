@@ -17,6 +17,7 @@
 | `grade.py` | 判分：只看第一个调用，分成 ok、参数错、选错工具、不存在的工具、调用写成文本、没调用；参数合法性按完整定义检查 |
 | `stats.py` | 文章里的配对比较（精确 McNemar 检验） |
 | `show.py` | 打印某个模型在某条请求上各条件下的调用 |
+| `logs/` | 文章所用的原始结果，每个模型一个 jsonl，`run-*.out` 是各批次的运行输出 |
 
 ## 运行
 
@@ -39,7 +40,7 @@ python3 show.py logs/llama3.1_8b.jsonl llama3.1:8b r14 full
 ollama rm qwen2.5:7b-instruct
 ```
 
-`logs/` 不在仓库里，需要自己跑一遍生成。
+`logs/` 是文章所用的原始结果，不想重跑时可以直接用上面的 `grade.py`、`stats.py`、`show.py` 核对文章里的数字。`run.py` 会跳过日志里已经跑过的条件，自己重跑前先把它移走：`mv logs logs.article`。
 
 `grade.py` 和 `stats.py` 覆盖文章里的选对率、参数全对、配对检验和 2023 年日期的计数；gemma4 反问的分类、llama3.1 乱码参数的计数和枚举补测的 5 条请求小表，是用 `show.py` 逐条看输出后人工统计的。
 
