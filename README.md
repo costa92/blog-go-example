@@ -41,3 +41,4 @@
 - [Claude Code 无头调用的 token 账](claude-code-token-budget/README.md)：逐块测内置工具、MCP、CLAUDE.md、技能和缓存的上下文开销，含一个无依赖的 MCP 服务器。
 - [小模型先答、大模型兜底的模型路由](agent-model-routing/README.md)：150 道自动判分题上比较 3b 判难度、自报把握、答案 logprob、格式校验和自一致性几种升级规则，附 Ollama 换模型的加载计时和原始结果。
 - [Agent 长会话的历史策略](agent-history-compaction/README.md)：28 轮脚本化会话、7 种历史策略（截断、滑窗、钉住开头、规则进 system、LLM 摘要、状态笔记）和 6 个探针的判分脚本，附原始结果。
+- [本地模型 Agent 的自查](agent-self-check/README.md)：112 道自动判分题上比较“请检查”、“我觉得不对”、校验/测试报错和另起一次审查四种追问的对改错与错改对，附原始结果。

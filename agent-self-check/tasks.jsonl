@@ -1,0 +1,112 @@
+{"id": "arith-00", "kind": "arith", "answer": 20, "prompt": "一件衣服原价 150 元，先打八折，再在折后价基础上减 10 元。小李买了 8 件，付给收银员 900 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-01", "kind": "arith", "answer": 9, "prompt": "学校组织 94 名学生和 5 名老师去春游，每辆车最多坐 12 人。至少需要几辆车？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-02", "kind": "arith", "answer": 3, "prompt": "今天是星期一，再过 142 天是星期几？用数字回答，星期一记为 1，星期日记为 7。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-03", "kind": "arith", "answer": 22, "prompt": "一根绳子长 64 厘米，先剪去全长的四分之一，再把剩下的平均分成 2 段，每段还要再剪掉 2 厘米。最后每段多长（厘米）？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-04", "kind": "arith", "answer": 18, "prompt": "爸爸今年的年龄是儿子的 7 倍，13 年后爸爸比儿子大 108 岁。儿子今年几岁？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-05", "kind": "arith", "answer": 24, "prompt": "一项工程，甲队单独做要 12 天，乙队单独做要 36 天。两队合作 3 天后，剩下的由乙队单独做，乙队还要几天？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-06", "kind": "arith", "answer": 3, "prompt": "一个数除以 8 商 846 余 6，把这个数加上 21 后再除以 8，余数是多少？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-07", "kind": "arith", "answer": 1030, "prompt": "一场考试 8 点 40 分开始，考 110 分钟，中间不休息。结束时是几点几分？用四位数字回答，例如 9 点 05 分写成 0905。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-08", "kind": "arith", "answer": 35, "prompt": "一件衣服原价 510 元，先打八折，再在折后价基础上减 15 元。小李买了 5 件，付给收银员 2000 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-09", "kind": "arith", "answer": 22, "prompt": "学校组织 233 名学生和 4 名老师去春游，每辆车最多坐 11 人。至少需要几辆车？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-10", "kind": "arith", "answer": 2, "prompt": "今天是星期日，再过 65 天是星期几？用数字回答，星期一记为 1，星期日记为 7。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-11", "kind": "arith", "answer": 31, "prompt": "一根绳子长 240 厘米，先剪去全长的四分之一，再把剩下的平均分成 5 段，每段还要再剪掉 5 厘米。最后每段多长（厘米）？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-12", "kind": "arith", "answer": 15, "prompt": "爸爸今年的年龄是儿子的 5 倍，8 年后爸爸比儿子大 60 岁。儿子今年几岁？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-13", "kind": "arith", "answer": 24, "prompt": "一项工程，甲队单独做要 12 天，乙队单独做要 36 天。两队合作 3 天后，剩下的由乙队单独做，乙队还要几天？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-14", "kind": "arith", "answer": 11, "prompt": "一个数除以 12 商 416 余 10，把这个数加上 49 后再除以 12，余数是多少？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-15", "kind": "arith", "answer": 924, "prompt": "一场考试 7 点 50 分开始，考 94 分钟，中间不休息。结束时是几点几分？用四位数字回答，例如 9 点 05 分写成 0905。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-16", "kind": "arith", "answer": 42, "prompt": "一件衣服原价 210 元，先打八折，再在折后价基础上减 25 元。小李买了 6 件，付给收银员 900 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-17", "kind": "arith", "answer": 4, "prompt": "学校组织 54 名学生和 6 名老师去春游，每辆车最多坐 17 人。至少需要几辆车？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-18", "kind": "arith", "answer": 7, "prompt": "今天是星期五，再过 51 天是星期几？用数字回答，星期一记为 1，星期日记为 7。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-19", "kind": "arith", "answer": 17, "prompt": "一根绳子长 224 厘米，先剪去全长的四分之一，再把剩下的平均分成 7 段，每段还要再剪掉 7 厘米。最后每段多长（厘米）？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-20", "kind": "arith", "answer": 14, "prompt": "爸爸今年的年龄是儿子的 4 倍，5 年后爸爸比儿子大 42 岁。儿子今年几岁？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-21", "kind": "arith", "answer": 40, "prompt": "一项工程，甲队单独做要 20 天，乙队单独做要 60 天。两队合作 5 天后，剩下的由乙队单独做，乙队还要几天？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-22", "kind": "arith", "answer": 7, "prompt": "一个数除以 11 商 795 余 9，把这个数加上 42 后再除以 11，余数是多少？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-23", "kind": "arith", "answer": 1215, "prompt": "一场考试 10 点 40 分开始，考 95 分钟，中间不休息。结束时是几点几分？用四位数字回答，例如 9 点 05 分写成 0905。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-24", "kind": "arith", "answer": 52, "prompt": "一件衣服原价 420 元，先打八折，再在折后价基础上减 30 元。小李买了 8 件，付给收银员 2500 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-25", "kind": "arith", "answer": 17, "prompt": "学校组织 234 名学生和 2 名老师去春游，每辆车最多坐 14 人。至少需要几辆车？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-26", "kind": "arith", "answer": 2, "prompt": "今天是星期三，再过 41 天是星期几？用数字回答，星期一记为 1，星期日记为 7。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-27", "kind": "arith", "answer": 22, "prompt": "一根绳子长 180 厘米，先剪去全长的四分之一，再把剩下的平均分成 5 段，每段还要再剪掉 5 厘米。最后每段多长（厘米）？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-28", "kind": "arith", "answer": 16, "prompt": "爸爸今年的年龄是儿子的 3 倍，10 年后爸爸比儿子大 32 岁。儿子今年几岁？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-29", "kind": "arith", "answer": 24, "prompt": "一项工程，甲队单独做要 12 天，乙队单独做要 36 天。两队合作 3 天后，剩下的由乙队单独做，乙队还要几天？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-30", "kind": "arith", "answer": 1, "prompt": "一个数除以 8 商 801 余 6，把这个数加上 35 后再除以 8，余数是多少？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-31", "kind": "arith", "answer": 903, "prompt": "一场考试 7 点 25 分开始，考 98 分钟，中间不休息。结束时是几点几分？用四位数字回答，例如 9 点 05 分写成 0905。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-32", "kind": "arith", "answer": 25, "prompt": "一件衣服原价 500 元，先打八折，再在折后价基础上减 25 元。小李买了 9 件，付给收银员 3400 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-33", "kind": "arith", "answer": 9, "prompt": "学校组织 93 名学生和 6 名老师去春游，每辆车最多坐 12 人。至少需要几辆车？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-34", "kind": "arith", "answer": 6, "prompt": "今天是星期六，再过 42 天是星期几？用数字回答，星期一记为 1，星期日记为 7。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-35", "kind": "arith", "answer": 51, "prompt": "一根绳子长 456 厘米，先剪去全长的四分之一，再把剩下的平均分成 6 段，每段还要再剪掉 6 厘米。最后每段多长（厘米）？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-36", "kind": "arith", "answer": 17, "prompt": "爸爸今年的年龄是儿子的 4 倍，13 年后爸爸比儿子大 51 岁。儿子今年几岁？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-37", "kind": "arith", "answer": 24, "prompt": "一项工程，甲队单独做要 12 天，乙队单独做要 36 天。两队合作 3 天后，剩下的由乙队单独做，乙队还要几天？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-38", "kind": "arith", "answer": 5, "prompt": "一个数除以 7 商 885 余 5，把这个数加上 49 后再除以 7，余数是多少？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-39", "kind": "arith", "answer": 944, "prompt": "一场考试 7 点 50 分开始，考 114 分钟，中间不休息。结束时是几点几分？用四位数字回答，例如 9 点 05 分写成 0905。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-40", "kind": "arith", "answer": 94, "prompt": "一件衣服原价 170 元，先打八折，再在折后价基础上减 35 元。小李买了 6 件，付给收银员 700 元，应找回多少元？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-41", "kind": "arith", "answer": 11, "prompt": "学校组织 157 名学生和 6 名老师去春游，每辆车最多坐 15 人。至少需要几辆车？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-42", "kind": "arith", "answer": 2, "prompt": "今天是星期二，再过 98 天是星期几？用数字回答，星期一记为 1，星期日记为 7。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-43", "kind": "arith", "answer": 21, "prompt": "一根绳子长 96 厘米，先剪去全长的四分之一，再把剩下的平均分成 3 段，每段还要再剪掉 3 厘米。最后每段多长（厘米）？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-44", "kind": "arith", "answer": 19, "prompt": "爸爸今年的年龄是儿子的 7 倍，10 年后爸爸比儿子大 114 岁。儿子今年几岁？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-45", "kind": "arith", "answer": 32, "prompt": "一项工程，甲队单独做要 16 天，乙队单独做要 48 天。两队合作 4 天后，剩下的由乙队单独做，乙队还要几天？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-46", "kind": "arith", "answer": 5, "prompt": "一个数除以 7 商 530 余 5，把这个数加上 42 后再除以 7，余数是多少？请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "arith-47", "kind": "arith", "answer": 1139, "prompt": "一场考试 9 点 40 分开始，考 119 分钟，中间不休息。结束时是几点几分？用四位数字回答，例如 9 点 05 分写成 0905。请一步步计算，最后单独一行写“答案：数字”。"}
+{"id": "fact-00", "kind": "fact", "prompt": "澳大利亚的首都是哪个城市？只回答答案，不要解释。", "answers": ["堪培拉", "坎培拉"]}
+{"id": "fact-01", "kind": "fact", "prompt": "土耳其的首都是哪个城市？只回答答案，不要解释。", "answers": ["安卡拉"]}
+{"id": "fact-02", "kind": "fact", "prompt": "瑞士的首都是哪个城市？只回答答案，不要解释。", "answers": ["伯尔尼", "伯恩"]}
+{"id": "fact-03", "kind": "fact", "prompt": "新西兰的首都是哪个城市？只回答答案，不要解释。", "answers": ["惠灵顿", "威灵顿", "威靈頓"]}
+{"id": "fact-04", "kind": "fact", "prompt": "巴西的首都是哪个城市？只回答答案，不要解释。", "answers": ["巴西利亚", "布拉西利亚"]}
+{"id": "fact-05", "kind": "fact", "prompt": "缅甸现在的首都是哪个城市？只回答答案，不要解释。", "answers": ["内比都"]}
+{"id": "fact-06", "kind": "fact", "prompt": "加拿大的首都是哪个城市？只回答答案，不要解释。", "answers": ["渥太华"]}
+{"id": "fact-07", "kind": "fact", "prompt": "南非的立法首都是哪个城市？只回答答案，不要解释。", "answers": ["开普敦", "开普城", "Cape Town", "cape town", "CapeTown"]}
+{"id": "fact-08", "kind": "fact", "prompt": "《水浒传》的作者是谁？只回答答案，不要解释。", "answers": ["施耐庵"]}
+{"id": "fact-09", "kind": "fact", "prompt": "《聊斋志异》的作者是谁？只回答答案，不要解释。", "answers": ["蒲松龄"]}
+{"id": "fact-10", "kind": "fact", "prompt": "《儒林外史》的作者是谁？只回答答案，不要解释。", "answers": ["吴敬梓"]}
+{"id": "fact-11", "kind": "fact", "prompt": "《哈姆雷特》的作者是谁？只回答答案，不要解释。", "answers": ["莎士比亚"]}
+{"id": "fact-12", "kind": "fact", "prompt": "“采菊东篱下”的作者是谁？只回答答案，不要解释。", "answers": ["陶渊明"]}
+{"id": "fact-13", "kind": "fact", "prompt": "“停车坐爱枫林晚”的下一句是什么？只回答答案，不要解释。", "answers": ["霜叶红于二月花"]}
+{"id": "fact-14", "kind": "fact", "prompt": "“会当凌绝顶”的作者是谁？只回答答案，不要解释。", "answers": ["杜甫"]}
+{"id": "fact-15", "kind": "fact", "prompt": "“春风又绿江南岸”的作者是谁？只回答答案，不要解释。", "answers": ["王安石"]}
+{"id": "fact-16", "kind": "fact", "prompt": "“但愿人长久”的下一句是什么？只回答答案，不要解释。", "answers": ["千里共婵娟"]}
+{"id": "fact-17", "kind": "fact", "prompt": "“人生自古谁无死”的下一句是什么？只回答答案，不要解释。", "answers": ["留取丹心照汗青"]}
+{"id": "fact-18", "kind": "fact", "prompt": "世界上最深的湖是哪个？只回答答案，不要解释。", "answers": ["贝加尔"]}
+{"id": "fact-19", "kind": "fact", "prompt": "人体最大的器官是什么？只回答答案，不要解释。", "answers": ["皮肤"]}
+{"id": "fact-20", "kind": "fact", "prompt": "非洲最高的山峰是哪座？只回答答案，不要解释。", "answers": ["乞力马扎罗"]}
+{"id": "fact-21", "kind": "fact", "prompt": "中国面积最大的省级行政区是哪个？只回答答案，不要解释。", "answers": ["新疆"]}
+{"id": "fact-22", "kind": "fact", "prompt": "成年人体内一共有多少块骨头？只回答答案，不要解释。", "answers": ["206"]}
+{"id": "fact-23", "kind": "fact", "prompt": "金的元素符号是什么？只回答答案，不要解释。", "answers": ["Au"]}
+{"id": "fact-24", "kind": "fact", "prompt": "钠的元素符号是什么？只回答答案，不要解释。", "answers": ["Na"]}
+{"id": "fact-25", "kind": "fact", "prompt": "最小的质数是几？只回答答案，不要解释。", "answers": ["2", "二"]}
+{"id": "fact-26", "kind": "fact", "prompt": "辛亥革命爆发于哪一年？只回答答案，不要解释。", "answers": ["1911"]}
+{"id": "fact-27", "kind": "fact", "prompt": "八国联军侵华是哪一年？只回答答案，不要解释。", "answers": ["1900"]}
+{"id": "fact-28", "kind": "fact", "prompt": "中国第一枚奥运会金牌是谁获得的？只回答答案，不要解释。", "answers": ["许海峰"]}
+{"id": "fact-29", "kind": "fact", "prompt": "元素周期律是谁发现的？只回答答案，不要解释。", "answers": ["门捷列夫"]}
+{"id": "fact-30", "kind": "fact", "prompt": "一年中北半球白天最长的节气是哪个？只回答答案，不要解释。", "answers": ["夏至"]}
+{"id": "fact-31", "kind": "fact", "prompt": "杜甫被后人称为什么？只回答答案，不要解释。", "answers": ["诗圣", "詩圣", "詩聖"]}
+{"id": "fact-32", "kind": "fact", "prompt": "太阳系中离太阳最近的行星是哪颗？只回答答案，不要解释。", "answers": ["水星"]}
+{"id": "fact-33", "kind": "fact", "prompt": "世界上落差最大的瀑布是哪个？只回答答案，不要解释。", "answers": ["安赫尔", "天使瀑布"]}
+{"id": "fact-34", "kind": "fact", "prompt": "世界上面积最大的沙漠（不算南极）是哪个？只回答答案，不要解释。", "answers": ["撒哈拉"]}
+{"id": "fact-35", "kind": "fact", "prompt": "蜀汉的开国皇帝是谁？只回答答案，不要解释。", "answers": ["刘备"]}
+{"id": "fact-36", "kind": "fact", "prompt": "“三顾茅庐”中被请的人是谁？只回答答案，不要解释。", "answers": ["诸葛亮"]}
+{"id": "fact-37", "kind": "fact", "prompt": "圆周率小数点后第 5 位数字是几？只回答答案，不要解释。", "answers": ["9", "九"]}
+{"id": "fact-38", "kind": "fact", "prompt": "日本的最高峰是哪座山？只回答答案，不要解释。", "answers": ["富士山"]}
+{"id": "fact-39", "kind": "fact", "prompt": "我国四大发明中，哪项最早用于航海指示方向？只回答答案，不要解释。", "answers": ["指南针", "司南"]}
+{"id": "code-00", "kind": "code", "test": ["assert rev_words('  the sky  is blue ')=='blue is sky the'", "assert rev_words('   ')==''"], "prompt": "用 Python 写一个函数 rev_words(s)：把句子中的单词顺序反转，单词之间用一个空格分隔，去掉首尾和多余空格。例：rev_words('a b')=='b a'。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-01", "kind": "code", "test": ["assert roman('MCMXCIV')==1994", "assert roman('XLIX')==49"], "prompt": "用 Python 写一个函数 roman(s)：把罗马数字字符串转成整数。例：roman('III')==3。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-02", "kind": "code", "test": ["assert to_roman(1994)=='MCMXCIV'", "assert to_roman(3999)=='MMMCMXCIX'", "assert to_roman(4)=='IV'"], "prompt": "用 Python 写一个函数 to_roman(n)：把 1 到 3999 的整数转成罗马数字字符串。例：to_roman(3)=='III'。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-03", "kind": "code", "test": ["assert snake('parseHTTPRequest')=='parse_http_request'", "assert snake('HTMLParser')=='html_parser'", "assert snake('simple')=='simple'"], "prompt": "用 Python 写一个函数 snake(s)：把驼峰命名转成小写下划线命名，连续大写字母算一个单词。例：snake('userId')=='user_id'。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-04", "kind": "code", "test": ["assert hms(0)=='00:00:00'", "assert hms(360000)=='100:00:00'", "assert hms(86399)=='23:59:59'"], "prompt": "用 Python 写一个函数 hms(sec)：把秒数转成 'HH:MM:SS' 字符串，小时至少两位、可以超过 99。例：hms(61)=='00:01:01'。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-05", "kind": "code", "test": ["assert second_max([3,1,3,2])==2", "assert second_max([5,5]) is None", "assert second_max([]) is None", "assert second_max([-1,-2])==-2"], "prompt": "用 Python 写一个函数 second_max(xs)：返回列表中第二大的不同数值，不存在时返回 None。例：second_max([1,2])==1。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-06", "kind": "code", "test": ["assert rle('')==''", "assert rle('z')=='z1'", "assert rle('aaaaaaaaaaaa')=='a12'"], "prompt": "用 Python 写一个函数 rle(s)：游程压缩，每段写成字符加次数。例：rle('aab')=='a2b1'。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-07", "kind": "code", "test": ["assert unrle('a12b1')=='a'*12+'b'", "assert unrle('')==''"], "prompt": "用 Python 写一个函数 unrle(s)：游程解压，次数可能是多位数。例：unrle('a2b1')=='aab'。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-08", "kind": "code", "test": ["assert chunks([],3)==[]", "assert chunks([1,2,3,4],2)==[[1,2],[3,4]]"], "prompt": "用 Python 写一个函数 chunks(xs, k)：把列表按每 k 个一组切分，最后一组可以不足 k 个。例：chunks([1,2,3],2)==[[1,2],[3]]。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-09", "kind": "code", "test": ["assert flatten([1,[2,[3,[4]]],5])==[1,2,3,4,5]", "assert flatten([(1,2),[3]])==[(1,2),3]", "assert flatten([])==[]"], "prompt": "用 Python 写一个函数 flatten(xs)：把任意层嵌套的列表展平成一维列表，元组不展开。例：flatten([1,[2]])==[1,2]。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-10", "kind": "code", "test": ["assert leap(2000)", "assert not leap(1900)", "assert not leap(2023)", "assert leap(2400)"], "prompt": "用 Python 写一个函数 leap(y)：判断公历年份是否为闰年。例：leap(2024) 为 True。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-11", "kind": "code", "test": ["assert days_between('2024-03-01','2024-02-28')==2", "assert days_between('2023-03-01','2023-02-28')==1", "assert days_between('2020-01-01','2020-01-01')==0"], "prompt": "用 Python 写一个函数 days_between(a, b)：a、b 是 'YYYY-MM-DD' 字符串，返回两个日期相差的天数（非负）。例：days_between('2024-01-01','2024-01-02')==1。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-12", "kind": "code", "test": ["assert median([4,1,3,2])==2.5", "assert median([5])==5", "assert median([1,1,2,9])==1.5"], "prompt": "用 Python 写一个函数 median(xs)：返回非空数字列表的中位数，偶数个时取中间两个的平均值。例：median([3,1,2])==2。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-13", "kind": "code", "test": ["assert word_freq('Hi, hi! HI.')=={'hi':3}", "assert word_freq('')=={}"], "prompt": "用 Python 写一个函数 word_freq(s)：统计英文句子里每个单词出现次数，忽略大小写和标点，返回字典。例：word_freq('a a')=={'a':2}。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-14", "kind": "code", "test": ["assert parse_kv('a=1;;b=x=y;')=={'a':'1','b':'x=y'}", "assert parse_kv('')=={}"], "prompt": "用 Python 写一个函数 parse_kv(s)：解析 'k1=v1;k2=v2' 格式的字符串为字典，忽略空段，值里可能含 '='。例：parse_kv('a=1')=={'a':'1'}。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-15", "kind": "code", "test": ["assert int_to_base(0,2)=='0'", "assert int_to_base(-255,16)=='-ff'", "assert int_to_base(35,36)=='z'"], "prompt": "用 Python 写一个函数 int_to_base(n, b)：把整数 n 转成 b 进制字符串（2<=b<=36，用 0-9a-z），支持负数和 0。例：int_to_base(5,2)=='101'。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-16", "kind": "code", "test": ["assert rotate([1,2,3],4)==[3,1,2]", "assert rotate([1,2,3],-1)==[2,3,1]", "assert rotate([],5)==[]"], "prompt": "用 Python 写一个函数 rotate(xs, k)：把列表向右循环移动 k 位，k 可能大于长度或为负数，返回新列表。例：rotate([1,2,3],1)==[3,1,2]。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-17", "kind": "code", "test": ["assert merge_intervals([[5,6],[1,2],[2,3]])==[[1,3],[5,6]]", "assert merge_intervals([])==[]", "assert merge_intervals([[1,10],[2,3]])==[[1,10]]"], "prompt": "用 Python 写一个函数 merge_intervals(xs)：合并重叠区间，输入是 [起,止] 列表、未排序，首尾相接也算重叠，返回按起点排序的列表。例：merge_intervals([[1,3],[2,4]])==[[1,4]]。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-18", "kind": "code", "test": ["assert title_case('hELLO  wORLD')=='Hello  World'", "assert title_case(' a')==' A'", "assert title_case('')==''"], "prompt": "用 Python 写一个函数 title_case(s)：把每个单词首字母大写、其余小写，单词间原有的空格数量保持不变。例：title_case('hi')=='Hi'。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-19", "kind": "code", "test": ["assert not is_ipv4('256.1.1.1')", "assert not is_ipv4('01.1.1.1')", "assert is_ipv4('0.0.0.0')", "assert not is_ipv4('1.2.3')", "assert not is_ipv4('1.2.3.4.5')", "assert not is_ipv4('a.b.c.d')"], "prompt": "用 Python 写一个函数 is_ipv4(s)：判断字符串是不是合法的点分十进制 IPv4 地址，每段 0-255、不允许前导零（单个 0 可以）。例：is_ipv4('1.2.3.4') 为 True。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-20", "kind": "code", "test": ["assert compare_versions('1.2.10','1.2.9')==1", "assert compare_versions('1.0','1.0.0')==0", "assert compare_versions('2','10')==-1"], "prompt": "用 Python 写一个函数 compare_versions(a, b)：比较 '1.2.10' 这样的版本号，a>b 返回 1，相等返回 0，否则 -1；缺的段按 0 算。例：compare_versions('1.0','1.1')==-1。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-21", "kind": "code", "test": ["assert count_islands([['1','1','0'],['0','1','0'],['1','0','1']])==3", "assert count_islands([])==0"], "prompt": "用 Python 写一个函数 count_islands(g)：g 是由 '1' 和 '0' 字符串组成的二维列表，返回上下左右相连的 '1' 区域个数。例：count_islands([['1']])==1。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-22", "kind": "code", "test": ["assert lcs_len('abcde','ace')==3", "assert lcs_len('','a')==0", "assert lcs_len('aaaa','aa')==2"], "prompt": "用 Python 写一个函数 lcs_len(a, b)：返回两个字符串最长公共子序列的长度。例：lcs_len('abc','ac')==2。只输出一个 ```python 代码块，不要解释，不要写测试。"}
+{"id": "code-23", "kind": "code", "test": ["assert top_k([3,1,1,3,2],2)==[3,1]", "assert top_k([4,5,6],2)==[4,5]", "assert top_k([],1)==[]"], "prompt": "用 Python 写一个函数 top_k(xs, k)：返回列表中出现次数最多的 k 个元素，次数相同时按元素第一次出现的顺序。例：top_k([1,1,2],1)==[1]。只输出一个 ```python 代码块，不要解释，不要写测试。"}
