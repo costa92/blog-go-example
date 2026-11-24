@@ -29,6 +29,7 @@
 - [Ollama /v1 兼容接口的静默差异](ollama-openai-compat/README.md)：同一请求分别发给 `/v1` 和原生接口，对照温度、上下文、`response_format`、工具调用和错误处理。
 - [Ollama 长提示词静默截断](ollama-context-truncation/README.md)：截断规则、任务说明写在哪里、`num_ctx` 的来源和显存代价。
 - [Ollama 提示词前缀缓存](ollama-prefix-cache/README.md)：时间戳位置、工具顺序、多轮对话和接口混用对缓存命中和首字延迟的影响。
+- [12GB 显卡上的 Ollama 参数](ollama-12gb-tuning/README.md)：`num_ctx`、Flash Attention、KV 缓存量化和 `OLLAMA_NUM_PARALLEL` 的显存、速度和长上下文检索判分脚本，附原始结果。
 - [本地代码模型的采样温度](local-model-temperature/README.md)：10 道带隐藏测试的 Python 题，5 档温度下的通过率、多样性和可复现性，附 MiniMax 对照。
 - [本地嵌入模型的中文检索](local-embedding-chinese-retrieval/README.md)：48 段中英文语料、40 条问题，测 recall、词表覆盖和长文档截断。
 - [大模型结构化 JSON 输出](llm-json-output/README.md)：36 条客服消息抽字段，对比提示词、`format: json` 和 JSON Schema，附 MiniMax 对照。

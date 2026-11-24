@@ -1,0 +1,4 @@
+q4_0 '2' 42
+q4_0 'Certainly! Below is a simple Go program that reversverses a string:\n\n```go\npackage main\n\nimport (\n\t"fmt"\n)\n\n//// reverseString reverses the given stri' 39
+q8_0 '5' 42
+q8_0 'Certainly! Below is a simple Go function that reverses a string:\n\n```go\npackage main\n\nimport (\n\t"fmt"\n)\n\n// ReverseString reverses the given string.\nf' 39
