@@ -126,7 +126,20 @@ go run ./superagent/cmd/superagent -mode demo -live -state-dir "$live_state"
 
 `event` 和 `work` 阶段均需带 `-live`；`deliver` 与 `status` 不调用模型。缺少配置直接报错，不自动降级成离线响应。协调器响应须为带布尔 `accept` 的 JSON，格式错误会停止接单。默认方案模式每次 Agent 调用限制 45 秒、命令限制 3 分钟，并发上限默认 2；编码模式的时限见对应说明。超时会消耗已发起的模型请求，不能据此保证固定金额预算。
 
-默认真实模型模式仍只生成方案；编码模式按单独说明开启 Harness 工具。通知仍使用本地模拟接收端。本次验证覆盖离线执行和本地 HTTP 流式接口契约，没有实测外部模型服务，也没有验证真实模型的判断质量。
+默认真实模型模式仍只生成方案；编码模式按单独说明开启 Harness 工具。通知仍使用本地模拟接收端。编码模式接真实 DeepSeek 的 20 次测量见下一节；默认方案模式没有做同样的批量测量。
+
+## 真实模型测量（2026-11-24）
+
+`cmd/usagelog` 是本地测量代理：转发 OpenAI-compatible 请求，为流式请求补上 `stream_options.include_usage`，每个请求写一行 JSON（角色、token 用量、工具调用、历史中被拒命令数），不记录 Authorization 头。`run_live.sh` 每次运行起一个代理和一个新状态目录，`summarize.py` 汇总成每次一行的 CSV（价格按 deepseek-flash 2026-11 官方价，区分高峰与非高峰）。
+
+```bash
+go build -o "$D/sa" ./superagent/cmd/superagent
+go build -o "$D/usagelog" ./superagent/cmd/usagelog
+D="$D" ./superagent/cmd/usagelog/run_live.sh 1 20     # 需要 DEEPSEEK_API_KEY 与 Docker
+python3 superagent/cmd/usagelog/summarize.py "$D/runs" > results.csv
+```
+
+`results/2026-11-24-deepseek-flash/` 保存了 20 次 `coding-demo -live` 的原始 JSONL、汇总 CSV 和墙钟时间。镜像用的是本机已有的 `golang:1.27`。结果：20 次全部进入 ready 且宿主独立测试通过；Worker 每次 5 到 7 次模型请求；20 次都恰好有 1 条命令被策略拒绝；宿主拦下虚报完成 0 次；按 token 计算合计约 0.048 美元。
 
 ## 恢复与边界
 
