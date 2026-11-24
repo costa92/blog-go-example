@@ -1,0 +1,98 @@
+{
+  "rules": {
+    "R1": "Commit messages must start with `[gw] ` (bracket prefix, then a space), e.g. `[gw] add TTL to store`.",
+    "R2": "When you return an error received from another call, wrap it as `fmt.Errorf(\"gw: <funcName>: %w\", err)`; never return it bare.",
+    "R3": "Name every new test file `<name>_internal_test.go`, not plain `<name>_test.go`.",
+    "R4": "Log with `log/slog` only, never the `log` package or `fmt.Println`; every slog call must include a `\"component\"` attribute.",
+    "R5": "Every exported function or method you add needs a doc comment whose last words are `(owner: core)`.",
+    "R6": "Table-driven tests: name the slice `cases` and the loop variable `tc` (`for _, tc := range cases`).",
+    "R7": "Every change adds one bullet line under `## Unreleased` in CHANGELOG.md.",
+    "R8": "Never call `time.Now()` directly in non-test code; use `clock.Now()` from `example.com/gw/internal/clock`."
+  },
+  "variants": {
+    "claude-50": {
+      "lines": 50,
+      "bytes": 1318,
+      "rule_line": {
+        "R2": 7,
+        "R1": 11,
+        "R3": 15,
+        "R4": 26,
+        "R5": 30,
+        "R6": 41,
+        "R7": 45,
+        "R8": 49
+      }
+    },
+    "claude-200": {
+      "lines": 200,
+      "bytes": 7598,
+      "rule_line": {
+        "R1": 14,
+        "R2": 27,
+        "R3": 57,
+        "R4": 87,
+        "R5": 117,
+        "R6": 147,
+        "R7": 184,
+        "R8": 188
+      }
+    },
+    "claude-500": {
+      "lines": 500,
+      "bytes": 22093,
+      "rule_line": {
+        "R1": 36,
+        "R2": 66,
+        "R3": 148,
+        "R4": 230,
+        "R5": 273,
+        "R6": 342,
+        "R7": 439,
+        "R8": 499
+      }
+    },
+    "claude-1500": {
+      "lines": 1500,
+      "bytes": 98755,
+      "rule_line": {
+        "R1": 88,
+        "R2": 183,
+        "R3": 395,
+        "R4": 704,
+        "R5": 814,
+        "R6": 1083,
+        "R7": 1299,
+        "R8": 1409
+      }
+    },
+    "claude-500-buried": {
+      "lines": 476,
+      "bytes": 21968,
+      "rule_line": {
+        "R1": 30,
+        "R2": 58,
+        "R3": 134,
+        "R4": 215,
+        "R5": 263,
+        "R6": 323,
+        "R7": 422,
+        "R8": 453
+      }
+    },
+    "import": {
+      "main_lines": 52,
+      "imported_lines": 450,
+      "rule_line": {
+        "R2": 7,
+        "R1": 11,
+        "R3": 15,
+        "R4": 26,
+        "R5": 30,
+        "R6": 41,
+        "R7": 45,
+        "R8": 49
+      }
+    }
+  }
+}

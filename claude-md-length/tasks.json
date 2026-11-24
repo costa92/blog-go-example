@@ -1,0 +1,22 @@
+[
+ {"id":"T01","rules":["R1","R2","R3","R5","R6","R7"],
+  "prompt":"Add `func LoadConfig(path string) (Config, error)` to internal/config. It reads a JSON file and fills a Config that starts from Default(). Add table-driven tests for it."},
+ {"id":"T02","rules":["R1","R3","R5","R6","R7","R8"],
+  "prompt":"Add expiry to internal/store: a method `SetWithTTL(key, value string, ttl time.Duration)`; Get must return ErrNotFound for an expired key. Add table-driven tests."},
+ {"id":"T03","rules":["R1","R2","R5","R7"],
+  "prompt":"Add a method `Snapshot(path string) error` to store.Store that writes all keys and values to the file as a JSON object."},
+ {"id":"T04","rules":["R1","R4","R7"],
+  "prompt":"In cmd/gw/main.go, log a line at startup with the listen address, and log the error before exiting when ListenAndServe fails."},
+ {"id":"T05","rules":["R1","R4","R5","R7"],
+  "prompt":"Create package internal/api with `func NewHandler(s *store.Store) http.Handler` that serves GET /kv/{key} (200 with the value, 404 if missing) and logs every request with method, path and status."},
+ {"id":"T06","rules":["R1","R2","R3","R5","R6","R7"],
+  "prompt":"Add `func ParseDuration(s string) (time.Duration, error)` to internal/config. It accepts everything time.ParseDuration accepts plus a `d` suffix for days (e.g. `2d`). Add table-driven tests."},
+ {"id":"T07","rules":["R1","R5","R7","R8"],
+  "prompt":"Add a method `Stats() Stats` to store.Store. Stats has `Keys int` and `LastWrite time.Time`; LastWrite is updated on every Set."},
+ {"id":"T08","rules":["R1","R2","R3","R5","R6","R7"],
+  "prompt":"Add `func ReadKeys(path string) ([]string, error)` to internal/store. It reads a file with one key per line and skips blank lines. Add table-driven tests."},
+ {"id":"T09","rules":["R1","R4","R5","R7","R8"],
+  "prompt":"Create package internal/health with `type Report struct { OK bool; Keys int; CheckedAt time.Time }` and `func Check(s *store.Store) Report`. Check is OK when the store can Set and Get a probe key; log a warning when it is not OK."},
+ {"id":"T10","rules":["R1","R3","R6","R7"],
+  "prompt":"store.Store has no tests yet. Add table-driven tests for Get and Set, including the ErrNotFound case."}
+]
