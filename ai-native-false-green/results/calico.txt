@@ -1,0 +1,72 @@
+$ kubectl apply -f calico-v3.32.1.yaml
+poddisruptionbudget.policy/calico-kube-controllers created
+serviceaccount/calico-kube-controllers created
+serviceaccount/calico-node created
+serviceaccount/calico-cni-plugin created
+configmap/calico-config created
+customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/bgpfilters.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
+Warning: unrecognized format "cidr"
+customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/stagedglobalnetworkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/stagedkubernetesnetworkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/stagednetworkpolicies.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/tiers.crd.projectcalico.org created
+customresourcedefinition.apiextensions.k8s.io/clusternetworkpolicies.policy.networking.k8s.io created
+clusterrole.rbac.authorization.k8s.io/calico-kube-controllers created
+clusterrole.rbac.authorization.k8s.io/calico-node created
+clusterrole.rbac.authorization.k8s.io/calico-cni-plugin created
+clusterrole.rbac.authorization.k8s.io/calico-tier-getter created
+clusterrolebinding.rbac.authorization.k8s.io/calico-kube-controllers created
+clusterrolebinding.rbac.authorization.k8s.io/calico-node created
+clusterrolebinding.rbac.authorization.k8s.io/calico-cni-plugin created
+clusterrolebinding.rbac.authorization.k8s.io/calico-tier-getter created
+daemonset.apps/calico-node created
+deployment.apps/calico-kube-controllers created
+$ kind version
+kind v0.33.0 go1.27.4 linux/amd64
+$ kubectl version
+Client Version: v1.37.0
+Kustomize Version: v5.8.1
+Server Version: v1.37.0
+$ kubectl get pods -n kube-system -o custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image -l k8s-app in (kindnet,calico-node)
+NAME                IMAGE
+calico-node-mdljw   quay.io/calico/node:v3.32.1
+$ kubectl get pod -n np-demo -o wide
+NAME     READY   STATUS    RESTARTS   AGE    IP               NODE                      NOMINATED NODE   READINESS GATES
+client   1/1     Running   0          103s   192.168.113.70   np-calico-control-plane   <none>           <none>
+server   1/1     Running   0          105s   192.168.113.69   np-calico-control-plane   <none>           <none>
+--- no policy
+$ kubectl exec -n np-demo client -- curl -sS -o /dev/null -m 5 -w %{http_code}\n http://192.168.113.69/
+200
+$ kubectl apply -f manifests/default-deny.yaml
+networkpolicy.networking.k8s.io/default-deny created
+$ kubectl get networkpolicy -n np-demo
+NAME           POD-SELECTOR   AGE
+default-deny   <none>         0s
+--- default-deny
+$ kubectl exec -n np-demo client -- curl -sS -o /dev/null -m 5 -w %{http_code}\n http://192.168.113.69/
+curl: (28) Connection timed out after 5001 milliseconds
+000
+command terminated with exit code 28
+$ kubectl apply -f manifests/allow-client-to-server.yaml
+networkpolicy.networking.k8s.io/allow-client-to-server created
+networkpolicy.networking.k8s.io/allow-client-egress created
+--- default-deny + allow client->server:80
+$ kubectl exec -n np-demo client -- curl -sS -o /dev/null -m 5 -w %{http_code}\n http://192.168.113.69/
+200

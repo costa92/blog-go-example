@@ -1,0 +1,3 @@
+I1124 08:56:37.401924       1 controller.go:334] Starting controller kube-network-policies
+I1124 08:56:37.401945       1 shared_informer.go:313] Waiting for caches to sync for kube-network-policies
+I1124 08:56:37.549684       1 shared_informer.go:320] Caches are synced for kube-network-policies

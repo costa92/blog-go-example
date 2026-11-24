@@ -1,0 +1,32 @@
+$ kind version
+kind v0.33.0 go1.27.4 linux/amd64
+$ kubectl version
+Client Version: v1.37.0
+Kustomize Version: v5.8.1
+Server Version: v1.37.0
+$ kubectl get pods -n kube-system -o custom-columns=NAME:.metadata.name,IMAGE:.spec.containers[0].image -l k8s-app in (kindnet,calico-node)
+NAME            IMAGE
+kindnet-4fvpk   docker.io/kindest/kindnetd:v20260820-69b56db7
+$ kubectl get pod -n np-demo -o wide
+NAME     READY   STATUS    RESTARTS   AGE   IP           NODE                        NOMINATED NODE   READINESS GATES
+client   1/1     Running   0          48s   10.244.0.6   np-kindnetd-control-plane   <none>           <none>
+server   1/1     Running   0          50s   10.244.0.5   np-kindnetd-control-plane   <none>           <none>
+--- no policy
+$ kubectl exec -n np-demo client -- curl -sS -o /dev/null -m 5 -w %{http_code}\n http://10.244.0.5/
+200
+$ kubectl apply -f manifests/default-deny.yaml
+networkpolicy.networking.k8s.io/default-deny created
+$ kubectl get networkpolicy -n np-demo
+NAME           POD-SELECTOR   AGE
+default-deny   <none>         0s
+--- default-deny
+$ kubectl exec -n np-demo client -- curl -sS -o /dev/null -m 5 -w %{http_code}\n http://10.244.0.5/
+curl: (28) Connection timed out after 5001 milliseconds
+000
+command terminated with exit code 28
+$ kubectl apply -f manifests/allow-client-to-server.yaml
+networkpolicy.networking.k8s.io/allow-client-to-server created
+networkpolicy.networking.k8s.io/allow-client-egress created
+--- default-deny + allow client->server:80
+$ kubectl exec -n np-demo client -- curl -sS -o /dev/null -m 5 -w %{http_code}\n http://10.244.0.5/
+200

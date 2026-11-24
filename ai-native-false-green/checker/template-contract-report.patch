@@ -1,0 +1,31 @@
+diff --git a/platform/backstage/tools/template-contract.mjs b/platform/backstage/tools/template-contract.mjs
+index 06ad322..5291e98 100644
+--- a/platform/backstage/tools/template-contract.mjs
++++ b/platform/backstage/tools/template-contract.mjs
+@@ -136,14 +136,25 @@ export async function verifyContract(root, workspace, values) {
+     ['Argo middleware permission removed', 'deploy/argocd/project.yaml', text => text.replace('  - {group: traefik.io, kind: Middleware}\n', ''), /Delivery\/AppProject forbids Middleware/],
+     ['Argo TLS permission removed', 'deploy/argocd/project.yaml', text => text.replace('  - {group: traefik.io, kind: TLSOption}\n', ''), /Delivery\/AppProject forbids TLSOption/],
+   );
+-  for (const [name, file, mutate, error] of defects) {
++  const report = process.env.CONTRACT_REPORT;
++  const all = report ? [...defects.map(d => [...d, 'builtin']), ...(await import(process.env.EXTRA_DEFECTS)).extraDefects(values).map(d => [...d, undefined, 'extra'])] : defects;
++  const { appendFile } = await import('node:fs/promises');
++  for (const [name, file, mutate, error, source] of all) {
+     const full = path.join(workspace, file);
+     const original = await readFile(full, 'utf8');
+     const broken = mutate(original);
++    if (report && broken === original) { await appendFile(report, JSON.stringify({service: values.name, source, name, file, outcome: 'fixture-no-change'}) + '\n'); continue; }
+     assert.notEqual(broken, original, `${name}: fixture made no change`);
+     try {
+       await writeFile(full, broken);
++      const started = Date.now();
+       const result = check();
++      if (report) {
++        const firstLine = (result.stderr || '').split('\n').find(l => l.trim()) || '';
++        const outcome = result.status === 0 ? 'passed (false green)' : (error ? (error.test(result.stderr) ? 'rejected' : 'rejected (other reason)') : 'rejected');
++        await appendFile(report, JSON.stringify({service: values.name, source, name, file, status: result.status, outcome, ms: Date.now() - started, firstError: firstLine.slice(0, 200)}) + '\n');
++        continue;
++      }
+       assert.notEqual(result.status, 0, `${name}: contract falsely passed`);
+       assert.match(result.stderr, error, `${name}: wrong failure`);
+     } finally { await writeFile(full, original); }

@@ -1,0 +1,244 @@
+service,source,name,file,exit_status,outcome,check_ms
+w17-inventory-api,builtin,signing step removed,.github/workflows/ci.yaml,1,rejected,1518
+w17-inventory-api,builtin,signing failure ignored,.github/workflows/ci.yaml,1,rejected,1300
+w17-inventory-api,builtin,signing COSIGN_PRIVATE_KEY source removed,.github/workflows/ci.yaml,1,rejected,1322
+w17-inventory-api,builtin,signing COSIGN_PASSWORD source removed,.github/workflows/ci.yaml,1,rejected,1413
+w17-inventory-api,builtin,signing COSIGN_PUBLIC_KEY source removed,.github/workflows/ci.yaml,1,rejected,1413
+w17-inventory-api,builtin,signing pair check removed,scripts/workload/create-signed-image-proposal.sh,1,rejected,1609
+w17-inventory-api,builtin,signing command removed,scripts/workload/create-signed-image-proposal.sh,1,rejected,1824
+w17-inventory-api,builtin,verification removed,scripts/workload/create-signed-image-proposal.sh,1,rejected,1519
+w17-inventory-api,builtin,verification failure ignored,scripts/workload/create-signed-image-proposal.sh,1,rejected,1423
+w17-inventory-api,builtin,proposal starts before verification,scripts/workload/create-signed-image-proposal.sh,1,rejected,1498
+w17-inventory-api,builtin,signature claims bypassed,scripts/workload/create-signed-image-proposal.sh,1,rejected,1287
+w17-inventory-api,builtin,insecure registry enabled,scripts/workload/create-signed-image-proposal.sh,1,rejected,1235
+w17-inventory-api,builtin,signature environment inherited,scripts/workload/create-signed-image-proposal.sh,1,rejected,1262
+w17-inventory-api,builtin,cosign unpinned,.tool-versions,1,rejected,1274
+w17-inventory-api,builtin,cosign checksum bypassed,scripts/toolchain/install-tools.sh,1,rejected,1270
+w17-inventory-api,builtin,GitOps mutable image permitted,deploy/helm/values-gitops.yaml,1,rejected,1305
+w17-inventory-api,builtin,GitOps approval guard removed,deploy/helm/templates/workload.yaml,1,rejected,1429
+w17-inventory-api,builtin,pull Secret omitted,deploy/helm/templates/workload.yaml,1,rejected,1360
+w17-inventory-api,builtin,GitOps SSH source replaced,deploy/argocd/dev.yaml,1,rejected,1488
+w17-inventory-api,builtin,empty build recipe,Makefile,1,rejected,63
+w17-inventory-api,builtin,broken Make prerequisite,Makefile,1,rejected,61
+w17-inventory-api,builtin,wrong image identity,Makefile,1,rejected,84
+w17-inventory-api,builtin,version route removed,cmd/server/main.go,1,rejected,821
+w17-inventory-api,builtin,runtime test skipped,cmd/server/main_test.go,1,rejected,830
+w17-inventory-api,builtin,CI gate removed,.github/workflows/ci.yaml,1,rejected,1490
+w17-inventory-api,builtin,CI compilation removed,.github/workflows/ci.yaml,1,rejected,1587
+w17-inventory-api,builtin,CI named binary context removed,.github/workflows/ci.yaml,1,rejected,1526
+w17-inventory-api,builtin,CI image runtime check removed,.github/workflows/ci.yaml,1,rejected,1522
+w17-inventory-api,builtin,CI dependency check removed,.github/workflows/ci.yaml,1,rejected,1503
+w17-inventory-api,builtin,CI GoSec removed,.github/workflows/ci.yaml,1,rejected,1495
+w17-inventory-api,builtin,GoSec missing recipe,Makefile,1,rejected,54
+w17-inventory-api,builtin,GoSec findings ignored,Makefile,1,rejected,1467
+w17-inventory-api,builtin,GoSec shell failure ignored,Makefile,1,rejected,1422
+w17-inventory-api,builtin,GoSec unpinned,.tool-versions,1,rejected,1438
+w17-inventory-api,builtin,pool open bound removed,internal/dependency/postgres.go,1,rejected,909
+w17-inventory-api,builtin,pool idle bound removed,internal/dependency/postgres.go,1,rejected,1169
+w17-inventory-api,builtin,pool lifetime removed,internal/dependency/postgres.go,1,rejected,998
+w17-inventory-api,builtin,pool constructor bypassed,internal/dependency/postgres.go,1,rejected,900
+w17-inventory-api,builtin,pool SQL text disclosure enabled,internal/dependency/postgres.go,1,rejected,914
+w17-inventory-api,builtin,pool readiness tracing enabled,internal/dependency/postgres.go,1,rejected,930
+w17-inventory-api,builtin,pool contract skipped,internal/dependency/postgres_test.go,1,rejected,965
+w17-inventory-api,builtin,HTTP client budget extended,internal/dependency/http.go,1,rejected,1677
+w17-inventory-api,builtin,HTTP context budget removed,internal/dependency/http.go,1,rejected,1550
+w17-inventory-api,builtin,HTTP caller context bypassed,internal/dependency/http.go,1,rejected,7345
+w17-inventory-api,builtin,HTTP body cancelled too early,internal/dependency/http.go,1,rejected,1580
+w17-inventory-api,builtin,HTTP close cancellation removed,internal/dependency/http.go,1,rejected,1816
+w17-inventory-api,builtin,HTTP tracing removed,internal/dependency/http.go,1,rejected,1802
+w17-inventory-api,builtin,HTTP contract skipped,internal/dependency/http_test.go,1,rejected,2101
+w17-inventory-api,builtin,HTTP raw caller added,cmd/server/main.go,1,rejected,1658
+w17-inventory-api,builtin,HTTP cross-origin redirect enabled,internal/dependency/http.go,1,rejected,1413
+w17-inventory-api,builtin,CI scan made nonblocking,.github/workflows/ci.yaml,1,rejected,1440
+w17-inventory-api,builtin,CI permission expanded,.github/workflows/ci.yaml,1,rejected,1481
+w17-inventory-api,builtin,CI verification skipped,.github/workflows/ci.yaml,1,rejected,1255
+w17-inventory-api,builtin,race job removed,.github/workflows/ci.yaml,1,rejected,1207
+w17-inventory-api,builtin,race command removed,.github/workflows/ci.yaml,1,rejected,1317
+w17-inventory-api,builtin,race job skipped,.github/workflows/ci.yaml,1,rejected,1256
+w17-inventory-api,builtin,race failure ignored,.github/workflows/ci.yaml,1,rejected,1242
+w17-inventory-api,builtin,race step failure ignored,.github/workflows/ci.yaml,1,rejected,1262
+w17-inventory-api,builtin,race permission expanded,.github/workflows/ci.yaml,1,rejected,1452
+w17-inventory-api,builtin,race runs after image verification,.github/workflows/ci.yaml,1,rejected,1243
+w17-inventory-api,builtin,race checks another commit,.github/workflows/ci.yaml,1,rejected,1375
+w17-inventory-api,builtin,race uses another Go version,.github/workflows/ci.yaml,1,rejected,1443
+w17-inventory-api,builtin,race cache shares image cache,.github/workflows/ci.yaml,1,rejected,1311
+w17-inventory-api,builtin,race flag removed,Makefile,1,rejected,1652
+w17-inventory-api,builtin,publish detached from verification,.github/workflows/ci.yaml,1,rejected,1384
+w17-inventory-api,builtin,publish ignores race job,.github/workflows/ci.yaml,1,rejected,1590
+w17-inventory-api,builtin,publish ignores image verification,.github/workflows/ci.yaml,1,rejected,1377
+w17-inventory-api,builtin,publish uses always on failed dependencies,.github/workflows/ci.yaml,1,rejected,1372
+w17-inventory-api,builtin,static binary producer changed,Makefile,1,rejected,1360
+w17-inventory-api,builtin,image byte comparison removed,scripts/workload/tests/test-image-runtime.sh,1,rejected,1420
+w17-inventory-api,builtin,image runtime stage replaced,Dockerfile,1,rejected,1789
+w17-inventory-api,builtin,Catalog owner changed,catalog-info.yaml,1,rejected,1367
+w17-inventory-api,builtin,CODEOWNERS removed,.github/CODEOWNERS,1,rejected,1375
+w17-inventory-api,builtin,runbook contact removed,docs/runbook.md,1,rejected,1392
+w17-inventory-api,builtin,readiness probe removed,deploy/helm/templates/workload.yaml,1,rejected,1269
+w17-inventory-api,builtin,read-only filesystem removed,deploy/helm/templates/workload.yaml,1,rejected,1521
+w17-inventory-api,builtin,service account token enabled,deploy/helm/templates/workload.yaml,1,rejected,1481
+w17-inventory-api,builtin,network policy removed,deploy/helm/templates/networkpolicy.yaml,1,rejected,1850
+w17-inventory-api,builtin,egress isolation removed,deploy/helm/templates/networkpolicy.yaml,1,rejected,1486
+w17-inventory-api,builtin,egress namespace and pod split into OR,deploy/helm/templates/networkpolicy.yaml,1,rejected,1413
+w17-inventory-api,builtin,egress DNS widened,deploy/helm/templates/networkpolicy.yaml,1,rejected,1447
+w17-inventory-api,builtin,egress DNS port widened,deploy/helm/templates/networkpolicy.yaml,1,rejected,1449
+w17-inventory-api,builtin,egress collector widened,deploy/helm/templates/networkpolicy.yaml,1,rejected,1636
+w17-inventory-api,builtin,egress global allow added,deploy/helm/templates/networkpolicy.yaml,1,rejected,1596
+w17-inventory-api,builtin,egress hidden in ingress policy,deploy/helm/templates/networkpolicy.yaml,1,rejected,1690
+w17-inventory-api,builtin,egress host networking bypass,deploy/helm/templates/workload.yaml,1,rejected,1511
+w17-inventory-api,builtin,monitor removed,deploy/helm/templates/monitoring.yaml,1,rejected,1784
+w17-inventory-api,builtin,dashboard removed,deploy/helm/templates/dashboard.yaml,1,rejected,1370
+w17-inventory-api,builtin,digest ignored,deploy/helm/templates/workload.yaml,1,rejected,1412
+w17-inventory-api,builtin,alert recipient changed,deploy/helm/templates/slo-availability.yaml,1,rejected,1570
+w17-inventory-api,builtin,CPU limit added,deploy/helm/templates/workload.yaml,1,rejected,1494
+w17-inventory-api,builtin,memory limit reduced,deploy/helm/templates/workload.yaml,1,rejected,1453
+w17-inventory-api,builtin,preStop removed,deploy/helm/templates/workload.yaml,1,rejected,1457
+w17-inventory-api,builtin,startup budget reduced,deploy/helm/templates/workload.yaml,1,rejected,1401
+w17-inventory-api,builtin,topology selector changed,deploy/helm/templates/workload.yaml,1,rejected,1430
+w17-inventory-api,builtin,dev replica count changed,deploy/helm/values-dev.yaml,1,rejected,1380
+w17-inventory-api,builtin,minimum Kubernetes version removed,deploy/helm/Chart.yaml,1,rejected,1368
+w17-inventory-api,builtin,Argo workload permission removed,deploy/argocd/project.yaml,1,rejected,1400
+w17-inventory-api,extra,readiness probe on wrong port,deploy/helm/templates/workload.yaml,0,passed (false green),1403
+w17-inventory-api,extra,liveness probe on wrong port,deploy/helm/templates/workload.yaml,0,passed (false green),1410
+w17-inventory-api,extra,Service targetPort points nowhere,deploy/helm/templates/workload.yaml,0,passed (false green),1329
+w17-inventory-api,extra,container command replaced by sleep,deploy/helm/templates/workload.yaml,0,passed (false green),1522
+w17-inventory-api,extra,Prometheus peer label typo,deploy/helm/templates/networkpolicy.yaml,0,passed (false green),1273
+w17-inventory-api,extra,ingress opened to every pod in monitoring namespace,deploy/helm/templates/networkpolicy.yaml,0,passed (false green),1328
+w17-inventory-api,extra,SA token mounted via projected volume,deploy/helm/templates/workload.yaml,0,passed (false green),1319
+w17-inventory-api,extra,memory request cut to 1Mi,deploy/helm/templates/workload.yaml,1,rejected,1460
+w17-inventory-api,extra,readiness checked every 300s,deploy/helm/templates/workload.yaml,0,passed (false green),1325
+w17-customer-api,builtin,signing step removed,.github/workflows/ci.yaml,1,rejected,1654
+w17-customer-api,builtin,signing failure ignored,.github/workflows/ci.yaml,1,rejected,1705
+w17-customer-api,builtin,signing COSIGN_PRIVATE_KEY source removed,.github/workflows/ci.yaml,1,rejected,1666
+w17-customer-api,builtin,signing COSIGN_PASSWORD source removed,.github/workflows/ci.yaml,1,rejected,1742
+w17-customer-api,builtin,signing COSIGN_PUBLIC_KEY source removed,.github/workflows/ci.yaml,1,rejected,1658
+w17-customer-api,builtin,signing pair check removed,scripts/workload/create-signed-image-proposal.sh,1,rejected,1640
+w17-customer-api,builtin,signing command removed,scripts/workload/create-signed-image-proposal.sh,1,rejected,1550
+w17-customer-api,builtin,verification removed,scripts/workload/create-signed-image-proposal.sh,1,rejected,1501
+w17-customer-api,builtin,verification failure ignored,scripts/workload/create-signed-image-proposal.sh,1,rejected,1782
+w17-customer-api,builtin,proposal starts before verification,scripts/workload/create-signed-image-proposal.sh,1,rejected,1521
+w17-customer-api,builtin,signature claims bypassed,scripts/workload/create-signed-image-proposal.sh,1,rejected,1550
+w17-customer-api,builtin,insecure registry enabled,scripts/workload/create-signed-image-proposal.sh,1,rejected,1555
+w17-customer-api,builtin,signature environment inherited,scripts/workload/create-signed-image-proposal.sh,1,rejected,1847
+w17-customer-api,builtin,cosign unpinned,.tool-versions,1,rejected,1673
+w17-customer-api,builtin,cosign checksum bypassed,scripts/toolchain/install-tools.sh,1,rejected,1698
+w17-customer-api,builtin,GitOps mutable image permitted,deploy/helm/values-gitops.yaml,1,rejected,1801
+w17-customer-api,builtin,GitOps approval guard removed,deploy/helm/templates/workload.yaml,1,rejected,1876
+w17-customer-api,builtin,pull Secret omitted,deploy/helm/templates/workload.yaml,1,rejected,1862
+w17-customer-api,builtin,GitOps SSH source replaced,deploy/argocd/dev.yaml,1,rejected,1684
+w17-customer-api,builtin,empty build recipe,Makefile,1,rejected,62
+w17-customer-api,builtin,broken Make prerequisite,Makefile,1,rejected,50
+w17-customer-api,builtin,wrong image identity,Makefile,1,rejected,85
+w17-customer-api,builtin,version route removed,cmd/server/main.go,1,rejected,984
+w17-customer-api,builtin,runtime test skipped,cmd/server/main_test.go,1,rejected,1032
+w17-customer-api,builtin,CI gate removed,.github/workflows/ci.yaml,1,rejected,1639
+w17-customer-api,builtin,CI compilation removed,.github/workflows/ci.yaml,1,rejected,1548
+w17-customer-api,builtin,CI named binary context removed,.github/workflows/ci.yaml,1,rejected,1748
+w17-customer-api,builtin,CI image runtime check removed,.github/workflows/ci.yaml,1,rejected,1772
+w17-customer-api,builtin,CI dependency check removed,.github/workflows/ci.yaml,1,rejected,1653
+w17-customer-api,builtin,CI GoSec removed,.github/workflows/ci.yaml,1,rejected,1625
+w17-customer-api,builtin,GoSec missing recipe,Makefile,1,rejected,53
+w17-customer-api,builtin,GoSec findings ignored,Makefile,1,rejected,1798
+w17-customer-api,builtin,GoSec shell failure ignored,Makefile,1,rejected,1787
+w17-customer-api,builtin,GoSec unpinned,.tool-versions,1,rejected,1512
+w17-customer-api,builtin,pool open bound removed,internal/dependency/postgres.go,1,rejected,1128
+w17-customer-api,builtin,pool idle bound removed,internal/dependency/postgres.go,1,rejected,1210
+w17-customer-api,builtin,pool lifetime removed,internal/dependency/postgres.go,1,rejected,1345
+w17-customer-api,builtin,pool constructor bypassed,internal/dependency/postgres.go,1,rejected,1319
+w17-customer-api,builtin,pool SQL text disclosure enabled,internal/dependency/postgres.go,1,rejected,1416
+w17-customer-api,builtin,pool readiness tracing enabled,internal/dependency/postgres.go,1,rejected,1409
+w17-customer-api,builtin,pool contract skipped,internal/dependency/postgres_test.go,1,rejected,1290
+w17-customer-api,builtin,HTTP client budget extended,internal/dependency/http.go,1,rejected,2318
+w17-customer-api,builtin,HTTP context budget removed,internal/dependency/http.go,1,rejected,2350
+w17-customer-api,builtin,HTTP caller context bypassed,internal/dependency/http.go,1,rejected,8068
+w17-customer-api,builtin,HTTP body cancelled too early,internal/dependency/http.go,1,rejected,1959
+w17-customer-api,builtin,HTTP close cancellation removed,internal/dependency/http.go,1,rejected,1933
+w17-customer-api,builtin,HTTP tracing removed,internal/dependency/http.go,1,rejected,2412
+w17-customer-api,builtin,HTTP contract skipped,internal/dependency/http_test.go,1,rejected,2095
+w17-customer-api,builtin,HTTP raw caller added,cmd/server/main.go,1,rejected,1989
+w17-customer-api,builtin,HTTP cross-origin redirect enabled,internal/dependency/http.go,1,rejected,2431
+w17-customer-api,builtin,CI scan made nonblocking,.github/workflows/ci.yaml,1,rejected,1715
+w17-customer-api,builtin,CI permission expanded,.github/workflows/ci.yaml,1,rejected,1922
+w17-customer-api,builtin,CI verification skipped,.github/workflows/ci.yaml,1,rejected,1733
+w17-customer-api,builtin,race job removed,.github/workflows/ci.yaml,1,rejected,1643
+w17-customer-api,builtin,race command removed,.github/workflows/ci.yaml,1,rejected,1651
+w17-customer-api,builtin,race job skipped,.github/workflows/ci.yaml,1,rejected,1420
+w17-customer-api,builtin,race failure ignored,.github/workflows/ci.yaml,1,rejected,1489
+w17-customer-api,builtin,race step failure ignored,.github/workflows/ci.yaml,1,rejected,1483
+w17-customer-api,builtin,race permission expanded,.github/workflows/ci.yaml,1,rejected,1563
+w17-customer-api,builtin,race runs after image verification,.github/workflows/ci.yaml,1,rejected,1662
+w17-customer-api,builtin,race checks another commit,.github/workflows/ci.yaml,1,rejected,1603
+w17-customer-api,builtin,race uses another Go version,.github/workflows/ci.yaml,1,rejected,1779
+w17-customer-api,builtin,race cache shares image cache,.github/workflows/ci.yaml,1,rejected,1779
+w17-customer-api,builtin,race flag removed,Makefile,1,rejected,1899
+w17-customer-api,builtin,publish detached from verification,.github/workflows/ci.yaml,1,rejected,1884
+w17-customer-api,builtin,publish ignores race job,.github/workflows/ci.yaml,1,rejected,1505
+w17-customer-api,builtin,publish ignores image verification,.github/workflows/ci.yaml,1,rejected,1574
+w17-customer-api,builtin,publish uses always on failed dependencies,.github/workflows/ci.yaml,1,rejected,1909
+w17-customer-api,builtin,static binary producer changed,Makefile,1,rejected,1693
+w17-customer-api,builtin,image byte comparison removed,scripts/workload/tests/test-image-runtime.sh,1,rejected,1704
+w17-customer-api,builtin,image runtime stage replaced,Dockerfile,1,rejected,1840
+w17-customer-api,builtin,Catalog owner changed,catalog-info.yaml,1,rejected,1483
+w17-customer-api,builtin,CODEOWNERS removed,.github/CODEOWNERS,1,rejected,1488
+w17-customer-api,builtin,runbook contact removed,docs/runbook.md,1,rejected,1477
+w17-customer-api,builtin,readiness probe removed,deploy/helm/templates/workload.yaml,1,rejected,1609
+w17-customer-api,builtin,read-only filesystem removed,deploy/helm/templates/workload.yaml,1,rejected,1586
+w17-customer-api,builtin,service account token enabled,deploy/helm/templates/workload.yaml,1,rejected,1617
+w17-customer-api,builtin,network policy removed,deploy/helm/templates/networkpolicy.yaml,1,rejected,1906
+w17-customer-api,builtin,egress isolation removed,deploy/helm/templates/networkpolicy.yaml,1,rejected,2022
+w17-customer-api,builtin,egress namespace and pod split into OR,deploy/helm/templates/networkpolicy.yaml,1,rejected,1898
+w17-customer-api,builtin,egress DNS widened,deploy/helm/templates/networkpolicy.yaml,1,rejected,1865
+w17-customer-api,builtin,egress DNS port widened,deploy/helm/templates/networkpolicy.yaml,1,rejected,1750
+w17-customer-api,builtin,egress collector widened,deploy/helm/templates/networkpolicy.yaml,1,rejected,1783
+w17-customer-api,builtin,egress global allow added,deploy/helm/templates/networkpolicy.yaml,1,rejected,1746
+w17-customer-api,builtin,egress hidden in ingress policy,deploy/helm/templates/networkpolicy.yaml,1,rejected,1877
+w17-customer-api,builtin,egress host networking bypass,deploy/helm/templates/workload.yaml,1,rejected,1864
+w17-customer-api,builtin,monitor removed,deploy/helm/templates/monitoring.yaml,1,rejected,1857
+w17-customer-api,builtin,dashboard removed,deploy/helm/templates/dashboard.yaml,1,rejected,1669
+w17-customer-api,builtin,digest ignored,deploy/helm/templates/workload.yaml,1,rejected,1599
+w17-customer-api,builtin,alert recipient changed,deploy/helm/templates/slo-availability.yaml,1,rejected,1658
+w17-customer-api,builtin,CPU limit added,deploy/helm/templates/workload.yaml,1,rejected,1641
+w17-customer-api,builtin,memory limit reduced,deploy/helm/templates/workload.yaml,1,rejected,1770
+w17-customer-api,builtin,preStop removed,deploy/helm/templates/workload.yaml,1,rejected,1858
+w17-customer-api,builtin,startup budget reduced,deploy/helm/templates/workload.yaml,1,rejected,1974
+w17-customer-api,builtin,topology selector changed,deploy/helm/templates/workload.yaml,1,rejected,2090
+w17-customer-api,builtin,dev replica count changed,deploy/helm/values-dev.yaml,1,rejected,1959
+w17-customer-api,builtin,minimum Kubernetes version removed,deploy/helm/Chart.yaml,1,rejected,1831
+w17-customer-api,builtin,Argo workload permission removed,deploy/argocd/project.yaml,1,rejected,1989
+w17-customer-api,builtin,egress environment scope removed,deploy/helm/templates/networkpolicy.yaml,1,rejected,1831
+w17-customer-api,builtin,prod promotion automated,deploy/argocd/prod.yaml,1,rejected,1875
+w17-customer-api,builtin,prod mislabeled dev,deploy/helm/values-prod.yaml,1,rejected,2103
+w17-customer-api,builtin,staging replica count reduced,deploy/helm/values-staging.yaml,1,rejected,1917
+w17-customer-api,builtin,prod HPA removed,deploy/helm/templates/scaling.yaml,1,rejected,2029
+w17-customer-api,builtin,prod HPA min reduced,deploy/helm/values-prod.yaml,1,rejected,1732
+w17-customer-api,builtin,prod PDB removed,deploy/helm/templates/scaling.yaml,1,rejected,1867
+w17-customer-api,builtin,prod PDB selector changed,deploy/helm/templates/scaling.yaml,1,rejected,1824
+w17-customer-api,builtin,Argo HPA permission removed,deploy/argocd/project.yaml,1,rejected,1843
+w17-customer-api,builtin,Argo PDB permission removed,deploy/argocd/project.yaml,1,rejected,1766
+w17-customer-api,builtin,egress PostgreSQL widened,deploy/helm/templates/networkpolicy.yaml,1,rejected,1893
+w17-customer-api,builtin,egress Redis removed,deploy/helm/templates/networkpolicy.yaml,1,rejected,2048
+w17-customer-api,builtin,pool readiness adapter bypassed,internal/handler/health.go,1,rejected,1556
+w17-customer-api,builtin,retry budget expanded,deploy/helm/templates/edge-security.yaml,1,rejected,1715
+w17-customer-api,builtin,retry includes POST,deploy/helm/templates/ingress.yaml,1,rejected,2162
+w17-customer-api,builtin,retry method restriction removed,deploy/helm/templates/ingress.yaml,1,rejected,1933
+w17-customer-api,builtin,retry fallback priority expanded,deploy/helm/templates/ingress.yaml,1,rejected,1584
+w17-customer-api,builtin,retry security middleware bypassed,deploy/helm/templates/ingress.yaml,1,rejected,1927
+w17-customer-api,builtin,retry applied to fallback methods,deploy/helm/templates/edge-security.yaml,1,rejected,1793
+w17-customer-api,builtin,retry route permission removed,deploy/argocd/project.yaml,1,rejected,1703
+w17-customer-api,builtin,HTTPS disabled,deploy/helm/templates/ingress.yaml,1,rejected,1753
+w17-customer-api,builtin,middleware detached,deploy/helm/templates/ingress.yaml,1,rejected,1735
+w17-customer-api,builtin,TLS minimum downgraded,deploy/helm/templates/edge-security.yaml,1,rejected,1684
+w17-customer-api,builtin,security header removed,deploy/helm/templates/edge-security.yaml,1,rejected,1682
+w17-customer-api,builtin,rate limit removed,deploy/helm/templates/edge-security.yaml,1,rejected,1571
+w17-customer-api,builtin,HTTP redirect disabled,deploy/helm/templates/edge-security.yaml,1,rejected,1621
+w17-customer-api,builtin,prod hostname collides with dev,deploy/helm/values-prod.yaml,1,rejected,1798
+w17-customer-api,builtin,Argo middleware permission removed,deploy/argocd/project.yaml,1,rejected,1523
+w17-customer-api,builtin,Argo TLS permission removed,deploy/argocd/project.yaml,1,rejected,1669
+w17-customer-api,extra,readiness probe on wrong port,deploy/helm/templates/workload.yaml,0,passed (false green),1658
+w17-customer-api,extra,liveness probe on wrong port,deploy/helm/templates/workload.yaml,0,passed (false green),2049
+w17-customer-api,extra,Service targetPort points nowhere,deploy/helm/templates/workload.yaml,0,passed (false green),1972
+w17-customer-api,extra,container command replaced by sleep,deploy/helm/templates/workload.yaml,0,passed (false green),1988
+w17-customer-api,extra,Prometheus peer label typo,deploy/helm/templates/networkpolicy.yaml,0,passed (false green),2150
+w17-customer-api,extra,ingress opened to every pod in monitoring namespace,deploy/helm/templates/networkpolicy.yaml,0,passed (false green),2083
+w17-customer-api,extra,SA token mounted via projected volume,deploy/helm/templates/workload.yaml,0,passed (false green),2072
+w17-customer-api,extra,memory request cut to 1Mi,deploy/helm/templates/workload.yaml,1,rejected,1748
+w17-customer-api,extra,readiness checked every 300s,deploy/helm/templates/workload.yaml,0,passed (false green),1916
