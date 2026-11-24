@@ -1,0 +1,28 @@
+--- PASS: TestBaselinePasses (4.67s)
+G1 code digest ignores merge base [gate_test]           caught by TestGates, TestGates/rebased_onto_moved_main
+G2 merge-check skips tree comparison [gate_test]        caught by TestGates, TestGates/spec_edited, TestGates/test_file_edited,_tests_still_pass, TestGates/code_edited,_tests_still_pass, TestGates/code_edit_breaks_a_test, TestGates/README_edited_outside_every_gate, TestGates/rebased_onto_moved_main
+G3 test digest ignores go test result [gate_test]       SURVIVED
+G4 uncommitted code changes not refused [gate_test]     caught by TestGates, TestGates/uncommitted_code_edit
+G6 base ancestry not checked [gate_test]                caught by TestGates, TestGates/main_moved_ahead
+M1 lock not held is ignored [full]                      caught by TestPromote, TestPromote/AC1_old_lock_held_rejects, TestPromote/AC7_resume_still_honours_old_lock
+M1 lock not held is ignored [weak]                      caught by TestPromoteWeak, TestPromoteWeak/AC1_old_lock_held_rejects, TestPromoteWeak/AC7_resume_still_honours_old_lock
+M2 permission error treated as missing old dir [full]   caught by TestPromote, TestPromote/AC2_old_dir_permission_error_rejects
+M2 permission error treated as missing old dir [weak]   caught by TestPromoteWeak, TestPromoteWeak/AC2_old_dir_permission_error_rejects
+M3 blocked replica status ignored [full]                caught by TestPromote, TestPromote/AC3_blocked_replica_rejects, TestPromote/AC7_resume_still_honours_blocked_replica
+M3 blocked replica status ignored [weak]                caught by TestPromoteWeak, TestPromoteWeak/AC3_blocked_replica_rejects
+M4 pending intent for another replica ignored [full]    caught by TestPromote, TestPromote/AC4_pending_intent_for_another_replica_rejects
+M4 pending intent for another replica ignored [weak]    caught by TestPromoteWeak, TestPromoteWeak/AC4_pending_intent_for_another_replica_rejects
+M5 intent written after the switch [full]               caught by TestCrashAfterSwitchKeepsIntent, TestCrashAfterIntentResumes, TestSwitchFailureKeepsIntent
+M5 intent written after the switch [weak]               SURVIVED
+M6 intent not cleared on success [full]                 caught by TestPromote, TestPromote/AC6_success_switches_and_clears_intent, TestPromote/AC7_resume_finishes_pending_switch, TestCrashAfterSwitchKeepsIntent
+M6 intent not cleared on success [weak]                 SURVIVED
+M7 resume skips the safety checks [full]                caught by TestPromote, TestPromote/AC7_resume_still_honours_old_lock, TestPromote/AC7_resume_still_honours_blocked_replica
+M7 resume skips the safety checks [weak]                caught by TestPromoteWeak, TestPromoteWeak/AC7_resume_still_honours_old_lock
+M8 switch error swallowed [full]                        caught by TestSwitchFailureKeepsIntent
+M8 switch error swallowed [weak]                        caught by TestPromoteWeak, TestPromoteWeak/AC8_switch_failure_returns_error
+M9 replica checked only after switching [full]          caught by TestPromote, TestPromote/AC3_blocked_replica_rejects, TestPromote/AC7_resume_still_honours_blocked_replica
+M9 replica checked only after switching [weak]          SURVIVED
+--- FAIL: TestMutations (0.00s)
+FAIL
+FAIL	github.com/costa92/blog-go-example/review-gates/mutation	12.420s
+FAIL

@@ -1,0 +1,32 @@
+diff --git a/promote/promote.go b/promote/promote.go
+index 6528935..a5376fb 100644
+--- a/promote/promote.go
++++ b/promote/promote.go
+@@ -90,6 +90,9 @@ func checkOld(root string) error {
+ 
+ func checkReplica(root, name string) error {
+ 	b, err := os.ReadFile(filepath.Join(root, "replicas", name, "STATUS"))
++	if os.IsNotExist(err) {
++		return fmt.Errorf("%w: %s has no STATUS", ErrBlocked, name)
++	}
+ 	if err != nil {
+ 		return err
+ 	}
+diff --git a/promote/promote_test.go b/promote/promote_test.go
+index cdd5bd4..ef433db 100644
+--- a/promote/promote_test.go
++++ b/promote/promote_test.go
+@@ -39,6 +39,13 @@ func TestPromote(t *testing.T) {
+ 			wantErr:     ErrBlocked,
+ 			wantCurrent: "replicas/r1",
+ 		},
++		{
++			name:        "AC3 replica without STATUS rejects",
++			setup:       func(t *testing.T, root string) { must(t, os.Remove(filepath.Join(root, "replicas", "r2", "STATUS"))) },
++			run:         func(root string) error { return Promote(root, "r2") },
++			wantErr:     ErrBlocked,
++			wantCurrent: "replicas/r1",
++		},
+ 		{
+ 			name:        "AC4 pending intent for another replica rejects",
+ 			setup:       func(t *testing.T, root string) { touch(t, filepath.Join(root, "intent"), "r3") },

@@ -1,0 +1,131 @@
+
+# main: spec, config, empty package
+
+# implementer: feature branch
+$ git log --oneline
+b2ef104 promote: implement switch with intent file
+9b338ae spec and config
+
+# reviewer: approve the three gates
+$ gate approve design --by reviewer-b
+approved design digest=a5c6836afd16 by=reviewer-b head=b2ef1049d430
+$ gate approve tests --by reviewer-b
+approved tests  digest=9f90635f1d5b by=reviewer-b head=b2ef1049d430
+$ gate approve code --by reviewer-b
+approved code   digest=21390bde8a00 by=reviewer-b head=b2ef1049d430
+$ cat .review/code.json
+{
+  "gate": "code",
+  "digest": "21390bde8a00a961f80ff30882ec4e410a1208c0e1993b81cdf12b405d625f34",
+  "parts": {
+    "base": "9b338ae418e648233949b2a240d0044a36d4a74a",
+    "diff:promote/promote.go": "873b5a61aadbeb9a3e9b289852742888204c27a6496bb1bc0a832249ba06db7e"
+  },
+  "approved_by": "reviewer-b",
+  "approved_at": "2026-11-24T08:24:49Z",
+  "head": "b2ef1049d430f3fce4950b0f8a04b90d019485cb",
+  "tree": "d714908eea56423a65fc9074d7eea18da9063118"
+}
+$ gate merge-check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  OK       9f90635f1d5b approved by reviewer-b
+code   OK       21390bde8a00 approved by reviewer-b
+tree   OK       squash candidate d714908eea56 == reviewed tree
+merge-check: OK
+
+# implementer: add an error branch and tweak a test after approval
+$ git diff --stat HEAD~1
+ promote/promote.go      | 3 +++
+ promote/promote_test.go | 7 +++++++
+ 2 files changed, 10 insertions(+)
+$ gate check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  STALE    approved 9f90635f1d5b by reviewer-b, now 65f2ce816854
+         ~ file:promote/promote_test.go 8f5bd9d36d79 -> 53511da09f0e
+         ~ go test result 56502927452e -> 52dfd2926c85
+code   STALE    approved 21390bde8a00 by reviewer-b, now 5033581a9b59
+         ~ diff:promote/promote.go 873b5a61aadb -> 56d6d709713e
+check: FAIL
+[exit 1]
+$ gate merge-check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  STALE    approved 9f90635f1d5b by reviewer-b, now 65f2ce816854
+         ~ file:promote/promote_test.go 8f5bd9d36d79 -> 53511da09f0e
+         ~ go test result 56502927452e -> 52dfd2926c85
+code   STALE    approved 21390bde8a00 by reviewer-b, now 5033581a9b59
+         ~ diff:promote/promote.go 873b5a61aadb -> 56d6d709713e
+tree   FAIL     squash candidate b135566fed12 != reviewed tree d714908eea56
+         M	promote/promote.go
+         M	promote/promote_test.go
+merge-check: FAIL
+[exit 1]
+
+# reviewer: re-review the delta, approve tests and code again
+$ git diff HEAD~1 -- promote/promote.go
+diff --git a/promote/promote.go b/promote/promote.go
+index 6528935..a5376fb 100644
+--- a/promote/promote.go
++++ b/promote/promote.go
+@@ -90,6 +90,9 @@ func checkOld(root string) error {
+ 
+ func checkReplica(root, name string) error {
+ 	b, err := os.ReadFile(filepath.Join(root, "replicas", name, "STATUS"))
++	if os.IsNotExist(err) {
++		return fmt.Errorf("%w: %s has no STATUS", ErrBlocked, name)
++	}
+ 	if err != nil {
+ 		return err
+ 	}
+$ gate approve tests --by reviewer-b
+approved tests  digest=65f2ce816854 by=reviewer-b head=17aa4157b2b4
+$ gate approve code --by reviewer-b
+approved code   digest=5033581a9b59 by=reviewer-b head=17aa4157b2b4
+$ gate merge-check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  OK       65f2ce816854 approved by reviewer-b
+code   OK       5033581a9b59 approved by reviewer-b
+tree   OK       squash candidate b135566fed12 == reviewed tree
+merge-check: OK
+
+# implementer: change only README (outside every gate)
+$ gate check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  OK       65f2ce816854 approved by reviewer-b
+code   OK       5033581a9b59 approved by reviewer-b
+check: OK
+$ gate merge-check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  OK       65f2ce816854 approved by reviewer-b
+code   OK       5033581a9b59 approved by reviewer-b
+tree   FAIL     squash candidate cb9e7a9c2bb1 != reviewed tree b135566fed12
+         M	README.md
+merge-check: FAIL
+[exit 1]
+
+# re-approve code to bind the new tree, then main moves ahead
+$ gate approve code --by reviewer-b
+approved code   digest=5033581a9b59 by=reviewer-b head=32a820d0bad8
+$ gate merge-check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  OK       65f2ce816854 approved by reviewer-b
+code   OK       5033581a9b59 approved by reviewer-b
+base   FAIL     main is not an ancestor of HEAD; rebase and re-review
+merge-check: FAIL
+[exit 1]
+
+# implementer: rebase onto main; the code digest moves with the merge base
+$ gate check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  OK       65f2ce816854 approved by reviewer-b
+code   STALE    approved 5033581a9b59 by reviewer-b, now 408e38081975
+         ~ base 9b338ae418e6 -> 168d9d91238c
+check: FAIL
+[exit 1]
+$ gate approve code --by reviewer-b
+approved code   digest=408e38081975 by=reviewer-b head=63c2b6601fe1
+$ gate merge-check
+design OK       a5c6836afd16 approved by reviewer-b
+tests  OK       65f2ce816854 approved by reviewer-b
+code   OK       408e38081975 approved by reviewer-b
+tree   OK       squash candidate cc567c4a0908 == reviewed tree
+merge-check: OK

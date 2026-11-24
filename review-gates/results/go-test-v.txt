@@ -1,0 +1,201 @@
+=== RUN   TestGates
+=== RUN   TestGates/no_change
+=== RUN   TestGates/spec_edited
+=== RUN   TestGates/test_file_edited,_tests_still_pass
+=== RUN   TestGates/code_edited,_tests_still_pass
+=== RUN   TestGates/code_edit_breaks_a_test
+=== RUN   TestGates/new_test_package_outside_the_test_globs
+=== RUN   TestGates/uncommitted_code_edit
+=== RUN   TestGates/README_edited_outside_every_gate
+=== RUN   TestGates/main_moved_ahead
+=== RUN   TestGates/rebased_onto_moved_main
+--- PASS: TestGates (4.59s)
+    --- PASS: TestGates/no_change (0.44s)
+    --- PASS: TestGates/spec_edited (0.46s)
+    --- PASS: TestGates/test_file_edited,_tests_still_pass (0.44s)
+    --- PASS: TestGates/code_edited,_tests_still_pass (0.53s)
+    --- PASS: TestGates/code_edit_breaks_a_test (0.45s)
+    --- PASS: TestGates/new_test_package_outside_the_test_globs (0.43s)
+    --- PASS: TestGates/uncommitted_code_edit (0.53s)
+    --- PASS: TestGates/README_edited_outside_every_gate (0.39s)
+    --- PASS: TestGates/main_moved_ahead (0.46s)
+    --- PASS: TestGates/rebased_onto_moved_main (0.47s)
+=== RUN   TestApproveRefusesFailingTests
+--- PASS: TestApproveRefusesFailingTests (0.35s)
+PASS
+ok  	github.com/costa92/blog-go-example/review-gates	4.945s
+=== RUN   TestBaselinePasses
+--- PASS: TestBaselinePasses (5.46s)
+=== RUN   TestMutations
+=== RUN   TestMutations/M1_lock_not_held_is_ignored/full
+=== PAUSE TestMutations/M1_lock_not_held_is_ignored/full
+=== RUN   TestMutations/M1_lock_not_held_is_ignored/weak
+=== PAUSE TestMutations/M1_lock_not_held_is_ignored/weak
+=== RUN   TestMutations/M2_permission_error_treated_as_missing_old_dir/full
+=== PAUSE TestMutations/M2_permission_error_treated_as_missing_old_dir/full
+=== RUN   TestMutations/M2_permission_error_treated_as_missing_old_dir/weak
+=== PAUSE TestMutations/M2_permission_error_treated_as_missing_old_dir/weak
+=== RUN   TestMutations/M3_blocked_replica_status_ignored/full
+=== PAUSE TestMutations/M3_blocked_replica_status_ignored/full
+=== RUN   TestMutations/M3_blocked_replica_status_ignored/weak
+=== PAUSE TestMutations/M3_blocked_replica_status_ignored/weak
+=== RUN   TestMutations/M4_pending_intent_for_another_replica_ignored/full
+=== PAUSE TestMutations/M4_pending_intent_for_another_replica_ignored/full
+=== RUN   TestMutations/M4_pending_intent_for_another_replica_ignored/weak
+=== PAUSE TestMutations/M4_pending_intent_for_another_replica_ignored/weak
+=== RUN   TestMutations/M5_intent_written_after_the_switch/full
+=== PAUSE TestMutations/M5_intent_written_after_the_switch/full
+=== RUN   TestMutations/M5_intent_written_after_the_switch/weak
+=== PAUSE TestMutations/M5_intent_written_after_the_switch/weak
+=== RUN   TestMutations/M6_intent_not_cleared_on_success/full
+=== PAUSE TestMutations/M6_intent_not_cleared_on_success/full
+=== RUN   TestMutations/M6_intent_not_cleared_on_success/weak
+=== PAUSE TestMutations/M6_intent_not_cleared_on_success/weak
+=== RUN   TestMutations/M7_resume_skips_the_safety_checks/full
+=== PAUSE TestMutations/M7_resume_skips_the_safety_checks/full
+=== RUN   TestMutations/M7_resume_skips_the_safety_checks/weak
+=== PAUSE TestMutations/M7_resume_skips_the_safety_checks/weak
+=== RUN   TestMutations/M8_switch_error_swallowed/full
+=== PAUSE TestMutations/M8_switch_error_swallowed/full
+=== RUN   TestMutations/M8_switch_error_swallowed/weak
+=== PAUSE TestMutations/M8_switch_error_swallowed/weak
+=== RUN   TestMutations/M9_replica_checked_only_after_switching/full
+=== PAUSE TestMutations/M9_replica_checked_only_after_switching/full
+=== RUN   TestMutations/M9_replica_checked_only_after_switching/weak
+=== PAUSE TestMutations/M9_replica_checked_only_after_switching/weak
+=== RUN   TestMutations/G1_code_digest_ignores_merge_base/gate_test
+=== PAUSE TestMutations/G1_code_digest_ignores_merge_base/gate_test
+=== RUN   TestMutations/G2_merge-check_skips_tree_comparison/gate_test
+=== PAUSE TestMutations/G2_merge-check_skips_tree_comparison/gate_test
+=== RUN   TestMutations/G3_test_digest_ignores_go_test_result/gate_test
+=== PAUSE TestMutations/G3_test_digest_ignores_go_test_result/gate_test
+=== RUN   TestMutations/G4_uncommitted_code_changes_not_refused/gate_test
+=== PAUSE TestMutations/G4_uncommitted_code_changes_not_refused/gate_test
+=== RUN   TestMutations/G5_approve_accepts_failing_tests/gate_test
+=== PAUSE TestMutations/G5_approve_accepts_failing_tests/gate_test
+=== RUN   TestMutations/G6_base_ancestry_not_checked/gate_test
+=== PAUSE TestMutations/G6_base_ancestry_not_checked/gate_test
+=== CONT  TestMutations/M1_lock_not_held_is_ignored/full
+=== CONT  TestMutations/G6_base_ancestry_not_checked/gate_test
+=== CONT  TestMutations/M7_resume_skips_the_safety_checks/full
+=== CONT  TestMutations/M4_pending_intent_for_another_replica_ignored/full
+=== CONT  TestMutations/M2_permission_error_treated_as_missing_old_dir/weak
+=== CONT  TestMutations/M5_intent_written_after_the_switch/weak
+=== CONT  TestMutations/G1_code_digest_ignores_merge_base/gate_test
+=== CONT  TestMutations/G4_uncommitted_code_changes_not_refused/gate_test
+=== CONT  TestMutations/M8_switch_error_swallowed/weak
+=== CONT  TestMutations/M2_permission_error_treated_as_missing_old_dir/full
+=== CONT  TestMutations/M1_lock_not_held_is_ignored/weak
+=== CONT  TestMutations/G5_approve_accepts_failing_tests/gate_test
+=== CONT  TestMutations/M9_replica_checked_only_after_switching/weak
+=== CONT  TestMutations/M8_switch_error_swallowed/full
+=== CONT  TestMutations/M9_replica_checked_only_after_switching/full
+=== CONT  TestMutations/M7_resume_skips_the_safety_checks/weak
+=== CONT  TestMutations/M4_pending_intent_for_another_replica_ignored/weak
+=== CONT  TestMutations/G3_test_digest_ignores_go_test_result/gate_test
+=== CONT  TestMutations/M6_intent_not_cleared_on_success/weak
+=== CONT  TestMutations/M6_intent_not_cleared_on_success/full
+=== CONT  TestMutations/M3_blocked_replica_status_ignored/weak
+=== CONT  TestMutations/G2_merge-check_skips_tree_comparison/gate_test
+=== CONT  TestMutations/M3_blocked_replica_status_ignored/full
+=== CONT  TestMutations/M5_intent_written_after_the_switch/full
+=== NAME  TestMutations/M5_intent_written_after_the_switch/weak
+    mutation_test.go:210: SURVIVED
+=== NAME  TestMutations/M8_switch_error_swallowed/weak
+    mutation_test.go:210: caught by TestPromoteWeak, TestPromoteWeak/AC8_switch_failure_returns_error
+=== NAME  TestMutations/M3_blocked_replica_status_ignored/weak
+    mutation_test.go:210: caught by TestPromoteWeak, TestPromoteWeak/AC3_blocked_replica_rejects
+=== NAME  TestMutations/M1_lock_not_held_is_ignored/full
+    mutation_test.go:210: caught by TestPromote, TestPromote/AC1_old_lock_held_rejects, TestPromote/AC7_resume_still_honours_old_lock
+=== NAME  TestMutations/M4_pending_intent_for_another_replica_ignored/weak
+    mutation_test.go:210: caught by TestPromoteWeak, TestPromoteWeak/AC4_pending_intent_for_another_replica_rejects
+=== NAME  TestMutations/M3_blocked_replica_status_ignored/full
+    mutation_test.go:210: caught by TestPromote, TestPromote/AC3_blocked_replica_rejects, TestPromote/AC7_resume_still_honours_blocked_replica
+=== NAME  TestMutations/M5_intent_written_after_the_switch/full
+    mutation_test.go:210: caught by TestCrashAfterSwitchKeepsIntent, TestCrashAfterIntentResumes, TestSwitchFailureKeepsIntent
+=== NAME  TestMutations/M6_intent_not_cleared_on_success/full
+    mutation_test.go:210: caught by TestPromote, TestPromote/AC6_success_switches_and_clears_intent, TestPromote/AC7_resume_finishes_pending_switch, TestCrashAfterSwitchKeepsIntent
+=== NAME  TestMutations/M4_pending_intent_for_another_replica_ignored/full
+    mutation_test.go:210: caught by TestPromote, TestPromote/AC4_pending_intent_for_another_replica_rejects
+=== NAME  TestMutations/M2_permission_error_treated_as_missing_old_dir/full
+    mutation_test.go:210: caught by TestPromote, TestPromote/AC2_old_dir_permission_error_rejects
+=== NAME  TestMutations/M6_intent_not_cleared_on_success/weak
+    mutation_test.go:210: SURVIVED
+=== NAME  TestMutations/M9_replica_checked_only_after_switching/weak
+    mutation_test.go:210: SURVIVED
+=== NAME  TestMutations/M1_lock_not_held_is_ignored/weak
+    mutation_test.go:210: caught by TestPromoteWeak, TestPromoteWeak/AC1_old_lock_held_rejects, TestPromoteWeak/AC7_resume_still_honours_old_lock
+=== NAME  TestMutations/M7_resume_skips_the_safety_checks/full
+    mutation_test.go:210: caught by TestPromote, TestPromote/AC7_resume_still_honours_old_lock, TestPromote/AC7_resume_still_honours_blocked_replica
+=== NAME  TestMutations/M8_switch_error_swallowed/full
+    mutation_test.go:210: caught by TestSwitchFailureKeepsIntent
+=== NAME  TestMutations/M9_replica_checked_only_after_switching/full
+    mutation_test.go:210: caught by TestPromote, TestPromote/AC3_blocked_replica_rejects, TestPromote/AC7_resume_still_honours_blocked_replica
+=== NAME  TestMutations/M2_permission_error_treated_as_missing_old_dir/weak
+    mutation_test.go:210: caught by TestPromoteWeak, TestPromoteWeak/AC2_old_dir_permission_error_rejects
+=== NAME  TestMutations/M7_resume_skips_the_safety_checks/weak
+    mutation_test.go:210: caught by TestPromoteWeak, TestPromoteWeak/AC7_resume_still_honours_old_lock
+=== NAME  TestMutations/G1_code_digest_ignores_merge_base/gate_test
+    mutation_test.go:210: caught by TestGates, TestGates/rebased_onto_moved_main
+=== NAME  TestMutations/G5_approve_accepts_failing_tests/gate_test
+    mutation_test.go:210: caught by TestApproveRefusesFailingTests
+=== NAME  TestMutations/G2_merge-check_skips_tree_comparison/gate_test
+    mutation_test.go:210: caught by TestGates, TestGates/spec_edited, TestGates/test_file_edited,_tests_still_pass, TestGates/code_edited,_tests_still_pass, TestGates/code_edit_breaks_a_test, TestGates/new_test_package_outside_the_test_globs, TestGates/README_edited_outside_every_gate, TestGates/rebased_onto_moved_main
+=== NAME  TestMutations/G4_uncommitted_code_changes_not_refused/gate_test
+    mutation_test.go:210: caught by TestGates, TestGates/uncommitted_code_edit
+=== NAME  TestMutations/G3_test_digest_ignores_go_test_result/gate_test
+    mutation_test.go:210: caught by TestGates, TestGates/new_test_package_outside_the_test_globs
+=== NAME  TestMutations/G6_base_ancestry_not_checked/gate_test
+    mutation_test.go:210: caught by TestGates, TestGates/main_moved_ahead
+=== NAME  TestMutations
+    mutation_test.go:189: G1 code digest ignores merge base [gate_test]           caught by TestGates, TestGates/rebased_onto_moved_main
+    mutation_test.go:189: G2 merge-check skips tree comparison [gate_test]        caught by TestGates, TestGates/spec_edited, TestGates/test_file_edited,_tests_still_pass, TestGates/code_edited,_tests_still_pass, TestGates/code_edit_breaks_a_test, TestGates/new_test_package_outside_the_test_globs, TestGates/README_edited_outside_every_gate, TestGates/rebased_onto_moved_main
+    mutation_test.go:189: G3 test digest ignores go test result [gate_test]       caught by TestGates, TestGates/new_test_package_outside_the_test_globs
+    mutation_test.go:189: G4 uncommitted code changes not refused [gate_test]     caught by TestGates, TestGates/uncommitted_code_edit
+    mutation_test.go:189: G5 approve accepts failing tests [gate_test]            caught by TestApproveRefusesFailingTests
+    mutation_test.go:189: G6 base ancestry not checked [gate_test]                caught by TestGates, TestGates/main_moved_ahead
+    mutation_test.go:189: M1 lock not held is ignored [full]                      caught by TestPromote, TestPromote/AC1_old_lock_held_rejects, TestPromote/AC7_resume_still_honours_old_lock
+    mutation_test.go:189: M1 lock not held is ignored [weak]                      caught by TestPromoteWeak, TestPromoteWeak/AC1_old_lock_held_rejects, TestPromoteWeak/AC7_resume_still_honours_old_lock
+    mutation_test.go:189: M2 permission error treated as missing old dir [full]   caught by TestPromote, TestPromote/AC2_old_dir_permission_error_rejects
+    mutation_test.go:189: M2 permission error treated as missing old dir [weak]   caught by TestPromoteWeak, TestPromoteWeak/AC2_old_dir_permission_error_rejects
+    mutation_test.go:189: M3 blocked replica status ignored [full]                caught by TestPromote, TestPromote/AC3_blocked_replica_rejects, TestPromote/AC7_resume_still_honours_blocked_replica
+    mutation_test.go:189: M3 blocked replica status ignored [weak]                caught by TestPromoteWeak, TestPromoteWeak/AC3_blocked_replica_rejects
+    mutation_test.go:189: M4 pending intent for another replica ignored [full]    caught by TestPromote, TestPromote/AC4_pending_intent_for_another_replica_rejects
+    mutation_test.go:189: M4 pending intent for another replica ignored [weak]    caught by TestPromoteWeak, TestPromoteWeak/AC4_pending_intent_for_another_replica_rejects
+    mutation_test.go:189: M5 intent written after the switch [full]               caught by TestCrashAfterSwitchKeepsIntent, TestCrashAfterIntentResumes, TestSwitchFailureKeepsIntent
+    mutation_test.go:189: M5 intent written after the switch [weak]               SURVIVED
+    mutation_test.go:189: M6 intent not cleared on success [full]                 caught by TestPromote, TestPromote/AC6_success_switches_and_clears_intent, TestPromote/AC7_resume_finishes_pending_switch, TestCrashAfterSwitchKeepsIntent
+    mutation_test.go:189: M6 intent not cleared on success [weak]                 SURVIVED
+    mutation_test.go:189: M7 resume skips the safety checks [full]                caught by TestPromote, TestPromote/AC7_resume_still_honours_old_lock, TestPromote/AC7_resume_still_honours_blocked_replica
+    mutation_test.go:189: M7 resume skips the safety checks [weak]                caught by TestPromoteWeak, TestPromoteWeak/AC7_resume_still_honours_old_lock
+    mutation_test.go:189: M8 switch error swallowed [full]                        caught by TestSwitchFailureKeepsIntent
+    mutation_test.go:189: M8 switch error swallowed [weak]                        caught by TestPromoteWeak, TestPromoteWeak/AC8_switch_failure_returns_error
+    mutation_test.go:189: M9 replica checked only after switching [full]          caught by TestPromote, TestPromote/AC3_blocked_replica_rejects, TestPromote/AC7_resume_still_honours_blocked_replica
+    mutation_test.go:189: M9 replica checked only after switching [weak]          SURVIVED
+--- PASS: TestMutations (0.00s)
+    --- PASS: TestMutations/M5_intent_written_after_the_switch/weak (0.36s)
+    --- PASS: TestMutations/M8_switch_error_swallowed/weak (0.36s)
+    --- PASS: TestMutations/M3_blocked_replica_status_ignored/weak (0.36s)
+    --- PASS: TestMutations/M1_lock_not_held_is_ignored/full (0.37s)
+    --- PASS: TestMutations/M4_pending_intent_for_another_replica_ignored/weak (0.38s)
+    --- PASS: TestMutations/M3_blocked_replica_status_ignored/full (0.39s)
+    --- PASS: TestMutations/M5_intent_written_after_the_switch/full (0.39s)
+    --- PASS: TestMutations/M6_intent_not_cleared_on_success/full (0.39s)
+    --- PASS: TestMutations/M4_pending_intent_for_another_replica_ignored/full (0.39s)
+    --- PASS: TestMutations/M2_permission_error_treated_as_missing_old_dir/full (0.40s)
+    --- PASS: TestMutations/M6_intent_not_cleared_on_success/weak (0.40s)
+    --- PASS: TestMutations/M9_replica_checked_only_after_switching/weak (0.40s)
+    --- PASS: TestMutations/M1_lock_not_held_is_ignored/weak (0.42s)
+    --- PASS: TestMutations/M7_resume_skips_the_safety_checks/full (0.42s)
+    --- PASS: TestMutations/M8_switch_error_swallowed/full (0.45s)
+    --- PASS: TestMutations/M9_replica_checked_only_after_switching/full (0.45s)
+    --- PASS: TestMutations/M2_permission_error_treated_as_missing_old_dir/weak (0.46s)
+    --- PASS: TestMutations/M7_resume_skips_the_safety_checks/weak (0.46s)
+    --- PASS: TestMutations/G1_code_digest_ignores_merge_base/gate_test (6.73s)
+    --- PASS: TestMutations/G5_approve_accepts_failing_tests/gate_test (6.82s)
+    --- PASS: TestMutations/G2_merge-check_skips_tree_comparison/gate_test (6.82s)
+    --- PASS: TestMutations/G4_uncommitted_code_changes_not_refused/gate_test (6.87s)
+    --- PASS: TestMutations/G3_test_digest_ignores_go_test_result/gate_test (6.87s)
+    --- PASS: TestMutations/G6_base_ancestry_not_checked/gate_test (6.88s)
+PASS
+ok  	github.com/costa92/blog-go-example/review-gates/mutation	12.347s

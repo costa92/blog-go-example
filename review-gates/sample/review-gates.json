@@ -1,0 +1,7 @@
+{
+  "base": "main",
+  "design": ["SPEC.md"],
+  "tests": ["promote/*_test.go"],
+  "test_cmd": ["go", "test", "-count=1", "./..."],
+  "code": ["promote/", ":(exclude)promote/*_test.go"]
+}
