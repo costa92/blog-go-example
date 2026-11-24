@@ -1,0 +1,287 @@
+{
+ "meta": {
+  "date": "2026-11-24",
+  "claude_code": "2.1.331",
+  "model": "sonnet (claude -p --model sonnet); subagents may pick their own model",
+  "superpowers": "7.0.2 (claude-plugins-official)",
+  "gsd": "get-shit-done-cc 1.42.3",
+  "go": "go1.27.4",
+  "flags": "--output-format stream-json --verbose --permission-mode bypassPermissions --max-budget-usd 3 --no-session-persistence",
+  "notes": "wall_s measured by run.sh; cost_usd is total_cost_usd from the last result event; num_turns and tokens summed over all result events (a run that waits on a background subagent emits more than one). code_commits counts commits after the plan/import commit, including GSD tracking commits."
+ },
+ "total_cost_usd": 4.419,
+ "runs": [
+  {
+   "run": "01-brainstorm-plan",
+   "kind": "plan",
+   "what": "superpowers brainstorming + writing-plans",
+   "wall_s": 48,
+   "tools": {
+    "Skill:superpowers:brainstorming": 1,
+    "Bash": 3,
+    "Skill:superpowers:writing-plans": 1
+   },
+   "result_events": 1,
+   "subtype": "success",
+   "num_turns": 8,
+   "cost_usd": 0.2744095,
+   "duration_api_ms": 40298,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.2744
+   },
+   "input_tokens": 10,
+   "output_tokens": 4815,
+   "cache_read": 226435,
+   "cache_create": 50899
+  },
+  {
+   "run": "02-import-no-planning",
+   "kind": "import",
+   "what": "/gsd-import, no .planning/",
+   "wall_s": 16,
+   "tools": {
+    "Read": 1,
+    "Bash": 1
+   },
+   "result_events": 1,
+   "subtype": "success",
+   "num_turns": 3,
+   "cost_usd": 0.19666330000000004,
+   "duration_api_ms": 8407,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.1967
+   },
+   "input_tokens": 4,
+   "output_tokens": 1042,
+   "cache_read": 59593,
+   "cache_create": 45069,
+   "observed": "BLOCKER: no ROADMAP; nothing written"
+  },
+  {
+   "run": "03-import-with-roadmap",
+   "kind": "import",
+   "what": "/gsd-import, ROADMAP with 3 phases, no phase named",
+   "wall_s": 67,
+   "tools": {
+    "Read": 3,
+    "Bash": 9,
+    "Agent:gsd-plan-checker": 1
+   },
+   "result_events": 1,
+   "subtype": "success",
+   "num_turns": 10,
+   "cost_usd": 0.42789789999999994,
+   "duration_api_ms": 59263,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.4279
+   },
+   "input_tokens": 18,
+   "output_tokens": 5192,
+   "cache_read": 490014,
+   "cache_create": 55086,
+   "observed": "inferred Phase 2; plan-checker 2 blockers (1 false positive) + 4 warnings; file staged, not committed"
+  },
+  {
+   "run": "04-import-phase5",
+   "kind": "import",
+   "what": "/gsd-import ... 导入到 Phase 5",
+   "wall_s": 20,
+   "tools": {
+    "Read": 2,
+    "Bash": 2
+   },
+   "result_events": 1,
+   "subtype": "success",
+   "num_turns": 5,
+   "cost_usd": 0.2156314,
+   "duration_api_ms": 9928,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.2156
+   },
+   "input_tokens": 6,
+   "output_tokens": 1135,
+   "cache_read": 113134,
+   "cache_create": 48239,
+   "observed": "BLOCKER: Phase 5 not in ROADMAP; nothing written; suggested Phase 2"
+  },
+  {
+   "run": "05-import-fixup",
+   "kind": "import",
+   "what": "follow-up: apply checker fixes, requirements [TOP-01, TOP-02], commit",
+   "wall_s": 93,
+   "tools": {
+    "Bash": 8,
+    "Write": 1,
+    "Edit": 1,
+    "Agent:gsd-plan-checker": 1,
+    "Read": 2
+   },
+   "result_events": 2,
+   "subtype": "success",
+   "num_turns": 11,
+   "cost_usd": 0.4579840999999999,
+   "duration_api_ms": 83022,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.458
+   },
+   "input_tokens": 20,
+   "output_tokens": 8058,
+   "cache_read": 601104,
+   "cache_create": 61506,
+   "observed": "checker re-run 0 blockers 0 warnings; committed docs(02-frequent-words-report): import plan ..."
+  },
+  {
+   "run": "10-exec-gsd-nosdk",
+   "kind": "exec-gsd",
+   "what": "/gsd-execute-phase 2 without gsd-sdk on PATH",
+   "wall_s": 59,
+   "tools": {
+    "Read": 1,
+    "Bash": 8
+   },
+   "result_events": 1,
+   "subtype": "success",
+   "num_turns": 10,
+   "cost_usd": 0.43473399999999995,
+   "duration_api_ms": 49311,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.4347
+   },
+   "input_tokens": 18,
+   "output_tokens": 5848,
+   "cache_read": 650300,
+   "cache_create": 77797,
+   "observed": "inline, no gsd-executor, no verifier",
+   "go_test_pass": true,
+   "code_commits": 3
+  },
+  {
+   "run": "11-exec-gsd-1",
+   "kind": "exec-gsd",
+   "what": "/gsd-execute-phase 2, gsd-sdk on PATH",
+   "wall_s": 81,
+   "tools": {
+    "Read": 2,
+    "Bash": 14,
+    "Agent:gsd-executor": 1,
+    "Write": 1
+   },
+   "result_events": 2,
+   "subtype": "success",
+   "num_turns": 10,
+   "cost_usd": 0.5668852,
+   "duration_api_ms": 67030,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.5669
+   },
+   "input_tokens": 18,
+   "output_tokens": 3427,
+   "cache_read": 661867,
+   "cache_create": 70697,
+   "observed": "spawned gsd-executor (sonnet)",
+   "go_test_pass": true,
+   "code_commits": 6
+  },
+  {
+   "run": "12-exec-gsd-2",
+   "kind": "exec-gsd",
+   "what": "/gsd-execute-phase 2, gsd-sdk on PATH",
+   "wall_s": 61,
+   "tools": {
+    "Bash": 11
+   },
+   "result_events": 1,
+   "subtype": "success",
+   "num_turns": 12,
+   "cost_usd": 0.39505960000000007,
+   "duration_api_ms": 48386,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.3951
+   },
+   "input_tokens": 22,
+   "output_tokens": 6696,
+   "cache_read": 689236,
+   "cache_create": 64783,
+   "observed": "inline, no subagent; wrote 02-VERIFICATION.md itself",
+   "go_test_pass": true,
+   "code_commits": 3
+  },
+  {
+   "run": "13-exec-gsd-3",
+   "kind": "exec-gsd",
+   "what": "/gsd-execute-phase 2, gsd-sdk on PATH",
+   "wall_s": 60,
+   "tools": {
+    "Read": 1,
+    "Bash": 11
+   },
+   "result_events": 1,
+   "subtype": "success",
+   "num_turns": 13,
+   "cost_usd": 0.48265539999999996,
+   "duration_api_ms": 49238,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.4827
+   },
+   "input_tokens": 26,
+   "output_tokens": 6481,
+   "cache_read": 1004494,
+   "cache_create": 79336,
+   "observed": "inline, no subagent",
+   "go_test_pass": true,
+   "code_commits": 4
+  },
+  {
+   "run": "20-exec-sp-1",
+   "kind": "exec-sp",
+   "what": "superpowers:executing-plans",
+   "wall_s": 43,
+   "tools": {
+    "Skill:superpowers:executing-plans": 1,
+    "Bash": 6
+   },
+   "result_events": 1,
+   "subtype": "success",
+   "num_turns": 9,
+   "cost_usd": 0.28758739999999994,
+   "duration_api_ms": 33241,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.2876
+   },
+   "input_tokens": 16,
+   "output_tokens": 4091,
+   "cache_read": 414654,
+   "cache_create": 51295,
+   "observed": "new branch feature/top-flag, no review",
+   "go_test_pass": true,
+   "code_commits": 2
+  },
+  {
+   "run": "21-exec-sp-2",
+   "kind": "exec-sp",
+   "what": "superpowers:executing-plans",
+   "wall_s": 100,
+   "tools": {
+    "Skill:superpowers:executing-plans": 1,
+    "Bash": 11,
+    "Agent:None": 1
+   },
+   "result_events": 2,
+   "subtype": "success",
+   "num_turns": 12,
+   "cost_usd": 0.6796020999999999,
+   "duration_api_ms": 88414,
+   "model_cost": {
+    "claude-sonnet-5-5": 0.3338,
+    "claude-opus-5-5": 0.3458
+   },
+   "input_tokens": 20,
+   "output_tokens": 5445,
+   "cache_read": 551359,
+   "cache_create": 56047,
+   "observed": "new branch feat/top-flag, final review subagent on opus",
+   "go_test_pass": true,
+   "code_commits": 2
+  }
+ ]
+}

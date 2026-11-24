@@ -1,0 +1,26 @@
+## Conflict Detection Report
+
+### BLOCKERS (1)
+
+[BLOCKER] 目标阶段不存在
+  Found: 你指定导入到 Phase 5。`.planning/ROADMAP.md` 只有 Phase 1 到 3，没有 Phase 4 和 5。
+  Expected: 导入目标必须是 ROADMAP 里已有的阶段。
+  → 二选一：
+    1. 导入到 Phase 2「Frequent words report」。这份计划是 `-top N`（前 N 个高频词），和 Phase 2 的目标及两条成功标准吻合：标志控制数量，默认输出不变。我推荐这个。
+    2. 先用 `/gsd-phase` 在 ROADMAP 里新增 Phase 4 和 5，再回来导入。这样 Phase 5 会排在「JSON output」之后，依赖关系和计划内容对不上。
+
+### WARNINGS (0)
+
+### INFO (2)
+
+[INFO] 与项目约束没有冲突
+  Note: 计划只用标准库（`sort`、`strings`、`flag`），符合「Go standard library only」。`-top 0` 默认输出与现在逐字节一致，符合「Default output must not change」。计划沿用 `strings.Fields` 分词，符合已锁定的决策。
+
+[INFO] 计划不是 GSD 格式
+  Note: 这是自由格式的 superpowers 计划，没有 `phase:`、`plan:` 这类 frontmatter。导入时会转成 `{NN}-01-PLAN.md`，包含 2 个任务、`must_haves` 和 `files_modified: [main.go, main_test.go, README.md]`。
+
+GSD > BLOCKED: 1 blocker must be resolved before import can proceed.
+
+我没有写任何文件。
+
+要导入到 Phase 2，请回复「改 Phase 2」，我会继续转换、校验并提交。要保留 Phase 5，请先新增阶段。

@@ -1,0 +1,53 @@
+## ISSUES FOUND
+
+**Phase:** 02-frequent-words-report
+**Plan checked:** 02-01-PLAN.md (the only plan)
+**Issues:** 2 blockers, 4 warnings
+
+The plan delivers both roadmap success criteria:
+- **Flag selects top-N:** `-top N` is implemented in Task 2.
+- **Default output unchanged:** `TestRun` covers the no-flag and `-top 0` cases.
+
+It is also within scope: 2 tasks and 3 files, with no dependency issues. The problems are in structure and GSD conventions.
+
+### Blockers
+
+**1. [task_completeness] Malformed XML: a stray `</output>` closes nothing.**
+- Line 87 has `</output>` after `</tasks>`, and no `<output>` is ever opened.
+- Any parser that extracts the `<tasks>` block can choke on it.
+- Fix: delete line 87.
+
+**2. [verification_derivation] Frontmatter has no `requirements` field.**
+- The plan's `requirements` field is missing, so nothing links the plan to phase requirements.
+- ROADMAP.md has no `**Requirements:**` line for Phase 2 either. Coverage is therefore checked against the success criteria only.
+- Fix: add `requirements: []`, or add requirement IDs to the roadmap and cite them. Map the two success criteria to explicit IDs, for example `[TOP-01, TOP-02]`.
+
+### Warnings
+
+**1. [task_completeness] Task type does not match the GSD convention.**
+- Both tasks use `type="auto" tdd="true"`. The convention is `type="tdd"`. Use the standard form, or confirm that `verify.plan-structure` accepts the `tdd` attribute.
+- The frontmatter `type: "feature"` is also non-standard. Use `execute` or `tdd`.
+- `plan: "02-01"` normally reads `"01"`, with `phase` holding the prefix.
+
+**2. [key_links_planned] `must_haves` has no `key_links`.**
+- Add these links:
+  - `run` → `scan`
+  - `run` → `Top`
+  - `main` → `run`
+  - `Count` → `scan`
+- Several `truths` are implementation-focused, such as "Count signature and Counts fields unchanged; Go stdlib only". Reword them as user-observable behavior, or move them to constraints.
+
+**3. [task_completeness] Missing structural sections.**
+- There is no `<objective>`, `<verification>`, `<success_criteria>` or `<context>` XML. Objective, architecture and constraints are Markdown prose.
+- Verify steps are prose, not runnable `<automated>` commands. Task 1's verify step is "fails to compile first", which is hard to check. Make it `go test ./... -run TestTop`, and add `go vet ./...` and `gofmt -l .` to Task 2.
+
+**4. [roadmap_sync] ROADMAP.md still shows `Plans: TBD` for Phase 2.**
+- Update it to list 02-01.
+
+### Info
+
+- **Lowercasing:** the plan lowercases words for the top report only. This does not contradict the locked "`strings.Fields` tokens" decision in PROJECT.md, because `Counts` is untouched. Keep it explicit in the README so users aren't surprised.
+- **Negative N exit code:** `-top -1` returns exit 2, and a flag parse error also returns 2, so the two are consistent. With `flag.NewFlagSet(..., ContinueOnError)`, make sure the flag package's usage output goes to `errOut`, not stdout. The plan doesn't say. Add this to the Task 2 action, because `TestRun` asserts empty stdout.
+- **Skipped dimensions:** CONTEXT.md, RESEARCH.md and PATTERNS.md don't exist, so Dimensions 7, 8, 11 and 12 are skipped.
+
+Path: `/home/user/tally/.planning/phases/02-frequent-words-report/02-01-PLAN.md`

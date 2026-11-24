@@ -1,0 +1,22 @@
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ GSD ► IMPORT — 已写入，待你处理校验问题
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+计划写好了，但 gsd-plan-checker 报了问题，所以我没有更新 ROADMAP.md，也没有提交。文件已暂存（`git add`），未提交：`.planning/phases/02-frequent-words-report/02-01-PLAN.md`。
+
+**冲突检测：** 0 个阻塞、0 个警告、2 条提示。目标是 Phase 2，与 PROJECT.md 的约束和已锁定决策都不冲突。
+
+**校验结果：2 个阻塞、4 个警告**
+
+- **阻塞 1（误报）：** checker 说第 87 行有多余的 `</output>`。文件只有 86 行，里面没有 `<output>` 标签，不用处理。
+- **阻塞 2：** frontmatter 缺 `requirements` 字段。ROADMAP 里 Phase 2 也没有需求 ID。可以补 `requirements: []`，或者先给两条成功标准编 ID，例如 `[TOP-01, TOP-02]`。
+- **警告 1：** `type="auto" tdd="true"` 和 `type: "feature"` 不是 GSD 惯例，应为 `type="tdd"` 和 `execute`/`tdd`。`plan` 字段也建议写成 `"01"`。
+- **警告 2：** `must_haves` 缺 `key_links`，部分 `truths` 偏实现细节。
+- **警告 3：** 缺 `<objective>`、`<verification>`、`<success_criteria>` 和 `<context>` 段。verify 步骤也不是可直接运行的命令，建议加 `go vet ./...` 和 `gofmt -l .`。
+- **警告 4：** ROADMAP 里 Phase 2 仍是 `Plans: TBD`，写完后要改成列出 02-01。
+
+另一个提示：用 `flag.NewFlagSet` 时，要把 flag 的用法输出指向 `errOut`，否则会影响 `TestRun` 里“stdout 为空”的断言。计划里没写这一点。
+
+要我按上面修正（补 `requirements`、规范化类型和 XML 段、加 `key_links`、补可运行的 verify），再重新校验、更新 ROADMAP 并提交吗？需求 ID 也请你定：用 `[TOP-01, TOP-02]`，还是留空？

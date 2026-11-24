@@ -1,0 +1,25 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ GSD ► IMPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GSD > 注意：没有找到 PROJECT.md、REQUIREMENTS.md 和 CONTEXT.md，对应的约束检查已跳过。
+
+## 冲突检测报告：import
+
+### BLOCKER
+- [BLOCKER] 这个仓库没有 `.planning/` 目录，也就没有 ROADMAP.md。导入需要计划所属的阶段，而 `docs/superpowers/plans/2026-11-24-top-flag.md` 是自由格式的 superpowers 计划，没有 `phase:` 和 `plan:` 的 frontmatter。导入流程把"目标阶段在 ROADMAP.md 中不存在"判为阻塞项。
+
+### WARNING
+（无）
+
+### INFO
+- [INFO] 计划使用的 Go 标准库（`sort`、`strings`、`flag`）没有可对照的 PROJECT.md 技术栈。
+
+安全门已触发，**没有写入任何文件**，包括 PLAN.md、ROADMAP.md 和提交。
+
+## 解除阻塞的办法
+1. **先初始化 GSD**：运行 `/gsd-new-project`，生成 PROJECT.md 和 ROADMAP.md。之后重跑 `/gsd-import --from docs/superpowers/plans/2026-11-24-top-flag.md`，把计划挂到某个阶段（如 `01-top-flag`）下。
+2. **不用 GSD 编排**：这份计划本身已经可以执行，直接用 `superpowers:executing-plans` 或 `superpowers:subagent-driven-development` 按两个 Task 实施。
+3. **小改动走轻量流程**：用 `/gsd-quick` 或 `/gsd-fast`，不需要完整的 `.planning/` 结构。
+
+要走哪一种？
