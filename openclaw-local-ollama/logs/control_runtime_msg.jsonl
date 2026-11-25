@@ -1,0 +1,20 @@
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 0, "task": 0, "prompt_eval_count": 15440, "native_tool_calls": ["write"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 0, "task": 1, "prompt_eval_count": 15436, "native_tool_calls": ["read"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 0, "task": 2, "prompt_eval_count": 15444, "native_tool_calls": ["exec"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 0, "task": 3, "prompt_eval_count": 15442, "native_tool_calls": [], "text_head": "To answer the question, I will use the `edit` function to modify the `task/config.json` file.\n\nHere is the JSON for the "}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 0, "task": 4, "prompt_eval_count": 15448, "native_tool_calls": ["openclaw_ls"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 1, "task": 0, "prompt_eval_count": 15440, "native_tool_calls": ["write"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 1, "task": 1, "prompt_eval_count": 15436, "native_tool_calls": ["read"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 1, "task": 2, "prompt_eval_count": 15444, "native_tool_calls": ["exec"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 1, "task": 3, "prompt_eval_count": 15442, "native_tool_calls": ["edit"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "D_verbatim", "run": 1, "task": 4, "prompt_eval_count": 15448, "native_tool_calls": [], "text_head": "To answer the question, we need to list the .md files in the task/notes directory of the workspace and write their file "}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 0, "task": 0, "prompt_eval_count": 15277, "native_tool_calls": ["write"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 0, "task": 1, "prompt_eval_count": 15273, "native_tool_calls": ["read"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 0, "task": 2, "prompt_eval_count": 15281, "native_tool_calls": [], "text_head": "{\"name\": \"exec\", \"parameters\": {\"command\": \"awk \\'/ERROR/ {n++} END {print n}\\' task/app.log\", \"title\": \"Count ERROR lin"}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 0, "task": 3, "prompt_eval_count": 15279, "native_tool_calls": ["edit"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 0, "task": 4, "prompt_eval_count": 15285, "native_tool_calls": ["read", "write", "exec"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 1, "task": 0, "prompt_eval_count": 15277, "native_tool_calls": ["write"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 1, "task": 1, "prompt_eval_count": 15273, "native_tool_calls": ["read"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 1, "task": 2, "prompt_eval_count": 15281, "native_tool_calls": ["exec"], "text_head": ""}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 1, "task": 3, "prompt_eval_count": 15279, "native_tool_calls": [], "text_head": "{\"name\": \"edit\", \"parameters\": {\"path\": \"/tmp/-mnt-data-code-web-hexo-blog/5e709907-772d-435d-a182-565874e36"}
+{"model": "llama3.1:8b", "variant": "E_no_runtime_msg", "run": 1, "task": 4, "prompt_eval_count": 15285, "native_tool_calls": ["openclaw_ls"], "text_head": ""}

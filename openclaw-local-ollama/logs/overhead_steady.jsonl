@@ -1,0 +1,1 @@
+{"label": "default full after bootstrap ritual (BOOTSTRAP.md on disk but no longer injected)", "model": "qwen2.5-coder:3b", "prompt_eval_count": [14140], "sp_chars": 39123, "project_context_chars": 12091, "injected_files": ["AGENTS.md", "SOUL.md", "IDENTITY.md", "USER.md"], "skills_prompt_chars": 7750, "n_skills": 23}

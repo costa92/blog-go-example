@@ -1,0 +1,7 @@
+[
+ "Create a file at task/hello.txt (relative to your workspace) whose entire content is exactly: hello openclaw",
+ "Read task/numbers.txt in your workspace and reply with only the sum of all the numbers in it.",
+ "Use a shell command to count how many lines in task/app.log (in your workspace) contain the word ERROR. Reply with only the number.",
+ "In task/config.json (in your workspace), change the port from 8080 to 9090. Keep every other field unchanged.",
+ "List the .md files in the task/notes directory of your workspace and write their file names, sorted alphabetically, one per line, into task/index.txt."
+]
