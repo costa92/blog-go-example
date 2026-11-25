@@ -11,6 +11,7 @@
 
 ## 案例
 
+- [AI Agent 执行线控制面（Poppy 与 Claude Approvals 模型）](execution-line-control-plane/README.md)：单进程 Go 模型验证 Poppy 1.0 的 ES256 `Poppy-Session` JWT 与 OAuth 双层鉴权，以及 `.claude/approvals.yml` 的 `observe`/`enforce` 策略求值与 PR Steward 权限护栏，不调用外部云端服务。
 - [AI-Native 批准与执行检查](ai-native-change-gate/README.md)：用单进程 Go 模型验证过期批准、条件写入、幂等回执与并发竞争，不调用模型或生产集群。
 - [审核结论绑定内容摘要](review-gates/README.md)：`gate` 命令把设计批准、测试记录和代码复核绑到摘要上，附一次补错误分支后旧批准被拒的交接重放，以及 15 个变异的测试结果。
 - [Super-agent 协调层](superagent/README.md)：基于 `kart-io/goagent v0.33.0`，包含任务分工、消息路由、可恢复 Worker 和 Outbox 通知重试；另提供 [GoAgent Harness CSV 编码执行案例](superagent/codingworker/README.md)。
