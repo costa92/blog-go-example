@@ -18,6 +18,7 @@
 | `gocheck.py` | 取回答里第一个 ```go 代码块，配隐藏测试跑 `go test -race -count=3`，三遍都过才算过；写 `logs/coding-tests.jsonl` |
 | `grade.py` | 只读 `logs/`，打印文章里的全部数字：`python3 grade.py coding\|reasoning\|longctx\|cost` |
 | `chart.py` | 从 `logs/` 画文章配图 `chart.png`，需要 matplotlib 和 Noto Sans CJK 字体 |
+| `chart_wechat.py` | 公众号版配图：竖排大字号的 `chart-mobile.png` 和 900×383 封面 `cover.png`（分享卡片裁 1:1 时文字仍在中间） |
 | `logs/` | 文章用到的原始结果，含每次调用的完整回答 |
 
 ## 运行
