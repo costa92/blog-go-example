@@ -47,5 +47,6 @@
 - [本地模型 Agent 的自查](agent-self-check/README.md)：112 道自动判分题上比较“请检查”、“我觉得不对”、校验/测试报错和另起一次审查四种追问的对改错与错改对，附原始结果。
 - [过期的项目记忆](agent-memory-stale/README.md)：假仓库的集成测试脚本改成自己起 Redis 后，比较不给记忆、原文注入、带文件指纹标 STALE 和按指纹停用四种做法，模拟 shell 与判分脚本，附原始结果。
 - [Gemini 4 Neon 与 Claude Opus 5.5 实测](gemini-neon-vs-opus-55/README.md)：10 道 Go 编程题（隐藏测试）、30 道推理题和 10 万到 60 万 token 的长上下文检索，记录答对率、延迟和按标价折算的成本，附原始结果。
+- [MCP 2026-07-28 无状态重构实测](mcp-2026-stateless/README.md)：3 个 MCP 副本加轮询代理，对比 2025-11-25 会话和 2026-07-28 无状态协议下的建连、句柄、MRTR 确认和 `tools/list` 缓存，并抓取 Claude Code 实际发出的请求，附原始记录。
 - [Superpowers 计划导入 GSD](superpowers-gsd-workflow/README.md)：一个小 Go 命令行上实跑 brainstorming → writing-plans → `/gsd-import` 的三种导入情形，再比较 `/gsd-execute-phase` 和 `executing-plans` 的耗时与费用，附汇总数据。
 - [CLAUDE.md 长度与规则遵守率](claude-md-length/README.md)：同样 8 条可判定规则放进 50 到 1500 行、`@import`、埋进列表和改用 hook 的各版 CLAUDE.md，10 个 Go 小任务上打分，附首轮 token 和原始结果。
